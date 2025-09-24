@@ -1,46 +1,63 @@
 import './bootstrap.js';
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
-
-// any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
-
 import './js/header';
 import './js/auth/register';
 
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules'; // Import modules as needed
-
-//vue
-import { createApp } from 'vue';
-import MapApp from './components/MapApp.vue';
-
-// Import Swiper styles (if not already handled in CSS)
+import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+import { createApp } from 'vue';
+import MapApp from './components/MapApp.vue';
 
-createApp(MapApp).mount('#map-app');
+// Функция инициализации Vue
+function initVue() {
+    const mapElement = document.getElementById('map-app');
+    if (mapElement && !mapElement.__vue_app__) {
+        const app = createApp(MapApp);
+        app.mount('#map-app');
+        mapElement.__vue_app__ = app; // Помечаем как инициализированный
+    }
+}
 
-// Initialize Swiper
-document.addEventListener('DOMContentLoaded', () => {
-    const swiper = new Swiper('.default-carousel', {
-        modules: [Navigation, Pagination], // Register modules
-        speed: 400,
-        spaceBetween: 100,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        // ... other Swiper options
+// Функция инициализации Swiper
+function initSwiper() {
+    const swiperElements = document.querySelectorAll('.default-carousel');
+    swiperElements.forEach(element => {
+        if (!element.__swiper_instance__) {
+            const swiper = new Swiper(element, {
+                modules: [Navigation, Pagination],
+                speed: 400,
+                spaceBetween: 100,
+                navigation: {
+                    nextEl: element.querySelector('.swiper-button-next'),
+                    prevEl: element.querySelector('.swiper-button-prev'),
+                },
+                pagination: {
+                    el: element.querySelector('.swiper-pagination'),
+                    clickable: true,
+                },
+            });
+            element.__swiper_instance__ = swiper;
+        }
     });
+}
+
+// Обработчик загрузки страницы
+function initPage() {
+    initVue();
+    initSwiper();
+}
+
+// Инициализация при полной загрузке
+document.addEventListener('DOMContentLoaded', initPage);
+
+// Инициализация при Turbo навигации
+document.addEventListener('turbo:load', initPage);
+
+// Очистка перед переходом (опционально)
+document.addEventListener('turbo:before-render', () => {
+    // Vue автоматически уничтожается при unmount
 });
