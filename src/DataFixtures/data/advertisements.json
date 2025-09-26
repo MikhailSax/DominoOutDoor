@@ -1,0 +1,4574 @@
+[
+  {
+    "place_number": "1",
+    "address": "ул.Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "10",
+    "address": "читинский переезд",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "100",
+    "address": "Аэропорт",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "100-АЛ",
+    "address": "Ботаническая ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "100-АМ",
+    "address": "ул.Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "101",
+    "address": "Аэропорт",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "101",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "102",
+    "address": "Аэропорт",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "103",
+    "address": "Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "103",
+    "address": "улица Балтахинова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "103",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "104",
+    "address": "Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "104",
+    "address": "Дорожная улица",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "105",
+    "address": "улица Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "106",
+    "address": "улица Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "107",
+    "address": "Борсоева (Авторынок)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "107",
+    "address": "Дорожная улица",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "107",
+    "address": "ул. Борсоева 77",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "108",
+    "address": "улица Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "109",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "109",
+    "address": "улица Борсоева",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "109-АМ",
+    "address": "Магистральная улица",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "10-АЛ",
+    "address": "Ербанова ул.",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "10-АЛ",
+    "address": "улица Ербанова",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "10-Д",
+    "address": "улица Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "11",
+    "address": "Ул.Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "11",
+    "address": "улица Терешковой",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "110",
+    "address": "улица Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "110-АЛ",
+    "address": "проспект Автомобилистов",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "110-АМ",
+    "address": "Н.Иволга",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "111",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "111",
+    "address": "улица Борсоева",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "111-АМ",
+    "address": "пр-тАвтомобилистов",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 23
+  },
+  {
+    "place_number": "112",
+    "address": "улица Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "112-АМ",
+    "address": "пр-тАвтомобилистов",
+    "sides": [
+      "A"
+    ],
+    "type_id": 16
+  },
+  {
+    "place_number": "113",
+    "address": "Борсоева (магазин \"Абсолют\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "113-АМ",
+    "address": "ул.Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "113-экран",
+    "address": "пересечение улицы Терешковой и ул. Сахьяновой",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "114",
+    "address": "Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "114-АМ",
+    "address": "ул.Кабанская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "115",
+    "address": "пр. Победы",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "115",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "115-АМ",
+    "address": "пр-т Автомобилистов",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "116",
+    "address": "Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "116-АМ",
+    "address": "ул.Тулаева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "117",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "117-АМ",
+    "address": "ул.Трубачеева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "118",
+    "address": "Борсоева (ОАО \"Наран\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "118",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "118-АМ",
+    "address": "ул.Лимонова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "119",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "119",
+    "address": "ул. Воровского",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "119",
+    "address": "ул. Воровского",
+    "sides": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "119",
+    "address": "ул. Воровского",
+    "sides": [
+      "C"
+    ],
+    "type_id": 17
+  },
+  {
+    "place_number": "119-АМ",
+    "address": "ул.Ботаническая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "11-АЛ",
+    "address": "Ербанова ул.",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "11-АЛ",
+    "address": "Ербанова ул.",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "11-АЛ",
+    "address": "Ербанова ул.",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "12",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "12",
+    "address": "улица Терешковой",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "12",
+    "address": "Ул.Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "12",
+    "address": "Ул.Терешковой",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "120",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "120",
+    "address": "ул. Воровского",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "120-АЛ",
+    "address": "пр-т Строителей/Жердева ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "120-АМ",
+    "address": "пр-т Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "120-Д",
+    "address": "пр-т Строителей",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "121",
+    "address": "ул. Иволгинская (через дорогу Иволгинская 14А",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "121-АМ",
+    "address": "ул.Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "122",
+    "address": "ул. Иволгинская (около 44 школы)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "122-АМ",
+    "address": "ул.Гагарина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "123",
+    "address": "ул. Иволгинская (около 44 школы)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "123-АМ",
+    "address": "ул.Мокрова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "124",
+    "address": "Иволгинская",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "124",
+    "address": "Иволгинская (пересечение с ул. Строителей) поз.1",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "124-АМ",
+    "address": "ул.Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "125",
+    "address": "Иволгинская (пересечение с ул. Строителей) поз.2",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "125-АМ",
+    "address": "ул.Жердева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "126",
+    "address": "Дорожная (остановка ВАИ)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "126",
+    "address": "ул. Коммунистическая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "126-АМ",
+    "address": "ул.Жердева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "127",
+    "address": "Ул. Коммунистическая",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "127",
+    "address": "Ул. Коммунистическая",
+    "sides": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "128",
+    "address": "ул. Кабанская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "128-АМ",
+    "address": "ул.Стартовая (АЭРОПОРТ)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "129-АМ",
+    "address": "Аэропорт",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "12-АЛ",
+    "address": "Бабушкина ул. (\"Республиканский Бизнес-Инкубатор\")",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "12-АЛ",
+    "address": "Бабушкина ул. (\"Республиканский Бизнес-Инкубатор\")",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "12-Д",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "13",
+    "address": "502 км",
+    "sides": [
+      "A",
+      "A1"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "13",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "130",
+    "address": "ул. Шефский подъем/пр. Победы",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "130",
+    "address": "Фдеральная трасса",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "130-АЛ",
+    "address": "Тобольская ул./Краснофлотская ул.",
+    "sides": [
+      "A1",
+      "A2",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "130-АМ",
+    "address": "ул.Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "130-Д",
+    "address": "ул.Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "131",
+    "address": "Федеральная трасса",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "131-АМ",
+    "address": "ул.Мокрова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "132",
+    "address": "Федеральная трасса",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "132-АМ",
+    "address": "ул.Мокрова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "133",
+    "address": "Федеральная трасса",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "133-АМ",
+    "address": "ул.Пищевая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "134",
+    "address": "Федеральная трасса",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "134-АМ",
+    "address": "ул.Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "135",
+    "address": "ул. Смолина (БГУ)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "135-АМ",
+    "address": "ул.Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "136",
+    "address": "ул. Смолина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "136-АМ",
+    "address": "ул.Товарный Двор",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "137",
+    "address": "ул. Смолина д.42/ул. Сухэ-Батора д.2",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "137",
+    "address": "ул. Смолина д.42/ул. Сухэ-Батора д.2",
+    "sides": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "137-АМ",
+    "address": "ул.Товарный Двор",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "13-АЛ",
+    "address": "Бабушкина ул./Трубачеева ул. (АЗС \"ННК-Байкалнефтепродукт\")",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "14",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "14",
+    "address": "ул.Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "140-АЛ",
+    "address": "пр-т Автомобилистов/ Блинова ул.(р-н \"Стрелка\")",
+    "sides": [
+      "A"
+    ],
+    "type_id": 19
+  },
+  {
+    "place_number": "147-АЛ",
+    "address": "Революции 1905 г. ул. / 50-Летия Октября пр-т (в сторону Читинского переезда)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "14-АЛ",
+    "address": "Борсоева ул. / Смолина ул. (Банк \" Авангард\")",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "14-АЛ",
+    "address": "Борсоева ул. / Смолина ул. (Банк \" Авангард\")",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "14-Д",
+    "address": "Магистральная 11",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "14-экран",
+    "address": "Борсоева ул. / Смолина ул. (Банк \" Авангард\")",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "15",
+    "address": "моховая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "15",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "150-АЛ",
+    "address": "Иволгинская ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "15-Д",
+    "address": "п. Верхняя Березовка",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "16",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "160-АЛ",
+    "address": "Трубачеева ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "16-АЛ",
+    "address": "Куйбышева ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "16-Д",
+    "address": "Сотниково",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "17",
+    "address": "Зеленоградская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "170-АЛ",
+    "address": "Трубачеева ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "170-экран",
+    "address": "Трубачеева",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "17-Д",
+    "address": "трасса Улан-Удэ-Романовка-Чита",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "18",
+    "address": "Зеленоградская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "180-АЛ",
+    "address": "Борсоева ул./Смолина ул. (АЗС \"БРК\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "18-1-Д",
+    "address": "Прибайкальский район",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "18-Д",
+    "address": "трасса Улан-Удэ-Романовка-Чита",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "190-АЛ",
+    "address": "Сахьяновой ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "1-АЛ",
+    "address": "Ботаническая ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "2",
+    "address": "ул.Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "200",
+    "address": "Бабушкина (остановка \"Геологическая\")",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "200",
+    "address": "Бабушкина (остановка \"Геологическая\")",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "200-АЛ",
+    "address": "Иволгинская ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "201",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "201",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "202",
+    "address": "Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "202",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "202",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "203",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "203",
+    "address": "Бабушкина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "203",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "203",
+    "address": "Бабушкина",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "203А",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "204",
+    "address": "Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "205",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "205",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "206",
+    "address": "Бабушкина (магазин \"100 мелочей\")",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "206",
+    "address": "Бабушкина (магазин \"100 мелочей\")",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "207",
+    "address": "Бабушкина (въезд на Удинский мост",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "207",
+    "address": "Бабушкина (въезд на Удинский мост",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "208",
+    "address": "Бабушкина (съезд с Удинского моста",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "208",
+    "address": "Бабушкина (съезд с Удинского моста",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "209",
+    "address": "Бабушкина (въезд на Удинский мост",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "209",
+    "address": "Бабушкина (въезд на Удинский мост",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "20-Д",
+    "address": "Прибайкальский район",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "210",
+    "address": "Бабушкина (съезд с Удинского моста",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "210",
+    "address": "Бабушкина (съезд с Удинского моста",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "211",
+    "address": "Боевая (остановка \"Химчистка\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "212",
+    "address": "ул. Боевая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "213",
+    "address": "ул. Боевая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "214",
+    "address": "Боевая (пересечение с пр.Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "215",
+    "address": "Боевая (пересечение с пр.Строителей)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "215",
+    "address": "Боевая (пересечение с пр.Строителей)",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "216",
+    "address": "Жердева (пересечение с ул.Калашникова)",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "217",
+    "address": "Жердева (43-44 кварталы)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "218",
+    "address": "Жердева (угол парка отдыха",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "219",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "21-Д",
+    "address": "ул. Борсоева 77",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "220",
+    "address": "Ключевская (18 квартал",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "221",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "222",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "223",
+    "address": "Ключевская (напротив магазина \"Товары Бурятии\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "224",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "225",
+    "address": "Ключевская (перес. Ул.Лебедева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "226",
+    "address": "Ключевская (пересечение с ул.Лебедева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "227",
+    "address": "ул. Мокрова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "228",
+    "address": "ул. Мокрова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "229",
+    "address": "ул. Пищевая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "22-Д",
+    "address": "Прибайкальский район",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "23",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "230",
+    "address": "ул. Пищевая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "230",
+    "address": "ул. Пищевая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "231",
+    "address": "пр. Строителей",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "231",
+    "address": "пр. Строителей",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "231-Д",
+    "address": "пр. Строителей",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "232",
+    "address": "Строителей( ГУП КСК)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "233",
+    "address": "Терешковой (пересечение с ул. Геологическая)",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "233",
+    "address": "Терешковой (пересечение с ул. Геологическая)",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "233",
+    "address": "Терешковой (пересечение с ул. Геологическая)",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "234",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "234",
+    "address": "ул. Терешковой",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "235",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "235",
+    "address": "ул. Терешковой",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "236",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "237",
+    "address": "Терешковой (напротив Сбербанка)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "238",
+    "address": "Терешковой (остановка \"Саяны\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "239",
+    "address": "Терешковой (пересечение с б-м К.Маркса",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "239",
+    "address": "Терешковой (пересечение с б-м К.Маркса",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "240",
+    "address": "Терешковой (пересечение с б-м К.Маркса",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B",
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "241",
+    "address": "Терешковой (напротив Администрации Октябрьского района)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "241",
+    "address": "Терешковой (напротив Администрации Октябрьского района)",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "242",
+    "address": "Терешковой (магазин \"Улыбка\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "243",
+    "address": "Терешковой (магазин \"Либерти\")",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "243",
+    "address": "Терешковой (магазин \"Либерти\")",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "244",
+    "address": "Жердева ул (вблизи м-н Выстрел)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "244",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "245",
+    "address": "Жердева ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "245",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "246",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "246",
+    "address": "ул. Терешковой",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "247",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "247",
+    "address": "ул. Терешковой",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "248",
+    "address": "Терешковой (пересечение с ул.Спартака)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "249",
+    "address": "ул. Трубачеева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "24-Д",
+    "address": "с. Нижняя Иволга",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "250",
+    "address": "ул. Трубачеева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "251",
+    "address": "ул. Трубачеева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "252",
+    "address": "Трубачеева (пересечение с ул. Городская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "253",
+    "address": "Тулаева (конечная трамвая автобусов)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "254",
+    "address": "Шумяцкого (пересечение Жердева)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "254",
+    "address": "Шумяцкого (пересечение Жердева)",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "255",
+    "address": "Шумяцкого (пересечение Жердева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "256",
+    "address": "Шумяцкого (супермаркет \"Заудинский мелькомбинат\"",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "257",
+    "address": "Шумяцкого (напротив ТЦ \"Акбэс\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "258",
+    "address": "пр. Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "259",
+    "address": "пр. Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "25-Д",
+    "address": "с. Нижняя Иволга",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "260",
+    "address": "ул. Калашникова (ост. БСМП)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "261",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "262",
+    "address": "ул. Трубачеева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "263",
+    "address": "ул. Терешковой (д.с Теремок)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "264",
+    "address": "Дальневосточная",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "264",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "265",
+    "address": "Мухоршибирский тракт",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "266",
+    "address": "Шумяцкого",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "266",
+    "address": "Шумяцкого",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "267",
+    "address": "Ул. Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "269",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "269",
+    "address": "ул. Ключевская",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "26-Д",
+    "address": "Ул. Бабушкина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "270",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "271",
+    "address": "ул. Кольцова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "272",
+    "address": "пр. Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "273",
+    "address": "ул. Шумяцкого",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "273-Д",
+    "address": "Жердева",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "274",
+    "address": "ул.Жердева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "275",
+    "address": "пр. Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "276",
+    "address": "мкр. Медведчиково",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "277",
+    "address": "140а квартал",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "278",
+    "address": "Яшмовая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "278",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "279",
+    "address": "Домостроительная",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "27-Д",
+    "address": "ул. Ключевская",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "27-Д",
+    "address": "ул. Ключевская",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "280",
+    "address": "Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "281",
+    "address": "140 А квартал",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "28-Д",
+    "address": "ул.Мокрова д.28",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "3",
+    "address": "ул.Революции 1905",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "301",
+    "address": "пр Автомобилистов вблизи здания16 к1",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "302",
+    "address": "пр. Автомобилистов (у АЗС \"Ариг Ус\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "303",
+    "address": "303",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "303",
+    "address": "пр. Автомобилистов (АЗС \"ПАП-1\")",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "304",
+    "address": "п. Верхняя Березовка",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "305",
+    "address": "пр.Автомобилистов (ТЦ \"База\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "306",
+    "address": "пр. Автомобилистов",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "307",
+    "address": "пр. Автомобилистов",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "307",
+    "address": "пр. Автомобилистов",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "308",
+    "address": "пр. Автомобилистов",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "308В",
+    "address": "пр. Автомобилистов",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "309",
+    "address": "пр. Автомобилистов",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "309",
+    "address": "пр. Автомобилистов",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "310",
+    "address": "ул. Ботаническая/пр. Автомобилистов",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "310",
+    "address": "ул. Ботаническая/пр. Автомобилистов",
+    "sides": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "310-экран",
+    "address": "пересечение улицы Ботаническая и пр. Автомобилистов.",
+    "sides": [
+      "B"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "311",
+    "address": "ул. Ботаническая",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "311",
+    "address": "ул. Ботаническая",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "311-Д",
+    "address": "ул. Ботаническая",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "312",
+    "address": "ул. Ботаническая",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "313",
+    "address": "ул. Ботаническая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "314",
+    "address": "ул. Ботаническая",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "315",
+    "address": "Гагарина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "316",
+    "address": "ул. Гагарина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "317",
+    "address": "Лимонова  ТЦ Титан",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "318",
+    "address": "Лимонова (банк \"Сибирское ОВК\") поз.2",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "319A",
+    "address": "Ботаническая",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "319В",
+    "address": "Ботаническая",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "320",
+    "address": "Лимонова (банк \"Сибирское ОВК\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "321",
+    "address": "Лимонова (пересечение с пр.Автомобилистов)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "322",
+    "address": "ул. Лимонова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "323",
+    "address": "Маяковского (пересечение с ул. Рылеева",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "324",
+    "address": "Н.Петрова (пересечение с Баргузинским трактом",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "324",
+    "address": "Н.Петрова (пересечение с Баргузинским трактом",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "325",
+    "address": "ул. Николая Петрова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "326",
+    "address": "Октябрьская (пересечение с ул.Комсомольская)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "327",
+    "address": "Н. Петрова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "327",
+    "address": "ул. Революции 1905 года",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "328",
+    "address": "ул. Революции 1905 года",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "329",
+    "address": "пр. 50-летия Октября (за зданием \"Бурятэнерго\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "330",
+    "address": "пр.50-летия Октября (пересечение с ул.Таймырская)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "331",
+    "address": "пр.50-летия Октября (пересечение с ул.Цивилева",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "332",
+    "address": "пр.50-летия Октября (остановка \"к/т Октябрь\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "333",
+    "address": "пр.50-летия Октября (проходная ЛВРЗ)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "334",
+    "address": "пр.50-летия Октября(пересечение с ул.Цивилева",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "334",
+    "address": "пр.50-летия Октября(пересечение с ул.Цивилева",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "335",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "335",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "336",
+    "address": "ул. Революции 1905 года",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "337",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "337",
+    "address": "ул. Гагарина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "338",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "339",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "339",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "34",
+    "address": "ул. Свободы",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "34",
+    "address": "ул. Свободы",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "340",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "341",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "341",
+    "address": "пр. 50-летия Октября",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "342",
+    "address": "пл. Славы",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "343",
+    "address": "ул. Краснодонская (Машзавод)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "344",
+    "address": "пос.Восточный (Обелиск)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "345",
+    "address": "пос. Зеленхоз",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "346",
+    "address": "пос.Зеленый",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "348",
+    "address": "Пересечение улиц Магистральная и Авиаторов",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "349",
+    "address": "ул. Туполева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "350",
+    "address": "пересечение улиц Магистральная и Авиаторов",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "351",
+    "address": "Добролюбова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "352",
+    "address": "ул. Жуковского",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "353",
+    "address": "Гагарина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "39",
+    "address": "ул. Ленина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "39",
+    "address": "ул. Ленина",
+    "sides": [
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "4",
+    "address": "ул.Революции 1905",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "400",
+    "address": "вблизи д.34",
+    "sides": [
+      "ул. Бабушкина"
+    ],
+    "type_id": 5
+  },
+  {
+    "place_number": "401",
+    "address": "Пересечение ул. Добролюбова и ул. Революции",
+    "sides": [
+      "A1"
+    ],
+    "type_id": 19
+  },
+  {
+    "place_number": "401",
+    "address": "Пересечение ул. Добролюбова и ул. Революции",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "401",
+    "address": "ул. Трубачеева",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 12
+  },
+  {
+    "place_number": "402",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "403(статика)",
+    "address": "ул. Борсоева",
+    "sides": [
+      "B"
+    ],
+    "type_id": 19
+  },
+  {
+    "place_number": "403",
+    "address": "ул. Борсоева",
+    "sides": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "404",
+    "address": "ул. Боросоева",
+    "sides": [
+      "B"
+    ],
+    "type_id": 19
+  },
+  {
+    "place_number": "404",
+    "address": "ул. Борсоева",
+    "sides": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "405",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "406",
+    "address": "ул.Борсоева",
+    "sides": [
+      "B"
+    ],
+    "type_id": 19
+  },
+  {
+    "place_number": "406/экран",
+    "address": "Ербанова/Борсоева",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "А10",
+      "А11",
+      "А12",
+      "А13",
+      "А14",
+      "А15",
+      "А6",
+      "А7",
+      "А8",
+      "А9"
+    ],
+    "type_id": 4
+  },
+  {
+    "place_number": "406-1",
+    "address": "Ербанова",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "А10",
+      "А11",
+      "А12",
+      "А6",
+      "А7",
+      "А8",
+      "А9"
+    ],
+    "type_id": 2
+  },
+  {
+    "place_number": "406-Д",
+    "address": "Ербанова",
+    "sides": [
+      "A"
+    ],
+    "type_id": 4
+  },
+  {
+    "place_number": "407",
+    "address": "ул. Ербанова (правая)",
+    "sides": [
+      "A3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "407",
+    "address": "ул. Ербанова (правая)",
+    "sides": [
+      "B"
+    ],
+    "type_id": 19
+  },
+  {
+    "place_number": "407-1",
+    "address": "Ербанова",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "А10",
+      "А11",
+      "А12",
+      "А6",
+      "А7",
+      "А8",
+      "А9"
+    ],
+    "type_id": 2
+  },
+  {
+    "place_number": "408",
+    "address": "ул. Бабушкина/ул. Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "B"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "408",
+    "address": "ул. Бабушкина/ул. Терешковой",
+    "sides": [
+      "B"
+    ],
+    "type_id": 19
+  },
+  {
+    "place_number": "409",
+    "address": "ул. Мокрова (пересечение с ул. Боевая)",
+    "sides": [
+      "A"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "409-экран",
+    "address": "пересечение улиц Боевая",
+    "sides": [
+      "A"
+    ],
+    "type_id": 5
+  },
+  {
+    "place_number": "41",
+    "address": "ул.Жердева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "410",
+    "address": "Бабушкина ул.(ТЦ \"Восточные ворота\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "411",
+    "address": "ул. Бабушкина",
+    "sides": [
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "411-1",
+    "address": "Бабушкина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "А10",
+      "А11",
+      "А12",
+      "А13",
+      "А14",
+      "А15",
+      "А16",
+      "А6",
+      "А7",
+      "А8",
+      "А9"
+    ],
+    "type_id": 5
+  },
+  {
+    "place_number": "411-Д",
+    "address": "Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 5
+  },
+  {
+    "place_number": "412",
+    "address": "Пр. Строителей (пересечение с ул. Ключевская)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "413",
+    "address": "пр.Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "414",
+    "address": "пр. Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "415",
+    "address": "ул. Лимонова (Мегатитан)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "416",
+    "address": "пр. Автомобилистов (Аквасити)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "417",
+    "address": "ул. Борсоева (дом  №69) Перед монтажем согласовывать с Рудаковой В",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "418",
+    "address": "ул. Лимонова (завод Аквабур)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 20
+  },
+  {
+    "place_number": "419",
+    "address": "ул. Бабушкина (въезд на мост",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 10
+  },
+  {
+    "place_number": "419",
+    "address": "ул. Бабушкина (въезд на мост",
+    "sides": [
+      "B"
+    ],
+    "type_id": 15
+  },
+  {
+    "place_number": "419-Д",
+    "address": "Бабушкина",
+    "sides": [
+      "A"
+    ],
+    "type_id": 6
+  },
+  {
+    "place_number": "420",
+    "address": "пр. 50-летия Октября (пересечение с ул. Жуковского)",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 10
+  },
+  {
+    "place_number": "420",
+    "address": "пр. 50-летия Октября (пересечение с ул. Жуковского)",
+    "sides": [
+      "B"
+    ],
+    "type_id": 15
+  },
+  {
+    "place_number": "421",
+    "address": "ул. Терешковой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "А10",
+      "А11",
+      "А12",
+      "А13",
+      "А6",
+      "А7",
+      "А8",
+      "А9"
+    ],
+    "type_id": 8
+  },
+  {
+    "place_number": "421-Д",
+    "address": "Терешковой",
+    "sides": [
+      "A"
+    ],
+    "type_id": 8
+  },
+  {
+    "place_number": "422-Д",
+    "address": "Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 5
+  },
+  {
+    "place_number": "43",
+    "address": "ул.Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "44",
+    "address": "ул.Сахьяновой",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "44",
+    "address": "улица Сахьяновой",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "44",
+    "address": "ул.Сахьяновой",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "45",
+    "address": "пр-т Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "46",
+    "address": "пр-т Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "47",
+    "address": "пр-т Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "49",
+    "address": "пр-т Автомобилистов",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "49",
+    "address": "пр-т Автомобилистов",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "4-Д",
+    "address": "ул. Стартовая – единственная автодорога в Аэропорт (направление в аэропорт)",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "5",
+    "address": "Дальневосточная",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "501",
+    "address": "пл.Революции",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "502",
+    "address": "пл.Революции",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "B"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "503",
+    "address": "пл.Революции",
+    "sides": [
+      "A",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "504",
+    "address": "пл.Революции",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "B"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "505",
+    "address": "пл.Революции",
+    "sides": [
+      "A",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "506",
+    "address": "пл.Революции",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "51",
+    "address": "ул.Бабушкина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "51",
+    "address": "ул.Бабушкина",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "52",
+    "address": "ул.Н.Петрова",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "52",
+    "address": "ул.Н.Петрова",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "53",
+    "address": "Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "54",
+    "address": "пр-т Автомобилистов",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "54",
+    "address": "ул. Терешковой",
+    "sides": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "56",
+    "address": "Ключевская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "57",
+    "address": "пр-т Строителей",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "58",
+    "address": "пр-т Строителей",
+    "sides": [
+      "A",
+      "A1"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "58",
+    "address": "пр-т Строителей",
+    "sides": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "59",
+    "address": "ул.Хоринская",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "5-АЛ",
+    "address": "Революции 1905 г. ул./ 50-Летия Октября пр-т (в сторону пл. Советов)",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "5-АЛ",
+    "address": "Революции 1905 г. ул./ 50-Летия Октября пр-т (в сторону пл. Советов)",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "6",
+    "address": "пр-т Автомобилистов",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "60",
+    "address": "ул.Кольцова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "600",
+    "address": "с.Нижняя Иволга",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "601",
+    "address": "Сотниково",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "602",
+    "address": "Сужа",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "603",
+    "address": "Иволга",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "604",
+    "address": "п. Гусиноозерск",
+    "sides": [
+      "A",
+      "B",
+      "C"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "605",
+    "address": "Вознесеновка",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "605",
+    "address": "с. Нижняя Иволга",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "61",
+    "address": "ул.Кольцова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "610",
+    "address": "Прибайкальский район",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "62",
+    "address": "пр.Строителей",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "62",
+    "address": "пр.Строителей",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "63",
+    "address": "ул.Добролюбова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "64",
+    "address": "Жуковского",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "65",
+    "address": "Бабушкина",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "65",
+    "address": "Бабушкина",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "66",
+    "address": "Жердева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "68",
+    "address": "ул.Трубачеева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "69",
+    "address": "ул.Трубачеева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "6-АЛ",
+    "address": "Балтахинова ул./ Шефский подьем",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "6-АЛ",
+    "address": "Балтахинова ул./ Шефский подьем",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "6-экран",
+    "address": "ул.Балтахинова",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "70",
+    "address": "пр.Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "71",
+    "address": "пр.Строителей",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "72",
+    "address": "Добролюбова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "73",
+    "address": "ул.Жердева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "74",
+    "address": "Гагарина",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "75",
+    "address": "ул.Жуковского",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "76",
+    "address": "пр Автомобилистов",
+    "sides": [
+      "A",
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "А10",
+      "А11",
+      "А12",
+      "А13",
+      "А14",
+      "А6",
+      "А7",
+      "А8",
+      "А9"
+    ],
+    "type_id": 2
+  },
+  {
+    "place_number": "76.",
+    "address": "проспект Автомобилистов",
+    "sides": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "А10",
+      "А11",
+      "А12",
+      "А13",
+      "А14",
+      "А6",
+      "А7",
+      "А8",
+      "А9"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "76-АЛ",
+    "address": "Автомобилистов пр-т / Ботаническая ул. (р-н \"Стрелка\")",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "76-АЛ",
+    "address": "Автомобилистов пр-т / Ботаническая ул. (р-н \"Стрелка\")",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "76-Д",
+    "address": "пр Автомобилистов",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "77 АЛ",
+    "address": "50-лет Октября пр-т / Гагарина ул. (ТЦ \"Сагаан Морин\")",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "77 АЛ",
+    "address": "50-лет Октября пр-т / Гагарина ул. (ТЦ \"Сагаан Морин\")",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "77",
+    "address": "В.Березовка",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "77-Д",
+    "address": "пр. 50 лет октября",
+    "sides": [
+      "A"
+    ],
+    "type_id": 7
+  },
+  {
+    "place_number": "78",
+    "address": "Добролюбова х Революции",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "78",
+    "address": "Добролюбова х Революции",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "7-АЛ",
+    "address": "Бабушкина ул. (\"Дворец детского и юнешеского творчества\")",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "7-АЛ",
+    "address": "Бабушкина ул. (\"Дворец детского и юнешеского творчества\")",
+    "sides": [
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "8",
+    "address": "пр-т Автомобилистов",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "80",
+    "address": "ул.Лимонова",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "836",
+    "address": "Зеленый",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "838",
+    "address": "Ул. Кабанская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "84",
+    "address": "ул. Пр.Автомобилитов",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 9
+  },
+  {
+    "place_number": "848",
+    "address": "Ул. Иволгинская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "849",
+    "address": "Ул. Кабанская",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "90-АЛ",
+    "address": "Бабушкина ул.",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "99",
+    "address": "Ул",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "9-АЛ",
+    "address": "Борсоева ул. / Сухэ-Батора ул. (ИФНС№2)",
+    "sides": [
+      "A"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "9-АЛ",
+    "address": "Борсоева ул. / Сухэ-Батора ул. (ИФНС№2)",
+    "sides": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "type_id": 11
+  },
+  {
+    "place_number": "9-Д",
+    "address": "ул. Борсоева",
+    "sides": [
+      "A",
+      "B"
+    ],
+    "type_id": 21
+  },
+  {
+    "place_number": "B2",
+    "address": "вблизи зд.34Б",
+    "sides": [
+      "Бабушкина"
+    ],
+    "type_id": 5
+  },
+  {
+    "place_number": "UUSS001",
+    "address": "ул. Бабушкина (въезд на мост",
+    "sides": [
+      "A1"
+    ],
+    "type_id": 10
+  },
+  {
+    "place_number": "Б1",
+    "address": "д.31 №1",
+    "sides": [
+      "ул. Ленина"
+    ],
+    "type_id": 1
+  },
+  {
+    "place_number": "Б2",
+    "address": "д.31 №2",
+    "sides": [
+      "ул. Ленина"
+    ],
+    "type_id": 1
+  },
+  {
+    "place_number": "Б3",
+    "address": "д.31 №3",
+    "sides": [
+      "ул. Ленина"
+    ],
+    "type_id": 1
+  },
+  {
+    "place_number": "Б4",
+    "address": "д.28 №1",
+    "sides": [
+      "ул. Куйбышева"
+    ],
+    "type_id": 1
+  },
+  {
+    "place_number": "Б5",
+    "address": "д.28 №2",
+    "sides": [
+      "ул. Куйбышева"
+    ],
+    "type_id": 1
+  },
+  {
+    "place_number": "Настенное панно",
+    "address": "5",
+    "sides": [
+      "по адресу ул. Бабушкина"
+    ],
+    "type_id": 22
+  },
+  {
+    "place_number": "Пилларс А1",
+    "address": "ул.Балтахинова",
+    "sides": [
+      "A"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс А2",
+    "address": "ул.Балтахинова",
+    "sides": [
+      "A"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс А3",
+    "address": "ул.Балтахинова",
+    "sides": [
+      "A"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс А4",
+    "address": "ул.Балтахинова",
+    "sides": [
+      "A"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс А5",
+    "address": "ул.Балтахинова",
+    "sides": [
+      "A"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс В1",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "B"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс В2",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "B"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс В3",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "B"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс В4",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "B"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс В5",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "B"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс С1",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "C"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс С2",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "C"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс С3",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "C"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс С4",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "C"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "Пилларс С5",
+    "address": "ул. Балтахинова",
+    "sides": [
+      "C"
+    ],
+    "type_id": 13
+  },
+  {
+    "place_number": "пилларс",
+    "address": "В",
+    "sides": [
+      "A"
+    ],
+    "type_id": 3
+  },
+  {
+    "place_number": "С1",
+    "address": "ул. Лебедева (Авторынок)",
+    "sides": [
+      "Стрит-баннер"
+    ],
+    "type_id": 14
+  },
+  {
+    "place_number": "С2",
+    "address": "ул. Ключевская (ВСГТУ)",
+    "sides": [
+      "Стрит-баннер"
+    ],
+    "type_id": 14
+  },
+  {
+    "place_number": "С3",
+    "address": "пр. Строителей (ТЦ Абсолют)",
+    "sides": [
+      "Стрит-баннер"
+    ],
+    "type_id": 14
+  },
+  {
+    "place_number": "С4",
+    "address": "ул. Жердева (ТЦ \"People`s Park\")",
+    "sides": [
+      "Стрит-баннер"
+    ],
+    "type_id": 14
+  },
+  {
+    "place_number": "С5",
+    "address": "ул. Смолина (Центральная улица)",
+    "sides": [
+      "Стрит-баннер"
+    ],
+    "type_id": 14
+  },
+  {
+    "place_number": "Сити Формат №2(ЖД)",
+    "address": "ул. Революции 1905 года(ЖД Вокзал)",
+    "sides": [
+      "A"
+    ],
+    "type_id": 18
+  }
+]

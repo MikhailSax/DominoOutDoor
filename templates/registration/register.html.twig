@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+        <div class="w-full max-w-md space-y-8 bg-white p-10 rounded-2xl shadow-lg border border-gray-200">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900">Создать аккаунт</h2>
+                <p class="mt-2 text-sm text-gray-500">
+                    Размещение наружной рекламы с <span class="text-red-600 font-semibold">Domino Outdoor</span>
+                </p>
+            </div>
+
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="text-red-600 text-sm font-medium">
+                    {{ flash_error }}
+                </div>
+            {% endfor %}
+
+            {{ form_start(registrationForm) }}
+
+            <div class="space-y-5">
+                <!-- Имя -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Имя</label>
+                    {{ form_widget(registrationForm.first_name, {
+                        attr: {
+                            class: 'w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900
+                                focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-red-400
+                                transition duration-150 ease-in-out text-base'
+                        }
+                    }) }}
+                    {{ form_errors(registrationForm.first_name) }}
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Почта</label>
+                    {{ form_widget(registrationForm.email, {
+                        attr: {
+                            class: 'w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900
+                                focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-red-400
+                                transition duration-150 ease-in-out text-base'
+                        }
+                    }) }}
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+
+                <!-- Телефон -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Телефон</label>
+                    {{ form_widget(registrationForm.phone, {
+                        attr: {
+                            placeholder: "+7 (___) ___-__-__",
+                            class: 'w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900
+                                focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-red-400
+                                transition duration-150 ease-in-out text-base'
+                        }
+                    }) }}
+                    {{ form_errors(registrationForm.phone) }}
+                </div>
+
+                <!-- Пароль -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Пароль</label>
+                    {{ form_widget(registrationForm.plainPassword, {
+                        attr: {
+                            class: 'w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900
+                                focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-red-400
+                                transition duration-150 ease-in-out text-base'
+                        }
+                    }) }}
+                    {{ form_errors(registrationForm.plainPassword) }}
+                </div>
+
+                <!-- Согласие -->
+                <div class="flex items-start space-x-2">
+                    {{ form_widget(registrationForm.agreeTerms, {
+                        attr: { class: 'mt-1' }
+                    }) }}
+                    <label class="text-sm text-gray-700 leading-snug">
+                        Я согласен с <a href="#" class="text-red-600 hover:underline">условиями использования</a>
+                    </label>
+                </div>
+                {{ form_errors(registrationForm.agreeTerms) }}
+            </div>
+
+            <!-- Кнопка -->
+            <div class="mt-6">
+                <button type="submit"
+                        class="w-full flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-md text-base font-semibold text-white
+                           bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition">
+                    Зарегистрироваться
+                </button>
+            </div>
+
+            {{ form_end(registrationForm) }}
+
+            <div class="text-sm text-center mt-6 text-gray-500">
+                Уже есть аккаунт?
+                <a href="{{ path('app_login') }}" class="text-red-600 hover:text-red-500 font-medium">Войти</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

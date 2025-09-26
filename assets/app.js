@@ -9,55 +9,67 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+// Vue
 import { createApp } from 'vue';
-import MapApp from './components/MapApp.vue';
+import App from './components/App.vue';
 
-// Функция инициализации Vue
+// Простая инициализация Vue
 function initVue() {
     const mapElement = document.getElementById('map-app');
-    if (mapElement && !mapElement.__vue_app__) {
-        const app = createApp(MapApp);
-        app.mount('#map-app');
-        mapElement.__vue_app__ = app; // Помечаем как инициализированный
+    if (mapElement && !mapElement._vueApp) {
+        try {
+            const app = createApp(App);
+            app.mount('#map-app');
+            mapElement._vueApp = app;
+            console.log('Vue app mounted successfully');
+        } catch (error) {
+            console.error('Vue app mounting error:', error);
+        }
     }
 }
 
-// Функция инициализации Swiper
+// Инициализация Swiper
 function initSwiper() {
     const swiperElements = document.querySelectorAll('.default-carousel');
-    swiperElements.forEach(element => {
-        if (!element.__swiper_instance__) {
-            const swiper = new Swiper(element, {
-                modules: [Navigation, Pagination],
-                speed: 400,
-                spaceBetween: 100,
-                navigation: {
-                    nextEl: element.querySelector('.swiper-button-next'),
-                    prevEl: element.querySelector('.swiper-button-prev'),
-                },
-                pagination: {
-                    el: element.querySelector('.swiper-pagination'),
-                    clickable: true,
-                },
-            });
-            element.__swiper_instance__ = swiper;
+    swiperElements.forEach((element) => {
+        if (!element._swiper) {
+            try {
+                const swiper = new Swiper(element, {
+                    modules: [Navigation, Pagination],
+                    speed: 400,
+                    spaceBetween: 100,
+                    navigation: {
+                        nextEl: element.querySelector('.swiper-button-next'),
+                        prevEl: element.querySelector('.swiper-button-prev'),
+                    },
+                    pagination: {
+                        el: element.querySelector('.swiper-pagination'),
+                        clickable: true,
+                    },
+                });
+                element._swiper = swiper;
+            } catch (error) {
+                console.error('Swiper initialization error:', error);
+            }
         }
     });
 }
 
-// Обработчик загрузки страницы
-function initPage() {
+// Основная функция инициализации
+function initApp() {
     initVue();
     initSwiper();
 }
 
-// Инициализация при полной загрузке
-document.addEventListener('DOMContentLoaded', initPage);
+// Обработчики событий
+document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener('turbo:load', initApp);
 
-// Инициализация при Turbo навигации
-document.addEventListener('turbo:load', initPage);
-
-// Очистка перед переходом (опционально)
+// Очистка перед переходом Turbo
 document.addEventListener('turbo:before-render', () => {
-    // Vue автоматически уничтожается при unmount
+    const mapElement = document.getElementById('map-app');
+    if (mapElement && mapElement._vueApp) {
+        mapElement._vueApp.unmount();
+        mapElement._vueApp = null;
+    }
 });

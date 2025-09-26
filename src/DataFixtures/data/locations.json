@@ -1,0 +1,1922 @@
+[
+  {
+    "place_number": "100-АЛ",
+    "latitude": 51.842179,
+    "longitude": 107.640463,
+    "azimuth": 67.0
+  },
+  {
+    "place_number": "100-АМ",
+    "latitude": 51.808778,
+    "longitude": 107.620667,
+    "azimuth": 281.0
+  },
+  {
+    "place_number": "103",
+    "latitude": 51.844106,
+    "longitude": 107.572636,
+    "azimuth": null
+  },
+  {
+    "place_number": "103",
+    "latitude": 51.823129,
+    "longitude": 107.591824,
+    "azimuth": 157.0
+  },
+  {
+    "place_number": "104",
+    "latitude": 51.839208,
+    "longitude": 107.518431,
+    "azimuth": 213.0
+  },
+  {
+    "place_number": "106",
+    "latitude": 51.828215,
+    "longitude": 107.596679,
+    "azimuth": 123.0
+  },
+  {
+    "place_number": "107",
+    "latitude": 51.835511,
+    "longitude": 107.513239,
+    "azimuth": 22.0
+  },
+  {
+    "place_number": "108",
+    "latitude": 51.828633,
+    "longitude": 107.596545,
+    "azimuth": 315.0
+  },
+  {
+    "place_number": "109-АМ",
+    "latitude": 51.764083,
+    "longitude": 107.450861,
+    "azimuth": 90.0
+  },
+  {
+    "place_number": "10-АМ",
+    "latitude": 51.827611,
+    "longitude": 107.600139,
+    "azimuth": null
+  },
+  {
+    "place_number": "110",
+    "latitude": 51.835406,
+    "longitude": 107.588904,
+    "azimuth": 281.0
+  },
+  {
+    "place_number": "110-АЛ",
+    "latitude": 51.841175,
+    "longitude": 107.650289,
+    "azimuth": 78.0
+  },
+  {
+    "place_number": "110-АМ",
+    "latitude": 51.766722,
+    "longitude": 107.440833,
+    "azimuth": null
+  },
+  {
+    "place_number": "111",
+    "latitude": 51.833175,
+    "longitude": 107.590924,
+    "azimuth": 315.0
+  },
+  {
+    "place_number": "111-АМ",
+    "latitude": 51.844417,
+    "longitude": 107.650056,
+    "azimuth": 157.0
+  },
+  {
+    "place_number": "112",
+    "latitude": 51.838467,
+    "longitude": 107.582871,
+    "azimuth": 123.0
+  },
+  {
+    "place_number": "113-АМ",
+    "latitude": 51.809194,
+    "longitude": 107.620778,
+    "azimuth": 258.0
+  },
+  {
+    "place_number": "114",
+    "latitude": 51.840294,
+    "longitude": 107.579921,
+    "azimuth": 123.0
+  },
+  {
+    "place_number": "115",
+    "latitude": 51.838932,
+    "longitude": 107.582222,
+    "azimuth": null
+  },
+  {
+    "place_number": "115-АМ",
+    "latitude": 51.835833,
+    "longitude": 107.654361,
+    "azimuth": 326.0
+  },
+  {
+    "place_number": "116",
+    "latitude": 51.843418,
+    "longitude": 107.573247,
+    "azimuth": 123.0
+  },
+  {
+    "place_number": "116-АМ",
+    "latitude": 51.821972,
+    "longitude": 107.680472,
+    "azimuth": null
+  },
+  {
+    "place_number": "117",
+    "latitude": 51.845597,
+    "longitude": 107.568494,
+    "azimuth": 101.0
+  },
+  {
+    "place_number": "117-АМ",
+    "latitude": 51.815639,
+    "longitude": 107.612028,
+    "azimuth": 225.0
+  },
+  {
+    "place_number": "118",
+    "latitude": 51.839279,
+    "longitude": 107.581647,
+    "azimuth": null
+  },
+  {
+    "place_number": "118-АМ",
+    "latitude": 51.841806,
+    "longitude": 107.621639,
+    "azimuth": 247.0
+  },
+  {
+    "place_number": "119",
+    "latitude": 51.842258,
+    "longitude": 107.575839,
+    "azimuth": null
+  },
+  {
+    "place_number": "119-АМ",
+    "latitude": 51.842111,
+    "longitude": 107.640639,
+    "azimuth": 67.0
+  },
+  {
+    "place_number": "11-АЛ",
+    "latitude": 51.834341,
+    "longitude": 107.588782,
+    "azimuth": 225.0
+  },
+  {
+    "place_number": "120",
+    "latitude": 51.843319,
+    "longitude": 107.573968,
+    "azimuth": null
+  },
+  {
+    "place_number": "120-АМ",
+    "latitude": 51.814083,
+    "longitude": 107.657389,
+    "azimuth": 225.0
+  },
+  {
+    "place_number": "121",
+    "latitude": 51.841625,
+    "longitude": 107.543709,
+    "azimuth": 78.0
+  },
+  {
+    "place_number": "122",
+    "latitude": 51.841798,
+    "longitude": 107.545557,
+    "azimuth": 258.0
+  },
+  {
+    "place_number": "122-АМ",
+    "latitude": 51.853056,
+    "longitude": 107.571472,
+    "azimuth": null
+  },
+  {
+    "place_number": "123",
+    "latitude": 51.841592,
+    "longitude": 107.545523,
+    "azimuth": 78.0
+  },
+  {
+    "place_number": "123-АМ",
+    "latitude": 51.804986,
+    "longitude": 107.648602,
+    "azimuth": 90.0
+  },
+  {
+    "place_number": "124",
+    "latitude": 51.842336,
+    "longitude": 107.530357,
+    "azimuth": 90.0
+  },
+  {
+    "place_number": "124-АМ",
+    "latitude": 51.806472,
+    "longitude": 107.601889,
+    "azimuth": null
+  },
+  {
+    "place_number": "125 Иволгинская",
+    "latitude": 51.839611,
+    "longitude": 107.519698,
+    "azimuth": 33.0
+  },
+  {
+    "place_number": "125-АМ",
+    "latitude": 51.811056,
+    "longitude": 107.659639,
+    "azimuth": 247.0
+  },
+  {
+    "place_number": "126",
+    "latitude": 51.835306,
+    "longitude": 107.513261,
+    "azimuth": null
+  },
+  {
+    "place_number": "126-АМ",
+    "latitude": 51.815528,
+    "longitude": 107.630472,
+    "azimuth": 67.0
+  },
+  {
+    "place_number": "127",
+    "latitude": 51.830701,
+    "longitude": 107.587601,
+    "azimuth": null
+  },
+  {
+    "place_number": "128",
+    "latitude": 51.851903,
+    "longitude": 107.506324,
+    "azimuth": null
+  },
+  {
+    "place_number": "128-АМ",
+    "latitude": 51.798167,
+    "longitude": 107.479111,
+    "azimuth": null
+  },
+  {
+    "place_number": "129-АМ",
+    "latitude": 51.799333,
+    "longitude": 107.465417,
+    "azimuth": null
+  },
+  {
+    "place_number": "12-АЛ",
+    "latitude": 51.813475,
+    "longitude": 107.595101,
+    "azimuth": null
+  },
+  {
+    "place_number": "130-АЛ",
+    "latitude": 51.816579,
+    "longitude": 107.654023,
+    "azimuth": null
+  },
+  {
+    "place_number": "130-АЛ",
+    "latitude": 51.814603,
+    "longitude": 107.665835,
+    "azimuth": null
+  },
+  {
+    "place_number": "130-АМ",
+    "latitude": 51.795639,
+    "longitude": 107.603528,
+    "azimuth": null
+  },
+  {
+    "place_number": "131-АМ",
+    "latitude": 51.8045,
+    "longitude": 107.660917,
+    "azimuth": null
+  },
+  {
+    "place_number": "132-АМ",
+    "latitude": 51.804722,
+    "longitude": 107.661139,
+    "azimuth": null
+  },
+  {
+    "place_number": "133-АМ",
+    "latitude": 51.815917,
+    "longitude": 107.694444,
+    "azimuth": null
+  },
+  {
+    "place_number": "134-АМ",
+    "latitude": 51.850417,
+    "longitude": 107.563806,
+    "azimuth": null
+  },
+  {
+    "place_number": "135",
+    "latitude": 51.832115,
+    "longitude": 107.580262,
+    "azimuth": null
+  },
+  {
+    "place_number": "135-АМ",
+    "latitude": 51.856472,
+    "longitude": 107.555667,
+    "azimuth": null
+  },
+  {
+    "place_number": "136",
+    "latitude": 51.832115,
+    "longitude": 107.580262,
+    "azimuth": null
+  },
+  {
+    "place_number": "136-АМ",
+    "latitude": 51.827361,
+    "longitude": 107.747556,
+    "azimuth": null
+  },
+  {
+    "place_number": "137-АМ",
+    "latitude": 51.828139,
+    "longitude": 107.749056,
+    "azimuth": null
+  },
+  {
+    "place_number": "13-АЛ",
+    "latitude": 51.806651,
+    "longitude": 107.601507,
+    "azimuth": null
+  },
+  {
+    "place_number": "13-АМ",
+    "latitude": 51.830194,
+    "longitude": 107.656028,
+    "azimuth": null
+  },
+  {
+    "place_number": "140",
+    "latitude": 51.833367,
+    "longitude": 107.655128,
+    "azimuth": null
+  },
+  {
+    "place_number": "147-АЛ",
+    "latitude": 51.835331,
+    "longitude": 107.592151,
+    "azimuth": null
+  },
+  {
+    "place_number": "14-АЛ",
+    "latitude": 51.845315,
+    "longitude": 107.569824,
+    "azimuth": null
+  },
+  {
+    "place_number": "14-АМ",
+    "latitude": 51.841167,
+    "longitude": 107.579139,
+    "azimuth": null
+  },
+  {
+    "place_number": "150-АЛ",
+    "latitude": 51.841726,
+    "longitude": 107.542677,
+    "azimuth": null
+  },
+  {
+    "place_number": "15-АМ",
+    "latitude": 51.836861,
+    "longitude": 107.632806,
+    "azimuth": null
+  },
+  {
+    "place_number": "15-Д",
+    "latitude": 51.871341,
+    "longitude": 107.650825,
+    "azimuth": null
+  },
+  {
+    "place_number": "160-АЛ",
+    "latitude": 51.814385,
+    "longitude": 107.608281,
+    "azimuth": null
+  },
+  {
+    "place_number": "16-АЛ",
+    "latitude": 51.825058,
+    "longitude": 107.588356,
+    "azimuth": null
+  },
+  {
+    "place_number": "16-АМ",
+    "latitude": 51.821889,
+    "longitude": 107.639528,
+    "azimuth": null
+  },
+  {
+    "place_number": "16-Д",
+    "latitude": 51.862047,
+    "longitude": 107.501711,
+    "azimuth": 123.0
+  },
+  {
+    "place_number": "16-Д",
+    "latitude": 51.862047,
+    "longitude": 107.501711,
+    "azimuth": -1.0
+  },
+  {
+    "place_number": "170-АЛ",
+    "latitude": 51.814385,
+    "longitude": 107.608281,
+    "azimuth": null
+  },
+  {
+    "place_number": "17-АМ",
+    "latitude": 51.848056,
+    "longitude": 107.678222,
+    "azimuth": null
+  },
+  {
+    "place_number": "17-Д",
+    "latitude": 52.179661,
+    "longitude": 109.803567,
+    "azimuth": null
+  },
+  {
+    "place_number": "180",
+    "latitude": 51.845315,
+    "longitude": 107.569824,
+    "azimuth": null
+  },
+  {
+    "place_number": "18-АМ",
+    "latitude": 51.848056,
+    "longitude": 107.678222,
+    "azimuth": 45.0
+  },
+  {
+    "place_number": "18-Д, Прибайкальский район",
+    "latitude": 52.903337,
+    "longitude": 108.164963,
+    "azimuth": -1.0
+  },
+  {
+    "place_number": "190",
+    "latitude": 51.812025,
+    "longitude": 107.62242,
+    "azimuth": null
+  },
+  {
+    "place_number": "1-АЛ",
+    "latitude": 51.84231,
+    "longitude": 107.640377,
+    "azimuth": null
+  },
+  {
+    "place_number": "1-АМ",
+    "latitude": 51.844472,
+    "longitude": 107.572333,
+    "azimuth": null
+  },
+  {
+    "place_number": "200-АЛ",
+    "latitude": 51.841726,
+    "longitude": 107.542677,
+    "azimuth": null
+  },
+  {
+    "place_number": "201",
+    "latitude": 51.811627,
+    "longitude": 107.595562,
+    "azimuth": null
+  },
+  {
+    "place_number": "202",
+    "latitude": 51.803299,
+    "longitude": 107.604781,
+    "azimuth": null
+  },
+  {
+    "place_number": "203",
+    "latitude": 51.786827,
+    "longitude": 107.590823,
+    "azimuth": null
+  },
+  {
+    "place_number": "204",
+    "latitude": 51.788304,
+    "longitude": 107.593795,
+    "azimuth": null
+  },
+  {
+    "place_number": "205",
+    "latitude": 51.814399,
+    "longitude": 107.595288,
+    "azimuth": null
+  },
+  {
+    "place_number": "207",
+    "latitude": 51.816849,
+    "longitude": 107.594247,
+    "azimuth": null
+  },
+  {
+    "place_number": "208",
+    "latitude": 51.817165,
+    "longitude": 107.593641,
+    "azimuth": null
+  },
+  {
+    "place_number": "209",
+    "latitude": 51.818411,
+    "longitude": 107.593621,
+    "azimuth": null
+  },
+  {
+    "place_number": "20-Д, Прибайкальский район",
+    "latitude": 52.930731,
+    "longitude": 108.218174,
+    "azimuth": -1.0
+  },
+  {
+    "place_number": "210",
+    "latitude": 51.818236,
+    "longitude": 107.593052,
+    "azimuth": null
+  },
+  {
+    "place_number": "211",
+    "latitude": 51.806527,
+    "longitude": 107.630884,
+    "azimuth": null
+  },
+  {
+    "place_number": "212",
+    "latitude": 51.805782,
+    "longitude": 107.634253,
+    "azimuth": null
+  },
+  {
+    "place_number": "213",
+    "latitude": 51.80516,
+    "longitude": 107.640803,
+    "azimuth": null
+  },
+  {
+    "place_number": "214",
+    "latitude": 51.805438,
+    "longitude": 107.640865,
+    "azimuth": null
+  },
+  {
+    "place_number": "216",
+    "latitude": 51.805664,
+    "longitude": 107.654383,
+    "azimuth": null
+  },
+  {
+    "place_number": "217",
+    "latitude": 51.810393,
+    "longitude": 107.655966,
+    "azimuth": null
+  },
+  {
+    "place_number": "219",
+    "latitude": 51.821491,
+    "longitude": 107.6349,
+    "azimuth": null
+  },
+  {
+    "place_number": "21-Д",
+    "latitude": 51.845315,
+    "longitude": 107.569824,
+    "azimuth": null
+  },
+  {
+    "place_number": "220",
+    "latitude": 51.821712,
+    "longitude": 107.634938,
+    "azimuth": null
+  },
+  {
+    "place_number": "221",
+    "latitude": 51.821781,
+    "longitude": 107.637306,
+    "azimuth": null
+  },
+  {
+    "place_number": "222",
+    "latitude": 51.821621,
+    "longitude": 107.64648,
+    "azimuth": null
+  },
+  {
+    "place_number": "223",
+    "latitude": 51.821648,
+    "longitude": 107.65075,
+    "azimuth": null
+  },
+  {
+    "place_number": "224",
+    "latitude": 51.821155,
+    "longitude": 107.662319,
+    "azimuth": null
+  },
+  {
+    "place_number": "225",
+    "latitude": 51.822059,
+    "longitude": 107.65113,
+    "azimuth": null
+  },
+  {
+    "place_number": "227",
+    "latitude": 51.804802,
+    "longitude": 107.654019,
+    "azimuth": null
+  },
+  {
+    "place_number": "228",
+    "latitude": 51.805103,
+    "longitude": 107.646983,
+    "azimuth": null
+  },
+  {
+    "place_number": "229",
+    "latitude": 51.818224,
+    "longitude": 107.684731,
+    "azimuth": null
+  },
+  {
+    "place_number": "22-Д,ХАИМ",
+    "latitude": 52.604979,
+    "longitude": 108.091895,
+    "azimuth": -1.0
+  },
+  {
+    "place_number": "230",
+    "latitude": 51.818186,
+    "longitude": 107.68468,
+    "azimuth": null
+  },
+  {
+    "place_number": "231",
+    "latitude": 51.808456,
+    "longitude": 107.645419,
+    "azimuth": null
+  },
+  {
+    "place_number": "232",
+    "latitude": 51.811824,
+    "longitude": 107.653033,
+    "azimuth": null
+  },
+  {
+    "place_number": "234",
+    "latitude": 51.808914,
+    "longitude": 107.601814,
+    "azimuth": null
+  },
+  {
+    "place_number": "235",
+    "latitude": 51.809206,
+    "longitude": 107.601857,
+    "azimuth": null
+  },
+  {
+    "place_number": "236",
+    "latitude": 51.808927,
+    "longitude": 107.604249,
+    "azimuth": null
+  },
+  {
+    "place_number": "239",
+    "latitude": 51.809193,
+    "longitude": 107.608042,
+    "azimuth": null
+  },
+  {
+    "place_number": "242",
+    "latitude": 51.809187,
+    "longitude": 107.611362,
+    "azimuth": null
+  },
+  {
+    "place_number": "244",
+    "latitude": 51.815351,
+    "longitude": 107.628593,
+    "azimuth": null
+  },
+  {
+    "place_number": "245",
+    "latitude": 51.816335,
+    "longitude": 107.634097,
+    "azimuth": null
+  },
+  {
+    "place_number": "246",
+    "latitude": 51.809191,
+    "longitude": 107.614886,
+    "azimuth": null
+  },
+  {
+    "place_number": "247",
+    "latitude": 51.808975,
+    "longitude": 107.614988,
+    "azimuth": null
+  },
+  {
+    "place_number": "248",
+    "latitude": 51.808968,
+    "longitude": 107.616393,
+    "azimuth": null
+  },
+  {
+    "place_number": "249",
+    "latitude": 51.819833,
+    "longitude": 107.623923,
+    "azimuth": null
+  },
+  {
+    "place_number": "250",
+    "latitude": 51.814853,
+    "longitude": 107.610185,
+    "azimuth": null
+  },
+  {
+    "place_number": "251",
+    "latitude": 51.813982,
+    "longitude": 107.603924,
+    "azimuth": null
+  },
+  {
+    "place_number": "252",
+    "latitude": 51.813184,
+    "longitude": 107.593542,
+    "azimuth": null
+  },
+  {
+    "place_number": "253",
+    "latitude": 51.822601,
+    "longitude": 107.679566,
+    "azimuth": null
+  },
+  {
+    "place_number": "254",
+    "latitude": 51.812318,
+    "longitude": 107.667197,
+    "azimuth": null
+  },
+  {
+    "place_number": "256",
+    "latitude": 51.812946,
+    "longitude": 107.67121,
+    "azimuth": null
+  },
+  {
+    "place_number": "257",
+    "latitude": 51.813255,
+    "longitude": 107.672406,
+    "azimuth": null
+  },
+  {
+    "place_number": "258",
+    "latitude": 51.806475,
+    "longitude": 107.643138,
+    "azimuth": null
+  },
+  {
+    "place_number": "259",
+    "latitude": 51.810451,
+    "longitude": 107.650763,
+    "azimuth": null
+  },
+  {
+    "place_number": "261",
+    "latitude": 51.821925,
+    "longitude": 107.64826,
+    "azimuth": null
+  },
+  {
+    "place_number": "262",
+    "latitude": 51.815244,
+    "longitude": 107.611003,
+    "azimuth": null
+  },
+  {
+    "place_number": "263",
+    "latitude": 51.809199,
+    "longitude": 107.606099,
+    "azimuth": null
+  },
+  {
+    "place_number": "264",
+    "latitude": 51.80241,
+    "longitude": 107.617285,
+    "azimuth": null
+  },
+  {
+    "place_number": "265",
+    "latitude": 51.774251,
+    "longitude": 107.562554,
+    "azimuth": null
+  },
+  {
+    "place_number": "266",
+    "latitude": 51.812159,
+    "longitude": 107.66676,
+    "azimuth": null
+  },
+  {
+    "place_number": "267",
+    "latitude": 51.789763,
+    "longitude": 107.596305,
+    "azimuth": null
+  },
+  {
+    "place_number": "269",
+    "latitude": 51.821873,
+    "longitude": 107.641455,
+    "azimuth": null
+  },
+  {
+    "place_number": "26-Д",
+    "latitude": 51.806651,
+    "longitude": 107.601507,
+    "azimuth": null
+  },
+  {
+    "place_number": "270",
+    "latitude": 51.823794,
+    "longitude": 107.67386,
+    "azimuth": null
+  },
+  {
+    "place_number": "271",
+    "latitude": 51.818909,
+    "longitude": 107.681675,
+    "azimuth": null
+  },
+  {
+    "place_number": "272",
+    "latitude": 51.814636,
+    "longitude": 107.648543,
+    "azimuth": null
+  },
+  {
+    "place_number": "273",
+    "latitude": 51.811352,
+    "longitude": 107.661118,
+    "azimuth": null
+  },
+  {
+    "place_number": "274",
+    "latitude": 51.814649,
+    "longitude": 107.650458,
+    "azimuth": null
+  },
+  {
+    "place_number": "275",
+    "latitude": 51.814202,
+    "longitude": 107.647646,
+    "azimuth": null
+  },
+  {
+    "place_number": "276",
+    "latitude": 51.769976,
+    "longitude": 107.558209,
+    "azimuth": null
+  },
+  {
+    "place_number": "277",
+    "latitude": 51.802682,
+    "longitude": 107.667966,
+    "azimuth": null
+  },
+  {
+    "place_number": "278",
+    "latitude": 51.809157,
+    "longitude": 107.61735,
+    "azimuth": null
+  },
+  {
+    "place_number": "278",
+    "latitude": 51.780888,
+    "longitude": 107.692461,
+    "azimuth": null
+  },
+  {
+    "place_number": "27-Д",
+    "latitude": 51.821745,
+    "longitude": 107.650636,
+    "azimuth": null
+  },
+  {
+    "place_number": "28-Д",
+    "latitude": 51.804925,
+    "longitude": 107.652172,
+    "azimuth": null
+  },
+  {
+    "place_number": "2-АМ",
+    "latitude": 51.836361,
+    "longitude": 107.587056,
+    "azimuth": null
+  },
+  {
+    "place_number": "301",
+    "latitude": 51.839227,
+    "longitude": 107.652823,
+    "azimuth": null
+  },
+  {
+    "place_number": "302",
+    "latitude": 51.842101,
+    "longitude": 107.650955,
+    "azimuth": null
+  },
+  {
+    "place_number": "303",
+    "latitude": 51.832839,
+    "longitude": 107.65528,
+    "azimuth": null
+  },
+  {
+    "place_number": "304",
+    "latitude": 51.866909,
+    "longitude": 107.657081,
+    "azimuth": null
+  },
+  {
+    "place_number": "305",
+    "latitude": 51.832201,
+    "longitude": 107.655935,
+    "azimuth": null
+  },
+  {
+    "place_number": "306",
+    "latitude": 51.826897,
+    "longitude": 107.658246,
+    "azimuth": null
+  },
+  {
+    "place_number": "307",
+    "latitude": 51.838294,
+    "longitude": 107.652715,
+    "azimuth": null
+  },
+  {
+    "place_number": "308",
+    "latitude": 51.839038,
+    "longitude": 107.65293,
+    "azimuth": null
+  },
+  {
+    "place_number": "309",
+    "latitude": 51.832108,
+    "longitude": 107.656044,
+    "azimuth": null
+  },
+  {
+    "place_number": "310",
+    "latitude": 51.840941,
+    "longitude": 107.651289,
+    "azimuth": null
+  },
+  {
+    "place_number": "311",
+    "latitude": 51.841794,
+    "longitude": 107.62735,
+    "azimuth": null
+  },
+  {
+    "place_number": "312",
+    "latitude": 51.842249,
+    "longitude": 107.635662,
+    "azimuth": null
+  },
+  {
+    "place_number": "313",
+    "latitude": 51.842397,
+    "longitude": 107.643775,
+    "azimuth": null
+  },
+  {
+    "place_number": "314",
+    "latitude": 51.841911,
+    "longitude": 107.646093,
+    "azimuth": null
+  },
+  {
+    "place_number": "315",
+    "latitude": 51.851345,
+    "longitude": 107.57433,
+    "azimuth": null
+  },
+  {
+    "place_number": "316",
+    "latitude": 51.839672,
+    "longitude": 107.593461,
+    "azimuth": null
+  },
+  {
+    "place_number": "317",
+    "latitude": 51.842103,
+    "longitude": 107.633521,
+    "azimuth": null
+  },
+  {
+    "place_number": "318",
+    "latitude": 51.842034,
+    "longitude": 107.632186,
+    "azimuth": null
+  },
+  {
+    "place_number": "319",
+    "latitude": 51.841953,
+    "longitude": 107.630625,
+    "azimuth": null
+  },
+  {
+    "place_number": "321",
+    "latitude": 51.841579,
+    "longitude": 107.649583,
+    "azimuth": null
+  },
+  {
+    "place_number": "322",
+    "latitude": 51.841798,
+    "longitude": 107.620335,
+    "azimuth": null
+  },
+  {
+    "place_number": "323",
+    "latitude": 51.84417,
+    "longitude": 107.604477,
+    "azimuth": null
+  },
+  {
+    "place_number": "324",
+    "latitude": 51.843802,
+    "longitude": 107.647543,
+    "azimuth": null
+  },
+  {
+    "place_number": "325",
+    "latitude": 51.843981,
+    "longitude": 107.634548,
+    "azimuth": null
+  },
+  {
+    "place_number": "326",
+    "latitude": 51.843139,
+    "longitude": 107.628894,
+    "azimuth": null
+  },
+  {
+    "place_number": "327",
+    "latitude": 51.84367,
+    "longitude": 107.632359,
+    "azimuth": null
+  },
+  {
+    "place_number": "328",
+    "latitude": 51.836889,
+    "longitude": 107.590694,
+    "azimuth": null
+  },
+  {
+    "place_number": "329",
+    "latitude": 51.840074,
+    "longitude": 107.601512,
+    "azimuth": null
+  },
+  {
+    "place_number": "330",
+    "latitude": 51.840148,
+    "longitude": 107.601034,
+    "azimuth": null
+  },
+  {
+    "place_number": "331",
+    "latitude": 51.836462,
+    "longitude": 107.59426,
+    "azimuth": null
+  },
+  {
+    "place_number": "332",
+    "latitude": 51.841398,
+    "longitude": 107.604797,
+    "azimuth": null
+  },
+  {
+    "place_number": "333",
+    "latitude": 51.841704,
+    "longitude": 107.611734,
+    "azimuth": null
+  },
+  {
+    "place_number": "334",
+    "latitude": 51.836775,
+    "longitude": 107.594045,
+    "azimuth": null
+  },
+  {
+    "place_number": "335",
+    "latitude": 51.836283,
+    "longitude": 107.59363,
+    "azimuth": null
+  },
+  {
+    "place_number": "336",
+    "latitude": 51.838239,
+    "longitude": 107.589104,
+    "azimuth": null
+  },
+  {
+    "place_number": "338",
+    "latitude": 51.836088,
+    "longitude": 107.592455,
+    "azimuth": null
+  },
+  {
+    "place_number": "339",
+    "latitude": 51.838335,
+    "longitude": 107.597958,
+    "azimuth": null
+  },
+  {
+    "place_number": "340",
+    "latitude": 51.840395,
+    "longitude": 107.601499,
+    "azimuth": null
+  },
+  {
+    "place_number": "341",
+    "latitude": 51.837858,
+    "longitude": 107.596943,
+    "azimuth": null
+  },
+  {
+    "place_number": "342",
+    "latitude": 51.84625,
+    "longitude": 107.619941,
+    "azimuth": null
+  },
+  {
+    "place_number": "343",
+    "latitude": 51.864121,
+    "longitude": 107.730942,
+    "azimuth": null
+  },
+  {
+    "place_number": "344",
+    "latitude": 51.853942,
+    "longitude": 107.700724,
+    "azimuth": null
+  },
+  {
+    "place_number": "345",
+    "latitude": 51.844491,
+    "longitude": 107.665452,
+    "azimuth": null
+  },
+  {
+    "place_number": "346",
+    "latitude": 51.851505,
+    "longitude": 107.694923,
+    "azimuth": null
+  },
+  {
+    "place_number": "347",
+    "latitude": 51.873708,
+    "longitude": 107.732436,
+    "azimuth": null
+  },
+  {
+    "place_number": "349",
+    "latitude": 51.86545,
+    "longitude": 107.744242,
+    "azimuth": null
+  },
+  {
+    "place_number": "351",
+    "latitude": 51.846027,
+    "longitude": 107.586471,
+    "azimuth": -1.0
+  },
+  {
+    "place_number": "352",
+    "latitude": 51.843198,
+    "longitude": 107.600779,
+    "azimuth": -1.0
+  },
+  {
+    "place_number": "3-АМ",
+    "latitude": 51.84075,
+    "longitude": 107.584444,
+    "azimuth": null
+  },
+  {
+    "place_number": "401",
+    "latitude": 51.843061,
+    "longitude": 107.581008,
+    "azimuth": null
+  },
+  {
+    "place_number": "406",
+    "latitude": 51.834496,
+    "longitude": 107.589193,
+    "azimuth": null
+  },
+  {
+    "place_number": "407",
+    "latitude": 51.834281,
+    "longitude": 107.589407,
+    "azimuth": null
+  },
+  {
+    "place_number": "409",
+    "latitude": 51.805216,
+    "longitude": 107.642799,
+    "azimuth": null
+  },
+  {
+    "place_number": "410",
+    "latitude": 51.815998,
+    "longitude": 107.594185,
+    "azimuth": null
+  },
+  {
+    "place_number": "411",
+    "latitude": 51.806651,
+    "longitude": 107.601507,
+    "azimuth": null
+  },
+  {
+    "place_number": "412",
+    "latitude": 51.821479,
+    "longitude": 107.658295,
+    "azimuth": null
+  },
+  {
+    "place_number": "414",
+    "latitude": 51.811225,
+    "longitude": 107.652801,
+    "azimuth": null
+  },
+  {
+    "place_number": "415",
+    "latitude": 51.84196,
+    "longitude": 107.635303,
+    "azimuth": null
+  },
+  {
+    "place_number": "416",
+    "latitude": 51.832117,
+    "longitude": 107.655553,
+    "azimuth": null
+  },
+  {
+    "place_number": "417",
+    "latitude": 51.841989,
+    "longitude": 107.575528,
+    "azimuth": null
+  },
+  {
+    "place_number": "41-АМ",
+    "latitude": 51.815286,
+    "longitude": 107.647696,
+    "azimuth": null
+  },
+  {
+    "place_number": "420",
+    "latitude": 51.841297,
+    "longitude": 107.602915,
+    "azimuth": null
+  },
+  {
+    "place_number": "43-АМ",
+    "latitude": 51.8215,
+    "longitude": 107.629583,
+    "azimuth": null
+  },
+  {
+    "place_number": "44-АМ",
+    "latitude": 51.814444,
+    "longitude": 107.623944,
+    "azimuth": 202.0
+  },
+  {
+    "place_number": "45-АМ",
+    "latitude": 51.812111,
+    "longitude": 107.654389,
+    "azimuth": null
+  },
+  {
+    "place_number": "46-АМ",
+    "latitude": 51.808639,
+    "longitude": 107.646611,
+    "azimuth": null
+  },
+  {
+    "place_number": "47-АМ",
+    "latitude": 51.808444,
+    "longitude": 107.645278,
+    "azimuth": null
+  },
+  {
+    "place_number": "49-АМ",
+    "latitude": 51.826556,
+    "longitude": 107.657861,
+    "azimuth": null
+  },
+  {
+    "place_number": "4-АМ",
+    "latitude": 51.841528,
+    "longitude": 107.58325,
+    "azimuth": null
+  },
+  {
+    "place_number": "4-Д",
+    "latitude": 51.806651,
+    "longitude": 107.601507,
+    "azimuth": null
+  },
+  {
+    "place_number": "4-Д",
+    "latitude": 51.801311,
+    "longitude": 107.453308,
+    "azimuth": -1.0
+  },
+  {
+    "place_number": "51.80165,107.452879",
+    "latitude": 51.80165,
+    "longitude": 107.452879,
+    "azimuth": null
+  },
+  {
+    "place_number": "51-АМ",
+    "latitude": 51.812778,
+    "longitude": 107.59575,
+    "azimuth": null
+  },
+  {
+    "place_number": "52-АМ",
+    "latitude": 51.843942,
+    "longitude": 107.647318,
+    "azimuth": null
+  },
+  {
+    "place_number": "53-АМ",
+    "latitude": 51.812778,
+    "longitude": 107.59575,
+    "azimuth": null
+  },
+  {
+    "place_number": "54-АМ",
+    "latitude": 51.844472,
+    "longitude": 107.650278,
+    "azimuth": null
+  },
+  {
+    "place_number": "56-АМ",
+    "latitude": 51.821472,
+    "longitude": 107.638639,
+    "azimuth": null
+  },
+  {
+    "place_number": "57-АМ",
+    "latitude": 51.813778,
+    "longitude": 107.65625,
+    "azimuth": null
+  },
+  {
+    "place_number": "58-А",
+    "latitude": 51.813583,
+    "longitude": 107.657056,
+    "azimuth": null
+  },
+  {
+    "place_number": "59-АМ",
+    "latitude": 51.863917,
+    "longitude": 107.73225,
+    "azimuth": null
+  },
+  {
+    "place_number": "5-АЛ",
+    "latitude": 51.843061,
+    "longitude": 107.581008,
+    "azimuth": null
+  },
+  {
+    "place_number": "5-АМ",
+    "latitude": 51.802028,
+    "longitude": 107.616361,
+    "azimuth": null
+  },
+  {
+    "place_number": "600",
+    "latitude": 51.768472,
+    "longitude": 107.408261,
+    "azimuth": null
+  },
+  {
+    "place_number": "601",
+    "latitude": 51.891432,
+    "longitude": 107.47775,
+    "azimuth": null
+  },
+  {
+    "place_number": "602",
+    "latitude": 51.777858,
+    "longitude": 107.467632,
+    "azimuth": null
+  },
+  {
+    "place_number": "603",
+    "latitude": 51.749653,
+    "longitude": 107.294173,
+    "azimuth": null
+  },
+  {
+    "place_number": "605",
+    "latitude": 51.768898,
+    "longitude": 107.409575,
+    "azimuth": null
+  },
+  {
+    "place_number": "60-АМ",
+    "latitude": 51.818833,
+    "longitude": 107.681361,
+    "azimuth": null
+  },
+  {
+    "place_number": "610",
+    "latitude": 52.602887,
+    "longitude": 108.085295,
+    "azimuth": null
+  },
+  {
+    "place_number": "61-АМ",
+    "latitude": 51.817194,
+    "longitude": 107.679667,
+    "azimuth": null
+  },
+  {
+    "place_number": "62-АМ",
+    "latitude": 51.807972,
+    "longitude": 107.644361,
+    "azimuth": null
+  },
+  {
+    "place_number": "63-АМ",
+    "latitude": 51.846194,
+    "longitude": 107.586861,
+    "azimuth": null
+  },
+  {
+    "place_number": "64-АМ",
+    "latitude": 51.84225,
+    "longitude": 107.601583,
+    "azimuth": null
+  },
+  {
+    "place_number": "65-АМ",
+    "latitude": 51.802333,
+    "longitude": 107.605611,
+    "azimuth": null
+  },
+  {
+    "place_number": "66-АМ",
+    "latitude": 51.814056,
+    "longitude": 107.653583,
+    "azimuth": null
+  },
+  {
+    "place_number": "68-АМ",
+    "latitude": 51.813944,
+    "longitude": 107.605167,
+    "azimuth": null
+  },
+  {
+    "place_number": "69-АМ",
+    "latitude": 51.813667,
+    "longitude": 107.60175,
+    "azimuth": null
+  },
+  {
+    "place_number": "6-АЛ",
+    "latitude": 51.826149,
+    "longitude": 107.590701,
+    "azimuth": null
+  },
+  {
+    "place_number": "6-АМ",
+    "latitude": 51.842306,
+    "longitude": 107.651361,
+    "azimuth": null
+  },
+  {
+    "place_number": "70-АМ",
+    "latitude": 51.813755,
+    "longitude": 107.654573,
+    "azimuth": null
+  },
+  {
+    "place_number": "71-АМ",
+    "latitude": 51.809139,
+    "longitude": 107.646861,
+    "azimuth": null
+  },
+  {
+    "place_number": "72-АМ",
+    "latitude": 51.844667,
+    "longitude": 107.583361,
+    "azimuth": null
+  },
+  {
+    "place_number": "73-АМ",
+    "latitude": 51.816722,
+    "longitude": 107.637944,
+    "azimuth": null
+  },
+  {
+    "place_number": "74-АМ",
+    "latitude": 51.845444,
+    "longitude": 107.58475,
+    "azimuth": null
+  },
+  {
+    "place_number": "75-АМ",
+    "latitude": 51.843389,
+    "longitude": 107.60025,
+    "azimuth": null
+  },
+  {
+    "place_number": "76-АЛ",
+    "latitude": 51.841359,
+    "longitude": 107.651221,
+    "azimuth": null
+  },
+  {
+    "place_number": "77-АЛ",
+    "latitude": 51.840407,
+    "longitude": 107.602028,
+    "azimuth": null
+  },
+  {
+    "place_number": "77-АМ",
+    "latitude": 51.888583,
+    "longitude": 107.667111,
+    "azimuth": null
+  },
+  {
+    "place_number": "78-АМ",
+    "latitude": 51.84325,
+    "longitude": 107.581083,
+    "azimuth": null
+  },
+  {
+    "place_number": "7-АЛ",
+    "latitude": 51.806651,
+    "longitude": 107.601507,
+    "azimuth": null
+  },
+  {
+    "place_number": "80-АМ",
+    "latitude": 51.841972,
+    "longitude": 107.618111,
+    "azimuth": null
+  },
+  {
+    "place_number": "836",
+    "latitude": 51.844554,
+    "longitude": 107.666345,
+    "azimuth": null
+  },
+  {
+    "place_number": "838",
+    "latitude": 51.845877,
+    "longitude": 107.514376,
+    "azimuth": null
+  },
+  {
+    "place_number": "848",
+    "latitude": 51.842244,
+    "longitude": 107.532284,
+    "azimuth": null
+  },
+  {
+    "place_number": "849",
+    "latitude": 51.848981,
+    "longitude": 107.509081,
+    "azimuth": null
+  },
+  {
+    "place_number": "8-АМ",
+    "latitude": 51.842417,
+    "longitude": 107.650778,
+    "azimuth": null
+  },
+  {
+    "place_number": "90-АЛ",
+    "latitude": 51.806651,
+    "longitude": 107.601507,
+    "azimuth": null
+  },
+  {
+    "place_number": "99",
+    "latitude": 51.82178,
+    "longitude": 107.680543,
+    "azimuth": null
+  },
+  {
+    "place_number": "9-АЛ",
+    "latitude": 51.845315,
+    "longitude": 107.569824,
+    "azimuth": null
+  },
+  {
+    "place_number": "9-Д",
+    "latitude": 51.845315,
+    "longitude": 107.569824,
+    "azimuth": null
+  },
+  {
+    "place_number": "Арка",
+    "latitude": 51.844381,
+    "longitude": 107.57196,
+    "azimuth": null
+  },
+  {
+    "place_number": "Аэропорт",
+    "latitude": 51.800737,
+    "longitude": 107.457242,
+    "azimuth": 90.0
+  },
+  {
+    "place_number": "Аэропорт 102",
+    "latitude": 51.799844,
+    "longitude": 107.463597,
+    "azimuth": null
+  },
+  {
+    "place_number": "Бабушкина (въезд на Удинский мост, напротив ДЮТ) поз.3",
+    "latitude": 51.819974,
+    "longitude": 107.59288,
+    "azimuth": null
+  },
+  {
+    "place_number": "Бабушкина (магазин \"100 мелочей\"), тривижн",
+    "latitude": 51.815303,
+    "longitude": 107.595007,
+    "azimuth": null
+  },
+  {
+    "place_number": "Бабушкина (остановка \"Геологическая\"), тривижн",
+    "latitude": 51.810921,
+    "longitude": 107.607368,
+    "azimuth": null
+  },
+  {
+    "place_number": "Боевая (пересечение с пр.Строителей)",
+    "latitude": 51.805227,
+    "longitude": 107.642718,
+    "azimuth": null
+  },
+  {
+    "place_number": "Борсоева (Авторынок)",
+    "latitude": 51.828592,
+    "longitude": 107.59663,
+    "azimuth": null
+  },
+  {
+    "place_number": "Борсоева (ОАО \"Наран\")",
+    "latitude": 51.846297,
+    "longitude": 107.566944,
+    "azimuth": null
+  },
+  {
+    "place_number": "Дорожная улица, 6",
+    "latitude": 51.841023,
+    "longitude": 107.522352,
+    "azimuth": 56.0
+  },
+  {
+    "place_number": "Жердева (угол парка отдыха, 43-44 кварталы)",
+    "latitude": 51.810847,
+    "longitude": 107.658074,
+    "azimuth": null
+  },
+  {
+    "place_number": "Забайкальская улица, 14Б",
+    "latitude": 51.783943,
+    "longitude": 107.58635,
+    "azimuth": 213.0
+  },
+  {
+    "place_number": "Кабанская улица, 16",
+    "latitude": 51.846556,
+    "longitude": 107.5135,
+    "azimuth": 292.0
+  },
+  {
+    "place_number": "Калашникова",
+    "latitude": 51.808116,
+    "longitude": 107.646482,
+    "azimuth": null
+  },
+  {
+    "place_number": "Ключевская (пересечение с ул.Лебедева, ОАО \"Улан-Удэ Лада\")",
+    "latitude": 51.822173,
+    "longitude": 107.650404,
+    "azimuth": null
+  },
+  {
+    "place_number": "Куйбышева",
+    "latitude": 51.825091,
+    "longitude": 107.590192,
+    "azimuth": null
+  },
+  {
+    "place_number": "Ленини(арбат)",
+    "latitude": 51.828325,
+    "longitude": 107.584425,
+    "azimuth": null
+  },
+  {
+    "place_number": "Магистральная",
+    "latitude": 51.875495,
+    "longitude": 107.748175,
+    "azimuth": null
+  },
+  {
+    "place_number": "пилларс",
+    "latitude": 51.827164,
+    "longitude": 107.589629,
+    "azimuth": null
+  },
+  {
+    "place_number": "пр. Автомобилистов (Аквасити)",
+    "latitude": 51.832622,
+    "longitude": 107.655375,
+    "azimuth": null
+  },
+  {
+    "place_number": "пр.Строителей,съезд с Богатырского моста",
+    "latitude": 51.814788,
+    "longitude": 107.656962,
+    "azimuth": null
+  },
+  {
+    "place_number": "проспект Победы, 16",
+    "latitude": 51.825089,
+    "longitude": 107.593379,
+    "azimuth": 348.0
+  },
+  {
+    "place_number": "проспект Строителей, 66Б",
+    "latitude": 51.81356,
+    "longitude": 107.65596,
+    "azimuth": 101.0
+  },
+  {
+    "place_number": "Терешковой (магазин \"Либерти\"),  тривижн",
+    "latitude": 51.809181,
+    "longitude": 107.609937,
+    "azimuth": null
+  },
+  {
+    "place_number": "Терешковой (напротив Администрации Октябрьского района)",
+    "latitude": 51.808928,
+    "longitude": 107.611178,
+    "azimuth": null
+  },
+  {
+    "place_number": "Терешковой (напротив Сбербанка)",
+    "latitude": 51.808935,
+    "longitude": 107.605613,
+    "azimuth": null
+  },
+  {
+    "place_number": "Терешковой (остановка \"Саяны\")",
+    "latitude": 51.808912,
+    "longitude": 107.607727,
+    "azimuth": null
+  },
+  {
+    "place_number": "Терешковой (пересечение с б-м К.Маркса, остановка \"Саяны\")",
+    "latitude": 51.808948,
+    "longitude": 107.608103,
+    "azimuth": null
+  },
+  {
+    "place_number": "Терешковой (пересечение с ул. Геологическая)",
+    "latitude": 51.80937,
+    "longitude": 107.5993,
+    "azimuth": null
+  },
+  {
+    "place_number": "ул. Бабушкина/ул. Терешковой",
+    "latitude": 51.808741,
+    "longitude": 107.598752,
+    "azimuth": null
+  },
+  {
+    "place_number": "ул. Балтахинова",
+    "latitude": 51.829467,
+    "longitude": 107.587807,
+    "azimuth": null
+  },
+  {
+    "place_number": "ул. Балтахинова, д.38",
+    "latitude": 51.826649,
+    "longitude": 107.590619,
+    "azimuth": null
+  },
+  {
+    "place_number": "ул. Меллиараторв",
+    "latitude": 51.818155,
+    "longitude": 107.504363,
+    "azimuth": null
+  },
+  {
+    "place_number": "ул.Бабушкина (Дворец пионеров)",
+    "latitude": 51.815546,
+    "longitude": 107.595262,
+    "azimuth": null
+  },
+  {
+    "place_number": "улица Борсоева, 1А",
+    "latitude": 51.827097,
+    "longitude": 107.59911,
+    "azimuth": 292.0
+  },
+  {
+    "place_number": "улица Борсоева, 23",
+    "latitude": 51.839776,
+    "longitude": 107.5808,
+    "azimuth": 326.0
+  },
+  {
+    "place_number": "улица Борсоева, 23",
+    "latitude": 51.839273,
+    "longitude": 107.581559,
+    "azimuth": 326.0
+  },
+  {
+    "place_number": "улица Борсоева, 32",
+    "latitude": 51.84447200000064,
+    "longitude": 107.57233299,
+    "azimuth": 338.0
+  },
+  {
+    "place_number": "улица Борсоева, 5",
+    "latitude": 51.82926,
+    "longitude": 107.595907,
+    "azimuth": 315.0
+  },
+  {
+    "place_number": "улица Бригада № 1, 170",
+    "latitude": 56.013302,
+    "longitude": 92.788498,
+    "azimuth": -1.0
+  },
+  {
+    "place_number": "улица Ербанова, 22",
+    "latitude": 51.834129,
+    "longitude": 107.589143,
+    "azimuth": 33.0
+  },
+  {
+    "place_number": "улица Терешковой, 2",
+    "latitude": 51.80925,
+    "longitude": 107.600167,
+    "azimuth": 258.0
+  },
+  {
+    "place_number": "улица Терешковой, 2",
+    "latitude": 51.808944,
+    "longitude": 107.60025,
+    "azimuth": 78.0
+  },
+  {
+    "place_number": "Шумяцкого (пересечение Жердева, 42 квартал)",
+    "latitude": 51.813641,
+    "longitude": 107.675055,
+    "azimuth": null
+  }
+]
