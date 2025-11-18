@@ -1,10 +1,12 @@
-type: php:8.2
+applications:
+    app:
+        type: php:8.2
 
-build:
-    flavor: symfony
+        build:
+            flavor: symfony
 
-web:
-    locations:
-        "/":
-            root: "public"
-            passthru: "/index.php"
+        web:
+            locations:
+                "/":
+                    root: public
+                    passthru: /index.php
