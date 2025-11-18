@@ -87,62 +87,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Карточки -->
-<!--                <div class="space-y-2 sm:space-y-3 md:space-y-4">-->
-<!--                    <div-->
-<!--                        v-for="item in objects"-->
-<!--                        :key="item.id"-->
-<!--                        @click="focusOnMap(item)"-->
-<!--                        :class="[-->
-<!--                            'bg-white border-2 border-gray-100 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-5 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:scale-[1.01] group',-->
-<!--                            activeCard === item.id ? 'border-red-400 shadow-lg ring-1 ring-red-100' : 'hover:border-red-200'-->
-<!--                        ]"-->
-<!--                    >-->
-<!--                        <div class="flex justify-between items-start mb-2 sm:mb-3">-->
-<!--                            <div class="flex-1 min-w-0">-->
-<!--                                <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-1 truncate">-->
-<!--                                    {{ item.address }}-->
-<!--                                </h3>-->
-<!--                                <div class="flex flex-wrap gap-1 mt-1 sm:mt-2">-->
-<!--                                    <span class="px-1.5 py-0.5 bg-blue-50 text-blue-600 text-xs rounded-full truncate">-->
-<!--                                        {{ getProductTypeName(item.productType) }}-->
-<!--                                    </span>-->
-<!--                                    <span class="px-1.5 py-0.5 bg-green-50 text-green-600 text-xs rounded-full truncate">-->
-<!--                                        {{ getConstrTypeName(item.constrTypeId) }}-->
-<!--                                    </span>-->
-
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        &lt;!&ndash; Дополнительная информация &ndash;&gt;-->
-<!--                        <div class="flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-2 sm:pt-3">-->
-<!--                            <span class="flex items-center line-clamp-1 truncate flex-1 min-w-0">-->
-<!--                                📍 {{ item.address || 'Адрес не указан' }}-->
-<!--                            </span>-->
-<!--                            <span class="flex items-center bg-gray-50 px-1.5 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 ml-2">-->
-<!--                                ⭐ {{ (Math.random() * 0.5 + 4.3).toFixed(1) }}-->
-<!--                            </span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    &lt;!&ndash; Сообщение если ничего не найдено &ndash;&gt;-->
-<!--                    <div v-if="objects.length === 0"-->
-<!--                         class="text-center py-4 sm:py-6 md:py-8 bg-gradient-to-br from-gray-50 to-white rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-dashed border-gray-200">-->
-<!--                        <div class="text-gray-400 mb-2">-->
-<!--                            <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">-->
-<!--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>-->
-<!--                            </svg>-->
-<!--                        </div>-->
-<!--                        <h3 class="text-sm sm:text-base md:text-lg font-semibold text-gray-600 mb-1">Ничего не найдено</h3>-->
-<!--                        <p class="text-xs sm:text-sm text-gray-500">Попробуйте изменить параметры фильтрации</p>-->
-<!--                        <button @click="resetFilters"-->
-<!--                                class="mt-2 sm:mt-3 px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:from-red-600 hover:to-red-700 transition-all">-->
-<!--                            Сбросить фильтры-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
 
@@ -190,9 +134,10 @@ const getConstrTypeName = id => constrTypes.value.find(c => c.id == id)?.name ||
 async function loadFilters() {
     const params = new URLSearchParams();
     if (filters.productType) params.append('productType', filters.productType)
-    console.log(params.toString())
-    const res = await fetch(`http://127.0.0.1:8000/api/filters${params.toString()}`)
+    const res = await fetch(`http://127.0.0.1:8000/api/filters?${params.toString()}`)
+    console.log(res)
     const data = await res.json()
+    console.log(data)
     productTypes.value = data.productTypes
     constrTypes.value = data.constrTypes
 }
@@ -204,10 +149,8 @@ async function loadAdvertisements() {
     if (filters.constrTypeId) params.append('constrTypeId', filters.constrTypeId)
 
     const res = await fetch(`http://127.0.0.1:8000/api/advertisements?${params.toString()}`)
-    console.log(params.toString())
     const data = await res.json()
     objects.value = data
-    console.log(data)
 
     if (map && isMapLoaded.value) {
         clearPlacemarks()
@@ -222,6 +165,7 @@ function resetFilters() {
 }
 
 function applyFilters() {
+    loadFilters()
     loadAdvertisements()
 }
 

@@ -53,13 +53,16 @@ class AdvertisementController extends AbstractController
 
         if (!empty($category_id)) {
             $constrTypes = $typeRepo->findFilter($category_id);
-            dd($constrTypes);
             return $this->json([
                 'productTypes' => array_map(fn($c) => [
                     'id' => $c->getId(),
                     'name' => $c->getName()
                 ], $catRepo->findAll()),
+                'constrTypes' => array_map(fn($c) => [
+                    'id' => $c['id'],
+                    'name' => $c['name']
 
+                ], $constrTypes)
             ]);
         }
 

@@ -32,7 +32,8 @@ class AdvertisementTypeRepository extends ServiceEntityRepository
     public function findFilter( ?int $categoryId): array
     {
         return $this->createQueryBuilder('at')
-            ->select('at.*')
+            ->select('at.id,at.name')
+            ->innerJoin('at.category', 'c')
             ->where('at.category = :categoryId')
             ->setParameter('categoryId', $categoryId)
             ->orderBy('at.name', 'ASC')

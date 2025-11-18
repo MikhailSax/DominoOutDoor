@@ -3,87 +3,350 @@
 {% block title %}Hello HomePageController!{% endblock %}
 
 {% block body %}
-    <div class="w-full relative mt-8">
-        <div class="swiper default-carousel swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
-                        <span class="text-3xl font-semibold text-indigo-600">Slide 1 </span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
-                        <span class="text-3xl font-semibold text-indigo-600">Slide 2 </span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
-                        <span class="text-3xl font-semibold text-indigo-600">Slide 3 </span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center gap-8 lg:justify-start justify-center">
-                <button id="slider-button-left" class="swiper-button-prev group !p-2 flex justify-center items-center border border-solid border-indigo-600 !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8 !left-5 hover:bg-indigo-600 " data-carousel-prev>
-                    <svg class="h-5 w-5 text-indigo-600 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <button id="slider-button-right" class="swiper-button-next group !p-2 flex justify-center items-center border border-solid border-indigo-600 !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8  !right-5 hover:bg-indigo-600" data-carousel-next>
-                    <svg class="h-5 w-5 text-indigo-600 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M5.99984 4.00012L10 8.00029L5.99748 12.0028" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </div>
+        <!-- ВНИМАНИЕ -->
+        <!-- Этот шаблон предполагает, что Tailwind подключён в base.html.twig -->
 
-    <div class="bg-white">
-        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-            <h2 class="sr-only">Products</h2>
+        <style>
+            /* Простая анимация появления для секций */
+            .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+            .reveal.is-visible { opacity: 1; transform: none; }
+            /* Небольшой ховер-фокус для карточек */
+            .card-glow:hover { box-shadow: 0 12px 30px rgba(239,68,68,0.12); transform: translateY(-6px); }
+        </style>
 
-            <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                <a href="#" class="group">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-01.jpg" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
-                    <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
-                </a>
-                <a href="#" class="group">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-02.jpg" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
-                    <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
-                </a>
-                <a href="#" class="group">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-03.jpg" alt="Person using a pen to cross a task off a productivity paper card." class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
-                    <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
-                </a>
-                <a href="#" class="group">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-04.jpg" alt="Hand holding black machined steel mechanical pencil with brass tip and top." class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
-                    <h3 class="mt-4 text-sm text-gray-700">Machined Mechanical Pencil</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
-                </a>
-                <a href="#" class="group">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-05.jpg" alt="Paper card sitting upright in walnut card holder on desk." class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
-                    <h3 class="mt-4 text-sm text-gray-700">Focus Card Tray</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">$64</p>
-                </a>
-                <a href="#" class="group">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-06.jpg" alt="Stack of 3 small drab green cardboard paper card refill boxes with white text." class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
-                    <h3 class="mt-4 text-sm text-gray-700">Focus Multi-Pack</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">$39</p>
-                </a>
-                <a href="#" class="group">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-07.jpg" alt="Brass scissors with geometric design, black steel finger holes, and included upright brass stand." class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
-                    <h3 class="mt-4 text-sm text-gray-700">Brass Scissors</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">$50</p>
-                </a>
-                <a href="#" class="group">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-08.jpg" alt="Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop." class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
-                    <h3 class="mt-4 text-sm text-gray-700">Focus Carry Pouch</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">$32</p>
-                </a>
+        <!-- Hero -->
+        <section class="relative h-screen flex items-center justify-center bg-cover bg-center" data-bg="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80">
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+            <div class="relative z-10 text-center text-white px-6 reveal">
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Наружная реклама, которая <span class="text-red-600">продаёт</span></h2>
+                <p class="mb-8 text-lg md:text-xl max-w-3xl mx-auto">Билборды, баннеры, вывески и digital-экраны. Полный цикл: креатив, печать, монтаж и сопровождение кампаний в городе и регионе.</p>
+                <div class="flex items-center justify-center space-x-4">
+                    <a href="#services" class="px-6 py-3 bg-red-600 text-white font-semibold uppercase hover:bg-red-700 transition shadow-md rounded">Наши услуги</a>
+                    <a href="#form" class="px-6 py-3 border-2 border-red-600 text-red-600 font-semibold uppercase hover:bg-red-600 hover:text-white transition rounded">Оставить заявку</a>
+                </div>
+                <div class="mt-6 text-sm text-gray-200">Бесплатная консультация и расчёт охвата в течение 24 часов</div>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <!-- Преимущества (Reveal grid) -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-3xl font-bold mb-10 reveal">Почему выбирают нас</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-6 rounded-lg bg-white card-glow reveal">
+                        <div class="text-red-600 text-3xl font-bold mb-3">Охват</div>
+                        <p class="text-gray-700">Сеть щитов и экранов в ключевых точках города — до миллиона контактов в месяц.</p>
+                    </div>
+                    <div class="p-6 rounded-lg bg-white card-glow reveal">
+                        <div class="text-red-600 text-3xl font-bold mb-3">Качество</div>
+                        <p class="text-gray-700">Износостойкие материалы, долговечная печать и профессиональный монтаж.</p>
+                    </div>
+                    <div class="p-6 rounded-lg bg-white card-glow reveal">
+                        <div class="text-red-600 text-3xl font-bold mb-3">Аналитика</div>
+                        <p class="text-gray-700">Замеры и отчёты по фактическому охвату и показам после запуска кампании.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форматы услуг -->
+        <section id="services" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold text-center mb-12 reveal">Наши форматы</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <article class="bg-white p-6 rounded-lg shadow reveal">
+                        <img loading="lazy" src="https://img.icons8.com/ios-filled/100/fa314a/billboard.png" alt="Билборды" class="mx-auto mb-4">
+                        <h4 class="text-xl font-semibold mb-2">Билборды</h4>
+                        <p class="text-gray-700">Классический формат для охвата и узнаваемости.</p>
+                    </article>
+
+                    <article class="bg-white p-6 rounded-lg shadow reveal">
+                        <img loading="lazy" src="https://img.icons8.com/ios-filled/100/fa314a/panorama.png" alt="Баннеры" class="mx-auto mb-4">
+                        <h4 class="text-xl font-semibold mb-2">Баннеры</h4>
+                        <p class="text-gray-700">Фасады, временные конструкции, event-баннера — любой размер под задачу.</p>
+                    </article>
+
+                    <article class="bg-white p-6 rounded-lg shadow reveal">
+                        <img loading="lazy" src="https://img.icons8.com/ios-filled/100/fa314a/neon-light.png" alt="Вывески" class="mx-auto mb-4">
+                        <h4 class="text-xl font-semibold mb-2">Вывески и световые короба</h4>
+                        <p class="text-gray-700">Короба, неон, световые панели — заметно даже ночью.</p>
+                    </article>
+
+                    <article class="bg-white p-6 rounded-lg shadow reveal">
+                        <img loading="lazy" src="https://img.icons8.com/ios-filled/100/fa314a/tv.png" alt="Digital" class="mx-auto mb-4">
+                        <h4 class="text-xl font-semibold mb-2">Digital-экраны</h4>
+                        <p class="text-gray-700">Динамическое сообщение, ротаторы и таргетированные показы.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кейс-грид (портфолио) -->
+        <section id="portfolio" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex items-center justify-between mb-8 reveal">
+                    <h3 class="text-3xl font-bold">Проекты</h3>
+                    <a href="#portfolio" class="text-sm text-red-600 font-semibold">Посмотреть все кейсы →</a>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <figure class="overflow-hidden rounded-lg shadow reveal">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=800&q=80" alt="Проект 1" class="w-full object-cover h-56">
+                        <figcaption class="p-4 bg-white">
+                            <h4 class="font-semibold">Кампания «Города мечты»</h4>
+                            <p class="text-sm text-gray-600">Комплексная кампания по 50 точкам</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="overflow-hidden rounded-lg shadow reveal">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?auto=format&fit=crop&w=800&q=80" alt="Проект 2" class="w-full object-cover h-56">
+                        <figcaption class="p-4 bg-white">
+                            <h4 class="font-semibold">Event-серия для бренда X</h4>
+                            <p class="text-sm text-gray-600">Баннеры и фасадная реклама в трёх городах</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="overflow-hidden rounded-lg shadow reveal">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1512291313931-d4291048e7b8?auto=format&fit=crop&w=800&q=80" alt="Проект 3" class="w-full object-cover h-56">
+                        <figcaption class="p-4 bg-white">
+                            <h4 class="font-semibold">Диджитал-кампания</h4>
+                            <p class="text-sm text-gray-600">Серия видеороликов на улицах и экранах</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Цифры (краткая статистика) -->
+        <section class="py-20 bg-gray-900 text-white">
+            <div class="container mx-auto px-6 grid md:grid-cols-3 gap-6 text-center reveal">
+                <div>
+                    <div class="text-red-600 text-5xl font-extrabold">500+</div>
+                    <div class="mt-2">точек размещения</div>
+                </div>
+                <div>
+                    <div class="text-red-600 text-5xl font-extrabold">1000+</div>
+                    <div class="mt-2">кампаний</div>
+                </div>
+                <div>
+                    <div class="text-red-600 text-5xl font-extrabold">15</div>
+                    <div class="mt-2">лет на рынке</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кейсы до/после -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold mb-8 reveal">До / После</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="rounded-lg overflow-hidden shadow reveal">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80" alt="До" class="w-full object-cover h-64">
+                        <div class="p-4 bg-white">
+                            <h4 class="font-semibold text-red-600">До</h4>
+                            <p class="text-gray-700">Пустой фасад — минимальная отдача от пространства.</p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-lg overflow-hidden shadow reveal">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1549921296-3aef90d2d63c?auto=format&fit=crop&w=800&q=80" alt="После" class="w-full object-cover h-64">
+                        <div class="p-4 bg-white">
+                            <h4 class="font-semibold text-red-600">После</h4>
+                            <p class="text-gray-700">Полноразмерный баннер — мгновенное увеличение трафика и внимания.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Отзывы -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold text-center mb-8 reveal">Отзывы</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <blockquote class="bg-white p-6 rounded shadow reveal">
+                        <p class="mb-4 text-gray-700">"Кампания превзошла все ожидания: охват и продажи выросли вдвое."</p>
+                        <footer class="text-sm text-red-600">— Ирина, маркетолог</footer>
+                    </blockquote>
+
+                    <blockquote class="bg-white p-6 rounded shadow reveal">
+                        <p class="mb-4 text-gray-700">"Профессиональная команда от дизайна до монтажа."</p>
+                        <footer class="text-sm text-red-600">— Дмитрий, владелец магазина</footer>
+                    </blockquote>
+
+                    <blockquote class="bg-white p-6 rounded shadow reveal">
+                        <p class="mb-4 text-gray-700">"Быстро, красиво и по делу — рекомендую."</p>
+                        <footer class="text-sm text-red-600">— Анна, PR</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Команда -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-3xl font-bold mb-8 reveal">Наша команда</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow text-center reveal">
+                        <img loading="lazy" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Анна" class="w-28 h-28 rounded-full mx-auto mb-4">
+                        <h4 class="font-semibold">Анна</h4>
+                        <div class="text-red-600">Креативный директор</div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow text-center reveal">
+                        <img loading="lazy" src="https://randomuser.me/api/portraits/men/46.jpg" alt="Дмитрий" class="w-28 h-28 rounded-full mx-auto mb-4">
+                        <h4 class="font-semibold">Дмитрий</h4>
+                        <div class="text-red-600">Менеджер проектов</div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow text-center reveal">
+                        <img loading="lazy" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Алексей" class="w-28 h-28 rounded-full mx-auto mb-4">
+                        <h4 class="font-semibold">Алексей</h4>
+                        <div class="text-red-600">Дизайнер</div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow text-center reveal">
+                        <img loading="lazy" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ирина" class="w-28 h-28 rounded-full mx-auto mb-4">
+                        <h4 class="font-semibold">Ирина</h4>
+                        <div class="text-red-600">Маркетолог</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Карта охвата (iframe) -->
+        <section class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6 text-center reveal">
+                <h3 class="text-3xl font-bold mb-6">Охват</h3>
+                <div class="w-full h-96 rounded-lg overflow-hidden shadow bg-gray-300">
+                    <!-- Если используете свою карту — замените src на ваш виджет -->
+                    <iframe loading="lazy" src="https://yandex.ru/map-widget/v1/-/CCUQ6C4Q~C" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p class="mt-4 text-gray-700">Мы размещаем рекламу в крупнейших городах и регионах.</p>
+            </div>
+        </section>
+
+        <!-- Блог -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold text-center mb-8 reveal">Полезные статьи</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <article class="bg-gray-50 p-6 rounded shadow reveal">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=800&q=80" alt="Статья 1" class="rounded mb-4 w-full object-cover h-44">
+                        <h4 class="font-semibold mb-2">5 трендов в наружной рекламе</h4>
+                        <p class="text-gray-600 text-sm">Коротко о том, что сейчас работает в наружке.</p>
+                    </article>
+
+                    <article class="bg-gray-50 p-6 rounded shadow reveal">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=800&q=80" alt="Статья 2" class="rounded mb-4 w-full object-cover h-44">
+                        <h4 class="font-semibold mb-2">Как выбрать билборд</h4>
+                        <p class="text-gray-600 text-sm">Практические советы по подбору локаций и формата.</p>
+                    </article>
+
+                    <article class="bg-gray-50 p-6 rounded shadow reveal">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1522205408450-add114ad53fe?auto=format&fit=crop&w=800&q=80" alt="Статья 3" class="rounded mb-4 w-full object-cover h-44">
+                        <h4 class="font-semibold mb-2">Ошибки в наружной рекламе</h4>
+                        <p class="text-gray-600 text-sm">Чего избегать при подготовке кампании.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 max-w-2xl">
+                <h3 class="text-3xl font-bold text-center mb-6 reveal">FAQ</h3>
+                <div class="space-y-4">
+                    <details class="bg-white p-4 rounded shadow reveal">
+                        <summary class="cursor-pointer font-semibold text-red-600">Сколько стоит размещение?</summary>
+                        <div class="mt-2 text-gray-700">Цена зависит от формата, срока и региона — оставьте заявку, и мы быстро рассчитаме.</div>
+                    </details>
+
+                    <details class="bg-white p-4 rounded shadow reveal">
+                        <summary class="cursor-pointer font-semibold text-red-600">Сколько времени занимает запуск?</summary>
+                        <div class="mt-2 text-gray-700">От 3 до 7 рабочих дней в зависимости от печати и согласований.</div>
+                    </details>
+
+                    <details class="bg-white p-4 rounded shadow reveal">
+                        <summary class="cursor-pointer font-semibold text-red-600">Делаете ли дизайн?</summary>
+                        <div class="mt-2 text-gray-700">Да — у нас есть креативный отдел и подготовка макетов под печать.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма лидов -->
+        <section id="form" class="py-20 bg-white">
+            <div class="container mx-auto px-6 max-w-lg">
+                <h3 class="text-3xl font-bold text-center mb-6 reveal">Оставьте заявку</h3>
+                <form id="lead-form" class="space-y-4 bg-gray-50 p-6 rounded shadow reveal" method="post" action="">
+                    <input name="name" type="text" placeholder="Ваше имя" required class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <input name="phone" type="tel" placeholder="Телефон" required class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <textarea name="message" placeholder="Комментарий" rows="4" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
+                    <button type="submit" class="w-full px-6 py-3 bg-red-600 text-white font-semibold uppercase hover:bg-red-700 transition rounded">Отправить</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Скрипты: reveal, lazy-bg, простая отправка формы через AJAX (опционально) -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Intersection Observer для .reveal
+                const revealEls = document.querySelectorAll('.reveal');
+                if ('IntersectionObserver' in window) {
+                    const io = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                obs.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.15 });
+                    revealEls.forEach(el => io.observe(el));
+                } else {
+                    revealEls.forEach(el => el.classList.add('is-visible'));
+                }
+
+                // Lazy load background images для секций с data-bg
+                const bgEls = document.querySelectorAll('[data-bg]');
+                if ('IntersectionObserver' in window) {
+                    const bgIo = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const el = entry.target;
+                                el.style.backgroundImage = `url(${el.dataset.bg})`;
+                                el.classList.add('bg-cover');
+                                obs.unobserve(el);
+                            }
+                        });
+                    }, { threshold: 0.05 });
+                    bgEls.forEach(el => bgIo.observe(el));
+                } else {
+                    bgEls.forEach(el => el.style.backgroundImage = `url(${el.dataset.bg})`);
+                }
+
+                // Простая AJAX-отправка формы (если используете Symfony, укажите маршрут lead_submit в action или оставьте #)
+                const form = document.getElementById('lead-form');
+                if (form) {
+                    form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        const btn = form.querySelector('button[type="submit"]');
+                        btn.disabled = true; btn.classList.add('opacity-60');
+                        const data = new FormData(form);
+                        const action = form.getAttribute('action') || '#';
+                        fetch(action, {
+                            method: 'POST',
+                            body: data,
+                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                        }).then(res => {
+                            btn.disabled = false; btn.classList.remove('opacity-60');
+                            if (res.ok) {
+                                form.reset();
+                                // Можно заменить на кастомный модал
+                                alert('Спасибо — заявка принята. Мы свяжемся с вами.');
+                            } else {
+                                alert('Ошибка отправки. Попробуйте позже.');
+                            }
+                        }).catch(() => { btn.disabled = false; btn.classList.remove('opacity-60'); alert('Ошибка сети.'); });
+                    });
+                }
+            });
+        </script>
 {% endblock %}

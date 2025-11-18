@@ -19,6 +19,9 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
     #[ORM\Column]
     private ?int $id = null;
 
+    //o2auth yandex
+    #[ORM\Column]
+    private ?int $yandexId = null;
     #[ORM\Column(length: 50)]
     private ?string $first_name = null;
 
@@ -51,6 +54,16 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
         return $this->id;
     }
 
+
+    public function getYandexId(): ?int
+    {
+        return $this->yandexId;
+    }
+
+    public function setYandexId(int $yandexId)
+    {
+        $this->yandexId = $yandexId;
+    }
     public function getFirstName(): ?string
     {
         return $this->first_name;
@@ -87,12 +100,12 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): int|array
     {
         return $this->phone;
     }
 
-    public function setPhone(int $phone): static
+    public function setPhone(int|array $phone): static
     {
         $this->phone = $phone;
 

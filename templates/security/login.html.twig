@@ -57,6 +57,33 @@
                     </div>
                 </form>
 
+                <!-- Разделитель -->
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="bg-white px-3 text-gray-500">или войдите с помощью</span>
+                    </div>
+                </div>
+
+                <!-- Кнопки соцсетей -->
+                <div class="flex flex-col gap-3">
+                    <a href="{{ path('connect_yandex') }}"
+                       class="flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-gray-300 shadow-sm hover:shadow-md bg-white hover:bg-gray-50 transition">
+                        <img src="{{ asset('images/orig.png') }}" alt="Yandex" class="h-5">
+                        <span class="font-medium text-gray-800">Войти через Яндекс</span>
+                    </a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <a href=""
+                       class="flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-gray-300 shadow-sm hover:shadow-md bg-white hover:bg-gray-50 transition">
+                        <img src="{{ asset('images/img.png') }}" alt="Yandex" class="h-5">
+                        <span class="font-medium text-gray-800">Войти через Mail.ru</span>
+                    </a>
+                </div>
+
+
                 <!-- Ссылки -->
                 <div class="text-sm text-center mt-6 text-gray-500">
                     <a href="#" class="font-medium text-red-600 hover:text-red-500 transition">Забыли пароль?</a>
