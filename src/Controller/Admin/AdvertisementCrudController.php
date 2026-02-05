@@ -3,9 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Advertisement;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class AdvertisementCrudController extends AbstractCrudController
@@ -15,19 +19,37 @@ class AdvertisementCrudController extends AbstractCrudController
         return Advertisement::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Рекламная конструкция')
+            ->setEntityLabelInPlural('Рекламные конструкции')
+            ->setPageTitle(Crud::PAGE_INDEX, 'Рекламные конструкции')
+            ->setPageTitle(Crud::PAGE_NEW, 'Добавление рекламной конструкции')
+            ->setPageTitle(Crud::PAGE_EDIT, 'Редактирование рекламной конструкции')
+            ->setPageTitle(Crud::PAGE_DETAIL, 'Карточка рекламной конструкции');
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
+            IdField::new('id', 'ID')->hideOnForm(),
             TextField::new('code', 'Код'),
             TextField::new('placeNumber', 'Номер места'),
-            TextField::new('address', 'Адрес'),
+            TextareaField::new('address', 'Адрес'),
             TextField::new('sides', 'Стороны (через запятую)')
                 ->formatValue(static function ($value, Advertisement $entity) {
                     return implode(', ', $entity->getSides());
                 })
                 ->onlyOnIndex(),
-            AssociationField::new('type', 'Тип конструкции'),
+            AssociationField::new('type', 'Тип рекламы'),
+            TextField::new('categoryName', 'Категория рекламы')->onlyOnIndex(),
+            NumberField::new('latitude', 'Широта')->setNumDecimals(6),
+            NumberField::new('longitude', 'Долгота')->setNumDecimals(6),
+            TextareaField::new('sideADescription', 'Описание стороны А')->hideOnIndex(),
+            MoneyField::new('sideAPrice', 'Цена стороны А')->setCurrency('RUB')->setStoredAsCents(false),
+            TextareaField::new('sideBDescription', 'Описание стороны Б')->hideOnIndex(),
+            MoneyField::new('sideBPrice', 'Цена стороны Б')->setCurrency('RUB')->setStoredAsCents(false),
         ];
     }
 }
