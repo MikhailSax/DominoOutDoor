@@ -108,6 +108,7 @@ class User implements UserInterface, PasswordUpgraderInterface, PasswordAuthenti
         return $this->phone;
     }
 
+
     public function setPhone(?string $phone): static
     {
         if ($phone === null) {
@@ -116,6 +117,8 @@ class User implements UserInterface, PasswordUpgraderInterface, PasswordAuthenti
             return $this;
         }
 
+    public function setPhone(string $phone): static
+    {
         $digits = preg_replace('/\D+/', '', $phone) ?? '';
         if ($digits === '') {
             $this->phone = null;
