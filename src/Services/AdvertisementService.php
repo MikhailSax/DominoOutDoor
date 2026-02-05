@@ -42,28 +42,44 @@ class AdvertisementService
         $sideItems = $advertisement->getSideItems()->toArray();
 
         if ($sideItems === []) {
+            $codes = $advertisement->getSides();
+
+            if ($codes === []) {
+                if ($advertisement->getSideADescription() !== null || $advertisement->getSideAPrice() !== null || $advertisement->getSideAImage() !== null) {
+                    $codes[] = 'A';
+                }
+                if ($advertisement->getSideBDescription() !== null || $advertisement->getSideBPrice() !== null || $advertisement->getSideBImage() !== null) {
+                    $codes[] = 'B';
+                }
+            }
+
             return array_map(function (string $code) use ($advertisement): array {
                 $isA = $code === 'A';
 
                 return [
                     'code' => $code,
-                    'description' => $isA ? $advertisement->getSideADescription() : $advertisement->getSideBDescription(),
-                    'price' => $isA ? $advertisement->getSideAPrice() : $advertisement->getSideBPrice(),
-                    'image' => $isA ? $advertisement->getSideAImage() : $advertisement->getSideBImage(),
-                    'image_url' => $this->buildImageUrl($isA ? $advertisement->getSideAImage() : $advertisement->getSideBImage()),
+                    'description' => $isA ? $advertisement->getSideADescription() : ($code === 'B' ? $advertisement->getSideBDescription() : null),
+                    'price' => $isA ? $advertisement->getSideAPrice() : ($code === 'B' ? $advertisement->getSideBPrice() : null),
+                    'image' => $isA ? $advertisement->getSideAImage() : ($code === 'B' ? $advertisement->getSideBImage() : null),
+                    'image_url' => $this->buildImageUrl($isA ? $advertisement->getSideAImage() : ($code === 'B' ? $advertisement->getSideBImage() : null)),
                 ];
-            }, $advertisement->getSides());
+            }, $codes);
         }
 
         usort($sideItems, static fn (AdvertisementSide $left, AdvertisementSide $right): int => strcmp((string) $left->getCode(), (string) $right->getCode()));
 
-        return array_map(function (AdvertisementSide $side): array {
-            $image = $side->getImage();
+        return array_map(function (AdvertisementSide $side) use ($advertisement): array {
+            $code = (string) $side->getCode();
+            $isA = $code === 'A';
+
+            $description = $side->getDescription() ?? ($isA ? $advertisement->getSideADescription() : ($code === 'B' ? $advertisement->getSideBDescription() : null));
+            $price = $side->getPrice() ?? ($isA ? $advertisement->getSideAPrice() : ($code === 'B' ? $advertisement->getSideBPrice() : null));
+            $image = $side->getImage() ?? ($isA ? $advertisement->getSideAImage() : ($code === 'B' ? $advertisement->getSideBImage() : null));
 
             return [
-                'code' => (string) $side->getCode(),
-                'description' => $side->getDescription(),
-                'price' => $side->getPrice(),
+                'code' => $code,
+                'description' => $description,
+                'price' => $price,
                 'image' => $image,
                 'image_url' => $this->buildImageUrl($image),
             ];
