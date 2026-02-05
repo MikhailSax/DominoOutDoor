@@ -49,6 +49,13 @@ class Advertisement
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private ?string $sideBPrice = null;
 
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sideAImage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sideBImage = null;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -261,6 +268,31 @@ class Advertisement
     public function setSideBPrice(?string $sideBPrice): static
     {
         $this->sideBPrice = $sideBPrice;
+
+        return $this;
+    }
+
+
+    public function getSideAImage(): ?string
+    {
+        return $this->sideAImage;
+    }
+
+    public function setSideAImage(?string $sideAImage): static
+    {
+        $this->sideAImage = $sideAImage;
+
+        return $this;
+    }
+
+    public function getSideBImage(): ?string
+    {
+        return $this->sideBImage;
+    }
+
+    public function setSideBImage(?string $sideBImage): static
+    {
+        $this->sideBImage = $sideBImage;
 
         return $this;
     }

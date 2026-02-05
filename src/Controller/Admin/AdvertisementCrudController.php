@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -42,12 +43,27 @@ class AdvertisementCrudController extends AbstractCrudController
                     return implode(', ', $entity->getSides());
                 })
                 ->onlyOnIndex(),
-            AssociationField::new('type', 'Тип рекламы'),
+
+            AssociationField::new('type', 'Категория (тип рекламной продукции)'),
+
             TextField::new('categoryName', 'Категория рекламы')->onlyOnIndex(),
             NumberField::new('latitude', 'Широта')->setNumDecimals(6),
             NumberField::new('longitude', 'Долгота')->setNumDecimals(6),
             TextareaField::new('sideADescription', 'Описание стороны А')->hideOnIndex(),
             MoneyField::new('sideAPrice', 'Цена стороны А')->setCurrency('RUB')->setStoredAsCents(false),
+            ImageField::new('sideAImage', 'Изображение стороны А')
+                ->setBasePath('/uploads/advertisements/')
+                ->setUploadDir('public/uploads/advertisements/')
+                ->setUploadedFileNamePattern('side-a-[slug]-[timestamp].[extension]')
+                ->setRequired(false),
+            TextareaField::new('sideBDescription', 'Описание стороны Б')->hideOnIndex(),
+            MoneyField::new('sideBPrice', 'Цена стороны Б')->setCurrency('RUB')->setStoredAsCents(false),
+            ImageField::new('sideBImage', 'Изображение стороны Б')
+                ->setBasePath('/uploads/advertisements/')
+                ->setUploadDir('public/uploads/advertisements/')
+                ->setUploadedFileNamePattern('side-b-[slug]-[timestamp].[extension]')
+                ->setRequired(false),
+
             TextareaField::new('sideBDescription', 'Описание стороны Б')->hideOnIndex(),
             MoneyField::new('sideBPrice', 'Цена стороны Б')->setCurrency('RUB')->setStoredAsCents(false),
         ];

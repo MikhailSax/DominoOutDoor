@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Advertisement;
 use App\Entity\AdvertisementBooking;
+use App\Entity\AdvertisementCategory;
+use App\Entity\AdvertisementType;
 use App\Entity\Banner;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -36,6 +38,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Пользователи', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Баннеры', 'fas fa-image', Banner::class);
         yield MenuItem::linkToCrud('Рекламные конструкции', 'fas fa-map-marker-alt', Advertisement::class);
+        yield MenuItem::linkToCrud('Категории рекламной продукции', 'fas fa-tags', AdvertisementCategory::class);
+        yield MenuItem::linkToCrud('Типы рекламной продукции', 'fas fa-layer-group', AdvertisementType::class);
         yield MenuItem::linkToCrud('Бронирования', 'fas fa-calendar-check', AdvertisementBooking::class);
         yield MenuItem::linkToRoute('Календарь занятости', 'fas fa-calendar', 'admin_booking_calendar');
     }
