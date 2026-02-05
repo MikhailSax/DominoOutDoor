@@ -3,10 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Advertisement;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
@@ -64,6 +66,15 @@ class AdvertisementCrudController extends AbstractCrudController
             TextField::new('placeNumber', 'Номер места'),
             TextareaField::new('address', 'Адрес'),
             ArrayField::new('sides', 'Стороны')->onlyOnIndex(),
+            ChoiceField::new('sides', 'Стороны')
+                ->setChoices([
+                    'A' => 'A',
+                    'B' => 'B',
+                ])
+                ->allowMultipleChoices()
+                ->renderExpanded(false)
+                ->onlyOnForms(),
+
             AssociationField::new('type', 'Категория (тип рекламной продукции)'),
             TextField::new('categoryName', 'Категория рекламы')->onlyOnIndex(),
             NumberField::new('latitude', 'Широта')->setNumDecimals(6),

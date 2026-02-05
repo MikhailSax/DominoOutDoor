@@ -37,6 +37,9 @@ class Advertisement
     #[ORM\OneToMany(mappedBy: 'advertisement', targetEntity: AdvertisementBooking::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $bookings;
 
+    #[ORM\OneToMany(mappedBy: 'advertisement', targetEntity: AdvertisementSide::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
+    private Collection $sideItems;
+
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $sideADescription = null;
 
@@ -58,6 +61,7 @@ class Advertisement
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+        $this->sideItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -106,7 +110,34 @@ class Advertisement
      */
     public function getSides(): array
     {
+        if (!$this->sideItems->isEmpty()) {
+            return array_values(array_unique(array_filter(array_map(
+                static fn (AdvertisementSide $side): ?string => $side->getCode(),
+                $this->sideItems->toArray(),
+            ))));
+        }
+
         return $this->sides ?? [];
+    }
+
+    /**
+     * @return Collection<int, AdvertisementSide>
+     */
+    public function getSideItems(): Collection
+    {
+        return $this->sideItems;
+    }
+
+    public function getSideByCode(string $code): ?AdvertisementSide
+    {
+        $code = mb_strtoupper(trim($code));
+        foreach ($this->sideItems as $side) {
+            if ($side->getCode() === $code) {
+                return $side;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -124,6 +155,10 @@ class Advertisement
                 continue;
             }
             $normalized[] = $s;
+
+            if ($this->getSideByCode($s) === null) {
+                $this->addSideItem((new AdvertisementSide())->setCode($s));
+            }
         }
 
         $this->sides = array_values(array_unique($normalized));
@@ -142,6 +177,7 @@ class Advertisement
         if (!in_array($side, $sides, true)) {
             $sides[] = $side;
             $this->sides = $sides;
+            $this->addSideItem((new AdvertisementSide())->setCode($side));
         }
 
         return $this;
@@ -163,8 +199,30 @@ class Advertisement
                 continue;
             }
             $incoming[] = $s;
+            if ($this->getSideByCode($s) === null) {
+                $this->addSideItem((new AdvertisementSide())->setCode($s));
+            }
         }
         $this->sides = array_values(array_unique(array_merge($current, $incoming)));
+
+        return $this;
+    }
+
+    public function addSideItem(AdvertisementSide $side): static
+    {
+        if (!$this->sideItems->contains($side)) {
+            $this->sideItems->add($side);
+            $side->setAdvertisement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSideItem(AdvertisementSide $side): static
+    {
+        if ($this->sideItems->removeElement($side) && $side->getAdvertisement() === $this) {
+            $side->setAdvertisement(null);
+        }
 
         return $this;
     }
