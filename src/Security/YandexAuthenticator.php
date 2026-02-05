@@ -53,6 +53,7 @@ class YandexAuthenticator extends OAuth2Authenticator
                 $name = $userData['first_name'] ?? 'Пользователь';
                 $lastName = $userData['last_name'] ?? null;
                 $rawPhone = $userData['default_phone']['number'] ?? $userData['default_phone'] ?? null;
+
                 $phone = is_string($rawPhone) ? $rawPhone : sprintf('+7999%07d', abs(crc32($yandexId)) % 10000000);
 
                 $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['yandexId' => $yandexId]);
@@ -86,9 +87,10 @@ class YandexAuthenticator extends OAuth2Authenticator
                 $this->entityManager->flush();
 
                 return $user;
-            }),
+            })
         );
     }
+
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {

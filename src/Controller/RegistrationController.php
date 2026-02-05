@@ -53,7 +53,6 @@ class RegistrationController extends AbstractController
                         ->subject('Подтвердите ваш email')
                         ->htmlTemplate('registration/confirmation_email.html.twig'),
                 );
-
                 $this->addFlash('success', 'Регистрация успешна. Проверьте почту для подтверждения email.');
 
                 return $this->redirectToRoute('app_login');

@@ -20,6 +20,7 @@ class User implements UserInterface, PasswordUpgraderInterface, PasswordAuthenti
     #[ORM\Column]
     private ?int $id = null;
 
+
     #[ORM\Column(type: 'bigint', nullable: true)]
     private ?string $yandexId = null;
 
@@ -62,11 +63,10 @@ class User implements UserInterface, PasswordUpgraderInterface, PasswordAuthenti
 
     public function setYandexId(int|string|null $yandexId): static
     {
-        $this->yandexId = $yandexId === null ? null : (string) $yandexId;
+        $this->yandexId = $yandexId === null ? null : (string)$yandexId;
 
         return $this;
     }
-
     public function getFirstName(): ?string
     {
         return $this->first_name;
@@ -108,13 +108,11 @@ class User implements UserInterface, PasswordUpgraderInterface, PasswordAuthenti
         return $this->phone;
     }
 
-    public function setPhone(?string $phone): static
-    {
-        if ($phone === null) {
-            $this->phone = null;
 
-            return $this;
-        }
+
+
+    public function setPhone(string $phone): static
+    {
 
         $digits = preg_replace('/\D+/', '', $phone) ?? '';
         if ($digits === '') {
