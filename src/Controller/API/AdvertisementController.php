@@ -102,6 +102,13 @@ class AdvertisementController extends AbstractController
                 'azimuth' => $ad->getLocation()->getAzimuth()
             ] : null,
 
+            'bookings' => array_map(static fn($booking) => [
+                'id' => $booking->getId(),
+                'clientName' => $booking->getClientName(),
+                'startDate' => $booking->getStartDate()?->format('Y-m-d'),
+                'endDate' => $booking->getEndDate()?->format('Y-m-d'),
+            ], $ad->getBookings()->toArray()),
+
             // 🔥 временно генерируем цену (или добавь в БД)
             'price' => random_int(15000, 50000),
 
