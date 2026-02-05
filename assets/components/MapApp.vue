@@ -1,190 +1,325 @@
 <template>
-    <div class="flex flex-col md:flex-row w-full h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 overflow-hidden">
-        <!-- Левая панель -->
-        <div class="w-full md:w-96 h-1/2 md:h-full flex flex-col flex-shrink-0 mt-8 rounded-4">
-            <!-- Контент с скроллом -->
-            <div class="p-3 sm:p-4 md:p-6 overflow-y-auto bg-white shadow-lg md:shadow-xl border-b md:border-r border-gray-200 flex-1">
-                <!-- Заголовок -->
-                <div class="mb-4 md:mb-6 lg:mb-8">
-                    <h2 class="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                        Каталог конструкций
-                    </h2>
-                    <p class="text-xs sm:text-sm text-gray-500 mt-1">Выберите подходящий вариант</p>
+    <div class="flex h-[calc(100vh-72px)] min-h-[680px] flex-col overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 lg:flex-row">
+        <aside class="w-full border-b border-gray-200 bg-white lg:w-[430px] lg:border-b-0 lg:border-r">
+            <div class="flex h-full flex-col">
+                <div class="border-b border-gray-100 p-5">
+                    <h1 class="text-2xl font-bold text-gray-900">Карта рекламных конструкций</h1>
+                    <p class="mt-1 text-sm text-gray-500">Выберите параметры, чтобы найти подходящие площадки.</p>
                 </div>
 
-                <!-- Фильтры -->
-                <div class="bg-gradient-to-br from-gray-50 to-white p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl md:rounded-2xl shadow-sm border border-gray-100 mb-3 sm:mb-4 md:mb-6 space-y-2 sm:space-y-3 md:space-y-4">
-                    <!-- Типы продукции -->
+                <div class="space-y-3 border-b border-gray-100 bg-gray-50 p-5">
                     <div>
-                        <label class="block text-xs sm:text-sm font-semibold mb-1 sm:mb-2 text-gray-700">Тип продукции</label>
-                        <div class="relative">
-                            <select
-                                v-model="filters.productType"
-                                class="w-full px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-3 text-xs sm:text-sm md:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-300 focus:border-red-400 appearance-none bg-white cursor-pointer"
-                            >
-                                <option value="">Все типы продукции</option>
-                                <option v-for="pt in productTypes" :key="pt.id" :value="pt.id">{{ pt.name }}</option>
-                            </select>
-                            <div class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
-                                <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Тип конструкции -->
-                    <div>
-                        <label class="block text-xs sm:text-sm font-semibold mb-1 sm:mb-2 text-gray-700">Тип конструкции</label>
-                        <div class="relative">
-                            <select
-                                v-model="filters.constrTypeId"
-                                class="w-full px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-3 text-xs sm:text-sm md:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-red-300 focus:border-red-400 appearance-none bg-white cursor-pointer"
-                            >
-                                <option value="">Все типы конструкций</option>
-                                <option v-for="c in constrTypes" :key="c.id" :value="c.id">{{ c.name }}</option>
-                            </select>
-                            <div class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
-                                <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Район -->
-
-                    <!-- Статистика фильтров -->
-                    <div v-if="objects.length !== objects.length"
-                         class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-2 md:p-3">
-                        <div class="flex items-center justify-between text-xs sm:text-sm">
-                            <span class="text-green-700 font-medium">Найдено объектов:</span>
-                            <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                                {{ objects.length }} из {{ objects.length }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Кнопки управления -->
-                    <div class="flex gap-2 sm:gap-3">
-                        <button
-                            @click="resetFilters"
-                            class="flex-1 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-3 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-lg font-medium hover:from-gray-200 hover:to-gray-300 transition-all duration-200 transform hover:scale-[1.02] border-2 border-gray-100 shadow-sm flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm"
+                        <label class="mb-1 block text-sm font-medium text-gray-700">Тип продукции</label>
+                        <select
+                            v-model="filters.productType"
+                            class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-200"
                         >
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                            </svg>
+                            <option value="">Все типы продукции</option>
+                            <option v-for="item in productTypes" :key="item.id" :value="String(item.id)">{{ item.name }}</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="mb-1 block text-sm font-medium text-gray-700">Тип конструкции</label>
+                        <select
+                            v-model="filters.constrTypeId"
+                            :disabled="isLoadingFilters"
+                            class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-200 disabled:cursor-not-allowed disabled:bg-gray-100"
+                        >
+                            <option value="">Все типы конструкций</option>
+                            <option v-for="item in constrTypes" :key="item.id" :value="String(item.id)">{{ item.name }}</option>
+                        </select>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button
+                            type="button"
+                            class="flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                            @click="resetFilters"
+                        >
                             Сбросить
                         </button>
                         <button
+                            type="button"
+                            class="flex-1 rounded-lg border border-red-600 bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
                             @click="applyFilters"
-                            class="flex-1 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg font-medium hover:from-red-600 hover:to-red-700 transition-all duration-200 transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm"
                         >
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
                             Применить
                         </button>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Карта -->
-        <div class="flex-1 h-1/2 md:h-full p-1 sm:p-2 md:p-3 lg:p-4 xl:p-6">
-            <!-- Спиннер загрузки -->
-            <div v-if="!isMapLoaded" class="w-full h-full flex flex-col items-center justify-center bg-gray-100 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-dashed border-gray-300">
-                <div class="animate-spin rounded-full h-8 sm:h-12 md:h-16 w-8 sm:w-12 md:w-16 border-4 border-red-200 border-t-red-600 mb-2 sm:mb-4"></div>
-                <p class="text-gray-600 font-medium text-sm sm:text-base">Загрузка карты...</p>
-                <p class="text-gray-500 text-xs sm:text-sm mt-1">Пожалуйста, подождите</p>
-            </div>
+                <div class="flex items-center justify-between border-b border-gray-100 px-5 py-3 text-sm">
+                    <span class="font-medium text-gray-600">Найдено объектов:</span>
+                    <span class="rounded-full bg-red-600 px-3 py-1 text-white">{{ objects.length }}</span>
+                </div>
 
-            <!-- Контейнер карты -->
-            <div v-else ref="mapContainer" class="w-full h-full rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-white shadow-lg"></div>
-        </div>
+                <div class="min-h-0 flex-1 overflow-y-auto p-3">
+                    <div v-if="isLoadingObjects" class="p-4 text-sm text-gray-500">Загрузка объектов...</div>
+                    <div v-else-if="objects.length === 0" class="rounded-lg border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
+                        По выбранным фильтрам ничего не найдено.
+                    </div>
+
+                    <button
+                        v-for="item in objects"
+                        :key="item.id"
+                        type="button"
+                        class="mb-2 w-full rounded-xl border bg-white p-4 text-left shadow-sm transition hover:shadow-md"
+                        :class="activeObjectId === item.id ? 'border-red-400 ring-2 ring-red-100' : 'border-gray-200'"
+                        @click="focusObject(item.id)"
+                    >
+                        <div class="mb-1 flex items-start justify-between gap-3">
+                            <h3 class="line-clamp-2 text-sm font-semibold text-gray-900">{{ item.address || 'Адрес не указан' }}</h3>
+                            <span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">#{{ item.id }}</span>
+                        </div>
+                        <p class="text-xs text-gray-600">{{ item.category || 'Категория не указана' }} • {{ item.type || 'Тип не указан' }}</p>
+                        <p class="mt-1 text-xs text-gray-500">Стороны: {{ formatSides(item.sides) }}</p>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <section class="relative min-h-[380px] flex-1 p-3 lg:p-5">
+            <div v-if="mapError" class="flex h-full items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-700">
+                {{ mapError }}
+            </div>
+            <div v-else-if="!isMapLoaded" class="flex h-full items-center justify-center rounded-2xl border border-gray-200 bg-white text-sm text-gray-500">
+                Загрузка карты...
+            </div>
+            <div v-show="isMapLoaded" ref="mapContainer" class="h-full w-full rounded-2xl border-2 border-white shadow-lg"></div>
+        </section>
     </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch, nextTick } from 'vue'
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 
-const isMapLoaded = ref(false)
+const props = defineProps({
+    filtersUrl: {
+        type: String,
+        required: true,
+    },
+    advertisementsUrl: {
+        type: String,
+        required: true,
+    },
+})
 
 const productTypes = ref([])
 const constrTypes = ref([])
-
-const filters = reactive({
-    productType: '',
-    constrTypeId: '',
-})
-
 const objects = ref([])
+const filters = reactive({ productType: '', constrTypeId: '' })
+const isLoadingFilters = ref(false)
+const isLoadingObjects = ref(false)
 
 const mapContainer = ref(null)
-const activeCard = ref(null)
+const isMapLoaded = ref(false)
+const mapError = ref('')
+const activeObjectId = ref(null)
+
 let map = null
-let placemarks = []
+let placemarks = new Map()
 
-const getProductTypeName = id => productTypes.value.find(p => p.id == id)?.name || ''
-const getConstrTypeName = id => constrTypes.value.find(c => c.id == id)?.name || ''
+const filteredParams = computed(() => {
+    const params = new URLSearchParams()
+    if (filters.productType) {
+        params.append('productType', filters.productType)
+    }
+    if (filters.constrTypeId) {
+        params.append('constrTypeId', filters.constrTypeId)
+    }
 
+    return params
+})
 
+function formatSides(sides) {
+    if (!Array.isArray(sides) || sides.length === 0) {
+        return '—'
+    }
 
-// 🚀 Загрузка фильтров
-async function loadFilters() {
-    const params = new URLSearchParams();
-    if (filters.productType) params.append('productType', filters.productType)
-    const res = await fetch(`http://127.0.0.1:8000/api/filters?${params.toString()}`)
-    console.log(res)
-    const data = await res.json()
-    console.log(data)
-    productTypes.value = data.productTypes
-    constrTypes.value = data.constrTypes
+    return sides.join(', ')
 }
 
-// 🚀 Загрузка объявлений с фильтрами
+async function fetchJson(url) {
+    const response = await fetch(url, {
+        headers: {
+            Accept: 'application/json',
+        },
+        credentials: 'same-origin',
+    })
+
+    if (!response.ok) {
+        throw new Error(`Ошибка запроса (${response.status})`)
+    }
+
+    return response.json()
+}
+
+async function loadFilters() {
+    isLoadingFilters.value = true
+    try {
+        const query = new URLSearchParams()
+        if (filters.productType) {
+            query.append('productType', filters.productType)
+        }
+
+        const url = query.toString() ? `${props.filtersUrl}?${query.toString()}` : props.filtersUrl
+        const data = await fetchJson(url)
+        productTypes.value = Array.isArray(data.productTypes) ? data.productTypes : []
+        constrTypes.value = Array.isArray(data.constrTypes) ? data.constrTypes : []
+    } finally {
+        isLoadingFilters.value = false
+    }
+}
+
 async function loadAdvertisements() {
-    const params = new URLSearchParams()
-    if (filters.productType) params.append('productType', filters.productType)
-    if (filters.constrTypeId) params.append('constrTypeId', filters.constrTypeId)
+    isLoadingObjects.value = true
+    try {
+        const query = filteredParams.value.toString()
+        const url = query ? `${props.advertisementsUrl}?${query}` : props.advertisementsUrl
+        const data = await fetchJson(url)
+        objects.value = Array.isArray(data) ? data : []
 
-    const res = await fetch(`http://127.0.0.1:8000/api/advertisements?${params.toString()}`)
-    const data = await res.json()
-    objects.value = data
-
-    if (map && isMapLoaded.value) {
-        clearPlacemarks()
-        renderPlacemarks()
+        syncMapPlacemarks()
+    } finally {
+        isLoadingObjects.value = false
     }
 }
 
 function resetFilters() {
     filters.productType = ''
     filters.constrTypeId = ''
-    loadAdvertisements()
+    applyFilters()
 }
 
-function applyFilters() {
-    loadFilters()
-    loadAdvertisements()
+async function applyFilters() {
+    activeObjectId.value = null
+    await loadFilters()
+    await loadAdvertisements()
 }
 
 function loadYandexMap() {
     return new Promise((resolve, reject) => {
         if (window.ymaps) {
             window.ymaps.ready(resolve)
-        } else {
-            const script = document.createElement('script')
-            script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=c623fc99-6a74-48cf-94b5-b7cf1ccf7254'
-            script.onload = () => {
-                if (window.ymaps) window.ymaps.ready(resolve)
-                else reject(new Error('Yandex Maps не загрузились'))
-            }
-            script.onerror = () => reject(new Error('Ошибка загрузки Яндекс.Карт'))
-            document.head.appendChild(script)
+            return
         }
+
+        const script = document.createElement('script')
+        script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU'
+        script.onload = () => {
+            if (window.ymaps) {
+                window.ymaps.ready(resolve)
+            } else {
+                reject(new Error('Yandex Maps не загрузились'))
+            }
+        }
+        script.onerror = () => reject(new Error('Ошибка загрузки Яндекс.Карт'))
+        document.head.appendChild(script)
     })
 }
+
+function createBalloonMarkup(item) {
+    return `
+        <div style="font-family: Inter, sans-serif; width: 260px;">
+            <div style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">${item.address || 'Адрес не указан'}</div>
+            <div style="font-size: 13px; color: #374151; line-height: 1.45;">
+                <div><b>Категория:</b> ${item.category || '—'}</div>
+                <div><b>Тип:</b> ${item.type || '—'}</div>
+                <div><b>Стороны:</b> ${formatSides(item.sides)}</div>
+            </div>
+        </div>
+    `
+}
+
+function clearPlacemarks() {
+    if (!map) {
+        return
+    }
+
+    placemarks.forEach((placemark) => {
+        map.geoObjects.remove(placemark)
+    })
+    placemarks.clear()
+}
+
+function syncMapPlacemarks() {
+    if (!map || !isMapLoaded.value) {
+        return
+    }
+
+    clearPlacemarks()
+
+    objects.value.forEach((item) => {
+        if (!item.location || typeof item.location.latitude !== 'number' || typeof item.location.longitude !== 'number') {
+            return
+        }
+
+        const placemark = new window.ymaps.Placemark(
+            [item.location.latitude, item.location.longitude],
+            {
+                balloonContent: createBalloonMarkup(item),
+            },
+            {
+                preset: 'islands#redIcon',
+            },
+        )
+
+        placemark.events.add('click', () => {
+            activeObjectId.value = item.id
+        })
+
+        placemarks.set(item.id, placemark)
+        map.geoObjects.add(placemark)
+    })
+
+    if (objects.value.length > 0) {
+        const bounds = map.geoObjects.getBounds()
+        if (bounds) {
+            map.setBounds(bounds, {
+                checkZoomRange: true,
+                zoomMargin: 30,
+            })
+        }
+    }
+}
+
+function focusObject(objectId) {
+    activeObjectId.value = objectId
+    const placemark = placemarks.get(objectId)
+    if (!placemark || !map) {
+        return
+    }
+
+    const coordinates = placemark.geometry.getCoordinates()
+    map.setCenter(coordinates, 16, { duration: 300 })
+    placemark.balloon.open()
+}
+
+async function initMap() {
+    try {
+        await loadYandexMap()
+        map = new window.ymaps.Map(mapContainer.value, {
+            center: [55.751244, 37.618423],
+            zoom: 10,
+            controls: ['zoomControl', 'fullscreenControl'],
+        })
+
+        isMapLoaded.value = true
+        syncMapPlacemarks()
+    } catch (error) {
+        mapError.value = 'Не удалось загрузить карту. Попробуйте обновить страницу.'
+        console.error(error)
+    }
+}
+
+watch(
+    () => filters.productType,
+    async () => {
+        filters.constrTypeId = ''
+        await loadFilters()
+    },
+)
 
 onMounted(async () => {
     await loadFilters()
@@ -192,138 +327,20 @@ onMounted(async () => {
     await initMap()
 })
 
-async function initMap() {
-    isMapLoaded.value = false
-    await loadYandexMap()
-    isMapLoaded.value = true
-    await nextTick()
-
-    map = new ymaps.Map(mapContainer.value, {
-        center: [51.833437, 107.584547],
-        zoom: 13,
-        controls: ['zoomControl', 'typeSelector', 'fullscreenControl'],
-        behaviors: ['default', 'scrollZoom']
-    })
-
-    renderPlacemarks()
-}
-
-function clearPlacemarks() {
-    if (map && placemarks.length > 0) {
-        placemarks.forEach(pm => map.geoObjects.remove(pm))
-        placemarks = []
+onBeforeUnmount(() => {
+    clearPlacemarks()
+    if (map) {
+        map.destroy()
+        map = null
     }
-}
-
-function renderPlacemarks() {
-    objects.value.forEach(obj => {
-        if (!obj.location) return
-        const coords = [obj.location.latitude, obj.location.longitude]
-
-        const placemark = new ymaps.Placemark(coords, {
-            balloonContent: `
-  <div style="
-    font-family: 'Inter', sans-serif;
-    padding: 12px 16px;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    max-width: 280px;
-  ">
-    <div style="font-weight: 700; font-size: 16px; color: #111; margin-bottom: 8px;">
-      📍 ${obj.address}
-    </div>
-
-    <div style="font-size: 14px; color: #444; line-height: 1.5;">
-      <p style="margin: 4px 0;">
-        🏭 <b>Тип продукции:</b> ${obj.type || '-'}
-      </p>
-      <p style="margin: 4px 0;">
-        🏗 <b>Конструкция:</b> ${getConstrTypeName(obj.type?.id) || '—'}
-      </p>
-      <p style="margin: 4px 0;">
-        📌 <b>Адрес:</b> ${obj.address || 'Не указан'}
-      </p>
-      <p style="margin: 4px 0">
-           <b>Стороны</b> ${obj.sides[0] || ''} и ${obj.sides[1] || ''}
-       </p>
-    </div>
-
-    <div style="margin-top: 10px; text-align: right;">
-      <button style="
-        background: linear-gradient(90deg,#ef4444,#dc2626);
-        color: #fff;
-        padding: 6px 12px;
-        font-size: 13px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.2s;
-      " onmouseover="this.style.opacity=0.9" onmouseout="this.style.opacity=1">
-        Подробнее →
-      </button>
-    </div>
-  </div>
-`
-
-
-        }, { preset: 'islands#redIcon' })
-
-        placemarks.push(placemark)
-        map.geoObjects.add(placemark)
-    })
-}
-
+})
 </script>
 
-
-
-
 <style scoped>
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-
-* {
-    transition-property: color, background-color, border-color, transform, box-shadow;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 200ms;
-}
-
-.line-clamp-1 {
+.line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-}
-
-/* Адаптивные стили для селектов */
-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right 0.5rem center;
-    background-repeat: no-repeat;
-    background-size: 1.2em 1.2em;
-    padding-right: 2.5rem;
-}
-
-@media (max-width: 768px) {
-    select {
-        background-size: 1em 1em;
-        padding-right: 2rem;
-    }
-}
-
-/* Анимация спиннера */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.animate-spin {
-    animation: spin 1s linear infinite;
 }
 </style>

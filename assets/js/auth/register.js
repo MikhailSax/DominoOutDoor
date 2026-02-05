@@ -1,7 +1,11 @@
-import Inputmask from "inputmask";
+import Inputmask from 'inputmask';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
+    const form = document.querySelector('form[name="registration_form"]');
+    if (!form) {
+        return;
+    }
+
     const nameInput = document.querySelector('#registration_form_first_name');
     const emailInput = document.querySelector('#registration_form_email');
     const phoneInput = document.querySelector('#registration_form_phone');
@@ -9,28 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const agreeCheckbox = document.querySelector('#registration_form_agreeTerms');
 
     if (phoneInput) {
-        Inputmask("+7 (999) 999-99-99").mask(phoneInput);
+        Inputmask('+7 (999) 999-99-99').mask(phoneInput);
     }
 
-    if (!form || !nameInput || !emailInput || !phoneInput || !passwordInput || !agreeCheckbox) {
-        console.warn('Не все элементы формы найдены');
+    if (!nameInput || !emailInput || !phoneInput || !passwordInput || !agreeCheckbox) {
         return;
     }
 
     const showError = (input, message) => {
+        const targetContainer = input.closest('div') ?? input.parentElement;
+        if (!targetContainer) {
+            return;
+        }
+
         const errorElem = document.createElement('div');
-        errorElem.className = 'text-sm text-red-600 mt-1';
+        errorElem.className = 'js-client-error mt-1 text-sm text-red-600';
         errorElem.textContent = message;
+
         input.classList.add('border-red-500');
-        input.parentNode.appendChild(errorElem);
+        targetContainer.appendChild(errorElem);
     };
 
     const clearErrors = () => {
-        form.querySelectorAll('.text-red-600').forEach(e => e.remove());
-        form.querySelectorAll('input').forEach(input => input.classList.remove('border-red-500'));
+        form.querySelectorAll('.js-client-error').forEach((element) => element.remove());
+        [nameInput, emailInput, phoneInput, passwordInput, agreeCheckbox].forEach((input) => {
+            input.classList.remove('border-red-500');
+        });
     };
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', (event) => {
         clearErrors();
         let hasError = false;
 
@@ -46,13 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const phoneDigits = phoneInput.value.replace(/\D/g, '');
-        if (phoneDigits.length < 10) {
+        if (phoneDigits.length !== 11 || !phoneDigits.startsWith('7')) {
             showError(phoneInput, 'Введите корректный номер телефона');
             hasError = true;
         }
 
-        const pwd = passwordInput.value;
-        if (pwd.length < 6 || !/\d/.test(pwd) || !/[a-zA-Z]/.test(pwd)) {
+        const password = passwordInput.value;
+        if (password.length < 6 || !/\d/.test(password) || !/[a-zA-Zа-яА-Я]/.test(password)) {
             showError(passwordInput, 'Пароль должен быть от 6 символов и содержать буквы и цифры');
             hasError = true;
         }
@@ -63,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (hasError) {
-            e.preventDefault();
+            event.preventDefault();
         }
     });
 });
