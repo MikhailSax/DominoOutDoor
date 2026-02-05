@@ -1,12 +1,35 @@
 {% extends 'base.html.twig' %}
 
-    {% block title %}Профиль{% endblock %}
+{% block title %}Личный кабинет{% endblock %}
 
-    {% block body %}
-        <section class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-6">Профиль пользователя</h1>
+{% block body %}
+    <section class="bg-gray-50/70 py-10 sm:py-12">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div class="mb-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wide text-red-600">Личный кабинет</p>
+                        <h1 class="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">Профиль пользователя</h1>
+                        <p class="mt-2 text-sm text-gray-600 sm:text-base">Обновляйте контактные данные и управляйте безопасностью аккаунта.</p>
+                    </div>
+                    <span class="inline-flex h-fit rounded-full px-3 py-1 text-xs font-semibold {{ user.isVerified ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                        {{ user.isVerified ? 'Email подтверждён' : 'Email не подтверждён' }}
+                    </span>
+                </div>
+            </div>
+
+            {% for message in app.flashes('success') %}
+                <div class="mb-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">{{ message }}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="mb-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{{ message }}</div>
+            {% endfor %}
 
             {% include 'profile/_tabs.html.twig' %}
-            {% include 'profile/_form.html.twig' %}
-        </section>
-    {% endblock %}
+
+            <div class="mt-6">
+                {% include 'profile/_form.html.twig' with { profileForm: profileForm } %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
