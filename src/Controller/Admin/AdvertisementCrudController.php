@@ -43,7 +43,7 @@ class AdvertisementCrudController extends AbstractCrudController
                     return implode(', ', $entity->getSides());
                 })
                 ->onlyOnIndex(),
-            AssociationField::new('type', 'Тип рекламы'),
+            AssociationField::new('type', 'Категория (тип рекламной продукции)'),
             TextField::new('categoryName', 'Категория рекламы')->onlyOnIndex(),
             NumberField::new('latitude', 'Широта')->setNumDecimals(6),
             NumberField::new('longitude', 'Долгота')->setNumDecimals(6),
