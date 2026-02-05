@@ -92,4 +92,45 @@ class AdvertisementRepository extends ServiceEntityRepository
 
         return [];
     }
+
+
+    /**
+     * @return Advertisement[]
+     */
+    public function findForApi(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.type', 'at')->addSelect('at')
+            ->leftJoin('at.category', 'ac')->addSelect('ac')
+            ->leftJoin('a.location', 'al')->addSelect('al')
+            ->leftJoin('a.sideItems', 'asi')->addSelect('asi')
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Advertisement[]
+     */
+    public function findByFiltersForApi(?int $productType, ?int $constrType): array
+    {
+        $query = $this->createQueryBuilder('a')
+            ->leftJoin('a.type', 'at')->addSelect('at')
+            ->leftJoin('at.category', 'ac')->addSelect('ac')
+            ->leftJoin('a.location', 'al')->addSelect('al')
+            ->leftJoin('a.sideItems', 'asi')->addSelect('asi');
+
+        if (!empty($productType)) {
+            $query->andWhere('ac.id = :category')
+                ->setParameter('category', $productType);
+        }
+
+        if (!empty($constrType)) {
+            $query->andWhere('at.id = :type')
+                ->setParameter('type', $constrType);
+        }
+
+        return $query->orderBy('a.id', 'ASC')->getQuery()->getResult();
+    }
+
 }
