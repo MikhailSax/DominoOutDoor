@@ -1,11 +1,17 @@
-<div class="mb-8 border-b border-gray-200">
-    <nav class="flex space-x-8 text-sm font-medium text-gray-500">
+<div class="rounded-2xl border border-gray-200 bg-white p-2 shadow-sm">
+    <nav class="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <a href="{{ path('profile') }}"
+           class="rounded-xl px-4 py-3 text-center text-sm font-semibold transition {{ app.request.attributes.get('_route') == 'profile' ? 'bg-red-600 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' }}">
+            Профиль
+        </a>
+        <a href="{{ path('profile.orders') }}"
+           class="rounded-xl px-4 py-3 text-center text-sm font-semibold transition {{ app.request.attributes.get('_route') == 'profile.orders' ? 'bg-red-600 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' }}">
+
            class="{{ app.request.attributes.get('_route') == 'profile' ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-gray-700' }} pb-2 transition">
             Профиль
         </a>
         <a href="{{ path('profile.orders') }}"
-           class="{{ app.request.attributes.get('_route') == 'profile.orders' ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-gray-700' }} pb-2 transition">
+
             Активность и заказы
         </a>
     </nav>
