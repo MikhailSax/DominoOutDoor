@@ -33,6 +33,30 @@ class AdvertisementCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $sideAImagePreview = ImageField::new('sideAImage', 'Фото стороны А')
+            ->setBasePath('/uploads/advertisements/')
+            ->hideOnForm();
+
+        $sideAImageUpload = ImageField::new('sideAImage', 'Загрузить фото стороны А')
+            ->setBasePath('/uploads/advertisements/')
+            ->setUploadDir('public/uploads/advertisements/')
+            ->setUploadedFileNamePattern('side-a-[randomhash].[extension]')
+            ->setRequired(false)
+            ->setFormTypeOption('attr.accept', 'image/*')
+            ->onlyOnForms();
+
+        $sideBImagePreview = ImageField::new('sideBImage', 'Фото стороны Б')
+            ->setBasePath('/uploads/advertisements/')
+            ->hideOnForm();
+
+        $sideBImageUpload = ImageField::new('sideBImage', 'Загрузить фото стороны Б')
+            ->setBasePath('/uploads/advertisements/')
+            ->setUploadDir('public/uploads/advertisements/')
+            ->setUploadedFileNamePattern('side-b-[randomhash].[extension]')
+            ->setRequired(false)
+            ->setFormTypeOption('attr.accept', 'image/*')
+            ->onlyOnForms();
+
         return [
             IdField::new('id', 'ID')->hideOnForm(),
             TextField::new('code', 'Код'),
@@ -46,11 +70,20 @@ class AdvertisementCrudController extends AbstractCrudController
 
             AssociationField::new('type', 'Категория (тип рекламной продукции)'),
 
+            AssociationField::new('type', 'Категория (тип рекламной продукции)'),
+
             TextField::new('categoryName', 'Категория рекламы')->onlyOnIndex(),
             NumberField::new('latitude', 'Широта')->setNumDecimals(6),
             NumberField::new('longitude', 'Долгота')->setNumDecimals(6),
             TextareaField::new('sideADescription', 'Описание стороны А')->hideOnIndex(),
             MoneyField::new('sideAPrice', 'Цена стороны А')->setCurrency('RUB')->setStoredAsCents(false),
+
+            $sideAImagePreview,
+            $sideAImageUpload,
+            TextareaField::new('sideBDescription', 'Описание стороны Б')->hideOnIndex(),
+            MoneyField::new('sideBPrice', 'Цена стороны Б')->setCurrency('RUB')->setStoredAsCents(false),
+            $sideBImagePreview,
+            $sideBImageUpload,
             ImageField::new('sideAImage', 'Изображение стороны А')
                 ->setBasePath('/uploads/advertisements/')
                 ->setUploadDir('public/uploads/advertisements/')

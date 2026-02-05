@@ -49,7 +49,6 @@ class Advertisement
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private ?string $sideBPrice = null;
 
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $sideAImage = null;
 
@@ -271,7 +270,6 @@ class Advertisement
 
         return $this;
     }
-
 
     public function getSideAImage(): ?string
     {
