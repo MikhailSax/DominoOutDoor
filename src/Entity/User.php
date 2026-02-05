@@ -108,6 +108,15 @@ class User implements UserInterface, PasswordUpgraderInterface, PasswordAuthenti
         return $this->phone;
     }
 
+
+    public function setPhone(?string $phone): static
+    {
+        if ($phone === null) {
+            $this->phone = null;
+
+            return $this;
+        }
+
     public function setPhone(string $phone): static
     {
         $digits = preg_replace('/\D+/', '', $phone) ?? '';

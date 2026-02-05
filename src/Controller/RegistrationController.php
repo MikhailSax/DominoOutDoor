@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +40,30 @@ class RegistrationController extends AbstractController
             $plainPassword = (string) $form->get('plainPassword')->getData();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
+
+            try {
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->emailVerifier->sendEmailConfirmation(
+                    'app_verify_email',
+                    $user,
+                    (new TemplatedEmail())
+                        ->from(new Address('noreply@domino-outdoor.ru', 'Domino Outdoor'))
+                        ->to((string) $user->getEmail())
+                        ->subject('Подтвердите ваш email')
+                        ->htmlTemplate('registration/confirmation_email.html.twig'),
+                );
+
+                $this->addFlash('success', 'Регистрация успешна. Проверьте почту для подтверждения email.');
+
+                return $this->redirectToRoute('app_login');
+            } catch (UniqueConstraintViolationException) {
+                $this->addFlash('verify_email_error', 'Пользователь с таким email или телефоном уже существует.');
+            } catch (\Throwable) {
+                $this->addFlash('verify_email_error', 'Произошла ошибка при регистрации. Попробуйте позже.');
+            }
+=======
             if ($user->getYandexId() === null) {
                 $user->setYandexId(null);
             }
