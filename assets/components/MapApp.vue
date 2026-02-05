@@ -87,6 +87,70 @@
                 Загрузка карты...
             </div>
             <div v-show="isMapLoaded" ref="mapContainer" class="h-full w-full rounded-2xl border-2 border-white shadow-lg"></div>
+
+            <article
+                v-if="activeObject && activeSide"
+                class="absolute left-7 top-7 z-20 w-[560px] max-w-[calc(100%-56px)] overflow-hidden rounded-3xl bg-white shadow-2xl"
+            >
+                <div class="relative">
+                    <div class="absolute left-4 top-4 z-10 flex rounded-full bg-white p-1 shadow">
+                        <button
+                            v-for="side in activeObject.side_details"
+                            :key="side.code"
+                            type="button"
+                            class="min-w-9 rounded-full px-3 py-1 text-lg font-semibold"
+                            :class="activeSide.code === side.code ? 'bg-blue-100 text-blue-700' : 'text-blue-700 hover:bg-blue-50'"
+                            @click="selectSide(side.code)"
+                        >
+                            {{ side.code }}
+                        </button>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="absolute right-4 top-4 z-10 rounded-full bg-white p-3 text-lg font-semibold text-slate-700 shadow hover:bg-slate-100"
+                        @click="closeCard"
+                    >
+                        ×
+                    </button>
+
+                    <img
+                        :src="activeSide.image_url || '/images/orig.png'"
+                        alt="Фото стороны"
+                        class="h-72 w-full object-cover"
+                    >
+                </div>
+
+                <div class="space-y-4 p-5">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-4 leading-tight font-bold text-slate-900">{{ activeObject.address || 'Адрес не указан' }}</h3>
+                            <p class="mt-1 text-xl font-semibold tracking-wide text-slate-400">GID {{ activeObject.code || activeObject.place_number }}</p>
+                        </div>
+                        <a
+                            :href="`/api/advertisements/${activeObject.id}`"
+                            target="_blank"
+                            class="text-xl font-medium text-blue-600 hover:text-blue-700"
+                        >
+                            Подробнее
+                        </a>
+                    </div>
+
+                    <dl class="grid grid-cols-[1fr_auto] gap-x-5 gap-y-2 text-xl">
+                        <dt class="border-b border-slate-200 pb-1 text-slate-600">Формат</dt>
+                        <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeObject.type || '—' }}</dd>
+
+                        <dt class="border-b border-slate-200 pb-1 text-slate-600">Сторона</dt>
+                        <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeSide.code }}</dd>
+
+                        <dt class="border-b border-slate-200 pb-1 text-slate-600">Город</dt>
+                        <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">Иркутск</dd>
+
+                        <dt class="text-slate-400">Прайс без НДС</dt>
+                        <dd class="text-right text-4 font-extrabold text-slate-900">{{ formatPrice(activeSide.price) }}</dd>
+                    </dl>
+                </div>
+            </article>
         </section>
     </div>
 </template>
@@ -116,6 +180,7 @@ const mapContainer = ref(null)
 const isMapLoaded = ref(false)
 const mapError = ref('')
 const activeObjectId = ref(null)
+const activeSideCode = ref('')
 
 let map = null
 let placemarks = new Map()
@@ -132,12 +197,56 @@ const filteredParams = computed(() => {
     return params
 })
 
+const activeObject = computed(() => objects.value.find((item) => item.id === activeObjectId.value) || null)
+
+const activeSide = computed(() => {
+    if (!activeObject.value) {
+        return null
+    }
+
+    const sides = Array.isArray(activeObject.value.side_details) ? activeObject.value.side_details : []
+    if (sides.length === 0) {
+        return null
+    }
+
+    return sides.find((item) => item.code === activeSideCode.value) || sides[0]
+})
+
 function formatSides(sides) {
     if (!Array.isArray(sides) || sides.length === 0) {
         return '—'
     }
 
     return sides.join(', ')
+}
+
+function formatPrice(price) {
+    if (price === null || price === undefined || price === '') {
+        return 'По запросу'
+    }
+
+    const value = Number(price)
+    if (Number.isNaN(value)) {
+        return String(price)
+    }
+
+    return `${new Intl.NumberFormat('ru-RU').format(value)} ₽`
+}
+
+function normalizeSideDetails(item) {
+    const details = Array.isArray(item.side_details) ? item.side_details : []
+    if (details.length > 0) {
+        return details
+    }
+
+    const sides = Array.isArray(item.sides) ? item.sides : []
+    return sides.map((code) => ({
+        code,
+        description: null,
+        price: null,
+        image: null,
+        image_url: null,
+    }))
 }
 
 async function fetchJson(url) {
@@ -178,7 +287,10 @@ async function loadAdvertisements() {
         const query = filteredParams.value.toString()
         const url = query ? `${props.advertisementsUrl}?${query}` : props.advertisementsUrl
         const data = await fetchJson(url)
-        objects.value = Array.isArray(data) ? data : []
+        objects.value = (Array.isArray(data) ? data : []).map((item) => ({
+            ...item,
+            side_details: normalizeSideDetails(item),
+        }))
 
         syncMapPlacemarks()
     } finally {
@@ -194,6 +306,7 @@ function resetFilters() {
 
 async function applyFilters() {
     activeObjectId.value = null
+    activeSideCode.value = ''
     await loadFilters()
     await loadAdvertisements()
 }
@@ -217,19 +330,6 @@ function loadYandexMap() {
         script.onerror = () => reject(new Error('Ошибка загрузки Яндекс.Карт'))
         document.head.appendChild(script)
     })
-}
-
-function createBalloonMarkup(item) {
-    return `
-        <div style="font-family: Inter, sans-serif; width: 260px;">
-            <div style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">${item.address || 'Адрес не указан'}</div>
-            <div style="font-size: 13px; color: #374151; line-height: 1.45;">
-                <div><b>Категория:</b> ${item.category || '—'}</div>
-                <div><b>Тип:</b> ${item.type || '—'}</div>
-                <div><b>Стороны:</b> ${formatSides(item.sides)}</div>
-            </div>
-        </div>
-    `
 }
 
 function clearPlacemarks() {
@@ -257,16 +357,14 @@ function syncMapPlacemarks() {
 
         const placemark = new window.ymaps.Placemark(
             [item.location.latitude, item.location.longitude],
-            {
-                balloonContent: createBalloonMarkup(item),
-            },
+            {},
             {
                 preset: 'islands#redIcon',
             },
         )
 
         placemark.events.add('click', () => {
-            activeObjectId.value = item.id
+            focusObject(item.id)
         })
 
         placemarks.set(item.id, placemark)
@@ -286,6 +384,9 @@ function syncMapPlacemarks() {
 
 function focusObject(objectId) {
     activeObjectId.value = objectId
+    const item = objects.value.find((obj) => obj.id === objectId)
+    activeSideCode.value = item?.side_details?.[0]?.code || ''
+
     const placemark = placemarks.get(objectId)
     if (!placemark || !map) {
         return
@@ -293,7 +394,15 @@ function focusObject(objectId) {
 
     const coordinates = placemark.geometry.getCoordinates()
     map.setCenter(coordinates, 16, { duration: 300 })
-    placemark.balloon.open()
+}
+
+function selectSide(code) {
+    activeSideCode.value = code
+}
+
+function closeCard() {
+    activeObjectId.value = null
+    activeSideCode.value = ''
 }
 
 async function initMap() {
@@ -342,5 +451,13 @@ onBeforeUnmount(() => {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+
+.text-4 {
+    font-size: 2rem;
+}
+
+.text-xl {
+    font-size: 1.25rem;
 }
 </style>
