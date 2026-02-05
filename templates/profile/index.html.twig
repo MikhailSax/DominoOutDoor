@@ -18,12 +18,14 @@
                 </div>
             </div>
 
-            {% for message in app.flashes('success') %}
-                <div class="mb-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">{{ message }}</div>
-            {% endfor %}
-            {% for message in app.flashes('error') %}
-                <div class="mb-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{{ message }}</div>
-            {% endfor %}
+            <div class="mb-5 space-y-3" aria-live="polite">
+                {% for message in app.flashes('success') %}
+                    <div class="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">{{ message }}</div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{{ message }}</div>
+                {% endfor %}
+            </div>
 
             {% include 'profile/_tabs.html.twig' %}
 
@@ -31,25 +33,5 @@
                 {% include 'profile/_form.html.twig' with { profileForm: profileForm } %}
             </div>
         </div>
-    <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div class="mb-6 flex items-center justify-between gap-4">
-            <div>
-                <h1 class="text-3xl font-bold text-gray-900">Личный кабинет</h1>
-                <p class="mt-1 text-sm text-gray-600">Управляйте личными данными и безопасностью аккаунта.</p>
-            </div>
-            <span class="rounded-full px-3 py-1 text-xs font-semibold {{ user.isVerified ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                {{ user.isVerified ? 'Email подтверждён' : 'Email не подтверждён' }}
-            </span>
-        </div>
-
-        {% for message in app.flashes('success') %}
-            <div class="mb-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">{{ message }}</div>
-        {% endfor %}
-        {% for message in app.flashes('error') %}
-            <div class="mb-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{{ message }}</div>
-        {% endfor %}
-
-        {% include 'profile/_tabs.html.twig' %}
-        {% include 'profile/_form.html.twig' with { profileForm: profileForm } %}
     </section>
 {% endblock %}
