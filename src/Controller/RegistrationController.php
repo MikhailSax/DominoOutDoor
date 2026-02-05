@@ -40,7 +40,6 @@ class RegistrationController extends AbstractController
             $plainPassword = (string) $form->get('plainPassword')->getData();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-
             try {
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -63,7 +62,6 @@ class RegistrationController extends AbstractController
             } catch (\Throwable) {
                 $this->addFlash('verify_email_error', 'Произошла ошибка при регистрации. Попробуйте позже.');
             }
-=======
             if ($user->getYandexId() === null) {
                 $user->setYandexId(null);
             }
@@ -84,6 +82,7 @@ class RegistrationController extends AbstractController
             $this->addFlash('success', 'Регистрация успешна. Проверьте почту для подтверждения email.');
 
             return $this->redirectToRoute('app_login');
+
         }
 
         return $this->render('registration/register.html.twig', [

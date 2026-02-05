@@ -33,4 +33,14 @@ class UserTest extends TestCase
 
         self::assertNull($user->getPhone());
     }
+
+    public function testYandexIdSupportsLargeValues(): void
+    {
+        $user = new User();
+        $user->setYandexId('2224529849');
+
+        self::assertSame('2224529849', $user->getYandexId());
+    }
 }
+}
+
