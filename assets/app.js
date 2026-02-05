@@ -18,10 +18,12 @@ function initVue() {
     const mapElement = document.getElementById('map-app');
     if (mapElement && !mapElement._vueApp) {
         try {
-            const app = createApp(App);
+            const app = createApp(App, {
+                filtersUrl: mapElement.dataset.filtersUrl || '/api/filters',
+                advertisementsUrl: mapElement.dataset.advertisementsUrl || '/api/advertisements',
+            });
             app.mount('#map-app');
             mapElement._vueApp = app;
-            console.log('Vue app mounted successfully');
         } catch (error) {
             console.error('Vue app mounting error:', error);
         }

@@ -1,21 +1,42 @@
 <template>
     <div>
-        <Spinner v-if="!isMapReady" message="Загрузка.." />
-        <MapSection v-else />
+        <Spinner v-if="isLoading" message="Загрузка интерфейса..." />
+        <MapSection
+            v-else
+            :filters-url="runtimeConfig.filtersUrl"
+            :advertisements-url="runtimeConfig.advertisementsUrl"
+        />
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import Spinner from './Spinner.vue'
 import MapSection from './MapApp.vue'
 
-const isMapReady = ref(false)
+const props = defineProps({
+    filtersUrl: {
+        type: String,
+        required: true,
+    },
+    advertisementsUrl: {
+        type: String,
+        required: true,
+    },
+})
 
-onMounted(async () => {
-    const el = document.getElementById('initial-spinner')
-    if (el) el.remove()
+const isLoading = ref(true)
+const runtimeConfig = ref({
+    filtersUrl: props.filtersUrl,
+    advertisementsUrl: props.advertisementsUrl,
+})
 
-    isMapReady.value = true
+onMounted(() => {
+    const initialSpinner = document.getElementById('initial-spinner')
+    if (initialSpinner) {
+        initialSpinner.remove()
+    }
+
+    isLoading.value = false
 })
 </script>

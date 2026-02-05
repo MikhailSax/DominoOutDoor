@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Карта билбордов{% endblock %}
+{% block title %}Карта рекламных конструкций{% endblock %}
 
 {% block body %}
-    <div id="map-app">
-        <div id="initial-spinner">
-            <div class="spinner"></div>
-            <p>Загрузка карты...</p>
+    <div
+        id="map-app"
+        data-filters-url="{{ path('api_filters') }}"
+        data-advertisements-url="{{ path('api_advertisements_list') }}"
+    >
+        <div id="initial-spinner" class="flex min-h-[60vh] items-center justify-center">
+            <div class="text-center text-gray-600">
+                <div class="mx-auto mb-3 h-10 w-10 animate-spin rounded-full border-4 border-red-200 border-t-red-600"></div>
+                <p>Загрузка карты...</p>
+            </div>
         </div>
     </div>
 {% endblock %}

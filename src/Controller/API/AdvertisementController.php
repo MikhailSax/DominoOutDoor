@@ -22,7 +22,7 @@ class AdvertisementController extends AbstractController
 
     }
 
-    #[Route('/advertisements', methods: ['GET'])]
+    #[Route('/advertisements', name: 'advertisements_list', methods: ['GET'])]
     public function list(Request $request, AdvertisementRepository $repository): JsonResponse
     {
         $ads = $repository->findAll();
