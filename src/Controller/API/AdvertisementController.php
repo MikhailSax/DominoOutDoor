@@ -22,7 +22,7 @@ class AdvertisementController extends AbstractController
 
     }
 
-    #[Route('/advertisements', methods: ['GET'])]
+    #[Route('/advertisements', name: 'advertisements_list', methods: ['GET'])]
     public function list(Request $request, AdvertisementRepository $repository): JsonResponse
     {
         $ads = $repository->findAll();
@@ -101,6 +101,13 @@ class AdvertisementController extends AbstractController
                 'longitude' => $ad->getLocation()->getLongitude(),
                 'azimuth' => $ad->getLocation()->getAzimuth()
             ] : null,
+
+            'bookings' => array_map(static fn($booking) => [
+                'id' => $booking->getId(),
+                'clientName' => $booking->getClientName(),
+                'startDate' => $booking->getStartDate()?->format('Y-m-d'),
+                'endDate' => $booking->getEndDate()?->format('Y-m-d'),
+            ], $ad->getBookings()->toArray()),
 
             // 🔥 временно генерируем цену (или добавь в БД)
             'price' => random_int(15000, 50000),

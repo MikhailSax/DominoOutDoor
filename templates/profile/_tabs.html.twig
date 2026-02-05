@@ -1,12 +1,12 @@
 <div class="mb-8 border-b border-gray-200">
     <nav class="flex space-x-8 text-sm font-medium text-gray-500">
         <a href="{{ path('profile') }}"
-           class="{{ app.request.attributes.get('_route') == 'profile' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'hover:text-gray-700' }} pb-2 transition">
+           class="{{ app.request.attributes.get('_route') == 'profile' ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-gray-700' }} pb-2 transition">
             Профиль
         </a>
         <a href="{{ path('profile.orders') }}"
-           class="{{ app.request.attributes.get('_route') == 'profile_orders' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'hover:text-gray-700' }} pb-2 transition">
-            История заказов
+           class="{{ app.request.attributes.get('_route') == 'profile.orders' ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-gray-700' }} pb-2 transition">
+            Активность и заказы
         </a>
     </nav>
 </div>
