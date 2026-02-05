@@ -1,5 +1,6 @@
 <template>
-    <div class="flex h-[calc(100vh-72px)] min-h-[680px] flex-col overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 lg:flex-row">
+    <div
+        class="flex h-[calc(100vh-72px)] min-h-[680px] flex-col overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 lg:flex-row">
         <aside class="w-full border-b border-gray-200 bg-white lg:w-[430px] lg:border-b-0 lg:border-r">
             <div class="flex h-full flex-col">
                 <div class="border-b border-gray-100 p-5">
@@ -15,7 +16,10 @@
                             class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-200"
                         >
                             <option value="">Все типы продукции</option>
-                            <option v-for="item in productTypes" :key="item.id" :value="String(item.id)">{{ item.name }}</option>
+                            <option v-for="item in productTypes" :key="item.id" :value="String(item.id)">{{
+                                    item.name
+                                }}
+                            </option>
                         </select>
                     </div>
 
@@ -27,7 +31,10 @@
                             class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-200 disabled:cursor-not-allowed disabled:bg-gray-100"
                         >
                             <option value="">Все типы конструкций</option>
-                            <option v-for="item in constrTypes" :key="item.id" :value="String(item.id)">{{ item.name }}</option>
+                            <option v-for="item in constrTypes" :key="item.id" :value="String(item.id)">{{
+                                    item.name
+                                }}
+                            </option>
                         </select>
                     </div>
 
@@ -56,7 +63,8 @@
 
                 <div class="min-h-0 flex-1 overflow-y-auto p-3">
                     <div v-if="isLoadingObjects" class="p-4 text-sm text-gray-500">Загрузка объектов...</div>
-                    <div v-else-if="objects.length === 0" class="rounded-lg border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
+                    <div v-else-if="objects.length === 0"
+                         class="rounded-lg border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
                         По выбранным фильтрам ничего не найдено.
                     </div>
 
@@ -69,10 +77,12 @@
                         @click="focusObject(item.id)"
                     >
                         <div class="mb-1 flex items-start justify-between gap-3">
-                            <h3 class="line-clamp-2 text-sm font-semibold text-gray-900">{{ item.address || 'Адрес не указан' }}</h3>
+                            <h3 class="line-clamp-2 text-sm font-semibold text-gray-900">
+                                {{ item.address || 'Адрес не указан' }}</h3>
                             <span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">#{{ item.id }}</span>
                         </div>
-                        <p class="text-xs text-gray-600">{{ item.category || 'Категория не указана' }} • {{ item.type || 'Тип не указан' }}</p>
+                        <p class="text-xs text-gray-600">{{ item.category || 'Категория не указана' }} •
+                            {{ item.type || 'Тип не указан' }}</p>
                         <p class="mt-1 text-xs text-gray-500">Стороны: {{ formatSides(item.sides) }}</p>
                     </button>
                 </div>
@@ -80,19 +90,22 @@
         </aside>
 
         <section class="relative min-h-[380px] flex-1 p-3 lg:p-5">
-            <div v-if="mapError" class="flex h-full items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-700">
+            <div v-if="mapError"
+                 class="flex h-full items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-700">
                 {{ mapError }}
             </div>
-            <div v-else-if="!isMapLoaded" class="flex h-full items-center justify-center rounded-2xl border border-gray-200 bg-white text-sm text-gray-500">
+            <div v-else-if="!isMapLoaded"
+                 class="flex h-full items-center justify-center rounded-2xl border border-gray-200 bg-white text-sm text-gray-500">
                 Загрузка карты...
             </div>
-            <div v-show="isMapLoaded" ref="mapContainer" class="h-full w-full rounded-2xl border-2 border-white shadow-lg"></div>
+            <div v-show="isMapLoaded" ref="mapContainer"
+                 class="h-full w-full rounded-2xl border-2 border-white shadow-lg"></div>
         </section>
     </div>
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import {computed, onBeforeUnmount, onMounted, reactive, ref, watch} from 'vue'
 
 const props = defineProps({
     filtersUrl: {
@@ -108,7 +121,7 @@ const props = defineProps({
 const productTypes = ref([])
 const constrTypes = ref([])
 const objects = ref([])
-const filters = reactive({ productType: '', constrTypeId: '' })
+const filters = reactive({productType: '', constrTypeId: ''})
 const isLoadingFilters = ref(false)
 const isLoadingObjects = ref(false)
 
@@ -292,7 +305,7 @@ function focusObject(objectId) {
     }
 
     const coordinates = placemark.geometry.getCoordinates()
-    map.setCenter(coordinates, 16, { duration: 300 })
+    map.setCenter(coordinates, 16, {duration: 300})
     placemark.balloon.open()
 }
 
@@ -300,7 +313,7 @@ async function initMap() {
     try {
         await loadYandexMap()
         map = new window.ymaps.Map(mapContainer.value, {
-            center: [55.751244, 37.618423],
+            center: [51.8272, 107.606],
             zoom: 10,
             controls: ['zoomControl', 'fullscreenControl'],
         })
