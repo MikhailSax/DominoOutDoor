@@ -47,4 +47,10 @@ class AdvertisementCategory
     {
         return $this->types;
     }
+
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 }
