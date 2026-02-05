@@ -69,21 +69,19 @@ class AdvertisementCrudController extends AbstractCrudController
                 ->onlyOnIndex(),
 
             AssociationField::new('type', 'Категория (тип рекламной продукции)'),
-
-            AssociationField::new('type', 'Категория (тип рекламной продукции)'),
-
             TextField::new('categoryName', 'Категория рекламы')->onlyOnIndex(),
             NumberField::new('latitude', 'Широта')->setNumDecimals(6),
             NumberField::new('longitude', 'Долгота')->setNumDecimals(6),
             TextareaField::new('sideADescription', 'Описание стороны А')->hideOnIndex(),
             MoneyField::new('sideAPrice', 'Цена стороны А')->setCurrency('RUB')->setStoredAsCents(false),
-
+          
             $sideAImagePreview,
             $sideAImageUpload,
             TextareaField::new('sideBDescription', 'Описание стороны Б')->hideOnIndex(),
             MoneyField::new('sideBPrice', 'Цена стороны Б')->setCurrency('RUB')->setStoredAsCents(false),
             $sideBImagePreview,
             $sideBImageUpload,
+
             ImageField::new('sideAImage', 'Изображение стороны А')
                 ->setBasePath('/uploads/advertisements/')
                 ->setUploadDir('public/uploads/advertisements/')
