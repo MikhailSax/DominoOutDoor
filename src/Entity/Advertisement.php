@@ -37,6 +37,24 @@ class Advertisement
     #[ORM\OneToMany(mappedBy: 'advertisement', targetEntity: AdvertisementBooking::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $bookings;
 
+    #[ORM\Column(length: 1000, nullable: true)]
+    private ?string $sideADescription = null;
+
+    #[ORM\Column(length: 1000, nullable: true)]
+    private ?string $sideBDescription = null;
+
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    private ?string $sideAPrice = null;
+
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    private ?string $sideBPrice = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sideAImage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sideBImage = null;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -203,5 +221,124 @@ class Advertisement
         }
 
         return $this;
+    }
+
+    public function getSideADescription(): ?string
+    {
+        return $this->sideADescription;
+    }
+
+    public function setSideADescription(?string $sideADescription): static
+    {
+        $this->sideADescription = $sideADescription;
+
+        return $this;
+    }
+
+    public function getSideBDescription(): ?string
+    {
+        return $this->sideBDescription;
+    }
+
+    public function setSideBDescription(?string $sideBDescription): static
+    {
+        $this->sideBDescription = $sideBDescription;
+
+        return $this;
+    }
+
+    public function getSideAPrice(): ?string
+    {
+        return $this->sideAPrice;
+    }
+
+    public function setSideAPrice(?string $sideAPrice): static
+    {
+        $this->sideAPrice = $sideAPrice;
+
+        return $this;
+    }
+
+    public function getSideBPrice(): ?string
+    {
+        return $this->sideBPrice;
+    }
+
+    public function setSideBPrice(?string $sideBPrice): static
+    {
+        $this->sideBPrice = $sideBPrice;
+
+        return $this;
+    }
+
+    public function getSideAImage(): ?string
+    {
+        return $this->sideAImage;
+    }
+
+    public function setSideAImage(?string $sideAImage): static
+    {
+        $this->sideAImage = $sideAImage;
+
+        return $this;
+    }
+
+    public function getSideBImage(): ?string
+    {
+        return $this->sideBImage;
+    }
+
+    public function setSideBImage(?string $sideBImage): static
+    {
+        $this->sideBImage = $sideBImage;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->location?->getLatitude();
+    }
+
+    public function setLatitude(?float $latitude): static
+    {
+        $location = $this->getOrCreateLocation();
+        $location->setLatitude($latitude);
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->location?->getLongitude();
+    }
+
+    public function setLongitude(?float $longitude): static
+    {
+        $location = $this->getOrCreateLocation();
+        $location->setLongitude($longitude);
+
+        return $this;
+    }
+
+    public function getCategoryName(): ?string
+    {
+        return $this->type?->getCategory()?->getName();
+    }
+
+    public function __toString(): string
+    {
+        $parts = array_filter([$this->getPlaceNumber(), $this->getAddress()]);
+
+        return $parts !== [] ? implode(' — ', $parts) : sprintf('Конструкция #%d', $this->id ?? 0);
+    }
+
+    private function getOrCreateLocation(): AdvertisementLocation
+    {
+        if ($this->location === null) {
+            $this->location = (new AdvertisementLocation())->setAdvertisement($this);
+        }
+
+        return $this->location;
     }
 }
