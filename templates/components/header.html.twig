@@ -1,107 +1,59 @@
-<header class="bg-white/90 backdrop-blur-md shadow-xl sticky top-0 z-50 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
-            <!-- Логотип -->
-            <a href="/" class="text-3xl font-black text-red-600 tracking-tight">
-                Domino <span class="text-red-400">Outdoor</span>
-            </a>
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a href="{{ path('app_homepage') }}" class="text-2xl font-black tracking-tight text-red-600">
+            Domino <span class="text-red-400">Outdoor</span>
+        </a>
 
-            <!-- Десктоп навигация -->
-            <nav class="hidden md:flex items-center space-x-8 text-[15px] font-medium text-gray-700">
-                <!-- Услуги -->
-                <div class="relative dropdown">
-                    <button type="button"
-                            class="dropdown-toggle inline-flex items-center hover:text-red-600 transition">
-                        Услуги
-                        <svg class="ml-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"/>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu hidden absolute top-full left-0 mt-2 bg-white shadow-2xl rounded-xl py-3 w-56 z-50">
-                        <a href="#" class="block px-5 py-2 hover:bg-red-50 transition">Баннеры</a>
-                        <a href="#" class="block px-5 py-2 hover:bg-red-50 transition">Световые короба</a>
-                        <a href="#" class="block px-5 py-2 hover:bg-red-50 transition">Оформление фасадов</a>
-                        <a href="#" class="block px-5 py-2 hover:bg-red-50 transition">Витринная реклама</a>
-                    </div>
-                </div>
+        <nav class="hidden items-center gap-7 text-sm font-medium text-gray-700 md:flex">
+            <a href="{{ path('app_homepage') }}#formats" class="hover:text-red-600">Форматы</a>
+            <a href="{{ path('app_map_app') }}" class="hover:text-red-600">Карта конструкций</a>
+            <a href="{{ path('app_homepage') }}#cases" class="hover:text-red-600">Кейсы</a>
+            <a href="{{ path('app_homepage') }}#faq" class="hover:text-red-600">FAQ</a>
+            <a href="{{ path('app_static_pages') }}" class="hover:text-red-600">О компании</a>
+        </nav>
 
-                <!-- Типы рекламы -->
-                <div class="relative dropdown">
-                    <button type="button"
-                            class="dropdown-toggle inline-flex items-center hover:text-red-600 transition">
-                        Типы рекламы
-                        <svg class="ml-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"/>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu hidden absolute top-full left-0 mt-2 bg-white shadow-2xl rounded-xl py-3 w-56 z-50">
-                        <a href="#" class="block px-5 py-2 hover:bg-red-50 transition">Наружная реклама</a>
-                        <a href="#" class="block px-5 py-2 hover:bg-red-50 transition">Цифровые вывески</a>
-                        <a href="#" class="block px-5 py-2 hover:bg-red-50 transition">Брендирование авто</a>
-                    </div>
-                </div>
-
-                <a href="{{path('app_map_app')}}" class="hover:text-red-600 transition">Карты</a>
-                <a href="#" class="hover:text-red-600 transition">Цены</a>
-                <a href="#" class="hover:text-red-600 transition">Контакты</a>
-            </nav>
-
-            <!-- Авторизация -->
-            <div class="hidden md:flex items-center space-x-4">
-                {% if app.user %}
-                    <a href="{{ path('profile') }}"
-                       class="text-gray-700 hover:text-red-600 transition font-medium text-sm">
-                        Профиль
-                    </a>
-                    <a href="{{ path('app_logout') }}"
-                       class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-xl shadow-md transition text-sm font-semibold">
-                        Выйти
-                    </a>
-                {% else %}
-                    <a href="{{ path('app_login') }}" class="text-gray-600 hover:text-red-600 transition">Вход</a>
-                    <a href="{{ path('app_register') }}"
-                       class="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-5 py-2 rounded-xl shadow-md transition text-sm font-semibold">
-                        Регистрация
-                    </a>
-                {% endif %}
-            </div>
-
-            <!-- Бургер -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-700 hover:text-red-600">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Мобильное меню -->
-    <div id="mobile-menu"
-         class="hidden md:hidden bg-white/95 backdrop-blur-md shadow-xl px-6 py-6 space-y-3 text-base text-gray-800 font-medium animate-fade-in-down z-40">
-        {% if app.user %}
-            <a href="{{ path('profile') }}" class="block py-2 hover:text-red-600 transition">Профиль</a>
-            <a href="{{ path('app_logout') }}"
-               class="block text-red-600 font-semibold py-2 hover:bg-red-50 rounded transition">Выйти</a>
-        {% else %}
-            <a href="#" class="block">Услуги</a>
-            <a href="#" class="block">Типы рекламы</a>
-            <a href="{{ path('app_map_app') }}" class="block">Карта</a>
-            <a href="#" class="block">Цены</a>
-            <a href="#" class="block">Контакты</a>
-            <div class="pt-3 border-t">
-                <a href="{{ path('app_login') }}" class="block py-2">Вход</a>
-                <a href="{{ path('app_register') }}"
-                   class="block text-center py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-xl hover:from-red-700 hover:to-red-600">
+        <div class="hidden items-center gap-3 md:flex">
+            {% if app.user %}
+                <a href="{{ path('profile') }}" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:border-red-300 hover:text-red-600">
+                    Профиль
+                </a>
+                <a href="{{ path('app_logout') }}" class="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700">
+                    Выйти
+                </a>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:border-red-300 hover:text-red-600">
+                    Войти
+                </a>
+                <a href="{{ path('app_register') }}" class="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700">
                     Регистрация
                 </a>
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
+
+        <button id="mobile-menu-button" class="rounded-md p-2 text-gray-700 hover:bg-gray-100 md:hidden" aria-label="Открыть меню">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden border-t border-gray-200 bg-white px-4 py-4 md:hidden">
+        <nav class="space-y-2 text-sm font-medium text-gray-700">
+            <a href="{{ path('app_homepage') }}#formats" class="block rounded-md px-3 py-2 hover:bg-red-50 hover:text-red-600">Форматы</a>
+            <a href="{{ path('app_map_app') }}" class="block rounded-md px-3 py-2 hover:bg-red-50 hover:text-red-600">Карта конструкций</a>
+            <a href="{{ path('app_homepage') }}#cases" class="block rounded-md px-3 py-2 hover:bg-red-50 hover:text-red-600">Кейсы</a>
+            <a href="{{ path('app_homepage') }}#faq" class="block rounded-md px-3 py-2 hover:bg-red-50 hover:text-red-600">FAQ</a>
+            <a href="{{ path('app_static_pages') }}" class="block rounded-md px-3 py-2 hover:bg-red-50 hover:text-red-600">О компании</a>
+        </nav>
+
+        <div class="mt-4 border-t border-gray-200 pt-4">
+            {% if app.user %}
+                <a href="{{ path('profile') }}" class="mb-2 block rounded-lg border border-gray-300 px-4 py-2 text-center text-sm font-medium">Профиль</a>
+                <a href="{{ path('app_logout') }}" class="block rounded-lg bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white">Выйти</a>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="mb-2 block rounded-lg border border-gray-300 px-4 py-2 text-center text-sm font-medium">Войти</a>
+                <a href="{{ path('app_register') }}" class="block rounded-lg bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white">Регистрация</a>
+            {% endif %}
+        </div>
     </div>
 </header>
-

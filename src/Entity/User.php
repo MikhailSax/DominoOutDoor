@@ -11,34 +11,35 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthenticatedUserInterface
+#[UniqueEntity(fields: ['email'], message: 'Пользователь с таким email уже существует')]
+#[UniqueEntity(fields: ['phone'], message: 'Пользователь с таким телефоном уже существует')]
+class User implements UserInterface, PasswordUpgraderInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    //o2auth yandex
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $yandexId = null;
+
     #[ORM\Column(length: 50)]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $last_name = null;
 
-    #[ORM\Column(length: 50, unique: true)]
+    #[ORM\Column(length: 100, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(unique: true)]
+    #[ORM\Column(length: 30, unique: true)]
     private ?string $phone = null;
 
     #[ORM\Column(type: 'json')]
-    private array $roles = ['ROLE_ADMIN'];
+    private array $roles = ['ROLE_USER'];
 
     #[ORM\Column(type: 'string')]
-    private string $password;
+    private string $password = '';
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
@@ -54,16 +55,18 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
         return $this->id;
     }
 
-
     public function getYandexId(): ?int
     {
         return $this->yandexId;
     }
 
-    public function setYandexId(int $yandexId)
+    public function setYandexId(?int $yandexId): static
     {
         $this->yandexId = $yandexId;
+
+        return $this;
     }
+
     public function getFirstName(): ?string
     {
         return $this->first_name;
@@ -71,7 +74,7 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
 
     public function setFirstName(string $first_name): static
     {
-        $this->first_name = $first_name;
+        $this->first_name = trim($first_name);
 
         return $this;
     }
@@ -83,7 +86,7 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
 
     public function setLastName(?string $last_name): static
     {
-        $this->last_name = $last_name;
+        $this->last_name = $last_name === null ? null : trim($last_name);
 
         return $this;
     }
@@ -95,19 +98,39 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
 
     public function setEmail(string $email): static
     {
-        $this->email = $email;
+        $this->email = mb_strtolower(trim($email));
 
         return $this;
     }
 
-    public function getPhone(): int|array
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(int|array $phone): static
+    public function setPhone(?string $phone): static
     {
-        $this->phone = $phone;
+        if ($phone === null) {
+            $this->phone = null;
+
+            return $this;
+        }
+
+        $digits = preg_replace('/\D+/', '', $phone) ?? '';
+        if ($digits === '') {
+            $this->phone = null;
+
+            return $this;
+        }
+
+        if (str_starts_with($digits, '8')) {
+            $digits = '7' . substr($digits, 1);
+        }
+        if (strlen($digits) === 10) {
+            $digits = '7' . $digits;
+        }
+
+        $this->phone = '+' . $digits;
 
         return $this;
     }
@@ -123,6 +146,7 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
         return $this;
     }
 
@@ -134,6 +158,7 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -163,12 +188,13 @@ class User implements UserInterface, PasswordUpgraderInterface,PasswordAuthentic
 
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
-
+        if ($user instanceof self) {
+            $user->setPassword($newHashedPassword);
+        }
     }
 
     public function eraseCredentials(): void
     {
-        // TODO: Implement eraseCredentials() method.
     }
 
     public function getUserIdentifier(): string

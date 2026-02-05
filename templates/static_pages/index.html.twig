@@ -1,20 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StaticPagesController!{% endblock %}
+{% block title %}О компании — Domino Outdoor{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class="bg-gray-50 py-16">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-bold text-gray-900">О компании</h1>
+            <p class="mt-4 text-base text-gray-600">
+                Domino Outdoor — оператор наружной рекламы. Работаем с локальными и федеральными брендами,
+                помогаем запускать кампании с прозрачной аналитикой и контролем занятости конструкций.
+            </p>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <div class="mt-10 grid gap-6 md:grid-cols-3">
+                <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <h2 class="text-lg font-semibold">10+ лет на рынке</h2>
+                    <p class="mt-2 text-sm text-gray-600">Опыт размещения кампаний в городских и региональных локациях.</p>
+                </article>
+                <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <h2 class="text-lg font-semibold">Собственная база мест</h2>
+                    <p class="mt-2 text-sm text-gray-600">Актуальные данные по доступности и бронированию конструкций.</p>
+                </article>
+                <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <h2 class="text-lg font-semibold">Полный цикл работ</h2>
+                    <p class="mt-2 text-sm text-gray-600">От брифа и медиаплана до монтажа и фотоотчёта по размещению.</p>
+                </article>
+            </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/mv/Desktop/Work/domino-bilobards/src/Controller/StaticPagesController.php</code></li>
-        <li>Your template at <code>C:/Users/mv/Desktop/Work/domino-bilobards/templates/static_pages/index.html.twig</code></li>
-    </ul>
-</div>
+            <div class="mt-10 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-900">Контакты</h3>
+                <div class="mt-4 grid gap-3 text-sm text-gray-700 sm:grid-cols-2">
+                    <p><span class="font-semibold">Телефон:</span> +7 (3012) 00-00-00</p>
+                    <p><span class="font-semibold">Email:</span> sales@domino-outdoor.ru</p>
+                    <p><span class="font-semibold">Адрес:</span> г. Улан‑Удэ, ул. Ленина, 35</p>
+                    <p><span class="font-semibold">График:</span> Пн–Пт, 09:00–18:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -13,7 +13,9 @@ class AdvertisementRepository extends ServiceEntityRepository
 {
     private string $query = '
                 a.id as id,
+                ac.id AS category_id,
                 ac.name AS category,
+                at.id AS type_id,
                 at.name AS type,
                 a.code AS code,
                 a.address AS address,
