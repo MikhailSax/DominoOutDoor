@@ -42,4 +42,5 @@ class UserTest extends TestCase
         self::assertSame('2224529849', $user->getYandexId());
     }
 }
+}
 

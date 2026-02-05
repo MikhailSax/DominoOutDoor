@@ -44,16 +44,24 @@ class YandexAuthenticator extends OAuth2Authenticator
                 $yandexUser = $client->fetchUserFromToken($accessToken);
                 $userData = $yandexUser->toArray();
 
+
                 $yandexId = (string) $yandexUser->getId();
                 $email = $yandexUser->getEmail() ?? ($userData['default_email'] ?? null);
                 if ($email === null) {
-                    $email = sprintf('yandex_%s@auth.local', $yandexId);
+
+                $yandexId = (int) $yandexUser->getId();
+                $email = $yandexUser->getEmail() ?? ($userData['default_email'] ?? null);
+                if ($email === null) {
+                    $email = sprintf('yandex_%d@auth.local', $yandexId);
+
                 }
 
                 $name = $userData['first_name'] ?? 'Пользователь';
                 $lastName = $userData['last_name'] ?? null;
                 $rawPhone = $userData['default_phone']['number'] ?? $userData['default_phone'] ?? null;
+
                 $phone = is_string($rawPhone) ? $rawPhone : sprintf('+7999%07d', abs(crc32($yandexId)) % 10000000);
+
 
                 $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['yandexId' => $yandexId]);
                 if ($existingUser instanceof User) {

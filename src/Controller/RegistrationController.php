@@ -62,6 +62,27 @@ class RegistrationController extends AbstractController
             } catch (\Throwable) {
                 $this->addFlash('verify_email_error', 'Произошла ошибка при регистрации. Попробуйте позже.');
             }
+            if ($user->getYandexId() === null) {
+                $user->setYandexId(null);
+            }
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
+                (new TemplatedEmail())
+                    ->from(new Address('noreply@domino-outdoor.ru', 'Domino Outdoor'))
+                    ->to((string) $user->getEmail())
+                    ->subject('Подтвердите ваш email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig'),
+            );
+
+            $this->addFlash('success', 'Регистрация успешна. Проверьте почту для подтверждения email.');
+
+            return $this->redirectToRoute('app_login');
+
         }
 
         return $this->render('registration/register.html.twig', [
