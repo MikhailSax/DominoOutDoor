@@ -26,6 +26,7 @@ class AdvertisementController extends AbstractController
     public function list(Request $request, AdvertisementRepository $repository): JsonResponse
     {
         $ads = $repository->findAll();
+        dd($ads);
         $category = $request->query->get('productType');
         $type = $request->query->get('constrTypeId');
 
