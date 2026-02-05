@@ -27,10 +27,40 @@
             <div class="space-y-2">
                 <label class="block text-sm font-medium text-gray-700">Email</label>
                 {{ form_widget(profileForm.email, { attr: { class: 'block w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm focus:border-red-500 focus:ring-red-500' } }) }}
+
+<section class="max-w-5xl">
+    {{ form_start(profileForm, { attr: { class: 'space-y-10 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm' } }) }}
+
+    <div>
+        <h2 class="mb-6 text-xl font-semibold text-gray-900">Личная информация</h2>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700">Имя</label>
+                {{ form_widget(profileForm.first_name, { attr: { class: 'block w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500' } }) }}
+                {{ form_errors(profileForm.first_name) }}
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700">Фамилия</label>
+                {{ form_widget(profileForm.last_name, { attr: { class: 'block w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500' } }) }}
+                {{ form_errors(profileForm.last_name) }}
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700">Телефон</label>
+                {{ form_widget(profileForm.phone, { attr: { class: 'block w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500' } }) }}
+                {{ form_errors(profileForm.phone) }}
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700">Email</label>
+                {{ form_widget(profileForm.email, { attr: { class: 'block w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500' } }) }}
+
                 {{ form_errors(profileForm.email) }}
             </div>
         </div>
     </div>
+
 
     <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
         <h2 class="text-xl font-semibold text-gray-900">Смена пароля</h2>
@@ -57,5 +87,29 @@
         </button>
     </div>
 
+
+    <div class="border-t border-gray-200 pt-8">
+        <h2 class="mb-2 text-xl font-semibold text-gray-900">Смена пароля</h2>
+        <p class="mb-6 text-sm text-gray-500">Заполняйте оба поля только если хотите изменить пароль.</p>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700">Текущий пароль</label>
+                {{ form_widget(profileForm.currentPassword, { attr: { class: 'block w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500' } }) }}
+                {{ form_errors(profileForm.currentPassword) }}
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700">Новый пароль</label>
+                {{ form_widget(profileForm.newPassword, { attr: { class: 'block w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500' } }) }}
+                {{ form_errors(profileForm.newPassword) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-2">
+        <button type="submit" class="inline-flex items-center rounded-xl bg-red-600 px-6 py-3 text-sm font-semibold text-white hover:bg-red-700">
+            Сохранить изменения
+        </button>
+    </div>
     {{ form_end(profileForm) }}
 </section>
