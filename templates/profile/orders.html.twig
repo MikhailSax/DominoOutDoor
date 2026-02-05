@@ -3,7 +3,7 @@
 {% block title %}Активность — личный кабинет{% endblock %}
 
 {% block body %}
-    <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <h1 class="mb-2 text-3xl font-bold text-gray-900">Активность и заказы</h1>
         <p class="mb-6 text-sm text-gray-600">История взаимодействий с сервисом и текущий статус аккаунта.</p>
 
@@ -25,7 +25,7 @@
                     <p><span class="font-semibold">Подтверждение email:</span>
                         <span class="{{ user.isVerified ? 'text-green-700' : 'text-yellow-700' }}">{{ user.isVerified ? 'Подтверждён' : 'Не подтверждён' }}</span>
                     </p>
-                    <p><span class="font-semibold">Роли:</span> {{ user.roles|join(', ') }}</p>
+                    <p><span class="font-semibold">Роли:</span> {{ user.roles|map(r => r|replace({'ROLE_': ''}))|join(', ') }}</p>
                     <p><span class="font-semibold">Последнее обновление:</span> {{ user.updatedAt ? user.updatedAt|date('d.m.Y H:i') : '—' }}</p>
                 </div>
             </article>
