@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Advertisement;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -62,11 +63,7 @@ class AdvertisementCrudController extends AbstractCrudController
             TextField::new('code', 'Код'),
             TextField::new('placeNumber', 'Номер места'),
             TextareaField::new('address', 'Адрес'),
-            TextField::new('sides', 'Стороны (через запятую)')
-                ->formatValue(static function ($value, Advertisement $entity) {
-                    return implode(', ', $entity->getSides());
-                })
-                ->onlyOnIndex(),
+            ArrayField::new('sides', 'Стороны')->onlyOnIndex(),
             AssociationField::new('type', 'Категория (тип рекламной продукции)'),
             TextField::new('categoryName', 'Категория рекламы')->onlyOnIndex(),
             NumberField::new('latitude', 'Широта')->setNumDecimals(6),

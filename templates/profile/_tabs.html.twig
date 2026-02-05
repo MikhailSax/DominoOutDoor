@@ -1,13 +1,11 @@
-{% set currentRoute = app.request.attributes.get('_route') %}
-
-<div class="mb-8 border-b border-gray-200">
-    <nav class="-mb-px flex flex-wrap gap-3 text-sm font-medium sm:gap-6" aria-label="Навигация личного кабинета">
+<div class="rounded-2xl border border-gray-200 bg-white p-2 shadow-sm">
+    <nav class="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <a href="{{ path('profile') }}"
-           class="rounded-t-lg px-3 py-2 transition {{ currentRoute == 'profile' ? 'border-b-2 border-red-600 text-red-600' : 'text-gray-500 hover:text-gray-700' }}">
+           class="rounded-xl px-4 py-3 text-center text-sm font-semibold transition {{ app.request.attributes.get('_route') == 'profile' ? 'bg-red-600 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' }}">
             Профиль
         </a>
         <a href="{{ path('profile.orders') }}"
-           class="rounded-t-lg px-3 py-2 transition {{ currentRoute == 'profile.orders' ? 'border-b-2 border-red-600 text-red-600' : 'text-gray-500 hover:text-gray-700' }}">
+           class="rounded-xl px-4 py-3 text-center text-sm font-semibold transition {{ app.request.attributes.get('_route') == 'profile.orders' ? 'bg-red-600 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' }}">
             Активность и заказы
         </a>
     </nav>
