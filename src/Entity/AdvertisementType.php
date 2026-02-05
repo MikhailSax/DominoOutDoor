@@ -62,4 +62,10 @@ class AdvertisementType
     {
         return $this->advertisements;
     }
+
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 }
