@@ -19,6 +19,7 @@ class AdvertisementBookingRepository extends ServiceEntityRepository
 
     public function hasOverlap(
         Advertisement $advertisement,
+        string $sideCode,
         \DateTimeImmutable $startDate,
         \DateTimeImmutable $endDate,
         ?int $excludeBookingId = null,
@@ -26,9 +27,11 @@ class AdvertisementBookingRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('b')
             ->select('COUNT(b.id)')
             ->andWhere('b.advertisement = :advertisement')
+            ->andWhere('b.sideCode = :sideCode')
             ->andWhere('b.startDate <= :endDate')
             ->andWhere('b.endDate >= :startDate')
             ->setParameter('advertisement', $advertisement)
+            ->setParameter('sideCode', mb_strtoupper(trim($sideCode)))
             ->setParameter('startDate', $startDate)
             ->setParameter('endDate', $endDate);
 
@@ -44,17 +47,26 @@ class AdvertisementBookingRepository extends ServiceEntityRepository
     /**
      * @return AdvertisementBooking[]
      */
-    public function findByAdvertisementAndMonth(Advertisement $advertisement, \DateTimeImmutable $monthStart, \DateTimeImmutable $monthEnd): array
-    {
-        return $this->createQueryBuilder('b')
+    public function findByAdvertisementAndMonth(
+        Advertisement $advertisement,
+        \DateTimeImmutable $monthStart,
+        \DateTimeImmutable $monthEnd,
+        ?string $sideCode = null,
+    ): array {
+        $qb = $this->createQueryBuilder('b')
             ->andWhere('b.advertisement = :advertisement')
             ->andWhere('b.startDate <= :monthEnd')
             ->andWhere('b.endDate >= :monthStart')
             ->setParameter('advertisement', $advertisement)
             ->setParameter('monthStart', $monthStart)
             ->setParameter('monthEnd', $monthEnd)
-            ->orderBy('b.startDate', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('b.startDate', 'ASC');
+
+        if ($sideCode !== null && trim($sideCode) !== '') {
+            $qb->andWhere('b.sideCode = :sideCode')
+                ->setParameter('sideCode', mb_strtoupper(trim($sideCode)));
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

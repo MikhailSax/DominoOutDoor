@@ -28,6 +28,7 @@ class AdvertisementBookingCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             AssociationField::new('advertisement', 'Конструкция'),
+            TextField::new('sideCode', 'Сторона')->setHelp('Укажите код стороны (например: A, B, C).'),
             TextField::new('clientName', 'Клиент'),
             DateField::new('startDate', 'Дата начала'),
             DateField::new('endDate', 'Дата окончания'),
@@ -53,21 +54,29 @@ class AdvertisementBookingCrudController extends AbstractCrudController
             return;
         }
 
-        if ($entityInstance->getAdvertisement() === null || $entityInstance->getStartDate() === null || $entityInstance->getEndDate() === null) {
-            throw new \InvalidArgumentException('Заполните конструкцию и обе даты бронирования.');
+        if ($entityInstance->getAdvertisement() === null || $entityInstance->getStartDate() === null || $entityInstance->getEndDate() === null || $entityInstance->getSideCode() === null) {
+            throw new \InvalidArgumentException('Заполните конструкцию, сторону и обе даты бронирования.');
         }
 
         if ($entityInstance->getEndDate() < $entityInstance->getStartDate()) {
             throw new \InvalidArgumentException('Дата окончания не может быть раньше даты начала.');
         }
 
+        $sideCode = mb_strtoupper(trim($entityInstance->getSideCode()));
+        $entityInstance->setSideCode($sideCode);
+
+        if (!in_array($sideCode, $entityInstance->getAdvertisement()->getSides(), true)) {
+            throw new \InvalidArgumentException('У выбранной конструкции нет указанной стороны.');
+        }
+
         if ($this->bookingRepository->hasOverlap(
             $entityInstance->getAdvertisement(),
+            $sideCode,
             $entityInstance->getStartDate(),
             $entityInstance->getEndDate(),
             $entityInstance->getId(),
         )) {
-            throw new \InvalidArgumentException('Этот период уже занят для выбранной рекламной конструкции.');
+            throw new \InvalidArgumentException('Этот период уже занят для выбранной стороны конструкции.');
         }
     }
 }
