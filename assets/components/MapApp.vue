@@ -1,5 +1,6 @@
 <template>
-    <div class="flex h-[calc(100vh-72px)] min-h-[680px] flex-col overflow-hidden bg-slate-100 text-slate-800 lg:flex-row">
+    <div
+        class="flex h-[calc(100vh-72px)] min-h-[680px] flex-col overflow-hidden bg-slate-100 text-slate-800 lg:flex-row">
         <aside class="w-full border-b border-slate-200 bg-white lg:w-[380px] lg:border-b-0 lg:border-r">
             <div class="flex h-full flex-col">
                 <div class="border-b border-slate-100 px-5 py-4">
@@ -15,7 +16,10 @@
                             class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         >
                             <option value="">Все типы продукции</option>
-                            <option v-for="item in productTypes" :key="item.id" :value="String(item.id)">{{ item.name }}</option>
+                            <option v-for="item in productTypes" :key="item.id" :value="String(item.id)">{{
+                                    item.name
+                                }}
+                            </option>
                         </select>
                     </div>
 
@@ -27,26 +31,35 @@
                             class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
                         >
                             <option value="">Все типы конструкций</option>
-                            <option v-for="item in constrTypes" :key="item.id" :value="String(item.id)">{{ item.name }}</option>
+                            <option v-for="item in constrTypes" :key="item.id" :value="String(item.id)">{{
+                                    item.name
+                                }}
+                            </option>
                         </select>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
                         <label class="text-sm">
                             <span class="mb-1 block text-slate-600">Свободно с</span>
-                            <input v-model="filters.bookingFrom" type="date" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm" />
+                            <input v-model="filters.bookingFrom" type="date"
+                                   class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"/>
                         </label>
                         <label class="text-sm">
                             <span class="mb-1 block text-slate-600">Свободно до</span>
-                            <input v-model="filters.bookingTo" type="date" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm" />
+                            <input v-model="filters.bookingTo" type="date"
+                                   class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"/>
                         </label>
                     </div>
 
                     <div class="flex gap-2">
-                        <button type="button" class="flex-1 rounded-xl border border-red-600 bg-white px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50" @click="resetFilters">
+                        <button type="button"
+                                class="flex-1 rounded-xl border border-red-600 bg-white px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+                                @click="resetFilters">
                             Сбросить
                         </button>
-                        <button type="button" class="flex-1 rounded-xl bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700" @click="applyFilters">
+                        <button type="button"
+                                class="flex-1 rounded-xl bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
+                                @click="applyFilters">
                             Подобрать
                         </button>
                     </div>
@@ -59,7 +72,8 @@
 
                 <div class="min-h-0 flex-1 overflow-y-auto p-3">
                     <div v-if="isLoadingObjects" class="p-4 text-sm text-slate-500">Загрузка объектов...</div>
-                    <div v-else-if="objects.length === 0" class="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-500">
+                    <div v-else-if="objects.length === 0"
+                         class="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-500">
                         По выбранным фильтрам ничего не найдено.
                     </div>
 
@@ -72,12 +86,15 @@
                         @click="focusObject(item.id)"
                     >
                         <div class="mb-1 flex items-start justify-between gap-3">
-                            <h3 class="line-clamp-2 text-sm font-semibold text-slate-900">{{ item.address || 'Адрес не указан' }}</h3>
+                            <h3 class="line-clamp-2 text-sm font-semibold text-slate-900">
+                                {{ item.address || 'Адрес не указан' }}</h3>
                             <span class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-600">#{{ item.id }}</span>
                         </div>
-                        <p class="text-xs text-slate-600">{{ item.category || 'Категория не указана' }} • {{ item.type || 'Тип не указан' }}</p>
+                        <p class="text-xs text-slate-600">{{ item.category || 'Категория не указана' }} •
+                            {{ item.type || 'Тип не указан' }}</p>
                         <p class="mt-1 text-xs text-slate-500">Стороны: {{ formatSides(item.sides) }}</p>
-                        <p class="mt-1 text-xs font-medium" :class="getItemStatus(item, bookingRange.from, bookingRange.to).busy ? 'text-red-600' : 'text-emerald-600'">
+                        <p class="mt-1 text-xs font-medium"
+                           :class="getItemStatus(item, bookingRange.from, bookingRange.to).busy ? 'text-red-600' : 'text-emerald-600'">
                             {{ getItemStatus(item, bookingRange.from, bookingRange.to).text }}
                         </p>
                     </button>
@@ -86,13 +103,16 @@
         </aside>
 
         <section class="relative min-h-[380px] flex-1 p-3 lg:p-5">
-            <div v-if="mapError" class="flex h-full items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-700">
+            <div v-if="mapError"
+                 class="flex h-full items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-700">
                 {{ mapError }}
             </div>
-            <div v-else-if="!isMapLoaded" class="flex h-full items-center justify-center rounded-2xl border border-slate-200 bg-white text-sm text-slate-500">
+            <div v-else-if="!isMapLoaded"
+                 class="flex h-full items-center justify-center rounded-2xl border border-slate-200 bg-white text-sm text-slate-500">
                 Загрузка карты...
             </div>
-            <div v-show="isMapLoaded" ref="mapContainer" class="h-full w-full rounded-2xl border-2 border-white shadow-lg"></div>
+            <div v-show="isMapLoaded" ref="mapContainer"
+                 class="h-full w-full rounded-2xl border-2 border-white shadow-lg"></div>
 
             <article
                 v-if="activeObject && activeSide"
@@ -132,26 +152,39 @@
                 <div class="space-y-4 p-5">
                     <div class="flex items-start justify-between gap-4">
                         <div>
-                            <h3 class="text-2xl leading-tight font-bold text-slate-900">{{ activeObject.address || 'Адрес не указан' }}</h3>
-                            <p class="mt-1 text-lg font-semibold tracking-wide text-slate-400">GID {{ activeObject.id }}</p>
+                            <h3 class="text-2xl leading-tight font-bold text-slate-900">
+                                {{ activeObject.address || 'Адрес не указан' }}</h3>
+                            <p class="mt-1 text-lg font-semibold tracking-wide text-slate-400">GID {{
+                                    activeObject.id
+                                }}</p>
                         </div>
-                        <a :href="`/api/advertisements/${activeObject.id}`" target="_blank" class="pt-1 text-base font-medium text-blue-600 hover:text-blue-700">
+                        <a :href="`/api/advertisements/${activeObject.id}`" target="_blank"
+                           class="pt-1 text-base font-medium text-blue-600 hover:text-blue-700">
                             Подробнее
                         </a>
                     </div>
 
                     <dl class="grid grid-cols-[1fr_auto] gap-x-5 gap-y-2 text-lg">
                         <dt class="border-b border-slate-200 pb-1 text-slate-600">Формат</dt>
-                        <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeObject.type || '—' }}</dd>
+                        <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">
+                            {{ activeObject.type || '—' }}
+                        </dd>
 
                         <dt class="border-b border-slate-200 pb-1 text-slate-600">Сторона</dt>
-                        <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeSide.code }}</dd>
+                        <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{
+                                activeSide.code
+                            }}
+                        </dd>
 
                         <dt class="text-slate-500">Прайс без НДС</dt>
-                        <dd class="text-right text-3xl font-extrabold text-slate-900">{{ formatPrice(activeSide.price) }}</dd>
+                        <dd class="text-right text-3xl font-extrabold text-slate-900">{{
+                                formatPrice(activeSide.price)
+                            }}
+                        </dd>
                     </dl>
 
-                    <p v-if="activeSideStatus" class="rounded-lg px-3 py-2 text-sm font-medium" :class="activeSideStatus.busy ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'">
+                    <p v-if="activeSideStatus" class="rounded-lg px-3 py-2 text-sm font-medium"
+                       :class="activeSideStatus.busy ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'">
                         {{ activeSideStatus.text }}
                     </p>
 
@@ -166,38 +199,49 @@
                 </div>
             </article>
 
-            <div v-if="isRequestModalOpen" class="absolute inset-0 z-30 flex items-center justify-center bg-slate-900/55 p-4">
+            <div v-if="isRequestModalOpen"
+                 class="absolute inset-0 z-30 flex items-center justify-center bg-slate-900/55 p-4">
                 <div class="w-full max-w-xl rounded-2xl bg-white p-5 shadow-2xl">
                     <div class="mb-4 flex items-start justify-between">
                         <div>
                             <h4 class="text-lg font-bold text-slate-900">Заявка на размещение</h4>
                             <p class="text-sm text-slate-500">{{ requestSummary }}</p>
                         </div>
-                        <button type="button" class="text-2xl text-slate-500 hover:text-slate-800" @click="closeRequestModal">×</button>
+                        <button type="button" class="text-2xl text-slate-500 hover:text-slate-800"
+                                @click="closeRequestModal">×
+                        </button>
                     </div>
 
                     <form class="space-y-3" @submit.prevent="submitRequest">
                         <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                             <label class="text-sm">
                                 <span class="mb-1 block text-slate-600">Ваше имя</span>
-                                <input v-model.trim="requestForm.name" required class="w-full rounded-lg border border-slate-300 px-3 py-2" />
+                                <input v-model.trim="requestForm.name" required
+                                       class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
                             </label>
                             <label class="text-sm">
                                 <span class="mb-1 block text-slate-600">Телефон</span>
-                                <input v-model.trim="requestForm.phone" required class="w-full rounded-lg border border-slate-300 px-3 py-2" />
+                                <input v-model.trim="requestForm.phone" required
+                                       class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
                             </label>
                         </div>
                         <label class="text-sm block">
                             <span class="mb-1 block text-slate-600">Комментарий</span>
-                            <textarea v-model.trim="requestForm.comment" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
+                            <textarea v-model.trim="requestForm.comment" rows="3"
+                                      class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
                         </label>
-                        <input v-model.trim="requestForm.website" type="text" class="hidden" />
+                        <input v-model.trim="requestForm.website" type="text" class="hidden"/>
 
-                        <p v-if="requestStatusMessage" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">{{ requestStatusMessage }}</p>
+                        <p v-if="requestStatusMessage" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">
+                            {{ requestStatusMessage }}</p>
 
                         <div class="flex gap-2">
-                            <button type="button" class="flex-1 rounded-lg border border-slate-300 py-2 text-sm font-semibold hover:bg-slate-50" @click="closeRequestModal">Отмена</button>
-                            <button type="submit" :disabled="isSubmittingRequest" class="flex-1 rounded-lg bg-red-600 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60">
+                            <button type="button"
+                                    class="flex-1 rounded-lg border border-slate-300 py-2 text-sm font-semibold hover:bg-slate-50"
+                                    @click="closeRequestModal">Отмена
+                            </button>
+                            <button type="submit" :disabled="isSubmittingRequest"
+                                    class="flex-1 rounded-lg bg-red-600 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60">
                                 {{ isSubmittingRequest ? 'Отправляем...' : 'Отправить заявку' }}
                             </button>
                         </div>
@@ -209,19 +253,19 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import {computed, onBeforeUnmount, onMounted, reactive, ref, watch} from 'vue'
 
 const props = defineProps({
-    filtersUrl: { type: String, required: true },
-    advertisementsUrl: { type: String, required: true },
-    productRequestsUrl: { type: String, required: true },
+    filtersUrl: {type: String, required: true},
+    advertisementsUrl: {type: String, required: true},
+    productRequestsUrl: {type: String, required: true},
 })
 
 // Состояние
 const productTypes = ref([])
 const constrTypes = ref([])
 const objects = ref([])
-const filters = reactive({ productType: '', constrTypeId: '', bookingFrom: '', bookingTo: '' })
+const filters = reactive({productType: '', constrTypeId: '', bookingFrom: '', bookingTo: ''})
 const isLoadingFilters = ref(false)
 const isLoadingObjects = ref(false)
 
@@ -234,7 +278,7 @@ const isLoadingCardDetails = ref(false)
 const isRequestModalOpen = ref(false)
 const isSubmittingRequest = ref(false)
 const requestStatusMessage = ref('')
-const requestForm = reactive({ name: '', phone: '', comment: '', website: '', startedAt: 0 })
+const requestForm = reactive({name: '', phone: '', comment: '', website: '', startedAt: 0})
 
 let map = null
 let placemarks = new Map()
@@ -243,8 +287,8 @@ let placemarks = new Map()
 const bookingRange = computed(() => {
     const from = parseDate(filters.bookingFrom)
     const to = parseDate(filters.bookingTo)
-    if (from && to && to < from) return { from: to, to: from }
-    return { from, to }
+    if (from && to && to < from) return {from: to, to: from}
+    return {from, to}
 })
 
 const filteredParams = computed(() => {
@@ -254,7 +298,7 @@ const filteredParams = computed(() => {
     return params
 })
 
-const activeObject = computed(() => 
+const activeObject = computed(() =>
     objects.value.find((item) => String(item.id) === String(activeObjectId.value)) || null
 )
 
@@ -293,7 +337,7 @@ function formatPrice(price) {
 function normalizeSideDetails(item) {
     if (item?.side_details?.length) return item.side_details
     const sides = Array.isArray(item?.sides) ? item.sides : []
-    return sides.map(code => ({ code: String(code).toUpperCase(), price: null, image_url: null }))
+    return sides.map(code => ({code: String(code).toUpperCase(), price: null, image_url: null}))
 }
 
 function getSideStatus(item, sideCode, fromDate, toDate) {
@@ -307,23 +351,24 @@ function getSideStatus(item, sideCode, fromDate, toDate) {
     })
 
     if (overlap) {
-        const d = parseDate(overlap.end_date); d.setDate(d.getDate() + 1)
-        return { busy: true, text: `Занята до ${d.toLocaleDateString('ru-RU')}` }
+        const d = parseDate(overlap.end_date);
+        d.setDate(d.getDate() + 1)
+        return {busy: true, text: `Занята до ${d.toLocaleDateString('ru-RU')}`}
     }
-    return { busy: false, text: 'Свободна' }
+    return {busy: false, text: 'Свободна'}
 }
 
 function getItemStatus(item, fromDate, toDate) {
     const sides = normalizeSideDetails(item)
     const statuses = sides.map(s => getSideStatus(item, s.code, fromDate, toDate))
-    return statuses.every(s => s.busy) 
-        ? { busy: true, text: 'Занята' } 
-        : { busy: false, text: 'Есть свободные стороны' }
+    return statuses.every(s => s.busy)
+        ? {busy: true, text: 'Занята'}
+        : {busy: false, text: 'Есть свободные стороны'}
 }
 
 // --- API ---
 async function fetchJson(url) {
-    const res = await fetch(url, { headers: { Accept: 'application/json' } })
+    const res = await fetch(url, {headers: {Accept: 'application/json'}})
     if (!res.ok) throw new Error(res.statusText)
     return res.json()
 }
@@ -331,17 +376,19 @@ async function fetchJson(url) {
 async function loadFilters() {
     isLoadingFilters.value = true
     try {
-        const data = await fetchJson(`${props.filtersUrl}${filters.productType ? '?productType='+filters.productType : ''}`)
+        const data = await fetchJson(`${props.filtersUrl}${filters.productType ? '?productType=' + filters.productType : ''}`)
         productTypes.value = data.productTypes || []
         constrTypes.value = data.constrTypes || []
-    } finally { isLoadingFilters.value = false }
+    } finally {
+        isLoadingFilters.value = false
+    }
 }
 
 async function loadAdvertisements() {
     isLoadingObjects.value = true
     try {
         const query = filteredParams.value.toString()
-        const data = await fetchJson(`${props.advertisementsUrl}${query ? '?'+query : ''}`)
+        const data = await fetchJson(`${props.advertisementsUrl}${query ? '?' + query : ''}`)
         objects.value = (data || []).map(item => ({
             ...item,
             side_details: normalizeSideDetails(item),
@@ -349,7 +396,9 @@ async function loadAdvertisements() {
             bookings: item.bookings || []
         }))
         syncMapPlacemarks()
-    } finally { isLoadingObjects.value = false }
+    } finally {
+        isLoadingObjects.value = false
+    }
 }
 
 // --- Map Logic ---
@@ -362,7 +411,7 @@ function syncMapPlacemarks() {
         if (!item.location?.latitude) return
         const p = new window.ymaps.Placemark(
             [item.location.latitude, item.location.longitude],
-            {}, { preset: 'islands#redIcon' }
+            {}, {preset: 'islands#redIcon'}
         )
         p.events.add('click', () => focusObject(item.id))
         placemarks.set(item.id, p)
@@ -374,30 +423,52 @@ async function focusObject(id) {
     activeObjectId.value = id
     const item = objects.value.find(o => o.id === id)
     activeSideCode.value = item?.sides[0] || ''
-    if (map) map.setCenter([item.location.latitude, item.location.longitude], 15, { duration: 300 })
+    if (map) map.setCenter([item.location.latitude, item.location.longitude], 15, {duration: 300})
 }
 
 // --- Actions ---
-function applyFilters() { activeObjectId.value = null; loadAdvertisements() }
-function resetFilters() { Object.assign(filters, { productType: '', constrTypeId: '', bookingFrom: '', bookingTo: '' }); applyFilters() }
-function selectSide(code) { activeSideCode.value = code }
-function closeCard() { activeObjectId.value = null }
-function openRequestModal() { requestForm.startedAt = Date.now(); isRequestModalOpen.value = true }
-function closeRequestModal() { isRequestModalOpen.value = false }
+function applyFilters() {
+    activeObjectId.value = null;
+    loadAdvertisements()
+}
+
+function resetFilters() {
+    Object.assign(filters, {productType: '', constrTypeId: '', bookingFrom: '', bookingTo: ''});
+    applyFilters()
+}
+
+function selectSide(code) {
+    activeSideCode.value = code
+}
+
+function closeCard() {
+    activeObjectId.value = null
+}
+
+function openRequestModal() {
+    requestForm.startedAt = Date.now();
+    isRequestModalOpen.value = true
+}
+
+function closeRequestModal() {
+    isRequestModalOpen.value = false
+}
 
 async function submitRequest() {
     isSubmittingRequest.value = true
     try {
         await fetch(props.productRequestsUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...requestForm, advertisementId: activeObject.value.id, side: activeSide.value.code })
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({...requestForm, advertisementId: activeObject.value.id, side: activeSide.value.code})
         })
         requestStatusMessage.value = 'Заявка успешно отправлена!'
         setTimeout(closeRequestModal, 1500)
     } catch {
         requestStatusMessage.value = 'Ошибка при отправке.'
-    } finally { isSubmittingRequest.value = false }
+    } finally {
+        isSubmittingRequest.value = false
+    }
 }
 
 onMounted(async () => {
@@ -406,7 +477,7 @@ onMounted(async () => {
     const script = document.createElement('script')
     script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU'
     script.onload = () => window.ymaps.ready(() => {
-        map = new window.ymaps.Map(mapContainer.value, { center: [55.75, 37.61], zoom: 10 })
+        map = new window.ymaps.Map(mapContainer.value, {center: [55.75, 37.61], zoom: 10})
         isMapLoaded.value = true
         syncMapPlacemarks()
     })
@@ -414,7 +485,10 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => map?.destroy())
-watch(() => filters.productType, () => { filters.constrTypeId = ''; loadFilters() })
+watch(() => filters.productType, () => {
+    filters.constrTypeId = '';
+    loadFilters()
+})
 </script>
 
 <style scoped>
