@@ -164,6 +164,10 @@
                         <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeObject.type }}</dd>
                         <dt class="border-b border-slate-200 pb-1 text-slate-600">Сторона</dt>
                         <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeSide.code }}</dd>
+                        <dt class="border-b border-slate-200 pb-1 text-slate-600">Описание стороны</dt>
+                        <dd class="border-b border-slate-200 pb-1 text-right text-base font-medium text-slate-700">
+                            {{ activeSide.description || 'Описание пока не заполнено' }}
+                        </dd>
                         <dt class="text-slate-500">Прайс без НДС</dt>
                         <dd class="text-right text-3xl font-extrabold text-slate-900">{{ formatPrice(activeSide.price) }}</dd>
                     </dl>
@@ -175,8 +179,7 @@
 
                     <button
                         type="button"
-                        class="w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-slate-400"
-                        :disabled="activeSideStatus?.busy"
+                        class="w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white hover:bg-red-700"
                         @click="openRequestModal"
                     >
                         Оставить заявку на экран
@@ -417,9 +420,13 @@ async function submitRequest() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                ...requestForm,
+                website: '',
+                formStartedAt: requestForm.startedAt,
                 advertisementId: activeObject.value.id,
-                side: activeSide.value.code
+                side: activeSide.value.code,
+                contactName: requestForm.name,
+                contactPhone: requestForm.phone,
+                comment: requestForm.comment || null,
             })
         })
         if (response.ok) {
