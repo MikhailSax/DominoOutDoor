@@ -25,17 +25,14 @@ class AdvertisementController extends AbstractController
     #[Route('/advertisements', name: 'advertisements_list', methods: ['GET'])]
     public function list(Request $request, AdvertisementRepository $repository): JsonResponse
     {
-        $ads = $repository->findForApi();
+        $ads = $repository->findAll();
         $category = $request->query->get('productType');
         $type = $request->query->get('constrTypeId');
 
         if (!empty($category) || !empty($type)) {
-            $ads = $repository->findByFiltersForApi(
-                !empty($category) ? (int) $category : null,
-                !empty($type) ? (int) $type : null,
-            );
+            $ads = $repository->findByFilters((int)$category, $type);;
+            return $this->json($this->advertisementService->getData($ads));
         }
-
         return $this->json($this->advertisementService->getData($ads));
     }
 
@@ -112,13 +109,11 @@ class AdvertisementController extends AbstractController
                 'endDate' => $booking->getEndDate()?->format('Y-m-d'),
             ], $ad->getBookings()->toArray()),
 
-            'side_details' => array_map(static fn ($side) => [
-                'code' => $side->getCode(),
-                'description' => $side->getDescription(),
-                'price' => $side->getPrice(),
-                'image' => $side->getImage(),
-                'image_url' => $side->getImage() ? '/uploads/advertisements/' . ltrim($side->getImage(), '/') : null,
-            ], $ad->getSideItems()->toArray()),
+            // 🔥 временно генерируем цену (или добавь в БД)
+            'price' => random_int(15000, 50000),
+
+            // район можно вычислять/присвоить вручную
+            'areaId' => random_int(1, 5)
         ];
     }
 }
