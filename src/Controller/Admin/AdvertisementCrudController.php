@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Advertisement;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField; // Добавлен импорт
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -37,7 +38,11 @@ class AdvertisementCrudController extends AbstractCrudController
             TextField::new('code', 'Код'),
             TextField::new('placeNumber', 'Номер места'),
             TextareaField::new('address', 'Адрес')->hideOnIndex(),
-            \EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField::new('sides', 'Стороны')->onlyOnIndex(),
+            
+            // Отображение списка сторон в таблице (Index)
+            ArrayField::new('sides', 'Стороны')->onlyOnIndex(),
+            
+            // Выбор сторон в формах создания и редактирования
             ChoiceField::new('sides', 'Стороны')
                 ->setChoices([
                     'A' => 'A',
@@ -48,6 +53,7 @@ class AdvertisementCrudController extends AbstractCrudController
                 ->allowMultipleChoices()
                 ->renderExpanded(false)
                 ->onlyOnForms(),
+
             AssociationField::new('type', 'Тип рекламной продукции'),
             TextField::new('categoryName', 'Категория')->onlyOnIndex(),
             NumberField::new('latitude', 'Широта')->setNumDecimals(6),
