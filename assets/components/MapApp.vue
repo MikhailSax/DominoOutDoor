@@ -262,7 +262,7 @@ let placemarks = new Map()
 const filteredParams = computed(() => {
     const params = new URLSearchParams()
     if (filters.productType) params.append('productType', filters.productType)
-    if (filters.constrTypeId) params.append('constrTypeId', filters.constrTypeId)
+    if (ilters.constrTypeId) params.append('constrTypeId', filters.constrTypeId)
     return params
 })
 
@@ -366,7 +366,6 @@ function parseDate(value) {
     const date = new Date(`${value}T00:00:00`)
     return Number.isNaN(date.getTime()) ? null : date
 }
-
 
 function overlapsRange(startDate, endDate, fromDate, toDate) {
     const start = parseDate(startDate)
@@ -544,7 +543,6 @@ async function submitRequest() {
         isSubmittingRequest.value = false
     }
 }
-
 
 // --- Lifecycle ---
 onMounted(async () => {
