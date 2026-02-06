@@ -280,11 +280,7 @@ const activeSide = computed(() => {
 const bookingRange = computed(() => {
     const from = parseDate(filters.bookingFrom)
     const to = parseDate(filters.bookingTo)
-
-    if (from && to && to < from) {
-        return { from: to, to: from }
-    }
-
+    if (from && to && to < from) return { from: to, to: from }
     return { from, to }
 })
 
@@ -335,6 +331,16 @@ function normalizeSideDetails(item) {
     })).filter(s => s.code).length > 0 ? rawSides.map(code => ({ code: String(code).trim().toUpperCase() })) : [{ code: '—' }]
 }
 
+function normalizeBookings(bookings) {
+    if (!Array.isArray(bookings)) return []
+    return bookings.map((booking) => ({
+        ...booking,
+        side_code: String(booking?.side_code ?? booking?.sideCode ?? '').trim().toUpperCase(),
+        start_date: booking?.start_date ?? booking?.startDate ?? null,
+        end_date: booking?.end_date ?? booking?.endDate ?? null,
+    })).filter((booking) => booking.side_code && booking.start_date && booking.end_date)
+}
+
 function normalizeAdvertisement(item) {
     const typeName = typeof item?.type === 'object' ? item?.type?.name : item?.type
     const categoryName = typeof item?.type === 'object' ? item?.type?.category : item?.category
@@ -350,33 +356,19 @@ function normalizeAdvertisement(item) {
     }
 }
 
-function normalizeBookings(bookings) {
-    if (!Array.isArray(bookings)) return []
-
-    return bookings.map((booking) => ({
-        ...booking,
-        side_code: String(booking?.side_code ?? booking?.sideCode ?? '').trim().toUpperCase(),
-        start_date: booking?.start_date ?? booking?.startDate ?? null,
-        end_date: booking?.end_date ?? booking?.endDate ?? null,
-    })).filter((booking) => booking.side_code && booking.start_date && booking.end_date)
-}
-
 function parseDate(value) {
     if (!value) return null
     const date = new Date(`${value}T00:00:00`)
     return Number.isNaN(date.getTime()) ? null : date
 }
 
-
 function overlapsRange(startDate, endDate, fromDate, toDate) {
     const start = parseDate(startDate)
     const end = parseDate(endDate)
     if (!start || !end) return false
-
     const from = fromDate ? new Date(fromDate) : new Date()
     from.setHours(0, 0, 0, 0)
     const to = toDate ? new Date(toDate) : new Date(from)
-
     return start <= to && end >= from
 }
 
@@ -387,9 +379,7 @@ function getSideBookings(item, sideCode) {
 
 function getSideStatus(item, sideCode, fromDate = null, toDate = null) {
     const sideBookings = getSideBookings(item, sideCode)
-    if (sideBookings.length === 0) {
-        return { busy: false, text: 'Свободна' }
-    }
+    if (sideBookings.length === 0) return { busy: false, text: 'Свободна' }
 
     const overlapping = sideBookings.find((booking) => overlapsRange(booking.start_date, booking.end_date, fromDate, toDate))
     if (overlapping) {
@@ -400,7 +390,6 @@ function getSideStatus(item, sideCode, fromDate = null, toDate = null) {
             text: nextDay ? `Занята, свободна с ${nextDay.toLocaleDateString('ru-RU')}` : 'Занята',
         }
     }
-
     return { busy: false, text: 'Свободна' }
 }
 
@@ -416,15 +405,14 @@ function getItemStatus(item, fromDate, toDate) {
             .map((status) => status.text.match(/с (.+)$/)?.[1] || null)
             .filter(Boolean)
             .sort()
-
-        if (busyDates.length > 0) {
-            return { busy: true, text: `Конструкция занята, свободна с ${busyDates[0]}` }
-        }
-
+        if (busyDates.length > 0) return { busy: true, text: `Конструкция занята, свободна с ${busyDates[0]}` }
         return { busy: true, text: 'Конструкция занята' }
     }
-
     return { busy: false, text: 'Есть свободные стороны' }
+}
+
+function hasAvailableSideInRange(item, fromDate, toDate) {
+    return normalizeSideDetails(item).some((side) => !getSideStatus(item, side.code, fromDate, toDate).busy)
 }
 
 // --- API ---
@@ -451,7 +439,8 @@ async function loadAdvertisements() {
         const url = query ? `${props.advertisementsUrl}?${query}` : props.advertisementsUrl
         const data = await fetchJson(url)
         const normalized = (Array.isArray(data) ? data : []).map(normalizeAdvertisement)
-        objects.value = normalized
+        // Фильтруем объекты, оставляя только те, где есть хоть одна свободная сторона в диапазоне
+        objects.value = normalized.filter((item) => hasAvailableSideInRange(item, bookingRange.value.from, bookingRange.value.to))
         syncMapPlacemarks()
     } finally { isLoadingObjects.value = false }
 }
@@ -563,7 +552,6 @@ async function submitRequest() {
         isSubmittingRequest.value = false
     }
 }
-
 
 // --- Lifecycle ---
 onMounted(async () => {
