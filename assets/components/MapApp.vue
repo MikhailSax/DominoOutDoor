@@ -34,14 +34,14 @@
                     <div class="flex gap-2">
                         <button
                             type="button"
-                            class="flex-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                            class="flex-1 rounded-xl border border-red-600 bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
                             @click="resetFilters"
                         >
                             Сбросить
                         </button>
                         <button
                             type="button"
-                            class="flex-1 rounded-xl border border-blue-600 bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                            class="flex-1 rounded-xl border border-red-600 bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
                             @click="applyFilters"
                         >
                             Подобрать
@@ -65,7 +65,7 @@
                         :key="item.id"
                         type="button"
                         class="mb-2 w-full rounded-xl border bg-white p-4 text-left shadow-sm transition hover:shadow-md"
-                        :class="activeObjectId === item.id ? 'border-blue-400 ring-2 ring-blue-100' : 'border-slate-200'"
+                        :class="activeObjectId === item.id ? 'border-red-400 ring-2 ring-red-100' : 'border-slate-200'"
                         @click="focusObject(item.id)"
                     >
                         <div class="mb-1 flex items-start justify-between gap-3">
@@ -99,7 +99,7 @@
                             :key="side.code"
                             type="button"
                             class="min-w-[42px] rounded-full px-3 py-1.5 text-base font-semibold"
-                            :class="activeSide.code === side.code ? 'bg-blue-600 text-white' : 'text-blue-700 hover:bg-blue-50'"
+                            :class="activeSide.code === side.code ? 'bg-red-600 text-white' : 'text-red-700 hover:bg-red-50'"
                             @click="selectSide(side.code)"
                         >
                             {{ side.code }}
@@ -157,7 +157,7 @@
 
                     <button
                         type="button"
-                        class="w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+                        class="w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white hover:bg-red-700"
                         @click="openRequestModal"
                     >
                         Оставить заявку на экран
@@ -195,8 +195,8 @@
                         <p v-if="requestStatusMessage" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">{{ requestStatusMessage }}</p>
 
                         <div class="flex gap-2">
-                            <button type="button" class="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" @click="closeRequestModal">Отмена</button>
-                            <button type="submit" :disabled="isSubmittingRequest" class="flex-1 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white disabled:opacity-60">
+                            <button type="button" class="flex-1 rounded-lg border border-red-600 bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-red-700" @click="closeRequestModal">Отмена</button>
+                            <button type="submit" :disabled="isSubmittingRequest" class="flex-1 rounded-lg bg-red-600 px-3 py-2 text-sm font-semibold text-white disabled:opacity-60 hover:bg-red-700">
                                 {{ isSubmittingRequest ? 'Отправляем...' : 'Отправить заявку' }}
                             </button>
                         </div>
