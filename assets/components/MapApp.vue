@@ -95,7 +95,7 @@
                 <div class="relative">
                     <div class="absolute left-4 top-4 z-10 flex rounded-full bg-white p-1 shadow-lg">
                         <button
-                            v-for="side in activeObject.side_details"
+                            v-for="side in normalizeSideDetails(activeObject)"
                             :key="side.code"
                             type="button"
                             class="min-w-[42px] rounded-full px-3 py-1.5 text-base font-semibold"
@@ -393,8 +393,17 @@ async function focusObject(objectId) {
 }
 
 // --- Actions ---
-function resetFilters() { Object.assign(filters, { productType: '', constrTypeId: '' }); applyFilters() }
-function applyFilters() { activeObjectId.value = null; loadFilters().then(loadAdvertisements) }
+function resetFilters() { 
+    filters.productType = ''
+    filters.constrTypeId = ''
+    applyFilters() 
+}
+
+function applyFilters() { 
+    activeObjectId.value = null
+    loadFilters().then(loadAdvertisements) 
+}
+
 function selectSide(code) { activeSideCode.value = code }
 function closeCard() { activeObjectId.value = null }
 function openRequestModal() { requestStatusMessage.value = ''; isRequestModalOpen.value = true }
@@ -403,6 +412,7 @@ function closeRequestModal() { isRequestModalOpen.value = false }
 async function submitRequest() {
     if (!activeObject.value || !activeSide.value) return
     isSubmittingRequest.value = true
+    
     try {
         const payload = {
             createdAt: new Date().toISOString(),
@@ -418,8 +428,15 @@ async function submitRequest() {
         window.location.href = `mailto:russ-support@rwb.ru?subject=Заявка&body=${encodeURIComponent(message)}`
         
         requestStatusMessage.value = 'Заявка подготовлена!'
-        setTimeout(() => { isRequestModalOpen.value = false; Object.assign(requestForm, { name: '', phone: '', comment: '' }) }, 1500)
-    } finally { isSubmittingRequest.value = false }
+        setTimeout(() => { 
+            isRequestModalOpen.value = false
+            requestForm.name = ''
+            requestForm.phone = ''
+            requestForm.comment = ''
+        }, 1500)
+    } finally { 
+        isSubmittingRequest.value = false 
+    }
 }
 
 // --- Lifecycle ---
