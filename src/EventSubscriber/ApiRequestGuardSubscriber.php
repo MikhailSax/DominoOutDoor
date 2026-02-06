@@ -44,12 +44,17 @@ class ApiRequestGuardSubscriber implements EventSubscriberInterface
         $referer = $request->headers->get('Referer');
         $baseHost = $this->extractHost($this->appBaseUrl);
 
-        if ($baseHost === null) {
+        $allowedHosts = array_values(array_unique(array_filter([
+            $baseHost,
+            $request->getHost(),
+        ])));
+
+        if ($allowedHosts === []) {
             return;
         }
 
         $originHost = $this->extractHost($origin);
-        if ($originHost !== null && $originHost !== $baseHost) {
+        if ($originHost !== null && !in_array($originHost, $allowedHosts, true)) {
             $event->setResponse(new JsonResponse([
                 'error' => 'forbidden_origin',
                 'message' => 'Доступ к API разрешён только с основного сайта.',
@@ -60,7 +65,7 @@ class ApiRequestGuardSubscriber implements EventSubscriberInterface
 
         if ($originHost === null && $referer !== null) {
             $refererHost = $this->extractHost($referer);
-            if ($refererHost !== null && $refererHost !== $baseHost) {
+            if ($refererHost !== null && !in_array($refererHost, $allowedHosts, true)) {
                 $event->setResponse(new JsonResponse([
                     'error' => 'forbidden_referer',
                     'message' => 'Доступ к API разрешён только с основного сайта.',
