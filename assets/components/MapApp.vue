@@ -95,7 +95,7 @@
                 <div class="relative">
                     <div class="absolute left-4 top-4 z-10 flex rounded-full bg-white p-1 shadow">
                         <button
-                            v-for="side in activeObject.side_details"
+                            v-for="side in normalizeSideDetails(activeObject)"
                             :key="side.code"
                             type="button"
                             class="min-w-9 rounded-full px-3 py-1 text-lg font-semibold"
@@ -197,14 +197,14 @@ const filteredParams = computed(() => {
     return params
 })
 
-const activeObject = computed(() => objects.value.find((item) => item.id === activeObjectId.value) || null)
+const activeObject = computed(() => objects.value.find((item) => String(item.id) === String(activeObjectId.value)) || null)
 
 const activeSide = computed(() => {
     if (!activeObject.value) {
         return null
     }
 
-    const sides = Array.isArray(activeObject.value.side_details) ? activeObject.value.side_details : []
+    const sides = normalizeSideDetails(activeObject.value)
     if (sides.length === 0) {
         return null
     }
@@ -235,18 +235,48 @@ function formatPrice(price) {
 
 function normalizeSideDetails(item) {
     const details = Array.isArray(item.side_details) ? item.side_details : []
-    if (details.length > 0) {
-        return details
+    const normalizedDetails = details
+        .map((side) => ({
+            code: String(side?.code || '').trim().toUpperCase(),
+            description: side?.description ?? null,
+            price: side?.price ?? null,
+            image: side?.image ?? null,
+            image_url: side?.image_url ?? null,
+        }))
+        .filter((side) => side.code)
+
+    if (normalizedDetails.length > 0) {
+        return normalizedDetails
     }
 
-    const sides = Array.isArray(item.sides) ? item.sides : []
-    return sides.map((code) => ({
-        code,
-        description: null,
+    const rawSides = Array.isArray(item.sides)
+        ? item.sides
+        : typeof item.sides === 'string' && item.sides.length > 0
+            ? item.sides.split(',')
+            : []
+
+    const normalizedFromSides = rawSides
+        .map((code) => String(code || '').trim().toUpperCase())
+        .filter(Boolean)
+        .map((code) => ({
+            code,
+            description: null,
+            price: null,
+            image: null,
+            image_url: null,
+        }))
+
+    if (normalizedFromSides.length > 0) {
+        return normalizedFromSides
+    }
+
+    return [{
+        code: '—',
+        description: item?.address ? `Конструкция по адресу: ${item.address}` : null,
         price: null,
         image: null,
         image_url: null,
-    }))
+    }]
 }
 
 async function fetchJson(url) {
@@ -384,8 +414,8 @@ function syncMapPlacemarks() {
 
 function focusObject(objectId) {
     activeObjectId.value = objectId
-    const item = objects.value.find((obj) => obj.id === objectId)
-    activeSideCode.value = item?.side_details?.[0]?.code || ''
+    const item = objects.value.find((obj) => String(obj.id) === String(objectId))
+    activeSideCode.value = normalizeSideDetails(item || {})[0]?.code || ''
 
     const placemark = placemarks.get(objectId)
     if (!placemark || !map) {
