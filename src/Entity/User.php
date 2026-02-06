@@ -37,7 +37,7 @@ class User implements UserInterface, PasswordUpgraderInterface, PasswordAuthenti
     private ?string $phone = null;
 
     #[ORM\Column(type: 'json')]
-    private array $roles = ['ROLE_ADMIN'];
+    private array $roles = ['ROLE_USER'];
 
     #[ORM\Column(type: 'string')]
     private string $password = '';
