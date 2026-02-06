@@ -122,7 +122,8 @@
                 </div>
 
                 <div class="space-y-4 p-5">
-                    <p v-if="isLoadingCardDetails" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-500">Загружаем данные из карточки...</p>
+                    <p v-if="isLoadingCardDetails" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-500">Загружаем данные из карточки в админке...</p>
+                    
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <h3 class="text-3xl leading-tight font-bold text-slate-900">{{ activeObject.address || 'Адрес не указан' }}</h3>
@@ -210,14 +211,8 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 
 const props = defineProps({
-    filtersUrl: {
-        type: String,
-        required: true,
-    },
-    advertisementsUrl: {
-        type: String,
-        required: true,
-    },
+    filtersUrl: { type: String, required: true },
+    advertisementsUrl: { type: String, required: true },
 })
 
 const productTypes = ref([])
@@ -236,11 +231,7 @@ const isLoadingCardDetails = ref(false)
 const isRequestModalOpen = ref(false)
 const isSubmittingRequest = ref(false)
 const requestStatusMessage = ref('')
-const requestForm = reactive({
-    name: '',
-    phone: '',
-    comment: '',
-})
+const requestForm = reactive({ name: '', phone: '', comment: '' })
 
 let map = null
 let placemarks = new Map()
@@ -252,9 +243,7 @@ const filteredParams = computed(() => {
     return params
 })
 
-const activeObject = computed(() =>
-    objects.value.find((item) => String(item.id) === String(activeObjectId.value)) || null
-)
+const activeObject = computed(() => objects.value.find((item) => String(item.id) === String(activeObjectId.value)) || null)
 
 const activeSide = computed(() => {
     if (!activeObject.value) return null
@@ -474,23 +463,10 @@ async function focusObject(objectId) {
     map.setCenter(placemark.geometry.getCoordinates(), 16, { duration: 300 })
 }
 
-function selectSide(code) {
-    activeSideCode.value = code
-}
-
-function closeCard() {
-    activeObjectId.value = null
-    activeSideCode.value = ''
-}
-
-function openRequestModal() {
-    requestStatusMessage.value = ''
-    isRequestModalOpen.value = true
-}
-
-function closeRequestModal() {
-    isRequestModalOpen.value = false
-}
+function selectSide(code) { activeSideCode.value = code }
+function closeCard() { activeObjectId.value = null; activeSideCode.value = '' }
+function openRequestModal() { requestStatusMessage.value = ''; isRequestModalOpen.value = true }
+function closeRequestModal() { isRequestModalOpen.value = false }
 
 async function submitRequest() {
     if (!activeObject.value || !activeSide.value) {
@@ -532,7 +508,7 @@ async function submitRequest() {
 
         window.location.href = `mailto:russ-support@rwb.ru?subject=${encodeURIComponent('Заявка на экран')}&body=${encodeURIComponent(message)}`
 
-        requestStatusMessage.value = 'Заявка сохранена и подготовлена к отправке.'
+        requestStatusMessage.value = 'Заявка сохранена и подготовлена к отправке в почтовом клиенте.'
         requestForm.name = ''
         requestForm.phone = ''
         requestForm.comment = ''
@@ -542,7 +518,7 @@ async function submitRequest() {
         }, 800)
     } catch (error) {
         console.error('Ошибка отправки заявки', error)
-        requestStatusMessage.value = 'Не удалось отправить заявку.'
+        requestStatusMessage.value = 'Не удалось отправить заявку. Попробуйте еще раз.'
     } finally {
         isSubmittingRequest.value = false
     }
