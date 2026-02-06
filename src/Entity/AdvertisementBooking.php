@@ -17,6 +17,9 @@ class AdvertisementBooking
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Advertisement $advertisement = null;
 
+    #[ORM\Column(length: 10)]
+    private ?string $sideCode = null;
+
     #[ORM\Column(length: 255)]
     private ?string $clientName = null;
 
@@ -42,6 +45,18 @@ class AdvertisementBooking
     public function setAdvertisement(?Advertisement $advertisement): static
     {
         $this->advertisement = $advertisement;
+
+        return $this;
+    }
+
+    public function getSideCode(): ?string
+    {
+        return $this->sideCode;
+    }
+
+    public function setSideCode(string $sideCode): static
+    {
+        $this->sideCode = mb_strtoupper(trim($sideCode));
 
         return $this;
     }

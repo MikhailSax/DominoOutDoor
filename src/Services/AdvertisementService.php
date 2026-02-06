@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entity\Advertisement;
+use App\Entity\AdvertisementBooking;
 use App\Entity\AdvertisementSide;
 
 class AdvertisementService
@@ -34,6 +35,13 @@ class AdvertisementService
                     'latitude' => $item->getLocation()?->getLatitude(),
                     'longitude' => $item->getLocation()?->getLongitude(),
                 ],
+                'bookings' => array_map(static fn (AdvertisementBooking $booking): array => [
+                    'id' => $booking->getId(),
+                    'side_code' => $booking->getSideCode(),
+                    'client_name' => $booking->getClientName(),
+                    'start_date' => $booking->getStartDate()?->format('Y-m-d'),
+                    'end_date' => $booking->getEndDate()?->format('Y-m-d'),
+                ], $item->getBookings()->toArray()),
             ];
         }, $ads);
     }
@@ -67,6 +75,7 @@ class AdvertisementService
                 'latitude' => $row['latitude'] ?? null,
                 'longitude' => $row['longitude'] ?? null,
             ],
+            'bookings' => [],
         ];
     }
 

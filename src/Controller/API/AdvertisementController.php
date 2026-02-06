@@ -27,14 +27,17 @@ class AdvertisementController extends AbstractController
     #[Route('/advertisements', name: 'advertisements_list', methods: ['GET'])]
     public function list(Request $request, AdvertisementRepository $repository): JsonResponse
     {
-        $ads = $repository->findAll();
         $category = $request->query->get('productType');
         $type = $request->query->get('constrTypeId');
 
         if (!empty($category) || !empty($type)) {
-            $ads = $repository->findByFilters((int)$category, $type);;
+            $ads = $repository->findByFiltersForApi((int) $category, (int) $type);
+
             return $this->json($this->advertisementService->getData($ads));
         }
+
+        $ads = $repository->findForApi();
+
         return $this->json($this->advertisementService->getData($ads));
     }
 
@@ -62,6 +65,27 @@ class AdvertisementController extends AbstractController
         $contactPhone = trim((string) ($payload['contactPhone'] ?? ''));
         $comment = isset($payload['comment']) ? trim((string) $payload['comment']) : null;
 
+
+        $honeypot = trim((string) ($payload['website'] ?? ''));
+        $formStartedAt = (int) ($payload['formStartedAt'] ?? 0);
+
+        if ($honeypot !== '') {
+            return $this->json(['message' => 'Запрос отклонён.'], 422);
+        }
+
+        $nowMs = (int) floor(microtime(true) * 1000);
+        if ($formStartedAt > 0 && $nowMs - $formStartedAt < 2500) {
+            return $this->json(['message' => 'Пожалуйста, отправьте форму чуть позже.'], 429);
+        }
+
+        $session = $request->hasSession() ? $request->getSession() : null;
+        if ($session !== null) {
+            $lastRequestAt = (int) $session->get('product_request_last_at', 0);
+            if ($lastRequestAt > 0 && (time() - $lastRequestAt) < 20) {
+                return $this->json(['message' => 'Слишком частые отправки. Повторите через несколько секунд.'], 429);
+            }
+        }
+
         if ($advertisementId <= 0 || $sideCode === '' || $contactName === '' || $contactPhone === '') {
             return $this->json(['message' => 'Заполните конструкцию, сторону и контактные данные.'], 422);
         }
@@ -85,6 +109,10 @@ class AdvertisementController extends AbstractController
 
         $entityManager->persist($productRequest);
         $entityManager->flush();
+
+        if (isset($session) && $session !== null) {
+            $session->set('product_request_last_at', time());
+        }
 
         return $this->json(['message' => 'Заявка отправлена.', 'id' => $productRequest->getId()], 201);
     }

@@ -31,17 +31,28 @@
                         </select>
                     </div>
 
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="text-sm">
+                            <span class="mb-1 block text-slate-600">Свободно с</span>
+                            <input v-model="filters.bookingFrom" type="date" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm" />
+                        </label>
+                        <label class="text-sm">
+                            <span class="mb-1 block text-slate-600">Свободно до</span>
+                            <input v-model="filters.bookingTo" type="date" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm" />
+                        </label>
+                    </div>
+
                     <div class="flex gap-2">
                         <button
                             type="button"
-                            class="flex-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                            class="flex-1 rounded-xl border border-red-600 bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
                             @click="resetFilters"
                         >
                             Сбросить
                         </button>
                         <button
                             type="button"
-                            class="flex-1 rounded-xl border border-blue-600 bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                            class="flex-1 rounded-xl border border-red-600 bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
                             @click="applyFilters"
                         >
                             Подобрать
@@ -65,7 +76,7 @@
                         :key="item.id"
                         type="button"
                         class="mb-2 w-full rounded-xl border bg-white p-4 text-left shadow-sm transition hover:shadow-md"
-                        :class="activeObjectId === item.id ? 'border-blue-400 ring-2 ring-blue-100' : 'border-slate-200'"
+                        :class="activeObjectId === item.id ? 'border-red-400 ring-2 ring-red-100' : 'border-slate-200'"
                         @click="focusObject(item.id)"
                     >
                         <div class="mb-1 flex items-start justify-between gap-3">
@@ -74,6 +85,9 @@
                         </div>
                         <p class="text-xs text-slate-600">{{ item.category || 'Категория не указана' }} • {{ item.type || 'Тип не указан' }}</p>
                         <p class="mt-1 text-xs text-slate-500">Стороны: {{ formatSides(item.sides) }}</p>
+                        <p class="mt-1 text-xs font-medium" :class="getItemStatus(item, bookingRange.from, bookingRange.to).busy ? 'text-red-600' : 'text-emerald-600'">
+                            {{ getItemStatus(item, bookingRange.from, bookingRange.to).text }}
+                        </p>
                     </button>
                 </div>
             </div>
@@ -99,7 +113,9 @@
                             :key="side.code"
                             type="button"
                             class="min-w-[42px] rounded-full px-3 py-1.5 text-base font-semibold"
-                            :class="activeSide.code === side.code ? 'bg-blue-600 text-white' : 'text-blue-700 hover:bg-blue-50'"
+                            :class="activeSide.code === side.code
+                                ? 'bg-red-600 text-white'
+                                : (getSideStatus(activeObject, side.code, bookingRange.from, bookingRange.to).busy ? 'bg-red-50 text-red-600' : 'text-emerald-700 hover:bg-emerald-50')"
                             @click="selectSide(side.code)"
                         >
                             {{ side.code }}
@@ -155,9 +171,13 @@
                         <dd class="text-right text-3xl font-extrabold text-slate-900">{{ formatPrice(activeSide.price) }}</dd>
                     </dl>
 
+                    <p v-if="activeSideStatus" class="rounded-lg px-3 py-2 text-sm font-medium" :class="activeSideStatus.busy ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'">
+                        {{ activeSideStatus.text }}
+                    </p>
+
                     <button
                         type="button"
-                        class="w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+                        class="w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white hover:bg-red-700"
                         @click="openRequestModal"
                     >
                         Оставить заявку на экран
@@ -192,11 +212,13 @@
                             <textarea v-model.trim="requestForm.comment" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
                         </label>
 
+                        <input v-model.trim="requestForm.website" type="text" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
                         <p v-if="requestStatusMessage" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">{{ requestStatusMessage }}</p>
 
                         <div class="flex gap-2">
-                            <button type="button" class="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" @click="closeRequestModal">Отмена</button>
-                            <button type="submit" :disabled="isSubmittingRequest" class="flex-1 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white disabled:opacity-60">
+                            <button type="button" class="flex-1 rounded-lg border border-red-600 bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-red-700" @click="closeRequestModal">Отмена</button>
+                            <button type="submit" :disabled="isSubmittingRequest" class="flex-1 rounded-lg bg-red-600 px-3 py-2 text-sm font-semibold text-white disabled:opacity-60 hover:bg-red-700">
                                 {{ isSubmittingRequest ? 'Отправляем...' : 'Отправить заявку' }}
                             </button>
                         </div>
@@ -219,7 +241,7 @@ const props = defineProps({
 const productTypes = ref([])
 const constrTypes = ref([])
 const objects = ref([])
-const filters = reactive({ productType: '', constrTypeId: '' })
+const filters = reactive({ productType: '', constrTypeId: '', bookingFrom: '', bookingTo: '' })
 const isLoadingFilters = ref(false)
 const isLoadingObjects = ref(false)
 
@@ -232,7 +254,7 @@ const isLoadingCardDetails = ref(false)
 const isRequestModalOpen = ref(false)
 const isSubmittingRequest = ref(false)
 const requestStatusMessage = ref('')
-const requestForm = reactive({ name: '', phone: '', comment: '' })
+const requestForm = reactive({ name: '', phone: '', comment: '', website: '', startedAt: 0 })
 
 let map = null
 let placemarks = new Map()
@@ -254,6 +276,22 @@ const activeSide = computed(() => {
     const sides = activeObject.value.side_details || []
     if (sides.length === 0) return null
     return sides.find((item) => item.code === activeSideCode.value) || sides[0]
+})
+
+const bookingRange = computed(() => {
+    const from = parseDate(filters.bookingFrom)
+    const to = parseDate(filters.bookingTo)
+
+    if (from && to && to < from) {
+        return { from: to, to: from }
+    }
+
+    return { from, to }
+})
+
+const activeSideStatus = computed(() => {
+    if (!activeObject.value || !activeSide.value) return null
+    return getSideStatus(activeObject.value, activeSide.value.code, bookingRange.value.from, bookingRange.value.to)
 })
 
 const requestSummary = computed(() => {
@@ -308,8 +346,86 @@ function normalizeAdvertisement(item) {
         category: categoryName || null,
         place_number: item?.place_number ?? item?.placeNumber ?? null,
         side_details: sideDetails,
-        sides: sideDetails.map(s => s.code)
+        sides: sideDetails.map(s => s.code),
+        bookings: normalizeBookings(item?.bookings)
     }
+}
+
+function normalizeBookings(bookings) {
+    if (!Array.isArray(bookings)) return []
+
+    return bookings.map((booking) => ({
+        ...booking,
+        side_code: String(booking?.side_code ?? booking?.sideCode ?? '').trim().toUpperCase(),
+        start_date: booking?.start_date ?? booking?.startDate ?? null,
+        end_date: booking?.end_date ?? booking?.endDate ?? null,
+    })).filter((booking) => booking.side_code && booking.start_date && booking.end_date)
+}
+
+function parseDate(value) {
+    if (!value) return null
+    const date = new Date(`${value}T00:00:00`)
+    return Number.isNaN(date.getTime()) ? null : date
+}
+
+
+function overlapsRange(startDate, endDate, fromDate, toDate) {
+    const start = parseDate(startDate)
+    const end = parseDate(endDate)
+    if (!start || !end) return false
+
+    const from = fromDate ? new Date(fromDate) : new Date()
+    from.setHours(0, 0, 0, 0)
+    const to = toDate ? new Date(toDate) : new Date(from)
+
+    return start <= to && end >= from
+}
+
+function getSideBookings(item, sideCode) {
+    const code = String(sideCode || '').trim().toUpperCase()
+    return (item?.bookings || []).filter((booking) => booking.side_code === code)
+}
+
+function getSideStatus(item, sideCode, fromDate = null, toDate = null) {
+    const sideBookings = getSideBookings(item, sideCode)
+    if (sideBookings.length === 0) {
+        return { busy: false, text: 'Свободна' }
+    }
+
+    const overlapping = sideBookings.find((booking) => overlapsRange(booking.start_date, booking.end_date, fromDate, toDate))
+    if (overlapping) {
+        const nextDay = parseDate(overlapping.end_date)
+        if (nextDay) nextDay.setDate(nextDay.getDate() + 1)
+        return {
+            busy: true,
+            text: nextDay ? `Занята, свободна с ${nextDay.toLocaleDateString('ru-RU')}` : 'Занята',
+        }
+    }
+
+    return { busy: false, text: 'Свободна' }
+}
+
+function getItemStatus(item, fromDate, toDate) {
+    const sides = normalizeSideDetails(item)
+    if (!Array.isArray(sides) || sides.length === 0) return { busy: false, text: 'Свободна' }
+
+    const sideStatuses = sides.map((side) => getSideStatus(item, side.code, fromDate, toDate))
+    const allBusy = sideStatuses.every((status) => status.busy)
+
+    if (allBusy) {
+        const busyDates = sideStatuses
+            .map((status) => status.text.match(/с (.+)$/)?.[1] || null)
+            .filter(Boolean)
+            .sort()
+
+        if (busyDates.length > 0) {
+            return { busy: true, text: `Конструкция занята, свободна с ${busyDates[0]}` }
+        }
+
+        return { busy: true, text: 'Конструкция занята' }
+    }
+
+    return { busy: false, text: 'Есть свободные стороны' }
 }
 
 // --- API ---
@@ -335,7 +451,8 @@ async function loadAdvertisements() {
         const query = filteredParams.value.toString()
         const url = query ? `${props.advertisementsUrl}?${query}` : props.advertisementsUrl
         const data = await fetchJson(url)
-        objects.value = (Array.isArray(data) ? data : []).map(normalizeAdvertisement)
+        const normalized = (Array.isArray(data) ? data : []).map(normalizeAdvertisement)
+        objects.value = normalized
         syncMapPlacemarks()
     } finally { isLoadingObjects.value = false }
 }
@@ -371,7 +488,7 @@ function syncMapPlacemarks() {
         if (!item.location?.latitude || !item.location?.longitude) return
         const p = new window.ymaps.Placemark(
             [item.location.latitude, item.location.longitude],
-            {}, { preset: 'islands#redIcon' }
+            {}, { preset: 'islands#redDotIcon' }
         )
         p.events.add('click', () => focusObject(item.id))
         placemarks.set(item.id, p)
@@ -397,6 +514,8 @@ async function focusObject(objectId) {
 function resetFilters() { 
     filters.productType = ''
     filters.constrTypeId = ''
+    filters.bookingFrom = ''
+    filters.bookingTo = ''
     applyFilters() 
 }
 
@@ -407,8 +526,8 @@ function applyFilters() {
 
 function selectSide(code) { activeSideCode.value = code }
 function closeCard() { activeObjectId.value = null }
-function openRequestModal() { requestStatusMessage.value = ''; isRequestModalOpen.value = true }
-function closeRequestModal() { isRequestModalOpen.value = false }
+function openRequestModal() { requestStatusMessage.value = ''; requestForm.startedAt = Date.now(); isRequestModalOpen.value = true }
+function closeRequestModal() { isRequestModalOpen.value = false; requestForm.website = ''; requestForm.startedAt = 0 }
 
 async function submitRequest() {
     if (!activeObject.value || !activeSide.value) return
@@ -425,6 +544,8 @@ async function submitRequest() {
                 contactName: requestForm.name,
                 contactPhone: requestForm.phone,
                 comment: requestForm.comment,
+                website: requestForm.website,
+                formStartedAt: requestForm.startedAt,
             }),
         })
 
@@ -440,6 +561,8 @@ async function submitRequest() {
             requestForm.name = ''
             requestForm.phone = ''
             requestForm.comment = ''
+            requestForm.website = ''
+            requestForm.startedAt = 0
         }, 1000)
     } finally {
         isSubmittingRequest.value = false
@@ -453,7 +576,7 @@ onMounted(async () => {
     await loadAdvertisements()
     try {
         await loadYandexMap()
-        map = new window.ymaps.Map(mapContainer.value, { center: [55.75, 37.61], zoom: 10, controls: ['zoomControl'] })
+        map = new window.ymaps.Map(mapContainer.value, { center: [51.8335, 107.584], zoom: 12, controls: ['zoomControl'] })
         isMapLoaded.value = true
         syncMapPlacemarks()
     } catch (e) { mapError.value = 'Ошибка загрузки карты' }
