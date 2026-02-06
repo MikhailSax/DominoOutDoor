@@ -1,3 +1,4 @@
+
 <template>
     <div class="flex h-[calc(100vh-72px)] min-h-[680px] flex-col overflow-hidden bg-slate-100 text-slate-800 lg:flex-row">
         <aside class="w-full border-b border-slate-200 bg-white lg:w-[380px] lg:border-b-0 lg:border-r">
@@ -122,7 +123,7 @@
                 </div>
 
                 <div class="space-y-4 p-5">
-                    <p v-if="isLoadingCardDetails" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-500">Загружаем данные из карточки в админке...</p>
+                    <p v-if="isLoadingCardDetails" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-500">Загружаем данные из карточки...</p>
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <h3 class="text-3xl leading-tight font-bold text-slate-900">{{ activeObject.address || 'Адрес не указан' }}</h3>
@@ -253,21 +254,18 @@ const filteredParams = computed(() => {
     if (filters.constrTypeId) {
         params.append('constrTypeId', filters.constrTypeId)
     }
-
     return params
 })
 
-const activeObject = computed(() => objects.value.find((item) => String(item.id) === String(activeObjectId.value)) || null)
+const activeObject = computed(() =>
+    objects.value.find((item) => String(item.id) === String(activeObjectId.value)) || null
+)
 
 const activeSide = computed(() => {
-    if (!activeObject.value) {
-        return null
-    }
+    if (!activeObject.value) return null
 
     const sides = normalizeSideDetails(activeObject.value)
-    if (sides.length === 0) {
-        return null
-    }
+    if (sides.length === 0) return null
 
     return sides.find((item) => item.code === activeSideCode.value) || sides[0]
 })
@@ -281,31 +279,22 @@ const requestSummary = computed(() => {
 })
 
 function formatSides(sides) {
-    if (!Array.isArray(sides) || sides.length === 0) {
-        return '—'
-    }
-
+    if (!Array.isArray(sides) || sides.length === 0) return '—'
     return sides.join(', ')
 }
 
 function formatPrice(price) {
-    if (price === null || price === undefined || price === '') {
-        return 'По запросу'
-    }
+    if (price === null || price === undefined || price === '') return 'По запросу'
 
     const value = Number(price)
-    if (Number.isNaN(value)) {
-        return String(price)
-    }
+    if (Number.isNaN(value)) return String(price)
 
     return `${new Intl.NumberFormat('ru-RU').format(value)} ₽`
 }
 
 function normalizeImageUrl(imageUrl, imageName) {
     const value = imageUrl || imageName
-    if (!value || typeof value !== 'string') {
-        return null
-    }
+    if (!value || typeof value !== 'string') return null
 
     if (value.startsWith('http://') || value.startsWith('https://') || value.startsWith('/')) {
         return value
@@ -381,9 +370,7 @@ function normalizeAdvertisement(item) {
 
 async function fetchJson(url) {
     const response = await fetch(url, {
-        headers: {
-            Accept: 'application/json',
-        },
+        headers: { Accept: 'application/json' },
         credentials: 'same-origin',
     })
 
@@ -402,7 +389,10 @@ async function loadFilters() {
             query.append('productType', filters.productType)
         }
 
-        const url = query.toString() ? `${props.filtersUrl}?${query.toString()}` : props.filtersUrl
+        const url = query.toString()
+            ? `${props.filtersUrl}?${query.toString()}`
+            : props.filtersUrl
+
         const data = await fetchJson(url)
         productTypes.value = Array.isArray(data.productTypes) ? data.productTypes : []
         constrTypes.value = Array.isArray(data.constrTypes) ? data.constrTypes : []
@@ -415,16 +405,19 @@ async function loadAdvertisements() {
     isLoadingObjects.value = true
     try {
         const query = filteredParams.value.toString()
-        const url = query ? `${props.advertisementsUrl}?${query}` : props.advertisementsUrl
+        const url = query
+            ? `${props.advertisementsUrl}?${query}`
+            : props.advertisementsUrl
+
         const data = await fetchJson(url)
-        objects.value = (Array.isArray(data) ? data : []).map((item) => normalizeAdvertisement(item))
+        objects.value = (Array.isArray(data) ? data : [])
+            .map((item) => normalizeAdvertisement(item))
 
         syncMapPlacemarks()
     } finally {
         isLoadingObjects.value = false
     }
 }
-
 
 async function loadAdvertisementDetails(objectId) {
     isLoadingCardDetails.value = true
@@ -433,13 +426,16 @@ async function loadAdvertisementDetails(objectId) {
         const data = await fetchJson(url)
         const normalized = normalizeAdvertisement(data)
 
-        objects.value = objects.value.map((item) => (
+        objects.value = objects.value.map((item) =>
             String(item.id) === String(objectId)
                 ? { ...item, ...normalized }
                 : item
-        ))
+        )
 
-        const updated = objects.value.find((item) => String(item.id) === String(objectId))
+        const updated = objects.value.find(
+            (item) => String(item.id) === String(objectId)
+        )
+
         const sideCodes = normalizeSideDetails(updated || {}).map((side) => side.code)
         if (!sideCodes.includes(activeSideCode.value)) {
             activeSideCode.value = sideCodes[0] || ''
@@ -473,6 +469,7 @@ function loadYandexMap() {
 
         const script = document.createElement('script')
         script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU'
+
         script.onload = () => {
             if (window.ymaps) {
                 window.ymaps.ready(resolve)
@@ -480,15 +477,16 @@ function loadYandexMap() {
                 reject(new Error('Yandex Maps не загрузились'))
             }
         }
-        script.onerror = () => reject(new Error('Ошибка загрузки Яндекс.Карт'))
+
+        script.onerror = () =>
+            reject(new Error('Ошибка загрузки Яндекс.Карт'))
+
         document.head.appendChild(script)
     })
 }
 
 function clearPlacemarks() {
-    if (!map) {
-        return
-    }
+    if (!map) return
 
     placemarks.forEach((placemark) => {
         map.geoObjects.remove(placemark)
@@ -497,23 +495,21 @@ function clearPlacemarks() {
 }
 
 function syncMapPlacemarks() {
-    if (!map || !isMapLoaded.value) {
-        return
-    }
+    if (!map || !isMapLoaded.value) return
 
     clearPlacemarks()
 
     objects.value.forEach((item) => {
-        if (!item.location || typeof item.location.latitude !== 'number' || typeof item.location.longitude !== 'number') {
+        if (!item.location ||
+            typeof item.location.latitude !== 'number' ||
+            typeof item.location.longitude !== 'number') {
             return
         }
 
         const placemark = new window.ymaps.Placemark(
             [item.location.latitude, item.location.longitude],
             {},
-            {
-                preset: 'islands#redIcon',
-            },
+            { preset: 'islands#redIcon' }
         )
 
         placemark.events.add('click', () => {
@@ -537,15 +533,18 @@ function syncMapPlacemarks() {
 
 async function focusObject(objectId) {
     activeObjectId.value = objectId
-    const item = objects.value.find((obj) => String(obj.id) === String(objectId))
-    activeSideCode.value = normalizeSideDetails(item || {})[0]?.code || ''
+
+    const item = objects.value.find(
+        (obj) => String(obj.id) === String(objectId)
+    )
+
+    activeSideCode.value =
+        normalizeSideDetails(item || {})[0]?.code || ''
 
     await loadAdvertisementDetails(objectId)
 
     const placemark = placemarks.get(objectId)
-    if (!placemark || !map) {
-        return
-    }
+    if (!placemark || !map) return
 
     const coordinates = placemark.geometry.getCoordinates()
     map.setCenter(coordinates, 16, { duration: 300 })
@@ -559,7 +558,6 @@ function closeCard() {
     activeObjectId.value = null
     activeSideCode.value = ''
 }
-
 
 function openRequestModal() {
     requestStatusMessage.value = ''
@@ -610,7 +608,7 @@ async function submitRequest() {
 
         window.location.href = `mailto:russ-support@rwb.ru?subject=${encodeURIComponent('Заявка на экран')}&body=${encodeURIComponent(message)}`
 
-        requestStatusMessage.value = 'Заявка сохранена и подготовлена к отправке в почтовом клиенте.'
+        requestStatusMessage.value = 'Заявка сохранена и подготовлена к отправке.'
         requestForm.name = ''
         requestForm.phone = ''
         requestForm.comment = ''
@@ -620,7 +618,7 @@ async function submitRequest() {
         }, 800)
     } catch (error) {
         console.error('Ошибка отправки заявки', error)
-        requestStatusMessage.value = 'Не удалось отправить заявку. Попробуйте еще раз.'
+        requestStatusMessage.value = 'Не удалось отправить заявку.'
     } finally {
         isSubmittingRequest.value = false
     }
@@ -629,6 +627,7 @@ async function submitRequest() {
 async function initMap() {
     try {
         await loadYandexMap()
+
         map = new window.ymaps.Map(mapContainer.value, {
             center: [55.751244, 37.618423],
             zoom: 10,
@@ -638,7 +637,8 @@ async function initMap() {
         isMapLoaded.value = true
         syncMapPlacemarks()
     } catch (error) {
-        mapError.value = 'Не удалось загрузить карту. Попробуйте обновить страницу.'
+        mapError.value =
+            'Не удалось загрузить карту. Попробуйте обновить страницу.'
         console.error(error)
     }
 }
@@ -648,7 +648,7 @@ watch(
     async () => {
         filters.constrTypeId = ''
         await loadFilters()
-    },
+    }
 )
 
 onMounted(async () => {
