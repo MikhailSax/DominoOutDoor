@@ -27,14 +27,17 @@ class AdvertisementController extends AbstractController
     #[Route('/advertisements', name: 'advertisements_list', methods: ['GET'])]
     public function list(Request $request, AdvertisementRepository $repository): JsonResponse
     {
-        $ads = $repository->findAll();
         $category = $request->query->get('productType');
         $type = $request->query->get('constrTypeId');
 
         if (!empty($category) || !empty($type)) {
-            $ads = $repository->findByFilters((int)$category, $type);;
+            $ads = $repository->findByFiltersForApi((int) $category, (int) $type);
+
             return $this->json($this->advertisementService->getData($ads));
         }
+
+        $ads = $repository->findForApi();
+
         return $this->json($this->advertisementService->getData($ads));
     }
 

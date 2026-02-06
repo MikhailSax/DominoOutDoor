@@ -104,6 +104,7 @@ class AdvertisementRepository extends ServiceEntityRepository
             ->leftJoin('at.category', 'ac')->addSelect('ac')
             ->leftJoin('a.location', 'al')->addSelect('al')
             ->leftJoin('a.sideItems', 'asi')->addSelect('asi')
+            ->leftJoin('a.bookings', 'ab')->addSelect('ab')
             ->orderBy('a.id', 'ASC')
             ->getQuery()
             ->getResult();
@@ -118,7 +119,8 @@ class AdvertisementRepository extends ServiceEntityRepository
             ->leftJoin('a.type', 'at')->addSelect('at')
             ->leftJoin('at.category', 'ac')->addSelect('ac')
             ->leftJoin('a.location', 'al')->addSelect('al')
-            ->leftJoin('a.sideItems', 'asi')->addSelect('asi');
+            ->leftJoin('a.sideItems', 'asi')->addSelect('asi')
+            ->leftJoin('a.bookings', 'ab')->addSelect('ab');
 
         if (!empty($productType)) {
             $query->andWhere('ac.id = :category')

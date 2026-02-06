@@ -3,7 +3,7 @@
 {% block content_title %}Календарь бронирований{% endblock %}
 
 {% block main %}
-    <form method="get" class="mb-4 d-flex gap-2 align-items-end">
+    <form method="get" class="mb-4 d-flex gap-2 align-items-end flex-wrap">
         <div>
             <label class="form-label">Конструкция</label>
             <select name="ad" class="form-select" required>
@@ -12,6 +12,15 @@
                     <option value="{{ ad.id }}" {% if selectedAdvertisement and ad.id == selectedAdvertisement.id %}selected{% endif %}>
                         #{{ ad.id }} — {{ ad.code ?: ad.placeNumber ?: 'Без кода' }}
                     </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label class="form-label">Сторона</label>
+            <select name="side" class="form-select">
+                <option value="">Все стороны</option>
+                {% for side in availableSides %}
+                    <option value="{{ side }}" {% if selectedSide == side %}selected{% endif %}>{{ side }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -25,6 +34,9 @@
     {% if selectedAdvertisement %}
         <div class="mb-3">
             <strong>Конструкция:</strong> #{{ selectedAdvertisement.id }} {{ selectedAdvertisement.address }}
+            {% if selectedSide %}
+                <span class="ms-3"><strong>Сторона:</strong> {{ selectedSide }}</span>
+            {% endif %}
         </div>
 
         <div class="row row-cols-7 g-2 mb-4">
@@ -42,7 +54,7 @@
         <ul>
             {% for booking in bookings %}
                 <li>
-                    {{ booking.clientName }}: {{ booking.startDate|date('d.m.Y') }} — {{ booking.endDate|date('d.m.Y') }}
+                    [{{ booking.sideCode }}] {{ booking.clientName }}: {{ booking.startDate|date('d.m.Y') }} — {{ booking.endDate|date('d.m.Y') }}
                 </li>
             {% else %}
                 <li>На выбранный месяц бронирований нет.</li>

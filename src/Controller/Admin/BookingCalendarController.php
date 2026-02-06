@@ -19,6 +19,7 @@ class BookingCalendarController extends AbstractController
     ): Response {
         $advertisements = $advertisementRepository->findBy([], ['id' => 'ASC']);
         $adId = (int) $request->query->get('ad', 0);
+        $selectedSide = mb_strtoupper(trim((string) $request->query->get('side', '')));
         $monthParam = (string) $request->query->get('month', (new \DateTimeImmutable('first day of this month'))->format('Y-m'));
 
         $monthStart = \DateTimeImmutable::createFromFormat('Y-m-d', sprintf('%s-01', $monthParam));
@@ -37,11 +38,19 @@ class BookingCalendarController extends AbstractController
             }
         }
 
+        $availableSides = [];
+        if ($selectedAdvertisement !== null) {
+            $availableSides = $selectedAdvertisement->getSides();
+            if ($selectedSide !== '' && !in_array($selectedSide, $availableSides, true)) {
+                $selectedSide = '';
+            }
+        }
+
         $bookings = [];
         $days = [];
 
         if ($selectedAdvertisement !== null) {
-            $bookings = $bookingRepository->findByAdvertisementAndMonth($selectedAdvertisement, $monthStart, $monthEnd);
+            $bookings = $bookingRepository->findByAdvertisementAndMonth($selectedAdvertisement, $monthStart, $monthEnd, $selectedSide !== '' ? $selectedSide : null);
 
             $cursor = $monthStart;
             while ($cursor <= $monthEnd) {
@@ -65,6 +74,8 @@ class BookingCalendarController extends AbstractController
         return $this->render('admin/booking_calendar.html.twig', [
             'advertisements' => $advertisements,
             'selectedAdvertisement' => $selectedAdvertisement,
+            'selectedSide' => $selectedSide,
+            'availableSides' => $availableSides,
             'month' => $monthStart,
             'days' => $days,
             'bookings' => $bookings,
