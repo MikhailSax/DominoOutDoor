@@ -42,7 +42,9 @@ class AdvertisementController extends AbstractController
     #[Route('/advertisements/{id}', name: 'advertisements_show', methods: ['GET'])]
     public function show(Advertisement $advertisement): JsonResponse
     {
-        return $this->json($this->serializeAdvertisement($advertisement));
+        $data = $this->advertisementService->getData([$advertisement]);
+
+        return $this->json($data[0] ?? []);
     }
 
     #[Route('/filters', name: 'filters', methods: ['GET'])]
