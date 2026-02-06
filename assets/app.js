@@ -22,6 +22,13 @@ function initVue() {
                 filtersUrl: mapElement.dataset.filtersUrl || '/api/filters',
                 advertisementsUrl: mapElement.dataset.advertisementsUrl || '/api/advertisements',
                 productRequestsUrl: mapElement.dataset.productRequestsUrl || '/product-requests',
+                authUser: {
+                    isAuthenticated: mapElement.dataset.isAuthenticated === '1',
+                    id: mapElement.dataset.userId ? Number(mapElement.dataset.userId) : null,
+                    name: mapElement.dataset.userName || '',
+                    phone: mapElement.dataset.userPhone || '',
+                    email: mapElement.dataset.userEmail || '',
+                },
             });
             app.mount('#map-app');
             mapElement._vueApp = app;
