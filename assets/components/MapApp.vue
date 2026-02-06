@@ -95,7 +95,7 @@
                 <div class="relative">
                     <div class="absolute left-4 top-4 z-10 flex rounded-full bg-white p-1 shadow-lg">
                         <button
-                            v-for="side in normalizeSideDetails(activeObject)"
+                            v-for="side in activeObject.side_details"
                             :key="side.code"
                             type="button"
                             class="min-w-[42px] rounded-full px-3 py-1.5 text-base font-semibold"
@@ -122,7 +122,7 @@
                 </div>
 
                 <div class="space-y-4 p-5">
-                    <p v-if="isLoadingCardDetails" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-500">Загружаем данные из карточки в админке...</p>
+                    <p v-if="isLoadingCardDetails" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-500">Загружаем данные...</p>
                     
                     <div class="flex items-start justify-between gap-4">
                         <div>
@@ -236,6 +236,7 @@ const requestForm = reactive({ name: '', phone: '', comment: '' })
 let map = null
 let placemarks = new Map()
 
+// --- Computed ---
 const filteredParams = computed(() => {
     const params = new URLSearchParams()
     if (filters.productType) params.append('productType', filters.productType)
@@ -243,11 +244,13 @@ const filteredParams = computed(() => {
     return params
 })
 
-const activeObject = computed(() => objects.value.find((item) => String(item.id) === String(activeObjectId.value)) || null)
+const activeObject = computed(() => 
+    objects.value.find((item) => String(item.id) === String(activeObjectId.value)) || null
+)
 
 const activeSide = computed(() => {
     if (!activeObject.value) return null
-    const sides = normalizeSideDetails(activeObject.value)
+    const sides = activeObject.value.side_details || []
     if (sides.length === 0) return null
     return sides.find((item) => item.code === activeSideCode.value) || sides[0]
 })
@@ -257,103 +260,72 @@ const requestSummary = computed(() => {
     return `${activeObject.value.address || 'Адрес не указан'} • сторона ${activeSide.value.code} • ${activeObject.value.type || 'Формат не указан'}`
 })
 
+// --- Helpers ---
 function formatSides(sides) {
     if (!Array.isArray(sides) || sides.length === 0) return '—'
     return sides.join(', ')
 }
 
 function formatPrice(price) {
-    if (price === null || price === undefined || price === '') return 'По запросу'
+    if (!price) return 'По запросу'
     const value = Number(price)
-    if (Number.isNaN(value)) return String(price)
-    return `${new Intl.NumberFormat('ru-RU').format(value)} ₽`
+    return Number.isNaN(value) ? String(price) : `${new Intl.NumberFormat('ru-RU').format(value)} ₽`
 }
 
 function normalizeImageUrl(imageUrl, imageName) {
     const value = imageUrl || imageName
     if (!value || typeof value !== 'string') return null
-    if (value.startsWith('http://') || value.startsWith('https://') || value.startsWith('/')) return value
+    if (value.startsWith('http') || value.startsWith('/')) return value
     return imageUrl ? `/${value}` : `/uploads/advertisements/${value}`
 }
 
 function normalizeSideDetails(item) {
     const details = Array.isArray(item?.side_details) ? item.side_details : []
-    const normalizedDetails = details
-        .map((side) => ({
-            code: String(side?.code || '').trim().toUpperCase(),
-            description: side?.description ?? null,
-            price: side?.price ?? null,
-            image: side?.image ?? null,
-            image_url: normalizeImageUrl(side?.image_url ?? null, side?.image ?? null),
-        }))
-        .filter((side) => side.code)
+    const normalized = details.map((side) => ({
+        code: String(side?.code || '').trim().toUpperCase(),
+        description: side?.description ?? null,
+        price: side?.price ?? null,
+        image_url: normalizeImageUrl(side?.image_url, side?.image),
+    })).filter(s => s.code)
 
-    if (normalizedDetails.length > 0) return normalizedDetails
+    if (normalized.length > 0) return normalized
 
-    const rawSides = Array.isArray(item?.sides)
-        ? item.sides
-        : typeof item?.sides === 'string' && item.sides.length > 0
-            ? item.sides.split(',')
-            : []
-
-    const normalizedFromSides = rawSides
-        .map((code) => String(code || '').trim().toUpperCase())
-        .filter(Boolean)
-        .map((code) => ({
-            code,
-            description: null,
-            price: null,
-            image: null,
-            image_url: null,
-        }))
-
-    if (normalizedFromSides.length > 0) return normalizedFromSides
-
-    return [{
-        code: '—',
-        description: item?.address ? `Конструкция по адресу: ${item.address}` : null,
-        price: null,
-        image: null,
-        image_url: null,
-    }]
+    const rawSides = Array.isArray(item?.sides) ? item.sides : (typeof item?.sides === 'string' ? item.sides.split(',') : [])
+    return rawSides.map(code => ({
+        code: String(code).trim().toUpperCase(),
+        description: null, price: null, image_url: null
+    })).filter(s => s.code).length > 0 ? rawSides.map(code => ({ code: String(code).trim().toUpperCase() })) : [{ code: '—' }]
 }
 
 function normalizeAdvertisement(item) {
     const typeName = typeof item?.type === 'object' ? item?.type?.name : item?.type
     const categoryName = typeof item?.type === 'object' ? item?.type?.category : item?.category
-    const sideDetails = normalizeSideDetails(item || {})
-
+    const sideDetails = normalizeSideDetails(item)
     return {
         ...item,
         type: typeName || null,
         category: categoryName || null,
         place_number: item?.place_number ?? item?.placeNumber ?? null,
         side_details: sideDetails,
-        sides: sideDetails.map((side) => side.code),
+        sides: sideDetails.map(s => s.code)
     }
 }
 
+// --- API ---
 async function fetchJson(url) {
-    const response = await fetch(url, {
-        headers: { Accept: 'application/json' },
-        credentials: 'same-origin',
-    })
-    if (!response.ok) throw new Error(`Ошибка запроса (${response.status})`)
+    const response = await fetch(url, { headers: { Accept: 'application/json' }, credentials: 'same-origin' })
+    if (!response.ok) throw new Error(`Ошибка: ${response.status}`)
     return response.json()
 }
 
 async function loadFilters() {
     isLoadingFilters.value = true
     try {
-        const query = new URLSearchParams()
-        if (filters.productType) query.append('productType', filters.productType)
-        const url = query.toString() ? `${props.filtersUrl}?${query.toString()}` : props.filtersUrl
-        const data = await fetchJson(url)
-        productTypes.value = Array.isArray(data.productTypes) ? data.productTypes : []
-        constrTypes.value = Array.isArray(data.constrTypes) ? data.constrTypes : []
-    } finally {
-        isLoadingFilters.value = false
-    }
+        const query = filters.productType ? `?productType=${filters.productType}` : ''
+        const data = await fetchJson(props.filtersUrl + query)
+        productTypes.value = data.productTypes || []
+        constrTypes.value = data.constrTypes || []
+    } finally { isLoadingFilters.value = false }
 }
 
 async function loadAdvertisements() {
@@ -362,87 +334,47 @@ async function loadAdvertisements() {
         const query = filteredParams.value.toString()
         const url = query ? `${props.advertisementsUrl}?${query}` : props.advertisementsUrl
         const data = await fetchJson(url)
-        objects.value = (Array.isArray(data) ? data : []).map((item) => normalizeAdvertisement(item))
+        objects.value = (Array.isArray(data) ? data : []).map(normalizeAdvertisement)
         syncMapPlacemarks()
-    } finally {
-        isLoadingObjects.value = false
-    }
+    } finally { isLoadingObjects.value = false }
 }
 
 async function loadAdvertisementDetails(objectId) {
     isLoadingCardDetails.value = true
     try {
-        const url = `${props.advertisementsUrl}/${encodeURIComponent(String(objectId))}`
-        const data = await fetchJson(url)
+        const data = await fetchJson(`${props.advertisementsUrl}/${objectId}`)
         const normalized = normalizeAdvertisement(data)
-
-        objects.value = objects.value.map((item) =>
-            String(item.id) === String(objectId) ? { ...item, ...normalized } : item
-        )
-
-        const updated = objects.value.find((item) => String(item.id) === String(objectId))
-        const sideCodes = normalizeSideDetails(updated || {}).map((side) => side.code)
-        if (!sideCodes.includes(activeSideCode.value)) {
-            activeSideCode.value = sideCodes[0] || ''
-        }
-    } catch (error) {
-        console.error('Не удалось загрузить детали конструкции', error)
-    } finally {
-        isLoadingCardDetails.value = false
-    }
+        objects.value = objects.value.map(item => String(item.id) === String(objectId) ? normalized : item)
+        if (!normalized.sides.includes(activeSideCode.value)) activeSideCode.value = normalized.sides[0] || ''
+    } catch (e) { console.error(e) } finally { isLoadingCardDetails.value = false }
 }
 
-function resetFilters() {
-    filters.productType = ''
-    filters.constrTypeId = ''
-    applyFilters()
-}
-
-async function applyFilters() {
-    activeObjectId.value = null
-    activeSideCode.value = ''
-    await loadFilters()
-    await loadAdvertisements()
-}
-
+// --- Map Logic ---
 function loadYandexMap() {
     return new Promise((resolve, reject) => {
-        if (window.ymaps) {
-            window.ymaps.ready(resolve)
-            return
-        }
+        if (window.ymaps) return window.ymaps.ready(resolve)
         const script = document.createElement('script')
         script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU'
-        script.onload = () => {
-            if (window.ymaps) window.ymaps.ready(resolve)
-            else reject(new Error('Yandex Maps не загрузились'))
-        }
-        script.onerror = () => reject(new Error('Ошибка загрузки Яндекс.Карт'))
+        script.onload = () => window.ymaps.ready(resolve)
+        script.onerror = reject
         document.head.appendChild(script)
     })
 }
 
-function clearPlacemarks() {
-    if (!map) return
-    placemarks.forEach((placemark) => map.geoObjects.remove(placemark))
-    placemarks.clear()
-}
-
 function syncMapPlacemarks() {
     if (!map || !isMapLoaded.value) return
-    clearPlacemarks()
+    placemarks.forEach(p => map.geoObjects.remove(p))
+    placemarks.clear()
 
-    objects.value.forEach((item) => {
-        if (!item.location || typeof item.location.latitude !== 'number' || typeof item.location.longitude !== 'number') return
-
-        const placemark = new window.ymaps.Placemark(
+    objects.value.forEach(item => {
+        if (!item.location?.latitude || !item.location?.longitude) return
+        const p = new window.ymaps.Placemark(
             [item.location.latitude, item.location.longitude],
-            {},
-            { preset: 'islands#redIcon' }
+            {}, { preset: 'islands#redIcon' }
         )
-        placemark.events.add('click', () => focusObject(item.id))
-        placemarks.set(item.id, placemark)
-        map.geoObjects.add(placemark)
+        p.events.add('click', () => focusObject(item.id))
+        placemarks.set(item.id, p)
+        map.geoObjects.add(p)
     })
 
     if (objects.value.length > 0) {
@@ -453,118 +385,65 @@ function syncMapPlacemarks() {
 
 async function focusObject(objectId) {
     activeObjectId.value = objectId
-    const item = objects.value.find((obj) => String(obj.id) === String(objectId))
-    activeSideCode.value = normalizeSideDetails(item || {})[0]?.code || ''
-
+    const item = objects.value.find(obj => String(obj.id) === String(objectId))
+    activeSideCode.value = item?.sides[0] || ''
     await loadAdvertisementDetails(objectId)
-
-    const placemark = placemarks.get(objectId)
-    if (!placemark || !map) return
-    map.setCenter(placemark.geometry.getCoordinates(), 16, { duration: 300 })
+    const p = placemarks.get(objectId)
+    if (p && map) map.setCenter(p.geometry.getCoordinates(), 16, { duration: 300 })
 }
 
+// --- Actions ---
+function resetFilters() { Object.assign(filters, { productType: '', constrTypeId: '' }); applyFilters() }
+function applyFilters() { activeObjectId.value = null; loadFilters().then(loadAdvertisements) }
 function selectSide(code) { activeSideCode.value = code }
-function closeCard() { activeObjectId.value = null; activeSideCode.value = '' }
+function closeCard() { activeObjectId.value = null }
 function openRequestModal() { requestStatusMessage.value = ''; isRequestModalOpen.value = true }
 function closeRequestModal() { isRequestModalOpen.value = false }
 
 async function submitRequest() {
-    if (!activeObject.value || !activeSide.value) {
-        requestStatusMessage.value = 'Сначала выберите конструкцию.'
-        return
-    }
-
+    if (!activeObject.value || !activeSide.value) return
     isSubmittingRequest.value = true
-    requestStatusMessage.value = ''
-
     try {
         const payload = {
             createdAt: new Date().toISOString(),
             advertisementId: activeObject.value.id,
-            placeNumber: activeObject.value.place_number || null,
-            address: activeObject.value.address || null,
+            address: activeObject.value.address,
             side: activeSide.value.code,
-            format: activeObject.value.type || null,
-            price: activeSide.value.price || null,
             contactName: requestForm.name,
             contactPhone: requestForm.phone,
-            comment: requestForm.comment || null,
+            comment: requestForm.comment
         }
-
-        const queue = JSON.parse(localStorage.getItem('screenRequests') || '[]')
-        queue.push(payload)
-        localStorage.setItem('screenRequests', JSON.stringify(queue))
-
-        const message = [
-            'Новая заявка на экран',
-            `Конструкция: ${payload.placeNumber || payload.advertisementId}`,
-            `Адрес: ${payload.address || '—'}`,
-            `Сторона: ${payload.side}`,
-            `Формат: ${payload.format || '—'}`,
-            `Цена: ${payload.price || 'По запросу'}`,
-            `Контакт: ${payload.contactName}, ${payload.contactPhone}`,
-            payload.comment ? `Комментарий: ${payload.comment}` : null,
-        ].filter(Boolean).join('\n')
-
-        window.location.href = `mailto:russ-support@rwb.ru?subject=${encodeURIComponent('Заявка на экран')}&body=${encodeURIComponent(message)}`
-
-        requestStatusMessage.value = 'Заявка сохранена и подготовлена к отправке в почтовом клиенте.'
-        requestForm.name = ''
-        requestForm.phone = ''
-        requestForm.comment = ''
-        setTimeout(() => {
-            isRequestModalOpen.value = false
-            requestStatusMessage.value = ''
-        }, 800)
-    } catch (error) {
-        console.error('Ошибка отправки заявки', error)
-        requestStatusMessage.value = 'Не удалось отправить заявку. Попробуйте еще раз.'
-    } finally {
-        isSubmittingRequest.value = false
-    }
+        
+        const message = `Новая заявка\nАдрес: ${payload.address}\nСторона: ${payload.side}\nКонтакт: ${payload.contactName}, ${payload.contactPhone}`
+        window.location.href = `mailto:russ-support@rwb.ru?subject=Заявка&body=${encodeURIComponent(message)}`
+        
+        requestStatusMessage.value = 'Заявка подготовлена!'
+        setTimeout(() => { isRequestModalOpen.value = false; Object.assign(requestForm, { name: '', phone: '', comment: '' }) }, 1500)
+    } finally { isSubmittingRequest.value = false }
 }
 
-async function initMap() {
-    try {
-        await loadYandexMap()
-        map = new window.ymaps.Map(mapContainer.value, {
-            center: [55.751244, 37.618423],
-            zoom: 10,
-            controls: ['zoomControl', 'fullscreenControl'],
-        })
-        isMapLoaded.value = true
-        syncMapPlacemarks()
-    } catch (error) {
-        mapError.value = 'Не удалось загрузить карту. Попробуйте обновить страницу.'
-        console.error(error)
-    }
-}
-
-watch(() => filters.productType, async () => {
-    filters.constrTypeId = ''
-    await loadFilters()
-})
-
+// --- Lifecycle ---
 onMounted(async () => {
     await loadFilters()
     await loadAdvertisements()
-    await initMap()
+    try {
+        await loadYandexMap()
+        map = new window.ymaps.Map(mapContainer.value, { center: [55.75, 37.61], zoom: 10, controls: ['zoomControl'] })
+        isMapLoaded.value = true
+        syncMapPlacemarks()
+    } catch (e) { mapError.value = 'Ошибка загрузки карты' }
 })
 
-onBeforeUnmount(() => {
-    clearPlacemarks()
-    if (map) {
-        map.destroy()
-        map = null
-    }
-})
+onBeforeUnmount(() => map?.destroy())
+
+watch(() => filters.productType, () => { filters.constrTypeId = ''; loadFilters() })
 </script>
 
 <style scoped>
 .line-clamp-2 {
-    overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 </style>
