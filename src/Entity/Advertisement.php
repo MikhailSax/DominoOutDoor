@@ -37,6 +37,9 @@ class Advertisement
     #[ORM\OneToMany(mappedBy: 'advertisement', targetEntity: AdvertisementBooking::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $bookings;
 
+    #[ORM\OneToMany(mappedBy: 'advertisement', targetEntity: ProductRequest::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
+    private Collection $productRequests;
+
     #[ORM\OneToMany(mappedBy: 'advertisement', targetEntity: AdvertisementSide::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $sideItems;
 
@@ -62,6 +65,7 @@ class Advertisement
     {
         $this->bookings = new ArrayCollection();
         $this->sideItems = new ArrayCollection();
+        $this->productRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -418,5 +422,34 @@ class Advertisement
         }
 
         return $this->location;
+    }
+
+    /**
+     * @return Collection<int, ProductRequest>
+     */
+    public function getProductRequests(): Collection
+    {
+        return $this->productRequests;
+    }
+
+    public function addProductRequest(ProductRequest $productRequest): static
+    {
+        if (!$this->productRequests->contains($productRequest)) {
+            $this->productRequests->add($productRequest);
+            $productRequest->setAdvertisement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductRequest(ProductRequest $productRequest): static
+    {
+        if ($this->productRequests->removeElement($productRequest)) {
+            if ($productRequest->getAdvertisement() === $this) {
+                $productRequest->setAdvertisement(null);
+            }
+        }
+
+        return $this;
     }
 }

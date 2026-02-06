@@ -5,6 +5,7 @@
             v-else
             :filters-url="runtimeConfig.filtersUrl"
             :advertisements-url="runtimeConfig.advertisementsUrl"
+            :product-requests-url="runtimeConfig.productRequestsUrl"
         />
     </div>
 </template>
@@ -23,12 +24,17 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    productRequestsUrl: {
+        type: String,
+        required: true,
+    },
 })
 
 const isLoading = ref(true)
 const runtimeConfig = ref({
     filtersUrl: props.filtersUrl,
     advertisementsUrl: props.advertisementsUrl,
+    productRequestsUrl: props.productRequestsUrl,
 })
 
 onMounted(() => {

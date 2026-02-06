@@ -213,6 +213,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 const props = defineProps({
     filtersUrl: { type: String, required: true },
     advertisementsUrl: { type: String, required: true },
+    productRequestsUrl: { type: String, required: true },
 })
 
 const productTypes = ref([])
@@ -412,32 +413,39 @@ function closeRequestModal() { isRequestModalOpen.value = false }
 async function submitRequest() {
     if (!activeObject.value || !activeSide.value) return
     isSubmittingRequest.value = true
-    
+
     try {
-        const payload = {
-            createdAt: new Date().toISOString(),
-            advertisementId: activeObject.value.id,
-            address: activeObject.value.address,
-            side: activeSide.value.code,
-            contactName: requestForm.name,
-            contactPhone: requestForm.phone,
-            comment: requestForm.comment
+        const response = await fetch(props.productRequestsUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                advertisementId: activeObject.value.id,
+                side: activeSide.value.code,
+                contactName: requestForm.name,
+                contactPhone: requestForm.phone,
+                comment: requestForm.comment,
+            }),
+        })
+
+        const data = await response.json().catch(() => ({}))
+        if (!response.ok) {
+            requestStatusMessage.value = data.message || 'Не удалось отправить заявку.'
+            return
         }
-        
-        const message = `Новая заявка\nАдрес: ${payload.address}\nСторона: ${payload.side}\nКонтакт: ${payload.contactName}, ${payload.contactPhone}`
-        window.location.href = `mailto:russ-support@rwb.ru?subject=Заявка&body=${encodeURIComponent(message)}`
-        
-        requestStatusMessage.value = 'Заявка подготовлена!'
-        setTimeout(() => { 
+
+        requestStatusMessage.value = data.message || 'Заявка отправлена.'
+        setTimeout(() => {
             isRequestModalOpen.value = false
             requestForm.name = ''
             requestForm.phone = ''
             requestForm.comment = ''
-        }, 1500)
-    } finally { 
-        isSubmittingRequest.value = false 
+        }, 1000)
+    } finally {
+        isSubmittingRequest.value = false
     }
 }
+
 
 // --- Lifecycle ---
 onMounted(async () => {
