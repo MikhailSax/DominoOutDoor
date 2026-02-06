@@ -43,18 +43,10 @@
                     </div>
 
                     <div class="flex gap-2">
-                        <button
-                            type="button"
-                            class="flex-1 rounded-xl border border-red-600 bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
-                            @click="resetFilters"
-                        >
+                        <button type="button" class="flex-1 rounded-xl border border-red-600 bg-white px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50" @click="resetFilters">
                             Сбросить
                         </button>
-                        <button
-                            type="button"
-                            class="flex-1 rounded-xl border border-red-600 bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
-                            @click="applyFilters"
-                        >
+                        <button type="button" class="flex-1 rounded-xl bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700" @click="applyFilters">
                             Подобрать
                         </button>
                     </div>
@@ -124,7 +116,7 @@
 
                     <button
                         type="button"
-                        class="absolute right-4 top-4 z-10 rounded-full bg-white p-3 text-lg font-semibold text-slate-700 shadow hover:bg-slate-100"
+                        class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-2xl font-light text-slate-700 shadow hover:bg-slate-100"
                         @click="closeCard"
                     >
                         ×
@@ -138,18 +130,12 @@
                 </div>
 
                 <div class="space-y-4 p-5">
-                    <p v-if="isLoadingCardDetails" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-500">Загружаем данные...</p>
-                    
                     <div class="flex items-start justify-between gap-4">
                         <div>
-                            <h3 class="text-3xl leading-tight font-bold text-slate-900">{{ activeObject.address || 'Адрес не указан' }}</h3>
-                            <p class="mt-1 text-lg font-semibold tracking-wide text-slate-400">GID {{ activeObject.code || activeObject.place_number || activeObject.id }}</p>
+                            <h3 class="text-2xl leading-tight font-bold text-slate-900">{{ activeObject.address || 'Адрес не указан' }}</h3>
+                            <p class="mt-1 text-lg font-semibold tracking-wide text-slate-400">GID {{ activeObject.id }}</p>
                         </div>
-                        <a
-                            :href="`/api/advertisements/${activeObject.id}`"
-                            target="_blank"
-                            class="pt-1 text-base font-medium text-blue-600 hover:text-blue-700"
-                        >
+                        <a :href="`/api/advertisements/${activeObject.id}`" target="_blank" class="pt-1 text-base font-medium text-blue-600 hover:text-blue-700">
                             Подробнее
                         </a>
                     </div>
@@ -160,12 +146,6 @@
 
                         <dt class="border-b border-slate-200 pb-1 text-slate-600">Сторона</dt>
                         <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeSide.code }}</dd>
-
-                        <dt class="border-b border-slate-200 pb-1 text-slate-600">Код поверхности</dt>
-                        <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeObject.place_number || '—' }}</dd>
-
-                        <dt class="border-b border-slate-200 pb-1 text-slate-600">Описание стороны</dt>
-                        <dd class="border-b border-slate-200 pb-1 text-right text-base font-medium text-slate-700">{{ activeSide.description || 'Не указано' }}</dd>
 
                         <dt class="text-slate-500">Прайс без НДС</dt>
                         <dd class="text-right text-3xl font-extrabold text-slate-900">{{ formatPrice(activeSide.price) }}</dd>
@@ -193,7 +173,7 @@
                             <h4 class="text-lg font-bold text-slate-900">Заявка на размещение</h4>
                             <p class="text-sm text-slate-500">{{ requestSummary }}</p>
                         </div>
-                        <button type="button" class="rounded-full px-3 py-1 text-slate-500 hover:bg-slate-100" @click="closeRequestModal">×</button>
+                        <button type="button" class="text-2xl text-slate-500 hover:text-slate-800" @click="closeRequestModal">×</button>
                     </div>
 
                     <form class="space-y-3" @submit.prevent="submitRequest">
@@ -207,17 +187,17 @@
                                 <input v-model.trim="requestForm.phone" required class="w-full rounded-lg border border-slate-300 px-3 py-2" />
                             </label>
                         </div>
-
                         <label class="text-sm block">
                             <span class="mb-1 block text-slate-600">Комментарий</span>
                             <textarea v-model.trim="requestForm.comment" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
                         </label>
+                        <input v-model.trim="requestForm.website" type="text" class="hidden" />
 
                         <p v-if="requestStatusMessage" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">{{ requestStatusMessage }}</p>
 
                         <div class="flex gap-2">
-                            <button type="button" class="flex-1 rounded-lg border border-red-600 bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-red-700" @click="closeRequestModal">Отмена</button>
-                            <button type="submit" :disabled="isSubmittingRequest" class="flex-1 rounded-lg bg-red-600 px-3 py-2 text-sm font-semibold text-white disabled:opacity-60 hover:bg-red-700">
+                            <button type="button" class="flex-1 rounded-lg border border-slate-300 py-2 text-sm font-semibold hover:bg-slate-50" @click="closeRequestModal">Отмена</button>
+                            <button type="submit" :disabled="isSubmittingRequest" class="flex-1 rounded-lg bg-red-600 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60">
                                 {{ isSubmittingRequest ? 'Отправляем...' : 'Отправить заявку' }}
                             </button>
                         </div>
@@ -237,6 +217,7 @@ const props = defineProps({
     productRequestsUrl: { type: String, required: true },
 })
 
+// Состояние
 const productTypes = ref([])
 const constrTypes = ref([])
 const objects = ref([])
@@ -253,12 +234,19 @@ const isLoadingCardDetails = ref(false)
 const isRequestModalOpen = ref(false)
 const isSubmittingRequest = ref(false)
 const requestStatusMessage = ref('')
-const requestForm = reactive({ name: '', phone: '', comment: '' })
+const requestForm = reactive({ name: '', phone: '', comment: '', website: '', startedAt: 0 })
 
 let map = null
 let placemarks = new Map()
 
 // --- Computed ---
+const bookingRange = computed(() => {
+    const from = parseDate(filters.bookingFrom)
+    const to = parseDate(filters.bookingTo)
+    if (from && to && to < from) return { from: to, to: from }
+    return { from, to }
+})
+
 const filteredParams = computed(() => {
     const params = new URLSearchParams()
     if (filters.productType) params.append('productType', filters.productType)
@@ -273,15 +261,7 @@ const activeObject = computed(() =>
 const activeSide = computed(() => {
     if (!activeObject.value) return null
     const sides = activeObject.value.side_details || []
-    if (sides.length === 0) return null
-    return sides.find((item) => item.code === activeSideCode.value) || sides[0]
-})
-
-const bookingRange = computed(() => {
-    const from = parseDate(filters.bookingFrom)
-    const to = parseDate(filters.bookingTo)
-    if (from && to && to < from) return { from: to, to: from }
-    return { from, to }
+    return sides.find((item) => item.code === activeSideCode.value) || sides[0] || null
 })
 
 const activeSideStatus = computed(() => {
@@ -290,143 +270,68 @@ const activeSideStatus = computed(() => {
 })
 
 const requestSummary = computed(() => {
-    if (!activeObject.value || !activeSide.value) return 'Выберите конструкцию на карте'
-    return `${activeObject.value.address || 'Адрес не указан'} • сторона ${activeSide.value.code} • ${activeObject.value.type || 'Формат не указан'}`
+    if (!activeObject.value || !activeSide.value) return 'Выберите конструкцию'
+    return `${activeObject.value.address} • сторона ${activeSide.value.code}`
 })
 
 // --- Helpers ---
+function parseDate(value) {
+    if (!value) return null
+    const date = new Date(`${value}T00:00:00`)
+    return isNaN(date.getTime()) ? null : date
+}
+
 function formatSides(sides) {
-    if (!Array.isArray(sides) || sides.length === 0) return '—'
-    return sides.join(', ')
+    return Array.isArray(sides) && sides.length > 0 ? sides.join(', ') : '—'
 }
 
 function formatPrice(price) {
     if (!price) return 'По запросу'
-    const value = Number(price)
-    return Number.isNaN(value) ? String(price) : `${new Intl.NumberFormat('ru-RU').format(value)} ₽`
-}
-
-function normalizeImageUrl(imageUrl, imageName) {
-    const value = imageUrl || imageName
-    if (!value || typeof value !== 'string') return null
-    if (value.startsWith('http') || value.startsWith('/')) return value
-    return imageUrl ? `/${value}` : `/uploads/advertisements/${value}`
+    return `${new Intl.NumberFormat('ru-RU').format(price)} ₽`
 }
 
 function normalizeSideDetails(item) {
-    const details = Array.isArray(item?.side_details) ? item.side_details : []
-    const normalized = details.map((side) => ({
-        code: String(side?.code || '').trim().toUpperCase(),
-        description: side?.description ?? null,
-        price: side?.price ?? null,
-        image_url: normalizeImageUrl(side?.image_url, side?.image),
-    })).filter(s => s.code)
-
-    if (normalized.length > 0) return normalized
-
-    const rawSides = Array.isArray(item?.sides) ? item.sides : (typeof item?.sides === 'string' ? item.sides.split(',') : [])
-    return rawSides.map(code => ({
-        code: String(code).trim().toUpperCase(),
-        description: null, price: null, image_url: null
-    })).filter(s => s.code).length > 0 ? rawSides.map(code => ({ code: String(code).trim().toUpperCase() })) : [{ code: '—' }]
+    if (item?.side_details?.length) return item.side_details
+    const sides = Array.isArray(item?.sides) ? item.sides : []
+    return sides.map(code => ({ code: String(code).toUpperCase(), price: null, image_url: null }))
 }
 
-function normalizeBookings(bookings) {
-    if (!Array.isArray(bookings)) return []
-    return bookings.map((booking) => ({
-        ...booking,
-        side_code: String(booking?.side_code ?? booking?.sideCode ?? '').trim().toUpperCase(),
-        start_date: booking?.start_date ?? booking?.startDate ?? null,
-        end_date: booking?.end_date ?? booking?.endDate ?? null,
-    })).filter((booking) => booking.side_code && booking.start_date && booking.end_date)
-}
+function getSideStatus(item, sideCode, fromDate, toDate) {
+    const bookings = (item?.bookings || []).filter(b => b.side_code === sideCode)
+    const overlap = bookings.find(b => {
+        const start = parseDate(b.start_date)
+        const end = parseDate(b.end_date)
+        const from = fromDate || new Date()
+        const to = toDate || from
+        return start <= to && end >= from
+    })
 
-function normalizeAdvertisement(item) {
-    const typeName = typeof item?.type === 'object' ? item?.type?.name : item?.type
-    const categoryName = typeof item?.type === 'object' ? item?.type?.category : item?.category
-    const sideDetails = normalizeSideDetails(item)
-    return {
-        ...item,
-        type: typeName || null,
-        category: categoryName || null,
-        place_number: item?.place_number ?? item?.placeNumber ?? null,
-        side_details: sideDetails,
-        sides: sideDetails.map(s => s.code),
-        bookings: normalizeBookings(item?.bookings)
-    }
-}
-
-function parseDate(value) {
-    if (!value) return null
-    const date = new Date(`${value}T00:00:00`)
-    return Number.isNaN(date.getTime()) ? null : date
-}
-
-function overlapsRange(startDate, endDate, fromDate, toDate) {
-    const start = parseDate(startDate)
-    const end = parseDate(endDate)
-    if (!start || !end) return false
-    const from = fromDate ? new Date(fromDate) : new Date()
-    from.setHours(0, 0, 0, 0)
-    const to = toDate ? new Date(toDate) : new Date(from)
-    return start <= to && end >= from
-}
-
-function getSideBookings(item, sideCode) {
-    const code = String(sideCode || '').trim().toUpperCase()
-    return (item?.bookings || []).filter((booking) => booking.side_code === code)
-}
-
-function getSideStatus(item, sideCode, fromDate = null, toDate = null) {
-    const sideBookings = getSideBookings(item, sideCode)
-    if (sideBookings.length === 0) return { busy: false, text: 'Свободна' }
-
-    const overlapping = sideBookings.find((booking) => overlapsRange(booking.start_date, booking.end_date, fromDate, toDate))
-    if (overlapping) {
-        const nextDay = parseDate(overlapping.end_date)
-        if (nextDay) nextDay.setDate(nextDay.getDate() + 1)
-        return {
-            busy: true,
-            text: nextDay ? `Занята, свободна с ${nextDay.toLocaleDateString('ru-RU')}` : 'Занята',
-        }
+    if (overlap) {
+        const d = parseDate(overlap.end_date); d.setDate(d.getDate() + 1)
+        return { busy: true, text: `Занята до ${d.toLocaleDateString('ru-RU')}` }
     }
     return { busy: false, text: 'Свободна' }
 }
 
 function getItemStatus(item, fromDate, toDate) {
     const sides = normalizeSideDetails(item)
-    if (!Array.isArray(sides) || sides.length === 0) return { busy: false, text: 'Свободна' }
-
-    const sideStatuses = sides.map((side) => getSideStatus(item, side.code, fromDate, toDate))
-    const allBusy = sideStatuses.every((status) => status.busy)
-
-    if (allBusy) {
-        const busyDates = sideStatuses
-            .map((status) => status.text.match(/с (.+)$/)?.[1] || null)
-            .filter(Boolean)
-            .sort()
-        if (busyDates.length > 0) return { busy: true, text: `Конструкция занята, свободна с ${busyDates[0]}` }
-        return { busy: true, text: 'Конструкция занята' }
-    }
-    return { busy: false, text: 'Есть свободные стороны' }
-}
-
-function hasAvailableSideInRange(item, fromDate, toDate) {
-    return normalizeSideDetails(item).some((side) => !getSideStatus(item, side.code, fromDate, toDate).busy)
+    const statuses = sides.map(s => getSideStatus(item, s.code, fromDate, toDate))
+    return statuses.every(s => s.busy) 
+        ? { busy: true, text: 'Занята' } 
+        : { busy: false, text: 'Есть свободные стороны' }
 }
 
 // --- API ---
 async function fetchJson(url) {
-    const response = await fetch(url, { headers: { Accept: 'application/json' }, credentials: 'same-origin' })
-    if (!response.ok) throw new Error(`Ошибка: ${response.status}`)
-    return response.json()
+    const res = await fetch(url, { headers: { Accept: 'application/json' } })
+    if (!res.ok) throw new Error(res.statusText)
+    return res.json()
 }
 
 async function loadFilters() {
     isLoadingFilters.value = true
     try {
-        const query = filters.productType ? `?productType=${filters.productType}` : ''
-        const data = await fetchJson(props.filtersUrl + query)
+        const data = await fetchJson(`${props.filtersUrl}${filters.productType ? '?productType='+filters.productType : ''}`)
         productTypes.value = data.productTypes || []
         constrTypes.value = data.constrTypes || []
     } finally { isLoadingFilters.value = false }
@@ -436,44 +341,25 @@ async function loadAdvertisements() {
     isLoadingObjects.value = true
     try {
         const query = filteredParams.value.toString()
-        const url = query ? `${props.advertisementsUrl}?${query}` : props.advertisementsUrl
-        const data = await fetchJson(url)
-        const normalized = (Array.isArray(data) ? data : []).map(normalizeAdvertisement)
-        // Фильтруем объекты, оставляя только те, где есть хоть одна свободная сторона в диапазоне
-        objects.value = normalized.filter((item) => hasAvailableSideInRange(item, bookingRange.value.from, bookingRange.value.to))
+        const data = await fetchJson(`${props.advertisementsUrl}${query ? '?'+query : ''}`)
+        objects.value = (data || []).map(item => ({
+            ...item,
+            side_details: normalizeSideDetails(item),
+            sides: normalizeSideDetails(item).map(s => s.code),
+            bookings: item.bookings || []
+        }))
         syncMapPlacemarks()
     } finally { isLoadingObjects.value = false }
 }
 
-async function loadAdvertisementDetails(objectId) {
-    isLoadingCardDetails.value = true
-    try {
-        const data = await fetchJson(`${props.advertisementsUrl}/${objectId}`)
-        const normalized = normalizeAdvertisement(data)
-        objects.value = objects.value.map(item => String(item.id) === String(objectId) ? normalized : item)
-        if (!normalized.sides.includes(activeSideCode.value)) activeSideCode.value = normalized.sides[0] || ''
-    } catch (e) { console.error(e) } finally { isLoadingCardDetails.value = false }
-}
-
 // --- Map Logic ---
-function loadYandexMap() {
-    return new Promise((resolve, reject) => {
-        if (window.ymaps) return window.ymaps.ready(resolve)
-        const script = document.createElement('script')
-        script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU'
-        script.onload = () => window.ymaps.ready(resolve)
-        script.onerror = reject
-        document.head.appendChild(script)
-    })
-}
-
 function syncMapPlacemarks() {
-    if (!map || !isMapLoaded.value) return
+    if (!map) return
     placemarks.forEach(p => map.geoObjects.remove(p))
     placemarks.clear()
 
     objects.value.forEach(item => {
-        if (!item.location?.latitude || !item.location?.longitude) return
+        if (!item.location?.latitude) return
         const p = new window.ymaps.Placemark(
             [item.location.latitude, item.location.longitude],
             {}, { preset: 'islands#redIcon' }
@@ -482,91 +368,52 @@ function syncMapPlacemarks() {
         placemarks.set(item.id, p)
         map.geoObjects.add(p)
     })
-
-    if (objects.value.length > 0) {
-        const bounds = map.geoObjects.getBounds()
-        if (bounds) map.setBounds(bounds, { checkZoomRange: true, zoomMargin: 30 })
-    }
 }
 
-async function focusObject(objectId) {
-    activeObjectId.value = objectId
-    const item = objects.value.find(obj => String(obj.id) === String(objectId))
+async function focusObject(id) {
+    activeObjectId.value = id
+    const item = objects.value.find(o => o.id === id)
     activeSideCode.value = item?.sides[0] || ''
-    await loadAdvertisementDetails(objectId)
-    const p = placemarks.get(objectId)
-    if (p && map) map.setCenter(p.geometry.getCoordinates(), 16, { duration: 300 })
+    if (map) map.setCenter([item.location.latitude, item.location.longitude], 15, { duration: 300 })
 }
 
 // --- Actions ---
-function resetFilters() { 
-    filters.productType = ''
-    filters.constrTypeId = ''
-    filters.bookingFrom = ''
-    filters.bookingTo = ''
-    applyFilters() 
-}
-
-function applyFilters() { 
-    activeObjectId.value = null
-    loadFilters().then(loadAdvertisements) 
-}
-
+function applyFilters() { activeObjectId.value = null; loadAdvertisements() }
+function resetFilters() { Object.assign(filters, { productType: '', constrTypeId: '', bookingFrom: '', bookingTo: '' }); applyFilters() }
 function selectSide(code) { activeSideCode.value = code }
 function closeCard() { activeObjectId.value = null }
-function openRequestModal() { requestStatusMessage.value = ''; isRequestModalOpen.value = true }
+function openRequestModal() { requestForm.startedAt = Date.now(); isRequestModalOpen.value = true }
 function closeRequestModal() { isRequestModalOpen.value = false }
 
 async function submitRequest() {
-    if (!activeObject.value || !activeSide.value) return
     isSubmittingRequest.value = true
-
     try {
-        const response = await fetch(props.productRequestsUrl, {
+        await fetch(props.productRequestsUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            credentials: 'same-origin',
-            body: JSON.stringify({
-                advertisementId: activeObject.value.id,
-                side: activeSide.value.code,
-                contactName: requestForm.name,
-                contactPhone: requestForm.phone,
-                comment: requestForm.comment,
-            }),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...requestForm, advertisementId: activeObject.value.id, side: activeSide.value.code })
         })
-
-        const data = await response.json().catch(() => ({}))
-        if (!response.ok) {
-            requestStatusMessage.value = data.message || 'Не удалось отправить заявку.'
-            return
-        }
-
-        requestStatusMessage.value = data.message || 'Заявка отправлена.'
-        setTimeout(() => {
-            isRequestModalOpen.value = false
-            requestForm.name = ''
-            requestForm.phone = ''
-            requestForm.comment = ''
-        }, 1000)
-    } finally {
-        isSubmittingRequest.value = false
-    }
+        requestStatusMessage.value = 'Заявка успешно отправлена!'
+        setTimeout(closeRequestModal, 1500)
+    } catch {
+        requestStatusMessage.value = 'Ошибка при отправке.'
+    } finally { isSubmittingRequest.value = false }
 }
 
-// --- Lifecycle ---
 onMounted(async () => {
     await loadFilters()
     await loadAdvertisements()
-    try {
-        await loadYandexMap()
-        map = new window.ymaps.Map(mapContainer.value, { center: [55.75, 37.61], zoom: 10, controls: ['zoomControl'] })
+    const script = document.createElement('script')
+    script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU'
+    script.onload = () => window.ymaps.ready(() => {
+        map = new window.ymaps.Map(mapContainer.value, { center: [55.75, 37.61], zoom: 10 })
         isMapLoaded.value = true
         syncMapPlacemarks()
-    } catch (e) { mapError.value = 'Ошибка загрузки карты' }
+    })
+    document.head.appendChild(script)
 })
 
 onBeforeUnmount(() => map?.destroy())
-
 watch(() => filters.productType, () => { filters.constrTypeId = ''; loadFilters() })
 </script>
 
