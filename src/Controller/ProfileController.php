@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfileFormType;
+use App\Repository\ProductRequestRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -63,13 +64,19 @@ final class ProfileController extends AbstractController
     }
 
     #[Route('/profile/orders', name: 'profile.orders')]
-    public function orders(): Response
+    public function orders(ProductRequestRepository $productRequestRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
+        $userRequests = [];
+        if ($user->getPhone()) {
+            $userRequests = $productRequestRepository->findLatestByContactPhone($user->getPhone());
+        }
+
         return $this->render('profile/orders.html.twig', [
             'user' => $user,
+            'userRequests' => $userRequests,
         ]);
     }
 }
