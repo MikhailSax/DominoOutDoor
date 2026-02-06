@@ -15,4 +15,18 @@ class ProductRequestRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, ProductRequest::class);
     }
+
+    /**
+     * @return ProductRequest[]
+     */
+    public function findLatestByContactPhone(string $contactPhone, int $limit = 50): array
+    {
+        return $this->createQueryBuilder('pr')
+            ->andWhere('pr.contactPhone = :contactPhone')
+            ->setParameter('contactPhone', $contactPhone)
+            ->orderBy('pr.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }
