@@ -7,6 +7,8 @@ use App\Repository\AdvertisementRepository;
 use App\Repository\AdvertisementTypeRepository;
 use App\Repository\AdvertisementCategoryRepository;
 use App\Services\AdvertisementService;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\ProductRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,6 +44,49 @@ class AdvertisementController extends AbstractController
         $data = $this->advertisementService->getData([$advertisement]);
 
         return $this->json($data[0] ?? []);
+    }
+
+
+    #[Route('/product-requests', name: 'product_requests_create', methods: ['POST'])]
+    public function createProductRequest(Request $request, AdvertisementRepository $repository, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $payload = json_decode($request->getContent(), true);
+
+        if (!is_array($payload)) {
+            return $this->json(['message' => 'Некорректный формат запроса.'], 400);
+        }
+
+        $advertisementId = (int) ($payload['advertisementId'] ?? 0);
+        $sideCode = mb_strtoupper(trim((string) ($payload['side'] ?? '')));
+        $contactName = trim((string) ($payload['contactName'] ?? ''));
+        $contactPhone = trim((string) ($payload['contactPhone'] ?? ''));
+        $comment = isset($payload['comment']) ? trim((string) $payload['comment']) : null;
+
+        if ($advertisementId <= 0 || $sideCode === '' || $contactName === '' || $contactPhone === '') {
+            return $this->json(['message' => 'Заполните конструкцию, сторону и контактные данные.'], 422);
+        }
+
+        $advertisement = $repository->find($advertisementId);
+        if (!$advertisement instanceof Advertisement) {
+            return $this->json(['message' => 'Конструкция не найдена.'], 404);
+        }
+
+        if (!in_array($sideCode, $advertisement->getSides(), true)) {
+            return $this->json(['message' => 'У выбранной конструкции нет указанной стороны.'], 422);
+        }
+
+        $productRequest = (new ProductRequest())
+            ->setAdvertisement($advertisement)
+            ->setSideCode($sideCode)
+            ->setContactName($contactName)
+            ->setContactPhone($contactPhone)
+            ->setComment($comment)
+            ->setCreatedAt(new \DateTimeImmutable());
+
+        $entityManager->persist($productRequest);
+        $entityManager->flush();
+
+        return $this->json(['message' => 'Заявка отправлена.', 'id' => $productRequest->getId()], 201);
     }
 
     #[Route('/filters', name: 'filters', methods: ['GET'])]

@@ -21,6 +21,7 @@ function initVue() {
             const app = createApp(App, {
                 filtersUrl: mapElement.dataset.filtersUrl || '/api/filters',
                 advertisementsUrl: mapElement.dataset.advertisementsUrl || '/api/advertisements',
+                productRequestsUrl: mapElement.dataset.productRequestsUrl || '/api/product-requests',
             });
             app.mount('#map-app');
             mapElement._vueApp = app;
