@@ -8,6 +8,11 @@
         data-filters-url="{{ path('api_filters') }}"
         data-advertisements-url="{{ path('api_advertisements_list') }}"
         data-product-requests-url="{{ path('api_product_requests_create') }}"
+        data-is-authenticated="{{ app.user ? '1' : '0' }}"
+        data-user-id="{{ app.user ? app.user.id : '' }}"
+        data-user-name="{{ app.user ? (app.user.firstName ~ ' ' ~ (app.user.lastName ?? ''))|trim : '' }}"
+        data-user-phone="{{ app.user ? app.user.phone : '' }}"
+        data-user-email="{{ app.user ? app.user.userIdentifier : '' }}"
     >
         <div id="initial-spinner" class="flex min-h-[60vh] items-center justify-center">
             <div class="text-center text-gray-600">

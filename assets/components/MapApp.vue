@@ -201,13 +201,18 @@
                         <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                             <label class="text-sm">
                                 <span class="mb-1 block text-slate-600">Ваше имя</span>
-                                <input v-model.trim="requestForm.name" required class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
+                                <input v-model.trim="requestForm.name" :readonly="isAuthenticated" required class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
                             </label>
                             <label class="text-sm">
                                 <span class="mb-1 block text-slate-600">Телефон</span>
-                                <input v-model.trim="requestForm.phone" required class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
+                                <input v-model.trim="requestForm.phone" :readonly="isAuthenticated" required class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
                             </label>
                         </div>
+
+                        <p v-if="isAuthenticated" class="text-xs text-slate-500">
+                            Контактные данные подтянуты из вашего аккаунта.
+                        </p>
+
                         <label class="text-sm block">
                             <span class="mb-1 block text-slate-600">Комментарий</span>
                             <textarea v-model.trim="requestForm.comment" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
@@ -235,6 +240,10 @@ const props = defineProps({
     filtersUrl: { type: String, required: true },
     advertisementsUrl: { type: String, required: true },
     productRequestsUrl: { type: String, required: true },
+    authUser: {
+        type: Object,
+        required: true,
+    },
 })
 
 // --- Состояние ---
@@ -284,6 +293,8 @@ const requestSummary = computed(() => {
     if (!activeObject.value || !activeSide.value) return 'Выберите конструкцию'
     return `${activeObject.value.address} • сторона ${activeSide.value.code}`
 })
+
+const isAuthenticated = computed(() => Boolean(props.authUser?.isAuthenticated))
 
 // --- Вспомогательные функции ---
 function parseDate(value) {
@@ -408,6 +419,12 @@ function closeCard() { activeObjectId.value = null }
 function openRequestModal() {
     requestStatusMessage.value = ''
     requestForm.startedAt = Date.now()
+
+    if (isAuthenticated.value) {
+        requestForm.name = props.authUser?.name || requestForm.name
+        requestForm.phone = props.authUser?.phone || requestForm.phone
+    }
+
     isRequestModalOpen.value = true
 }
 
@@ -427,6 +444,9 @@ async function submitRequest() {
                 contactName: requestForm.name,
                 contactPhone: requestForm.phone,
                 comment: requestForm.comment || null,
+                userId: props.authUser?.id ?? null,
+                userEmail: props.authUser?.email || null,
+                isAuthenticated: isAuthenticated.value,
             })
         })
         if (response.ok) {

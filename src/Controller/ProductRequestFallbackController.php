@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Advertisement;
 use App\Entity\ProductRequest;
+use App\Entity\User;
 use App\Repository\AdvertisementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +31,17 @@ final class ProductRequestFallbackController extends AbstractController
         $contactName = trim((string) ($payload['contactName'] ?? ''));
         $contactPhone = trim((string) ($payload['contactPhone'] ?? ''));
         $comment = isset($payload['comment']) ? trim((string) $payload['comment']) : null;
+
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            $fullName = trim(sprintf('%s %s', $user->getFirstName() ?? '', $user->getLastName() ?? ''));
+            if ($fullName !== '') {
+                $contactName = $fullName;
+            }
+            if (($user->getPhone() ?? '') !== '') {
+                $contactPhone = (string) $user->getPhone();
+            }
+        }
 
         $honeypot = trim((string) ($payload['website'] ?? ''));
         $formStartedAt = (int) ($payload['formStartedAt'] ?? 0);

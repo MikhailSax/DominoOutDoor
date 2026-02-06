@@ -9,6 +9,7 @@ use App\Repository\AdvertisementCategoryRepository;
 use App\Services\AdvertisementService;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\ProductRequest;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -65,6 +66,16 @@ class AdvertisementController extends AbstractController
         $contactPhone = trim((string) ($payload['contactPhone'] ?? ''));
         $comment = isset($payload['comment']) ? trim((string) $payload['comment']) : null;
 
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            $fullName = trim(sprintf('%s %s', $user->getFirstName() ?? '', $user->getLastName() ?? ''));
+            if ($fullName !== '') {
+                $contactName = $fullName;
+            }
+            if (($user->getPhone() ?? '') !== '') {
+                $contactPhone = (string) $user->getPhone();
+            }
+        }
 
         $honeypot = trim((string) ($payload['website'] ?? ''));
         $formStartedAt = (int) ($payload['formStartedAt'] ?? 0);

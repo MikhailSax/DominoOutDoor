@@ -6,6 +6,7 @@
             :filters-url="runtimeConfig.filtersUrl"
             :advertisements-url="runtimeConfig.advertisementsUrl"
             :product-requests-url="runtimeConfig.productRequestsUrl"
+            :auth-user="runtimeConfig.authUser"
         />
     </div>
 </template>
@@ -28,6 +29,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    authUser: {
+        type: Object,
+        required: true,
+    },
 })
 
 const isLoading = ref(true)
@@ -35,6 +40,7 @@ const runtimeConfig = ref({
     filtersUrl: props.filtersUrl,
     advertisementsUrl: props.advertisementsUrl,
     productRequestsUrl: props.productRequestsUrl,
+    authUser: props.authUser,
 })
 
 onMounted(() => {
