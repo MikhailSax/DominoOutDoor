@@ -21,8 +21,13 @@ final class ProfileController extends AbstractController
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher,
     ): Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         /** @var User $user */
         $user = $this->getUser();
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
 
         $form = $this->createForm(ProfileFormType::class, $user);
         $form->handleRequest($request);
@@ -66,8 +71,13 @@ final class ProfileController extends AbstractController
     #[Route('/profile/orders', name: 'profile.orders')]
     public function orders(ProductRequestRepository $productRequestRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         /** @var User $user */
         $user = $this->getUser();
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
 
         $userRequests = [];
         if ($user->getPhone()) {

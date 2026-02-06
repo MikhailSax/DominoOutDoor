@@ -18,6 +18,7 @@ security:
             provider: app_user_provider
             custom_authenticators:
                 - App\Security\YandexAuthenticator
+            entry_point: form_login
             form_login:
                 login_path: app_login
                 check_path: app_login
