@@ -85,8 +85,8 @@
                         </div>
                         <p class="text-xs text-slate-600">{{ item.category || 'Категория не указана' }} • {{ item.type || 'Тип не указан' }}</p>
                         <p class="mt-1 text-xs text-slate-500">Стороны: {{ formatSides(item.sides) }}</p>
-                        <p class="mt-1 text-xs font-medium" :class="getItemStatus(item, bookingRange.from, bookingRange.to).busy ? 'text-red-600' : 'text-emerald-600'">
-                            {{ getItemStatus(item, bookingRange.from, bookingRange.to).text }}
+                        <p class="mt-1 text-xs font-medium" :class="getSideStatus(item, item.sides[0], bookingRange.from, bookingRange.to).busy ? 'text-red-600' : 'text-emerald-600'">
+                            {{ getSideStatus(item, item.sides[0], bookingRange.from, bookingRange.to).text }}
                         </p>
                     </button>
                 </div>
@@ -262,7 +262,7 @@ let placemarks = new Map()
 const filteredParams = computed(() => {
     const params = new URLSearchParams()
     if (filters.productType) params.append('productType', filters.productType)
-    if (filters.constrTypeId) params.append('constrTypeId', filters.constrTypeId)
+    if (ilters.constrTypeId) params.append('constrTypeId', filters.constrTypeId)
     return params
 })
 
@@ -367,7 +367,6 @@ function parseDate(value) {
     return Number.isNaN(date.getTime()) ? null : date
 }
 
-
 function overlapsRange(startDate, endDate, fromDate, toDate) {
     const start = parseDate(startDate)
     const end = parseDate(endDate)
@@ -404,27 +403,8 @@ function getSideStatus(item, sideCode, fromDate = null, toDate = null) {
     return { busy: false, text: 'Свободна' }
 }
 
-function getItemStatus(item, fromDate, toDate) {
-    const sides = normalizeSideDetails(item)
-    if (!Array.isArray(sides) || sides.length === 0) return { busy: false, text: 'Свободна' }
-
-    const sideStatuses = sides.map((side) => getSideStatus(item, side.code, fromDate, toDate))
-    const allBusy = sideStatuses.every((status) => status.busy)
-
-    if (allBusy) {
-        const busyDates = sideStatuses
-            .map((status) => status.text.match(/с (.+)$/)?.[1] || null)
-            .filter(Boolean)
-            .sort()
-
-        if (busyDates.length > 0) {
-            return { busy: true, text: `Конструкция занята, свободна с ${busyDates[0]}` }
-        }
-
-        return { busy: true, text: 'Конструкция занята' }
-    }
-
-    return { busy: false, text: 'Есть свободные стороны' }
+function hasAvailableSideInRange(item, fromDate, toDate) {
+    return normalizeSideDetails(item).some((side) => !getSideStatus(item, side.code, fromDate, toDate).busy)
 }
 
 // --- API ---
@@ -451,7 +431,7 @@ async function loadAdvertisements() {
         const url = query ? `${props.advertisementsUrl}?${query}` : props.advertisementsUrl
         const data = await fetchJson(url)
         const normalized = (Array.isArray(data) ? data : []).map(normalizeAdvertisement)
-        objects.value = normalized
+        objects.value = normalized.filter((item) => hasAvailableSideInRange(item, bookingRange.value.from, bookingRange.value.to))
         syncMapPlacemarks()
     } finally { isLoadingObjects.value = false }
 }
@@ -563,7 +543,6 @@ async function submitRequest() {
         isSubmittingRequest.value = false
     }
 }
-
 
 // --- Lifecycle ---
 onMounted(async () => {
