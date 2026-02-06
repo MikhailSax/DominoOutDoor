@@ -25,7 +25,7 @@ class Advertisement
     private ?string $address = null;
 
     #[ORM\Column(type: 'json', nullable: true)]
-    private array $sides = [];
+    private $sides = [];
 
     #[ORM\ManyToOne(targetEntity: AdvertisementType::class, inversedBy: 'advertisements')]
     #[ORM\JoinColumn(nullable: false)]
@@ -117,7 +117,27 @@ class Advertisement
             ))));
         }
 
-        return $this->sides ?? [];
+        if ($this->sides === null) {
+            return [];
+        }
+
+        if (is_array($this->sides)) {
+            return $this->sides;
+        }
+
+        if (is_string($this->sides)) {
+            $decoded = json_decode($this->sides, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+
+            $parts = array_filter(array_map('trim', explode(',', $this->sides)));
+            if ($parts !== []) {
+                return array_values($parts);
+            }
+        }
+
+        return [];
     }
 
     /**
