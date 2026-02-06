@@ -8,11 +8,15 @@ use App\Entity\AdvertisementSide;
 class AdvertisementService
 {
     /**
-     * @param Advertisement[] $ads
+     * @param array<int, Advertisement|array<string, mixed>> $ads
      */
     public function getData(array $ads): array
     {
-        return array_map(function (Advertisement $item): array {
+        return array_map(function (Advertisement|array $item): array {
+            if (is_array($item)) {
+                return $this->serializeLegacyRow($item);
+            }
+
             $sideDetails = $this->serializeSides($item);
 
             return [
@@ -32,6 +36,59 @@ class AdvertisementService
                 ],
             ];
         }, $ads);
+    }
+
+
+    /**
+     * @param array<string, mixed> $row
+     */
+    private function serializeLegacyRow(array $row): array
+    {
+        $sides = $this->normalizeSides($row['side'] ?? $row['sides'] ?? []);
+
+        return [
+            'id' => $row['id'] ?? null,
+            'category' => $row['category'] ?? null,
+            'category_id' => $row['category_id'] ?? null,
+            'type' => $row['type'] ?? null,
+            'type_id' => $row['type_id'] ?? null,
+            'place_number' => $row['place_number'] ?? null,
+            'sides' => $sides,
+            'side_details' => array_map(static fn (string $code): array => [
+                'code' => $code,
+                'description' => null,
+                'price' => null,
+                'image' => null,
+                'image_url' => null,
+            ], $sides),
+            'code' => $row['code'] ?? null,
+            'address' => $row['address'] ?? null,
+            'location' => [
+                'latitude' => $row['latitude'] ?? null,
+                'longitude' => $row['longitude'] ?? null,
+            ],
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function normalizeSides(mixed $sides): array
+    {
+        if (is_array($sides)) {
+            return array_values(array_filter(array_map(static fn (mixed $side): string => mb_strtoupper(trim((string) $side)), $sides)));
+        }
+
+        if (is_string($sides) && $sides !== '') {
+            $decoded = json_decode($sides, true);
+            if (is_array($decoded)) {
+                return array_values(array_filter(array_map(static fn (mixed $side): string => mb_strtoupper(trim((string) $side)), $decoded)));
+            }
+
+            return array_values(array_filter(array_map(static fn (string $side): string => mb_strtoupper(trim($side)), explode(',', $sides))));
+        }
+
+        return [];
     }
 
     /**
