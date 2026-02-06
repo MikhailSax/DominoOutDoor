@@ -9,10 +9,12 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -28,7 +30,17 @@ class RegistrationController extends AbstractController
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager,
+        #[Autowire(service: 'limiter.registration')] RateLimiterFactory $registrationLimiter,
     ): Response {
+        $limiter = $registrationLimiter->create($request->getClientIp() ?? 'unknown');
+        $rateLimit = $limiter->consume();
+
+        if (!$rateLimit->isAccepted()) {
+            $this->addFlash('verify_email_error', 'Слишком много попыток регистрации. Попробуйте немного позже.');
+
+            return $this->redirectToRoute('app_register');
+        }
+
         $user = new User();
         $user->setCreatedAt(new \DateTimeImmutable());
         $user->setRoles(['ROLE_USER']);
@@ -37,6 +49,22 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $honeypot = trim((string) $form->get('website')->getData());
+            $formStartedAt = (int) $form->get('formStartedAt')->getData();
+            $nowMs = (int) floor(microtime(true) * 1000);
+
+            if ($honeypot !== '') {
+                $this->addFlash('verify_email_error', 'Запрос отклонён.');
+
+                return $this->redirectToRoute('app_register');
+            }
+
+            if ($formStartedAt > 0 && $nowMs - $formStartedAt < 2500) {
+                $this->addFlash('verify_email_error', 'Пожалуйста, отправьте форму чуть позже.');
+
+                return $this->redirectToRoute('app_register');
+            }
+
             $plainPassword = (string) $form->get('plainPassword')->getData();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
