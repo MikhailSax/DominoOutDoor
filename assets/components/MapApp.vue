@@ -463,7 +463,7 @@ function syncMapPlacemarks() {
         const p = new window.ymaps.Placemark(
             [item.location.latitude, item.location.longitude],
             {}, 
-            { preset: 'islands#redIcon' }
+            { preset: 'islands#redCircleDotIcon' }
         )
         p.events.add('click', () => focusObject(item.id))
         placemarks.set(item.id, p)
