@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-[calc(100vh-72px)] min-h-[680px] flex-col overflow-hidden bg-slate-100 text-slate-800 lg:flex-row">
+    <div class="flex min-h-[calc(100vh-72px)] flex-col bg-slate-100 text-slate-800 lg:h-[calc(100vh-72px)] lg:flex-row lg:overflow-hidden">
         <aside class="w-full border-b border-slate-200 bg-white lg:w-[380px] lg:border-b-0 lg:border-r">
             <div class="flex h-full flex-col">
                 <div class="border-b border-slate-100 px-5 py-4">
@@ -69,7 +69,7 @@
                     <span class="rounded-full bg-blue-600 px-3 py-1 text-white">{{ objects.length }}</span>
                 </div>
 
-                <div class="min-h-0 flex-1 overflow-y-auto p-3">
+                <div class="max-h-[45vh] min-h-0 flex-1 overflow-y-auto p-3 lg:max-h-none">
                     <div v-if="isLoadingObjects" class="p-4 text-sm text-slate-500">Загрузка объектов...</div>
                     <div v-else-if="objects.length === 0"
                          class="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-500">
@@ -103,7 +103,7 @@
             </div>
         </aside>
 
-        <section class="relative min-h-[380px] flex-1 p-3 lg:p-5">
+        <section class="relative min-h-[360px] flex-1 p-2 sm:p-3 lg:p-5">
             <div v-if="mapError" class="flex h-full items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-700">
                 {{ mapError }}
             </div>
@@ -111,19 +111,19 @@
                 Загрузка карты...
             </div>
             
-            <div v-show="isMapLoaded" ref="mapContainer" class="h-full w-full rounded-2xl border-2 border-white shadow-lg"></div>
+            <div v-show="isMapLoaded" ref="mapContainer" class="h-[62vh] min-h-[320px] w-full rounded-2xl border-2 border-white shadow-lg lg:h-full"></div>
 
             <article
                 v-if="activeObject && activeSide"
-                class="absolute right-6 top-6 z-20 w-[520px] max-w-[calc(100%-48px)] overflow-hidden rounded-3xl bg-white shadow-2xl"
+                class="absolute inset-x-2 bottom-2 z-20 max-h-[68vh] w-auto overflow-y-auto rounded-2xl bg-white shadow-2xl sm:right-4 sm:top-4 sm:bottom-auto sm:max-h-[calc(100%-2rem)] sm:w-[520px] sm:max-w-[calc(100%-2rem)] sm:rounded-3xl lg:right-6 lg:top-6 lg:max-h-none lg:max-w-[calc(100%-48px)]"
             >
                 <div class="relative">
-                    <div class="absolute left-4 top-4 z-10 flex rounded-full bg-white p-1 shadow-lg">
+                    <div class="absolute left-3 top-3 z-10 flex max-w-[calc(100%-90px)] overflow-x-auto rounded-full bg-white p-1 shadow-lg sm:left-4 sm:top-4">
                         <button
                             v-for="side in activeObject.side_details"
                             :key="side.code"
                             type="button"
-                            class="min-w-[42px] rounded-full px-3 py-1.5 text-base font-semibold"
+                            class="min-w-[42px] rounded-full px-3 py-1 text-sm font-semibold sm:py-1.5 sm:text-base"
                             :class="activeSideCode === side.code 
                                 ? 'bg-red-600 text-white' 
                                 : (getSideStatus(activeObject, side.code, bookingRange.from, bookingRange.to).busy ? 'bg-red-50 text-red-600' : 'text-emerald-700 hover:bg-emerald-50')"
@@ -135,7 +135,7 @@
 
                     <button
                         type="button"
-                        class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-2xl font-light text-slate-700 shadow hover:bg-slate-100"
+                        class="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white text-xl font-light text-slate-700 shadow hover:bg-slate-100 sm:right-4 sm:top-4 sm:h-10 sm:w-10 sm:text-2xl"
                         @click="closeCard"
                     >
                         ×
@@ -144,32 +144,32 @@
                     <img
                         :src="activeSide.image_url || '/images/orig.png'"
                         alt="Фото стороны"
-                        class="h-64 w-full object-cover"
+                        class="h-44 w-full object-cover sm:h-56 lg:h-64"
                     >
                 </div>
 
-                <div class="space-y-4 p-5">
+                <div class="space-y-3 p-4 sm:space-y-4 sm:p-5">
                     <div class="flex items-start justify-between gap-4">
                         <div>
-                            <h3 class="text-2xl leading-tight font-bold text-slate-900">{{ activeObject.address }}</h3>
-                            <p class="mt-1 text-lg font-semibold tracking-wide text-slate-400">GID {{ activeObject.id }}</p>
+                            <h3 class="text-lg leading-tight font-bold text-slate-900 sm:text-2xl">{{ activeObject.address }}</h3>
+                            <p class="mt-1 text-sm font-semibold tracking-wide text-slate-400 sm:text-lg">GID {{ activeObject.id }}</p>
                         </div>
-                        <a :href="`/api/advertisements/${activeObject.id}`" target="_blank" class="pt-1 text-base font-medium text-blue-600 hover:text-blue-700">
+                        <a :href="`/api/advertisements/${activeObject.id}`" target="_blank" class="pt-1 text-sm font-medium text-blue-600 hover:text-blue-700 sm:text-base">
                             Подробнее
                         </a>
                     </div>
 
-                    <dl class="grid grid-cols-[1fr_auto] gap-x-5 gap-y-2 text-lg">
+                    <dl class="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-sm sm:gap-x-5 sm:text-lg">
                         <dt class="border-b border-slate-200 pb-1 text-slate-600">Формат</dt>
                         <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeObject.type }}</dd>
                         <dt class="border-b border-slate-200 pb-1 text-slate-600">Сторона</dt>
                         <dd class="border-b border-slate-200 pb-1 font-semibold text-slate-800">{{ activeSide.code }}</dd>
                         <dt class="border-b border-slate-200 pb-1 text-slate-600">Описание стороны</dt>
-                        <dd class="border-b border-slate-200 pb-1 text-right text-base font-medium text-slate-700">
+                        <dd class="border-b border-slate-200 pb-1 text-right text-xs font-medium text-slate-700 sm:text-base">
                             {{ activeSide.description || 'Описание пока не заполнено' }}
                         </dd>
                         <dt class="text-slate-500">Прайс без НДС</dt>
-                        <dd class="text-right text-3xl font-extrabold text-slate-900">{{ formatPrice(activeSide.price) }}</dd>
+                        <dd class="text-right text-xl font-extrabold text-slate-900 sm:text-3xl">{{ formatPrice(activeSide.price) }}</dd>
                     </dl>
 
                     <p v-if="activeSideStatus" class="rounded-lg px-3 py-2 text-sm font-medium" 
