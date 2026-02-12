@@ -1,9 +1,33 @@
 <template>
     <div class="flex min-h-[calc(100vh-72px)] flex-col bg-slate-100 text-slate-800 lg:h-[calc(100vh-72px)] lg:flex-row lg:overflow-hidden">
-        <aside class="w-full border-b border-slate-200 bg-white lg:w-[380px] lg:border-b-0 lg:border-r">
+        <div class="sticky top-0 z-20 flex gap-2 border-b border-slate-200 bg-white/95 p-2 backdrop-blur lg:hidden">
+            <button
+                type="button"
+                class="flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition"
+                :class="mobileView === 'list' ? 'bg-red-600 text-white shadow' : 'bg-slate-100 text-slate-700'"
+                @click="mobileView = 'list'"
+            >
+                Фильтры
+            </button>
+            <button
+                type="button"
+                class="flex-1 rounded-xl px-4 py-2 text-sm font-semibold transition"
+                :class="mobileView === 'map' ? 'bg-red-600 text-white shadow' : 'bg-slate-100 text-slate-700'"
+                @click="mobileView = 'map'"
+            >
+                Карта
+            </button>
+        </div>
+
+        <aside class="w-full border-b border-slate-200 bg-white lg:w-[380px] lg:border-b-0 lg:border-r" :class="mobileView === 'map' ? 'hidden lg:block' : 'block'">
             <div class="flex h-full flex-col">
                 <div class="border-b border-slate-100 px-5 py-4">
-                    <h1 class="text-xl font-bold text-slate-900">Каталог конструкций</h1>
+                    <div class="flex items-start justify-between gap-3">
+                        <h1 class="text-xl font-bold text-slate-900">Каталог конструкций</h1>
+                        <span v-if="hasActiveFilters" class="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700">
+                            Умный фильтр включен
+                        </span>
+                    </div>
                     <p class="mt-1 text-sm text-slate-500">Подберите рекламные поверхности по параметрам.</p>
                 </div>
 
@@ -12,7 +36,7 @@
                         <label class="mb-1 block text-sm font-medium text-slate-700">Тип продукции</label>
                         <select
                             v-model="filters.productType"
-                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-100"
                         >
                             <option value="">Все типы продукции</option>
                             <option v-for="item in productTypes" :key="item.id" :value="String(item.id)">
@@ -26,13 +50,26 @@
                         <select
                             v-model="filters.constrTypeId"
                             :disabled="isLoadingFilters"
-                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-100 disabled:cursor-not-allowed disabled:bg-slate-100"
                         >
                             <option value="">Все типы конструкций</option>
                             <option v-for="item in constrTypes" :key="item.id" :value="String(item.id)">
                                 {{ item.name }}
                             </option>
                         </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4">
+                        <button
+                            v-for="preset in datePresets"
+                            :key="preset.key"
+                            type="button"
+                            class="rounded-lg border px-2 py-1.5 font-semibold transition"
+                            :class="activeDatePreset === preset.key ? 'border-red-600 bg-red-600 text-white' : 'border-slate-300 bg-white text-slate-600 hover:border-red-200 hover:text-red-600'"
+                            @click="applyDatePreset(preset.key)"
+                        >
+                            {{ preset.label }}
+                        </button>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
@@ -66,7 +103,7 @@
 
                 <div class="flex items-center justify-between border-b border-slate-100 px-5 py-3 text-sm">
                     <span class="font-medium text-slate-600">Найдено поверхностей:</span>
-                    <span class="rounded-full bg-blue-600 px-3 py-1 text-white">{{ objects.length }}</span>
+                    <span class="rounded-full bg-red-600 px-3 py-1 text-white">{{ objects.length }}</span>
                 </div>
 
                 <div class="max-h-[45vh] min-h-0 flex-1 overflow-y-auto p-3 lg:max-h-none">
@@ -103,7 +140,7 @@
             </div>
         </aside>
 
-        <section class="relative min-h-[360px] flex-1 p-2 sm:p-3 lg:p-5">
+        <section class="relative min-h-[360px] flex-1 p-2 sm:p-3 lg:p-5" :class="mobileView === 'list' ? 'hidden lg:block' : 'block'">
             <div v-if="mapError" class="flex h-full items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-6 text-center text-sm text-red-700">
                 {{ mapError }}
             </div>
@@ -111,7 +148,7 @@
                 Загрузка карты...
             </div>
             
-            <div v-show="isMapLoaded" ref="mapContainer" class="h-[62vh] min-h-[320px] w-full rounded-2xl border-2 border-white shadow-lg lg:h-full"></div>
+            <div v-show="isMapLoaded" ref="mapContainer" class="h-[calc(100vh-140px)] min-h-[380px] w-full rounded-2xl border-2 border-white shadow-lg lg:h-full"></div>
 
             <article
                 v-if="activeObject && activeSide"
@@ -253,6 +290,8 @@ const objects = ref([])
 const filters = reactive({ productType: '', constrTypeId: '', bookingFrom: '', bookingTo: '' })
 const isLoadingFilters = ref(false)
 const isLoadingObjects = ref(false)
+const mobileView = ref('list')
+const activeDatePreset = ref('')
 
 const mapContainer = ref(null)
 const isMapLoaded = ref(false)
@@ -266,6 +305,14 @@ const requestForm = reactive({ name: '', phone: '', comment: '', startedAt: 0 })
 
 let map = null
 let placemarks = new Map()
+let applyTimer = null
+
+const datePresets = [
+    { key: 'today', label: 'Сегодня' },
+    { key: 'week', label: '7 дней' },
+    { key: 'month', label: '30 дней' },
+    { key: 'clear', label: 'Без дат' },
+]
 
 // --- Вычисляемые свойства ---
 const bookingRange = computed(() => {
@@ -295,12 +342,43 @@ const requestSummary = computed(() => {
 })
 
 const isAuthenticated = computed(() => Boolean(props.authUser?.isAuthenticated))
+const hasActiveFilters = computed(() => Boolean(filters.productType || filters.constrTypeId || filters.bookingFrom || filters.bookingTo))
 
 // --- Вспомогательные функции ---
 function parseDate(value) {
     if (!value) return null
     const date = new Date(`${value}T00:00:00`)
     return isNaN(date.getTime()) ? null : date
+}
+
+function toInputDate(date) {
+    return date.toISOString().slice(0, 10)
+}
+
+function applyDatePreset(presetKey) {
+    activeDatePreset.value = presetKey
+    const now = new Date()
+
+    if (presetKey === 'clear') {
+        filters.bookingFrom = ''
+        filters.bookingTo = ''
+        return
+    }
+
+    const from = new Date(now)
+    const to = new Date(now)
+    if (presetKey === 'week') to.setDate(now.getDate() + 7)
+    if (presetKey === 'month') to.setDate(now.getDate() + 30)
+
+    filters.bookingFrom = toInputDate(from)
+    filters.bookingTo = toInputDate(to)
+}
+
+function scheduleApplyFilters() {
+    clearTimeout(applyTimer)
+    applyTimer = setTimeout(() => {
+        applyFilters()
+    }, 250)
 }
 
 function formatSides(sides) {
@@ -410,6 +488,7 @@ function applyFilters() {
 
 function resetFilters() {
     Object.assign(filters, { productType: '', constrTypeId: '', bookingFrom: '', bookingTo: '' })
+    activeDatePreset.value = ''
     applyFilters()
 }
 
@@ -487,10 +566,20 @@ function initMap() {
 }
 
 onBeforeUnmount(() => map?.destroy())
+onBeforeUnmount(() => clearTimeout(applyTimer))
 
 watch(() => filters.productType, () => {
     filters.constrTypeId = ''
     loadFilters()
+})
+
+watch(() => filters.constrTypeId, scheduleApplyFilters)
+watch(() => [filters.bookingFrom, filters.bookingTo], ([from, to]) => {
+    if (from && to && parseDate(to) < parseDate(from)) {
+        filters.bookingTo = from
+    }
+    if (!from && !to) activeDatePreset.value = ''
+    scheduleApplyFilters()
 })
 </script>
 
