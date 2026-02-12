@@ -64,7 +64,7 @@ HELP);
         for ($row = 1; $row <= min($highestRow, 30); $row++) {
             $current = [];
             for ($column = 1; $column <= $highestColumnIndex; $column++) {
-                $value = trim((string) $sheet->getCellByColumnAndRow($column, $row)->getFormattedValue());
+                $value = trim((string) $sheet->getCell(Coordinate::stringFromColumnIndex($column) . $row)->getFormattedValue());
                 if ($value !== '') {
                     $current[$this->normalizeHeader($value)] = $column;
                 }
@@ -166,7 +166,7 @@ HELP);
             return '';
         }
 
-        return trim((string) $sheet->getCellByColumnAndRow($column, $row)->getFormattedValue());
+        return trim((string) $sheet->getCell(Coordinate::stringFromColumnIndex($column) . $row)->getFormattedValue());
     }
 
     private function readLink($sheet, int $row, array $headers, string $header): ?string
@@ -176,7 +176,7 @@ HELP);
             return null;
         }
 
-        $cell = $sheet->getCellByColumnAndRow($column, $row);
+        $cell = $sheet->getCell(Coordinate::stringFromColumnIndex($column) . $row);
         $url = trim((string) $cell->getHyperlink()->getUrl());
         if ($url !== '') {
             return $url;
