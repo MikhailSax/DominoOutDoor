@@ -1,3 +1,5 @@
 services:
   app:
-    command: sh -c "composer install --no-interaction && php-fpm"
+    command: >
+      sh -c "composer install --no-interaction --prefer-dist --no-progress --no-scripts
+      && php-fpm"
