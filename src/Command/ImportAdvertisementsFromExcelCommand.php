@@ -8,7 +8,6 @@ use App\Entity\AdvertisementType;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -51,7 +50,6 @@ HELP);
 
         if (!is_file($file)) {
             $io->error(sprintf('Файл не найден: %s', $file));
-
             return Command::FAILURE;
         }
 
@@ -66,7 +64,7 @@ HELP);
         for ($row = 1; $row <= min($highestRow, 30); $row++) {
             $current = [];
             for ($column = 1; $column <= $highestColumnIndex; $column++) {
-                $value = trim((string) $this->getCell($sheet, $column, $row)->getFormattedValue());
+                $value = trim((string) $sheet->getCellByColumnAndRow($column, $row)->getFormattedValue());
                 if ($value !== '') {
                     $current[$this->normalizeHeader($value)] = $column;
                 }
@@ -81,7 +79,6 @@ HELP);
 
         if ($headerRow === null) {
             $io->error('Не найдена строка заголовка. Ожидаются как минимум колонки: Номер, Сторона, Тип конструкции.');
-
             return Command::FAILURE;
         }
 
@@ -169,7 +166,7 @@ HELP);
             return '';
         }
 
-        return trim((string) $this->getCell($sheet, $column, $row)->getFormattedValue());
+        return trim((string) $sheet->getCellByColumnAndRow($column, $row)->getFormattedValue());
     }
 
     private function readLink($sheet, int $row, array $headers, string $header): ?string
@@ -179,7 +176,7 @@ HELP);
             return null;
         }
 
-        $cell = $this->getCell($sheet, $column, $row);
+        $cell = $sheet->getCellByColumnAndRow($column, $row);
         $url = trim((string) $cell->getHyperlink()->getUrl());
         if ($url !== '') {
             return $url;
@@ -189,17 +186,10 @@ HELP);
         return $value !== '' ? $value : null;
     }
 
-
-    private function getCell(Worksheet $sheet, int $column, int $row)
-    {
-        return $sheet->getCell(Coordinate::stringFromColumnIndex($column) . $row);
-    }
-
     private function normalizeHeader(string $header): string
     {
         $header = mb_strtolower($header);
         $header = preg_replace('/\s+/u', '', $header) ?? $header;
-
         return str_replace(['\n', '\r', 'ё'], ['', '', 'е'], $header);
     }
 
@@ -254,3 +244,4 @@ HELP);
         return is_numeric($normalized) ? number_format((float) $normalized, 2, '.', '') : null;
     }
 }
+
