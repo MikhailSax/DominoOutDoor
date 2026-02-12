@@ -152,7 +152,7 @@
 
             <article
                 v-if="activeObject && activeSide"
-                class="absolute inset-x-2 bottom-2 z-20 max-h-[68vh] w-auto overflow-y-auto rounded-2xl bg-white shadow-2xl sm:right-4 sm:top-4 sm:bottom-auto sm:max-h-[calc(100%-2rem)] sm:w-[520px] sm:max-w-[calc(100%-2rem)] sm:rounded-3xl lg:right-6 lg:top-6 lg:max-h-none lg:max-w-[calc(100%-48px)]"
+                class="absolute inset-x-2 bottom-2 z-20 max-h-[68vh] w-auto overflow-y-auto rounded-2xl bg-white shadow-2xl sm:right-4 sm:top-4 sm:bottom-auto sm:max-h-[calc(100%-2rem)] sm:w-[520px] sm:max-w-[calc(100%-2rem)] sm:rounded-3xl lg:inset-x-auto lg:right-0 lg:top-1/2 lg:max-h-[calc(100%-3rem)] lg:w-[520px] lg:max-w-[calc(100%-24px)] lg:-translate-y-1/2"
             >
                 <div class="relative">
                     <div class="absolute left-3 top-3 z-10 flex max-w-[calc(100%-90px)] overflow-x-auto rounded-full bg-white p-1 shadow-lg sm:left-4 sm:top-4">
@@ -557,7 +557,7 @@ onMounted(async () => {
 
 function initMap() {
     map = new window.ymaps.Map(mapContainer.value, {
-        center: [55.75, 37.61],
+        center: [51.8335, 107.5841],
         zoom: 10,
         controls: ['zoomControl']
     })
