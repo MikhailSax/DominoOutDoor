@@ -50,7 +50,6 @@ HELP);
 
         if (!is_file($file)) {
             $io->error(sprintf('Файл не найден: %s', $file));
-
             return Command::FAILURE;
         }
 
@@ -80,7 +79,6 @@ HELP);
 
         if ($headerRow === null) {
             $io->error('Не найдена строка заголовка. Ожидаются как минимум колонки: Номер, Сторона, Тип конструкции.');
-
             return Command::FAILURE;
         }
 
@@ -192,7 +190,6 @@ HELP);
     {
         $header = mb_strtolower($header);
         $header = preg_replace('/\s+/u', '', $header) ?? $header;
-
         return str_replace(['\n', '\r', 'ё'], ['', '', 'е'], $header);
     }
 
@@ -247,3 +244,4 @@ HELP);
         return is_numeric($normalized) ? number_format((float) $normalized, 2, '.', '') : null;
     }
 }
+
