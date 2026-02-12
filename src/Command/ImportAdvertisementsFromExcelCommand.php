@@ -28,17 +28,28 @@ class ImportAdvertisementsFromExcelCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument('file', InputArgument::REQUIRED, 'Путь до Excel-файла (.xlsx/.xls).');
+        $this
+            ->addArgument('file', InputArgument::OPTIONAL, 'Путь до Excel-файла (.xlsx/.xls).')
+            ->setHelp(<<<'HELP'
+Если путь к файлу не передан, команда попробует взять файл list.xlsx из корня проекта.
+
+Примеры:
+  php bin/console app:import:ads-from-excel
+  php bin/console app:import:ads-from-excel /full/path/to/file.xlsx
+HELP);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $file = (string) $input->getArgument('file');
+        $file = trim((string) ($input->getArgument('file') ?? ''));
+        if ($file === '') {
+            $file = dirname(__DIR__, 2) . '/list.xlsx';
+            $io->note(sprintf('Путь к файлу не передан, используется файл по умолчанию: %s', $file));
+        }
 
         if (!is_file($file)) {
             $io->error(sprintf('Файл не найден: %s', $file));
-
             return Command::FAILURE;
         }
 
@@ -68,7 +79,6 @@ class ImportAdvertisementsFromExcelCommand extends Command
 
         if ($headerRow === null) {
             $io->error('Не найдена строка заголовка. Ожидаются как минимум колонки: Номер, Сторона, Тип конструкции.');
-
             return Command::FAILURE;
         }
 
@@ -180,7 +190,6 @@ class ImportAdvertisementsFromExcelCommand extends Command
     {
         $header = mb_strtolower($header);
         $header = preg_replace('/\s+/u', '', $header) ?? $header;
-
         return str_replace(['\n', '\r', 'ё'], ['', '', 'е'], $header);
     }
 
@@ -235,3 +244,4 @@ class ImportAdvertisementsFromExcelCommand extends Command
         return is_numeric($normalized) ? number_format((float) $normalized, 2, '.', '') : null;
     }
 }
+
