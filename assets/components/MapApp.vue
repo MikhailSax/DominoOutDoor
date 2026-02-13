@@ -179,10 +179,13 @@
                     </button>
 
                     <img
-                        :src="activeSide.image_url || '/images/orig.png'"
+                        :src="isNightPhoto && activeSide.night_image_url ? activeSide.night_image_url : (activeSide.image_url || '/images/orig.png')"
                         alt="Фото стороны"
                         class="h-44 w-full object-cover sm:h-56 lg:h-64"
                     >
+                    <button v-if="activeSide.night_image_url" type="button" class="absolute bottom-3 right-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700" @click="isNightPhoto = !isNightPhoto">
+                        {{ isNightPhoto ? 'Дневное фото' : 'Ночное фото' }}
+                    </button>
                 </div>
 
                 <div class="space-y-3 p-4 sm:space-y-4 sm:p-5">
@@ -217,32 +220,42 @@
                     <button
                         type="button"
                         class="w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white hover:bg-red-700"
-                        @click="openRequestModal"
+                        @click="addToCart"
                     >
-                        Оставить заявку на экран
+                        Добавить в корзину
+                    </button>
+                    <button type="button" class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50" @click="openOrderModal">
+                        Оформить заказ ({{ cartItems.length }})
                     </button>
                 </div>
             </article>
 
-            <div v-if="isRequestModalOpen" class="absolute inset-0 z-30 flex items-center justify-center bg-slate-900/55 p-4">
+            <div v-if="isOrderModalOpen" class="absolute inset-0 z-30 flex items-center justify-center bg-slate-900/55 p-4">
                 <div class="w-full max-w-xl rounded-2xl bg-white p-5 shadow-2xl">
                     <div class="mb-4 flex items-start justify-between">
                         <div>
-                            <h4 class="text-lg font-bold text-slate-900">Заявка на размещение</h4>
-                            <p class="text-sm text-slate-500">{{ requestSummary }}</p>
+                            <h4 class="text-lg font-bold text-slate-900">Корзина и заказ</h4>
+                            <p class="text-sm text-slate-500">Бронь действует 24 часа после отправки</p>
                         </div>
-                        <button type="button" class="text-2xl text-slate-500 hover:text-slate-800" @click="closeRequestModal">×</button>
+                        <button type="button" class="text-2xl text-slate-500 hover:text-slate-800" @click="closeOrderModal">×</button>
                     </div>
 
-                    <form class="space-y-3" @submit.prevent="submitRequest">
+                    <form class="space-y-3" @submit.prevent="submitOrder">
+                        <div class="max-h-32 space-y-2 overflow-auto rounded-lg border border-slate-200 p-2">
+                            <div v-for="(item, index) in cartItems" :key="`${item.advertisementId}-${item.side}-${index}`" class="flex items-center justify-between text-sm">
+                                <span>{{ item.address }} • {{ item.side }} • {{ item.startDate }}—{{ item.endDate }}</span>
+                                <button type="button" class="text-red-600" @click="removeCartItem(index)">Удалить</button>
+                            </div>
+                            <p v-if="!cartItems.length" class="text-sm text-slate-500">Корзина пуста</p>
+                        </div>
                         <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                             <label class="text-sm">
                                 <span class="mb-1 block text-slate-600">Ваше имя</span>
-                                <input v-model.trim="requestForm.name" :readonly="isAuthenticated" required class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
+                                <input v-model.trim="orderForm.name" :readonly="isAuthenticated" required class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
                             </label>
                             <label class="text-sm">
                                 <span class="mb-1 block text-slate-600">Телефон</span>
-                                <input v-model.trim="requestForm.phone" :readonly="isAuthenticated" required class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
+                                <input v-model.trim="orderForm.phone" :readonly="isAuthenticated" required class="w-full rounded-lg border border-slate-300 px-3 py-2"/>
                             </label>
                         </div>
 
@@ -252,15 +265,16 @@
 
                         <label class="text-sm block">
                             <span class="mb-1 block text-slate-600">Комментарий</span>
-                            <textarea v-model.trim="requestForm.comment" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
+                            <textarea v-model.trim="orderForm.comment" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
                         </label>
+                        <input v-model="orderForm.website" type="text" autocomplete="off" class="hidden" tabindex="-1" />
                         
-                        <p v-if="requestStatusMessage" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">{{ requestStatusMessage }}</p>
+                        <p v-if="orderStatusMessage" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">{{ orderStatusMessage }}</p>
 
                         <div class="flex gap-2">
-                            <button type="button" class="flex-1 rounded-lg border border-slate-300 py-2 text-sm font-semibold hover:bg-slate-50" @click="closeRequestModal">Отмена</button>
-                            <button type="submit" :disabled="isSubmittingRequest" class="flex-1 rounded-lg bg-red-600 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60">
-                                {{ isSubmittingRequest ? 'Отправляем...' : 'Отправить заявку' }}
+                            <button type="button" class="flex-1 rounded-lg border border-slate-300 py-2 text-sm font-semibold hover:bg-slate-50" @click="closeOrderModal">Отмена</button>
+                            <button type="submit" :disabled="isSubmittingOrder || !cartItems.length" class="flex-1 rounded-lg bg-red-600 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60">
+                                {{ isSubmittingOrder ? 'Отправляем...' : 'Подтвердить заказ' }}
                             </button>
                         </div>
                     </form>
@@ -276,7 +290,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 const props = defineProps({
     filtersUrl: { type: String, required: true },
     advertisementsUrl: { type: String, required: true },
-    productRequestsUrl: { type: String, required: true },
+    ordersUrl: { type: String, required: true },
     authUser: {
         type: Object,
         required: true,
@@ -298,10 +312,12 @@ const isMapLoaded = ref(false)
 const mapError = ref('')
 const activeObjectId = ref(null)
 const activeSideCode = ref('')
-const isRequestModalOpen = ref(false)
-const isSubmittingRequest = ref(false)
-const requestStatusMessage = ref('')
-const requestForm = reactive({ name: '', phone: '', comment: '', startedAt: 0 })
+const isOrderModalOpen = ref(false)
+const isSubmittingOrder = ref(false)
+const orderStatusMessage = ref('')
+const orderForm = reactive({ name: '', phone: '', comment: '', website: '', startedAt: 0 })
+const cartItems = ref([])
+const isNightPhoto = ref(false)
 
 let map = null
 let placemarks = new Map()
@@ -334,11 +350,6 @@ const activeSide = computed(() => {
 const activeSideStatus = computed(() => {
     if (!activeObject.value || !activeSide.value) return null
     return getSideStatus(activeObject.value, activeSide.value.code, bookingRange.value.from, bookingRange.value.to)
-})
-
-const requestSummary = computed(() => {
-    if (!activeObject.value || !activeSide.value) return 'Выберите конструкцию'
-    return `${activeObject.value.address} • сторона ${activeSide.value.code}`
 })
 
 const isAuthenticated = computed(() => Boolean(props.authUser?.isAuthenticated))
@@ -393,7 +404,7 @@ function formatPrice(price) {
 function normalizeSideDetails(item) {
     const sides = Array.isArray(item?.sides) ? item.sides : []
     if (item?.side_details?.length) return item.side_details
-    return sides.map(code => ({ code: String(code).toUpperCase(), price: null, image_url: null }))
+    return sides.map(code => ({ code: String(code).toUpperCase(), price: null, image_url: null, night_image_url: null }))
 }
 
 function getSideStatus(item, sideCode, fromDate, toDate) {
@@ -475,6 +486,7 @@ function focusObject(id) {
     activeObjectId.value = id
     const item = objects.value.find(o => o.id === id)
     activeSideCode.value = item?.sides[0] || ''
+    isNightPhoto.value = false
     if (map && item?.location) {
         map.setCenter([item.location.latitude, item.location.longitude], 15, { duration: 300 })
     }
@@ -492,52 +504,72 @@ function resetFilters() {
     applyFilters()
 }
 
-function selectSide(code) { activeSideCode.value = code }
+function selectSide(code) { activeSideCode.value = code; isNightPhoto.value = false }
 function closeCard() { activeObjectId.value = null }
 
-function openRequestModal() {
-    requestStatusMessage.value = ''
-    requestForm.startedAt = Date.now()
-
-    if (isAuthenticated.value) {
-        requestForm.name = props.authUser?.name || requestForm.name
-        requestForm.phone = props.authUser?.phone || requestForm.phone
-    }
-
-    isRequestModalOpen.value = true
+function addToCart() {
+    if (!activeObject.value || !activeSide.value) return
+    const startDate = filters.bookingFrom || toInputDate(new Date())
+    const end = new Date()
+    end.setDate(end.getDate() + 30)
+    const endDate = filters.bookingTo || toInputDate(end)
+    cartItems.value.push({
+        advertisementId: activeObject.value.id,
+        address: activeObject.value.address,
+        side: activeSide.value.code,
+        startDate,
+        endDate,
+    })
+    orderStatusMessage.value = 'Позиция добавлена в корзину.'
 }
 
-function closeRequestModal() { isRequestModalOpen.value = false }
+function removeCartItem(index) {
+    cartItems.value.splice(index, 1)
+}
 
-async function submitRequest() {
-    isSubmittingRequest.value = true
+function openOrderModal() {
+    orderStatusMessage.value = ''
+    orderForm.startedAt = Date.now()
+
+    if (isAuthenticated.value) {
+        orderForm.name = props.authUser?.name || orderForm.name
+        orderForm.phone = props.authUser?.phone || orderForm.phone
+    }
+
+    isOrderModalOpen.value = true
+}
+
+function closeOrderModal() { isOrderModalOpen.value = false }
+
+async function submitOrder() {
+    isSubmittingOrder.value = true
     try {
-        const response = await fetch(props.productRequestsUrl, {
+        const response = await fetch(props.ordersUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                website: '',
-                formStartedAt: requestForm.startedAt,
-                advertisementId: activeObject.value.id,
-                side: activeSide.value.code,
-                contactName: requestForm.name,
-                contactPhone: requestForm.phone,
-                comment: requestForm.comment || null,
+                website: orderForm.website,
+                formStartedAt: orderForm.startedAt,
+                contactName: orderForm.name,
+                contactPhone: orderForm.phone,
+                comment: orderForm.comment || null,
+                items: cartItems.value,
                 userId: props.authUser?.id ?? null,
                 userEmail: props.authUser?.email || null,
                 isAuthenticated: isAuthenticated.value,
             })
         })
         if (response.ok) {
-            requestStatusMessage.value = 'Заявка успешно отправлена!'
-            setTimeout(closeRequestModal, 1500)
+            orderStatusMessage.value = 'Заказ отправлен. Бронь активна 24 часа.'
+            cartItems.value = []
+            setTimeout(closeOrderModal, 1500)
         } else {
             throw new Error()
         }
     } catch {
-        requestStatusMessage.value = 'Ошибка при отправке.'
+        orderStatusMessage.value = 'Ошибка при отправке.'
     } finally {
-        isSubmittingRequest.value = false
+        isSubmittingOrder.value = false
     }
 }
 
