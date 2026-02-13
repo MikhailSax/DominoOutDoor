@@ -8,6 +8,7 @@ use App\Entity\AdvertisementCategory;
 use App\Entity\AdvertisementSide;
 use App\Entity\AdvertisementType;
 use App\Entity\Banner;
+use App\Entity\Order;
 use App\Entity\ProductRequest;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -44,6 +45,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Типы рекламной продукции', 'fas fa-layer-group', AdvertisementType::class);
         yield MenuItem::linkToCrud('Стороны конструкций (цены/фото)', 'fas fa-images', AdvertisementSide::class);
         yield MenuItem::linkToCrud('Бронирования', 'fas fa-calendar-check', AdvertisementBooking::class);
+        yield MenuItem::linkToCrud('Заказы', 'fas fa-shopping-cart', Order::class);
         yield MenuItem::linkToCrud('Заявки по продуктам', 'fas fa-inbox', ProductRequest::class);
         yield MenuItem::linkToRoute('Календарь занятости', 'fas fa-calendar', 'admin_booking_calendar');
     }

@@ -21,7 +21,7 @@ function initVue() {
             const app = createApp(App, {
                 filtersUrl: mapElement.dataset.filtersUrl || '/api/filters',
                 advertisementsUrl: mapElement.dataset.advertisementsUrl || '/api/advertisements',
-                productRequestsUrl: mapElement.dataset.productRequestsUrl || '/product-requests',
+                ordersUrl: mapElement.dataset.ordersUrl || '/api/orders',
                 authUser: {
                     isAuthenticated: mapElement.dataset.isAuthenticated === '1',
                     id: mapElement.dataset.userId ? Number(mapElement.dataset.userId) : null,

@@ -68,6 +68,8 @@ class AdvertisementService
                 'price' => null,
                 'image' => null,
                 'image_url' => null,
+                'night_image' => null,
+                'night_image_url' => null,
             ], $sides),
             'code' => $row['code'] ?? null,
             'address' => $row['address'] ?? null,
@@ -128,6 +130,8 @@ class AdvertisementService
                     'price' => $isA ? $advertisement->getSideAPrice() : ($code === 'B' ? $advertisement->getSideBPrice() : null),
                     'image' => $isA ? $advertisement->getSideAImage() : ($code === 'B' ? $advertisement->getSideBImage() : null),
                     'image_url' => $this->buildImageUrl($isA ? $advertisement->getSideAImage() : ($code === 'B' ? $advertisement->getSideBImage() : null)),
+                    'night_image' => null,
+                    'night_image_url' => null,
                 ];
             }, $codes);
         }
@@ -148,6 +152,8 @@ class AdvertisementService
                 'price' => $price,
                 'image' => $image,
                 'image_url' => $this->buildImageUrl($image),
+                'night_image' => $side->getNightImage(),
+                'night_image_url' => $this->buildImageUrl($side->getNightImage()),
             ];
         }, $sideItems);
     }

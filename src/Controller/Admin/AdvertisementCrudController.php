@@ -47,6 +47,9 @@ class AdvertisementCrudController extends AbstractCrudController
                 ->setChoices([
                     'A' => 'A',
                     'B' => 'B',
+                    'A1' => 'A1',
+                    'A2' => 'A2',
+                    'A3' => 'A3',
                     'C' => 'C',
                     'D' => 'D',
                 ])

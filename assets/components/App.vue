@@ -5,7 +5,7 @@
             v-else
             :filters-url="runtimeConfig.filtersUrl"
             :advertisements-url="runtimeConfig.advertisementsUrl"
-            :product-requests-url="runtimeConfig.productRequestsUrl"
+            :orders-url="runtimeConfig.ordersUrl"
             :auth-user="runtimeConfig.authUser"
         />
     </div>
@@ -25,7 +25,7 @@ const props = defineProps({
         type: String,
         required: true,
     },
-    productRequestsUrl: {
+    ordersUrl: {
         type: String,
         required: true,
     },
@@ -39,7 +39,7 @@ const isLoading = ref(true)
 const runtimeConfig = ref({
     filtersUrl: props.filtersUrl,
     advertisementsUrl: props.advertisementsUrl,
-    productRequestsUrl: props.productRequestsUrl,
+    ordersUrl: props.ordersUrl,
     authUser: props.authUser,
 })
 

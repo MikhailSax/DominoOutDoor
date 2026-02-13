@@ -30,6 +30,9 @@ class AdvertisementSide
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nightImage = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,4 +97,17 @@ class AdvertisementSide
 
         return $this;
     }
+
+    public function getNightImage(): ?string
+    {
+        return $this->nightImage;
+    }
+
+    public function setNightImage(?string $nightImage): static
+    {
+        $this->nightImage = $nightImage;
+
+        return $this;
+    }
 }
+
