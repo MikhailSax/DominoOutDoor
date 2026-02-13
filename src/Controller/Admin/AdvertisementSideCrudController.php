@@ -44,6 +44,19 @@ class AdvertisementSideCrudController extends AbstractCrudController
             ->setFormTypeOption('attr.accept', 'image/*')
             ->onlyOnForms();
 
+
+        $nightImagePreview = ImageField::new('nightImage', 'Ночное фото')
+            ->setBasePath('/uploads/advertisements/')
+            ->hideOnForm();
+
+        $nightImageUpload = ImageField::new('nightImage', 'Загрузить ночное фото')
+            ->setBasePath('/uploads/advertisements/')
+            ->setUploadDir('public/uploads/advertisements/')
+            ->setUploadedFileNamePattern('side-night-[randomhash].[extension]')
+            ->setRequired(false)
+            ->setFormTypeOption('attr.accept', 'image/*')
+            ->onlyOnForms();
+
         return [
             IdField::new('id')->hideOnForm(),
             AssociationField::new('advertisement', 'Конструкция')
@@ -52,6 +65,9 @@ class AdvertisementSideCrudController extends AbstractCrudController
                 ->setChoices([
                     'A' => 'A',
                     'B' => 'B',
+                    'A1' => 'A1',
+                    'A2' => 'A2',
+                    'A3' => 'A3',
                     'C' => 'C',
                     'D' => 'D',
                 ])
@@ -61,7 +77,9 @@ class AdvertisementSideCrudController extends AbstractCrudController
                 ->setCurrency('RUB')
                 ->setStoredAsCents(false),
             $imagePreview,
+            $nightImagePreview,
             $imageUpload,
+            $nightImageUpload,
         ];
     }
 }

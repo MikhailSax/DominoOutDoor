@@ -32,6 +32,10 @@ class AdvertisementBooking
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $comment = null;
 
+    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Order $orderRef = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,6 +101,18 @@ class AdvertisementBooking
         return $this;
     }
 
+
+    public function getOrderRef(): ?Order
+    {
+        return $this->orderRef;
+    }
+
+    public function setOrderRef(?Order $orderRef): static
+    {
+        $this->orderRef = $orderRef;
+
+        return $this;
+    }
     public function getComment(): ?string
     {
         return $this->comment;
