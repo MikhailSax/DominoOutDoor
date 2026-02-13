@@ -131,7 +131,7 @@
                             {{ item.category || '—' }} • {{ item.type || '—' }}
                         </p>
                         <p class="mt-1 text-xs text-slate-500">Стороны: {{ formatSides(item.sides) }}</p>
-                        <p class="mt-1 text-xs font-medium" 
+                        <p class="mt-1 text-xs font-medium"
                            :class="getItemStatus(item, bookingRange.from, bookingRange.to).busy ? 'text-red-600' : 'text-emerald-600'">
                             {{ getItemStatus(item, bookingRange.from, bookingRange.to).text }}
                         </p>
@@ -147,7 +147,7 @@
             <div v-else-if="!isMapLoaded" class="flex h-full items-center justify-center rounded-2xl border border-slate-200 bg-white text-sm text-slate-500">
                 Загрузка карты...
             </div>
-            
+
             <div v-show="isMapLoaded" ref="mapContainer" class="h-[calc(100vh-140px)] min-h-[380px] w-full rounded-2xl border-2 border-white shadow-lg lg:h-full"></div>
 
             <article
@@ -161,8 +161,8 @@
                             :key="side.code"
                             type="button"
                             class="min-w-[42px] rounded-full px-3 py-1 text-sm font-semibold sm:py-1.5 sm:text-base"
-                            :class="activeSideCode === side.code 
-                                ? 'bg-red-600 text-white' 
+                            :class="activeSideCode === side.code
+                                ? 'bg-red-600 text-white'
                                 : (getSideStatus(activeObject, side.code, bookingRange.from, bookingRange.to).busy ? 'bg-red-50 text-red-600' : 'text-emerald-700 hover:bg-emerald-50')"
                             @click="selectSide(side.code)"
                         >
@@ -191,9 +191,6 @@
                             <h3 class="text-lg leading-tight font-bold text-slate-900 sm:text-2xl">{{ activeObject.address }}</h3>
                             <p class="mt-1 text-sm font-semibold tracking-wide text-slate-400 sm:text-lg">GID {{ activeObject.id }}</p>
                         </div>
-                        <a :href="`/api/advertisements/${activeObject.id}`" target="_blank" class="pt-1 text-sm font-medium text-blue-600 hover:text-blue-700 sm:text-base">
-                            Подробнее
-                        </a>
                     </div>
 
                     <dl class="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-sm sm:gap-x-5 sm:text-lg">
@@ -209,7 +206,7 @@
                         <dd class="text-right text-xl font-extrabold text-slate-900 sm:text-3xl">{{ formatPrice(activeSide.price) }}</dd>
                     </dl>
 
-                    <p v-if="activeSideStatus" class="rounded-lg px-3 py-2 text-sm font-medium" 
+                    <p v-if="activeSideStatus" class="rounded-lg px-3 py-2 text-sm font-medium"
                        :class="activeSideStatus.busy ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'">
                         {{ activeSideStatus.text }}
                     </p>
@@ -254,7 +251,7 @@
                             <span class="mb-1 block text-slate-600">Комментарий</span>
                             <textarea v-model.trim="requestForm.comment" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
                         </label>
-                        
+
                         <p v-if="requestStatusMessage" class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-600">{{ requestStatusMessage }}</p>
 
                         <div class="flex gap-2">
@@ -322,7 +319,7 @@ const bookingRange = computed(() => {
     return { from, to }
 })
 
-const activeObject = computed(() => 
+const activeObject = computed(() =>
     objects.value.find(o => String(o.id) === String(activeObjectId.value)) || null
 )
 
@@ -400,7 +397,7 @@ function getSideStatus(item, sideCode, fromDate, toDate) {
     const bookings = (item?.bookings || []).filter(b => b.side_code === sideCode)
     const from = fromDate || new Date()
     const to = toDate || from
-    
+
     const overlap = bookings.find(b => {
         const start = parseDate(b.start_date)
         const end = parseDate(b.end_date)
@@ -439,7 +436,7 @@ async function loadAdvertisements() {
         const params = new URLSearchParams()
         if (filters.productType) params.append('productType', filters.productType)
         if (filters.constrTypeId) params.append('constrTypeId', filters.constrTypeId)
-        
+
         const res = await fetch(`${props.advertisementsUrl}?${params.toString()}`)
         const data = await res.json()
         objects.value = (data || []).map(item => ({
@@ -462,7 +459,7 @@ function syncMapPlacemarks() {
         if (!item.location?.latitude) return
         const p = new window.ymaps.Placemark(
             [item.location.latitude, item.location.longitude],
-            {}, 
+            {},
             { preset: 'islands#redCircleDotIcon' }
         )
         p.events.add('click', () => focusObject(item.id))
@@ -544,7 +541,7 @@ async function submitRequest() {
 onMounted(async () => {
     await loadFilters()
     await loadAdvertisements()
-    
+
     if (!window.ymaps) {
         const script = document.createElement('script')
         script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU'
@@ -558,7 +555,7 @@ onMounted(async () => {
 function initMap() {
     map = new window.ymaps.Map(mapContainer.value, {
         center: [51.8335, 107.5841],
-        zoom: 10,
+        zoom: 14,
         controls: ['zoomControl']
     })
     isMapLoaded.value = true
