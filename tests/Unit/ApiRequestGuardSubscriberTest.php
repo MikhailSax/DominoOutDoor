@@ -14,7 +14,7 @@ class ApiRequestGuardSubscriberTest extends TestCase
 {
     public function testAllowsSameRequestHostEvenWhenBaseUrlHostIsDifferent(): void
     {
-        $subscriber = new ApiRequestGuardSubscriber('https://domino-outdoor.ru');
+        $subscriber = new ApiRequestGuardSubscriber('https://bmsbur.ru');
 
         $kernel = $this->createMock(KernelInterface::class);
         $request = Request::create('http://127.0.0.1/api/advertisements');
@@ -28,10 +28,10 @@ class ApiRequestGuardSubscriberTest extends TestCase
 
     public function testBlocksForeignOrigin(): void
     {
-        $subscriber = new ApiRequestGuardSubscriber('https://domino-outdoor.ru');
+        $subscriber = new ApiRequestGuardSubscriber('https://bmsbur.ru');
 
         $kernel = $this->createMock(KernelInterface::class);
-        $request = Request::create('https://domino-outdoor.ru/api/advertisements');
+        $request = Request::create('https://bmsbur.ru/api/advertisements');
         $request->headers->set('Origin', 'https://evil.example');
 
         $event = new RequestEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST);

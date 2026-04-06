@@ -16,21 +16,22 @@ final class ProductRequestFallbackController extends AbstractController
 {
     #[Route('/product-requests', name: 'product_requests_create_fallback', methods: ['POST'])]
     public function __invoke(
-        Request $request,
+        Request                 $request,
         AdvertisementRepository $repository,
-        EntityManagerInterface $entityManager,
-    ): JsonResponse {
+        EntityManagerInterface  $entityManager,
+    ): JsonResponse
+    {
         $payload = json_decode($request->getContent(), true);
 
         if (!is_array($payload)) {
             return $this->json(['message' => 'Некорректный формат запроса.'], 400);
         }
 
-        $advertisementId = (int) ($payload['advertisementId'] ?? 0);
-        $sideCode = mb_strtoupper(trim((string) ($payload['side'] ?? '')));
-        $contactName = trim((string) ($payload['contactName'] ?? ''));
-        $contactPhone = trim((string) ($payload['contactPhone'] ?? ''));
-        $comment = isset($payload['comment']) ? trim((string) $payload['comment']) : null;
+        $advertisementId = (int)($payload['advertisementId'] ?? 0);
+        $sideCode = mb_strtoupper(trim((string)($payload['side'] ?? '')));
+        $contactName = trim((string)($payload['contactName'] ?? ''));
+        $contactPhone = trim((string)($payload['contactPhone'] ?? ''));
+        $comment = isset($payload['comment']) ? trim((string)$payload['comment']) : null;
 
         $user = $this->getUser();
         if ($user instanceof User) {
@@ -39,25 +40,25 @@ final class ProductRequestFallbackController extends AbstractController
                 $contactName = $fullName;
             }
             if (($user->getPhone() ?? '') !== '') {
-                $contactPhone = (string) $user->getPhone();
+                $contactPhone = (string)$user->getPhone();
             }
         }
 
-        $honeypot = trim((string) ($payload['website'] ?? ''));
-        $formStartedAt = (int) ($payload['formStartedAt'] ?? 0);
+        $honeypot = trim((string)($payload['website'] ?? ''));
+        $formStartedAt = (int)($payload['formStartedAt'] ?? 0);
 
         if ($honeypot !== '') {
             return $this->json(['message' => 'Запрос отклонён.'], 422);
         }
 
-        $nowMs = (int) floor(microtime(true) * 1000);
+        $nowMs = (int)floor(microtime(true) * 1000);
         if ($formStartedAt > 0 && $nowMs - $formStartedAt < 2500) {
             return $this->json(['message' => 'Пожалуйста, отправьте форму чуть позже.'], 429);
         }
 
         $session = $request->hasSession() ? $request->getSession() : null;
         if ($session !== null) {
-            $lastRequestAt = (int) $session->get('product_request_last_at', 0);
+            $lastRequestAt = (int)$session->get('product_request_last_at', 0);
             if ($lastRequestAt > 0 && (time() - $lastRequestAt) < 20) {
                 return $this->json(['message' => 'Слишком частые отправки. Повторите через несколько секунд.'], 429);
             }

@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    container_name: domino_app
+    container_name: bms_app
     restart: unless-stopped
     working_dir: /var/www
     volumes:
@@ -18,7 +18,7 @@ services:
 
   nginx:
     image: nginx:1.27-alpine
-    container_name: domino_nginx
+    container_name: bms_nginx
     restart: unless-stopped
     depends_on:
       - app
@@ -31,7 +31,7 @@ services:
 ###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
-    container_name: domino_database
+    container_name: bms_database
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-app}
@@ -51,7 +51,7 @@ services:
 ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit
-    container_name: domino_mailer
+    container_name: bms_mailer
     restart: unless-stopped
     ports:
       - "1025:1025"

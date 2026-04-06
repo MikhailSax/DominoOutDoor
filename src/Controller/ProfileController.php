@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfileFormType;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRequestRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -69,8 +70,10 @@ final class ProfileController extends AbstractController
     }
 
     #[Route('/profile/orders', name: 'profile.orders')]
-    public function orders(ProductRequestRepository $productRequestRepository): Response
-    {
+    public function orders(
+        ProductRequestRepository $productRequestRepository,
+        OrderRepository $orderRepository,
+    ): Response {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         /** @var User $user */
@@ -79,6 +82,8 @@ final class ProfileController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
+        $userOrders = $orderRepository->findByUserOrdered($user);
+
         $userRequests = [];
         if ($user->getPhone()) {
             $userRequests = $productRequestRepository->findLatestByContactPhone($user->getPhone());
@@ -86,6 +91,7 @@ final class ProfileController extends AbstractController
 
         return $this->render('profile/orders.html.twig', [
             'user' => $user,
+            'userOrders' => $userOrders,
             'userRequests' => $userRequests,
         ]);
     }

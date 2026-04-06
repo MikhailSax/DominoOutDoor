@@ -57,29 +57,125 @@ class Order
         $this->bookings = new ArrayCollection();
     }
 
-    public function getId(): ?int { return $this->id; }
-    public function getUser(): ?User { return $this->user; }
-    public function setUser(?User $user): static { $this->user = $user; return $this; }
-    public function getContactName(): ?string { return $this->contactName; }
-    public function setContactName(string $contactName): static { $this->contactName = trim($contactName); return $this; }
-    public function getContactPhone(): ?string { return $this->contactPhone; }
-    public function setContactPhone(string $contactPhone): static { $this->contactPhone = trim($contactPhone); return $this; }
-    public function getComment(): ?string { return $this->comment; }
-    public function setComment(?string $comment): static { $this->comment = $comment === null ? null : trim($comment); return $this; }
-    public function getStatus(): string { return $this->status; }
-    public function setStatus(string $status): static { $this->status = $status; return $this; }
-    public function getCreatedAt(): ?\DateTimeImmutable { return $this->createdAt; }
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static { $this->createdAt = $createdAt; return $this; }
-    public function getReservedUntil(): ?\DateTimeImmutable { return $this->reservedUntil; }
-    public function setReservedUntil(\DateTimeImmutable $reservedUntil): static { $this->reservedUntil = $reservedUntil; return $this; }
-    public function getExpiredAt(): ?\DateTimeImmutable { return $this->expiredAt; }
-    public function setExpiredAt(?\DateTimeImmutable $expiredAt): static { $this->expiredAt = $expiredAt; return $this; }
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    public function getContactName(): ?string
+    {
+        return $this->contactName;
+    }
+
+    public function setContactName(string $contactName): static
+    {
+        $this->contactName = trim($contactName);
+        return $this;
+    }
+
+    public function getContactPhone(): ?string
+    {
+        return $this->contactPhone;
+    }
+
+    public function setContactPhone(string $contactPhone): static
+    {
+        $this->contactPhone = trim($contactPhone);
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): static
+    {
+        $this->comment = $comment === null ? null : trim($comment);
+        return $this;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    public function getReservedUntil(): ?\DateTimeImmutable
+    {
+        return $this->reservedUntil;
+    }
+
+    public function setReservedUntil(\DateTimeImmutable $reservedUntil): static
+    {
+        $this->reservedUntil = $reservedUntil;
+        return $this;
+    }
+
+    public function getExpiredAt(): ?\DateTimeImmutable
+    {
+        return $this->expiredAt;
+    }
+
+    public function setExpiredAt(?\DateTimeImmutable $expiredAt): static
+    {
+        $this->expiredAt = $expiredAt;
+        return $this;
+    }
 
     /** @return Collection<int, OrderItem> */
-    public function getItems(): Collection { return $this->items; }
-    public function addItem(OrderItem $item): static { if (!$this->items->contains($item)) { $this->items->add($item); $item->setOrderRef($this);} return $this; }
-    public function removeItem(OrderItem $item): static { if ($this->items->removeElement($item) && $item->getOrderRef() === $this) { $item->setOrderRef(null);} return $this; }
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(OrderItem $item): static
+    {
+        if (!$this->items->contains($item)) {
+            $this->items->add($item);
+            $item->setOrderRef($this);
+        }
+        return $this;
+    }
+
+    public function removeItem(OrderItem $item): static
+    {
+        if ($this->items->removeElement($item) && $item->getOrderRef() === $this) {
+            $item->setOrderRef(null);
+        }
+        return $this;
+    }
 
     /** @return Collection<int, AdvertisementBooking> */
-    public function getBookings(): Collection { return $this->bookings; }
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
 }

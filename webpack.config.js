@@ -1,3 +1,4 @@
+const path = require('path');
 const Encore = require('@symfony/webpack-encore');
 const webpack = require('webpack');
 
@@ -35,6 +36,10 @@ Encore
     .splitEntryChunks()
     .enablePostCssLoader()
     .enableVueLoader()
+    .addAliases({
+        // Шаблоны компилирует vue-loader — runtime без компилятора в бандле (меньше JS, проще CSP)
+        vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.runtime.esm-bundler.js'),
+    })
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 

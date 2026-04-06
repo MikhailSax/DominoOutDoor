@@ -1,18 +1,19 @@
 <template>
-    <div>
-        <Spinner v-if="isLoading" message="Загрузка интерфейса..." />
+    <div class="flex min-h-0 flex-1 flex-col">
+        <Spinner v-if="isLoading" message="Загрузка интерфейса..."/>
         <MapSection
             v-else
             :filters-url="runtimeConfig.filtersUrl"
             :advertisements-url="runtimeConfig.advertisementsUrl"
             :orders-url="runtimeConfig.ordersUrl"
+            :cart-url="runtimeConfig.cartUrl"
             :auth-user="runtimeConfig.authUser"
         />
     </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import Spinner from './Spinner.vue'
 import MapSection from './MapApp.vue'
 
@@ -29,6 +30,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    cartUrl: {
+        type: String,
+        required: true,
+    },
     authUser: {
         type: Object,
         required: true,
@@ -40,6 +45,7 @@ const runtimeConfig = ref({
     filtersUrl: props.filtersUrl,
     advertisementsUrl: props.advertisementsUrl,
     ordersUrl: props.ordersUrl,
+    cartUrl: props.cartUrl,
     authUser: props.authUser,
 })
 

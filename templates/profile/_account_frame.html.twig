@@ -1,0 +1,51 @@
+{# Обертка кабинета: hero в духе корпоративных OOH-сайтов (например OUTFRONT) + контент с боковой навигацией #}
+{% set page_title = page_title|default('Личный кабинет') %}
+{% set page_subtitle = page_subtitle|default('') %}
+{% set show_verification_badge = show_verification_badge|default(false) %}
+
+<header class="relative overflow-hidden border-b border-white/10 bg-gradient-to-br from-[#05299E] via-[#041d6b] to-[#0d1117] text-white">
+    <div class="pointer-events-none absolute inset-0 opacity-90 site-page-hero-grid"></div>
+    <div class="pointer-events-none absolute -right-24 top-0 h-[min(70vw,420px)] w-[min(70vw,420px)] rounded-full bg-[#e85d4c]/20 blur-3xl"></div>
+    <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+        <nav class="home-display mb-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50" aria-label="Навигация">
+            <a href="{{ path('app_homepage') }}" class="transition hover:text-white">Главная</a>
+            <span class="mx-2 text-white/30" aria-hidden="true">/</span>
+            <span class="text-white/80">Личный кабинет</span>
+        </nav>
+        <p class="home-display text-xs font-semibold uppercase tracking-[0.3em] text-[#e85d4c]">Клиентский портал</p>
+        <div class="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div class="max-w-3xl">
+                <h1 class="home-display text-[clamp(1.75rem,4vw,2.75rem)] font-bold uppercase leading-[1.08] tracking-tight">
+                    {{ page_title }}
+                </h1>
+                {% if page_subtitle %}
+                    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base">
+                        {{ page_subtitle }}
+                    </p>
+                {% endif %}
+            </div>
+            {% if show_verification_badge and user is defined %}
+                <span class="inline-flex h-fit w-fit shrink-0 rounded-sm border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] {{ user.isVerified ? 'text-emerald-200' : 'text-amber-200' }}">
+                    {{ user.isVerified ? 'Email подтверждён' : 'Email не подтверждён' }}
+                </span>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+<section class="min-h-[50vh] bg-[#f0f1f4] py-10 sm:py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            {% include 'components/_account_flashes.html.twig' with { keys: ['success', 'error'] } only %}
+        </div>
+
+        <div class="flex flex-col gap-10 lg:flex-row lg:gap-12 xl:gap-16">
+            <aside class="shrink-0 lg:w-56 xl:w-64">
+                {% include 'profile/_tabs.html.twig' %}
+            </aside>
+            <div class="min-w-0 flex-1">
+                {% block account_main %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</section>
