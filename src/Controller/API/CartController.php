@@ -31,10 +31,10 @@ class CartController extends AbstractController
             return $this->json(['message' => 'Некорректный формат запроса.'], 400);
         }
 
-        $advertisementId = (int) ($payload['advertisementId'] ?? 0);
-        $sideCode = mb_strtoupper(trim((string) ($payload['side'] ?? '')));
-        $from = \DateTimeImmutable::createFromFormat('Y-m-d', (string) ($payload['startDate'] ?? '')) ?: null;
-        $to = \DateTimeImmutable::createFromFormat('Y-m-d', (string) ($payload['endDate'] ?? '')) ?: null;
+        $advertisementId = (int)($payload['advertisementId'] ?? 0);
+        $sideCode = mb_strtoupper(trim((string)($payload['side'] ?? '')));
+        $from = \DateTimeImmutable::createFromFormat('Y-m-d', (string)($payload['startDate'] ?? '')) ?: null;
+        $to = \DateTimeImmutable::createFromFormat('Y-m-d', (string)($payload['endDate'] ?? '')) ?: null;
 
         /** @var Advertisement|null $advertisement */
         $advertisement = $repository->find($advertisementId);
@@ -52,17 +52,17 @@ class CartController extends AbstractController
             'side' => $sideCode,
             'startDate' => $from->format('Y-m-d'),
             'endDate' => $to->format('Y-m-d'),
-            'price' => (float) ($side?->getPrice() ?? 0),
+            'price' => (float)($side?->getPrice() ?? 0),
         ];
 
         $session = $request->getSession();
         $items = is_array($session->get(self::SESSION_KEY, [])) ? $session->get(self::SESSION_KEY, []) : [];
         foreach ($items as $existing) {
             if (
-                (int) ($existing['advertisementId'] ?? 0) === $item['advertisementId']
-                && (string) ($existing['side'] ?? '') === $item['side']
-                && (string) ($existing['startDate'] ?? '') === $item['startDate']
-                && (string) ($existing['endDate'] ?? '') === $item['endDate']
+                (int)($existing['advertisementId'] ?? 0) === $item['advertisementId']
+                && (string)($existing['side'] ?? '') === $item['side']
+                && (string)($existing['startDate'] ?? '') === $item['startDate']
+                && (string)($existing['endDate'] ?? '') === $item['endDate']
             ) {
                 return $this->json(['message' => 'Позиция уже находится в корзине.'] + $this->buildPayload($items), 200);
             }
@@ -106,7 +106,7 @@ class CartController extends AbstractController
     {
         $normalized = array_values($items);
         $total = array_reduce($normalized, static function (float $sum, array $item): float {
-            return $sum + (float) ($item['price'] ?? 0);
+            return $sum + (float)($item['price'] ?? 0);
         }, 0.0);
 
         return [
@@ -119,23 +119,23 @@ class CartController extends AbstractController
     private function resolveAddress(Advertisement $advertisement): string
     {
         if (method_exists($advertisement, 'getAddress')) {
-            $address = (string) $advertisement->getAddress();
+            $address = (string)$advertisement->getAddress();
             if ($address !== '') {
                 return $address;
             }
         }
 
-        $code = method_exists($advertisement, 'getCode') ? (string) $advertisement->getCode() : '';
+        $code = method_exists($advertisement, 'getCode') ? (string)$advertisement->getCode() : '';
         if ($code !== '') {
             return $code;
         }
 
-        $placeNumber = method_exists($advertisement, 'getPlaceNumber') ? (string) $advertisement->getPlaceNumber() : '';
+        $placeNumber = method_exists($advertisement, 'getPlaceNumber') ? (string)$advertisement->getPlaceNumber() : '';
         if ($placeNumber !== '') {
             return $placeNumber;
         }
 
-        return sprintf('#%d', (int) $advertisement->getId());
+        return sprintf('#%d', (int)$advertisement->getId());
     }
 }
 
