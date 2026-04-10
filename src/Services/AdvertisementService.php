@@ -164,6 +164,10 @@ class AdvertisementService
             return null;
         }
 
+        if (preg_match('#^https?://cloud\\.mail\\.ru/public/#i', $image) === 1) {
+            return '/api/media/cloud-image?url=' . rawurlencode($image);
+        }
+
         if (preg_match('#^https?://#i', $image) === 1) {
             return $image;
         }
