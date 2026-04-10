@@ -622,7 +622,16 @@ function getPreviewSideImage(side) {
 
 function normalizeSideDetails(item) {
     const sides = Array.isArray(item?.sides) ? item.sides : []
-    if (item?.side_details?.length) return item.side_details
+    if (Array.isArray(item?.side_details) && item.side_details.length) {
+        return item.side_details
+            .filter(side => side && typeof side === 'object')
+            .map(side => ({
+                ...side,
+                code: String(side.code || '').toUpperCase(),
+            }))
+            .filter(side => side.code !== '')
+    }
+
     return sides.map(code => ({ code: String(code).toUpperCase(), price: null, image_url: null, night_image_url: null }))
 }
 
@@ -663,7 +672,11 @@ function getSideStatus(item, sideCode, fromDate, toDate) {
 }
 
 function getItemStatus(item, from, to) {
-    const statuses = item.side_details.map(s => getSideStatus(item, s.code, from, to))
+    const sideDetails = Array.isArray(item?.side_details) ? item.side_details : []
+    const statuses = sideDetails.map(s => getSideStatus(item, s.code, from, to))
+    if (!statuses.length) {
+        return { busy: false, kind: 'free', text: 'Есть свободные стороны', toneClass: 'text-emerald-700' }
+    }
     const busyAll = statuses.every(s => s.busy)
     if (!busyAll) {
         return { busy: false, kind: 'free', text: 'Есть свободные стороны', toneClass: 'text-emerald-700' }
@@ -697,11 +710,13 @@ async function loadAdvertisements() {
         
         const res = await fetch(`${props.advertisementsUrl}?${params.toString()}`)
         const data = await res.json()
-        objects.value = (data || []).map(item => ({
+        const items = Array.isArray(data) ? data : (Array.isArray(data?.items) ? data.items : [])
+
+        objects.value = items.map(item => ({
             ...item,
             side_details: normalizeSideDetails(item),
             sides: normalizeSideDetails(item).map(s => s.code),
-            bookings: item.bookings || [],
+            bookings: Array.isArray(item?.bookings) ? item.bookings : [],
         }))
         syncMapPlacemarks()
     } finally { isLoadingObjects.value = false }
