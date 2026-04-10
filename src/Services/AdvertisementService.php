@@ -164,6 +164,10 @@ class AdvertisementService
             return null;
         }
 
+        if (preg_match('#^https?://#i', $image) === 1) {
+            return $image;
+        }
+
         return '/uploads/advertisements/' . ltrim($image, '/');
     }
 }
