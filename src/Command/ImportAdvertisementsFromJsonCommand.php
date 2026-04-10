@@ -304,6 +304,56 @@ HELP);
             if (!is_array($sides)) {
                 $sides = [$sides];
             }
+            $sideCodes = [];
+            foreach ($sides as $sideCodeRaw) {
+                foreach ($this->parseSideCodes((string) $sideCodeRaw) as $parsedCode) {
+                    $sideCodes[] = $parsedCode;
+                }
+            }
+            $sideCodes = array_values(array_unique($sideCodes));
+
+            $coordinates = isset($row['latitude'], $row['longitude'])
+                ? sprintf('%s,%s', (string) $row['latitude'], (string) $row['longitude'])
+                : null;
+
+            // Новый legacy-вариант: side_details с полями по конкретной стороне.
+            $sideDetails = $row['side_details'] ?? null;
+            if (is_array($sideDetails) && $sideDetails !== []) {
+                $detailsByCode = [];
+                foreach ($sideDetails as $detail) {
+                    if (!is_array($detail)) {
+                        continue;
+                    }
+                    $code = $this->stringOrNull($detail['code'] ?? null);
+                    if ($code === null) {
+                        continue;
+                    }
+                    $normalizedCodes = $this->parseSideCodes($code);
+                    if ($normalizedCodes === []) {
+                        continue;
+                    }
+                    $detailsByCode[$normalizedCodes[0]] = $detail;
+                }
+
+                $allCodes = array_values(array_unique(array_merge($sideCodes, array_keys($detailsByCode))));
+
+                foreach ($allCodes as $code) {
+                    $detail = $detailsByCode[$code] ?? [];
+                    $rows[] = [
+                        'place_number' => $row['place_number'] ?? null,
+                        'side' => $code,
+                        'address' => $row['address'] ?? null,
+                        'type_name' => $typeName,
+                        'image' => $detail['image'] ?? ($row['image'] ?? null),
+                        'description' => $detail['description'] ?? ($row['description'] ?? null),
+                        'coordinates' => $coordinates,
+                        'price' => $detail['price'] ?? ($row['price'] ?? null),
+                        'map_link' => $detail['map_link'] ?? ($row['map_link'] ?? null),
+                    ];
+                }
+
+                continue;
+            }
 
             $rows[] = [
                 'place_number' => $row['place_number'] ?? null,
@@ -312,9 +362,7 @@ HELP);
                 'type_name' => $typeName,
                 'image' => $row['image'] ?? null,
                 'description' => $row['description'] ?? null,
-                'coordinates' => isset($row['latitude'], $row['longitude'])
-                    ? sprintf('%s,%s', (string) $row['latitude'], (string) $row['longitude'])
-                    : null,
+                'coordinates' => $coordinates,
                 'price' => $row['price'] ?? null,
                 'map_link' => $row['map_link'] ?? null,
             ];
