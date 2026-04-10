@@ -164,8 +164,8 @@ class AdvertisementService
             return null;
         }
 
-        if (preg_match('#^https?://cloud\\.mail\\.ru/public/#i', $image) === 1) {
-            return '/api/media/cloud-image?url=' . rawurlencode($image);
+        if (preg_match('#^https?://cloud\\.mail\\.ru/public/([^/]+)/([^/?#]+)#i', $image, $matches) === 1) {
+            return sprintf('https://thumb.cloud.mail.ru/weblink/thumb/xw0/%s/%s?wm=true', $matches[1], $matches[2]);
         }
 
         if (preg_match('#^https?://#i', $image) === 1) {
