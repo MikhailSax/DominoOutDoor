@@ -236,7 +236,7 @@
                         </button>
 
                         <img
-                            :src="isNightPhoto && activeSide.night_image_url ? activeSide.night_image_url : (activeSide.image_url || '/images/orig.png')"
+                            :src="getMainSideImage(activeSide)"
                             alt="Фото стороны"
                             class="h-44 w-full object-cover sm:h-56 lg:h-64"
                         />
@@ -270,6 +270,35 @@
                             <dt class="pt-1 text-gray-500">Прайс без НДС</dt>
                             <dd class="pt-1 text-right text-xl font-extrabold text-gray-900 sm:text-2xl">{{ formatPrice(activeSide.price) }}</dd>
                         </dl>
+
+                        <section v-if="activeObject.side_details?.length" class="space-y-2 border-t border-gray-100 pt-3">
+                            <p class="site-header-font text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">
+                                Фотографии всех сторон
+                            </p>
+                            <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                                <button
+                                    v-for="side in activeObject.side_details"
+                                    :key="`photo-${side.code}`"
+                                    type="button"
+                                    class="group text-left"
+                                    @click="selectSide(side.code)"
+                                >
+                                    <div
+                                        class="relative aspect-[4/3] overflow-hidden border transition"
+                                        :class="activeSideCode === side.code ? 'border-[#05299E] ring-1 ring-[#05299E]/35' : 'border-gray-200 hover:border-[#05299E]/40'"
+                                    >
+                                        <img
+                                            :src="getPreviewSideImage(side)"
+                                            :alt="`Сторона ${side.code}`"
+                                            class="h-full w-full object-cover"
+                                        />
+                                        <span class="site-header-font absolute left-1.5 top-1.5 bg-white/90 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gray-800">
+                                            {{ side.code }}
+                                        </span>
+                                    </div>
+                                </button>
+                            </div>
+                        </section>
 
                         <p
                             v-if="activeSideStatus"
@@ -559,6 +588,17 @@ function formatSides(sides) {
 function formatPrice(price) {
     if (!price) return 'По запросу'
     return `${new Intl.NumberFormat('ru-RU').format(price)} ₽`
+}
+
+function getMainSideImage(side) {
+    if (!side) return '/images/orig.png'
+    if (isNightPhoto.value && side.night_image_url) return side.night_image_url
+    return side.image_url || side.night_image_url || '/images/orig.png'
+}
+
+function getPreviewSideImage(side) {
+    if (!side) return '/images/orig.png'
+    return side.image_url || side.night_image_url || '/images/orig.png'
 }
 
 function normalizeSideDetails(item) {
