@@ -590,15 +590,34 @@ function formatPrice(price) {
     return `${new Intl.NumberFormat('ru-RU').format(price)} ₽`
 }
 
-function getMainSideImage(side) {
+function normalizeCloudMailImageUrl(url) {
+    if (!url) return null
+    const source = String(url).trim()
+    const match = source.match(/^https?:\/\/cloud\.mail\.ru\/public\/([^/]+)\/([^/?#]+)/i)
+    if (!match) return source
+    return `https://thumb.cloud.mail.ru/weblink/thumb/xw0/${match[1]}/${match[2]}?wm=true`
+}
+
+function resolveSideImageUrl(side, useNight = false) {
     if (!side) return '/images/orig.png'
-    if (isNightPhoto.value && side.night_image_url) return side.night_image_url
-    return side.image_url || side.night_image_url || '/images/orig.png'
+
+    const preferred = useNight
+        ? (side.night_image_url || side.night_image)
+        : (side.image_url || side.image)
+
+    const fallback = useNight
+        ? (side.image_url || side.image)
+        : (side.night_image_url || side.night_image)
+
+    return normalizeCloudMailImageUrl(preferred) || normalizeCloudMailImageUrl(fallback) || '/images/orig.png'
+}
+
+function getMainSideImage(side) {
+    return resolveSideImageUrl(side, isNightPhoto.value)
 }
 
 function getPreviewSideImage(side) {
-    if (!side) return '/images/orig.png'
-    return side.image_url || side.night_image_url || '/images/orig.png'
+    return resolveSideImageUrl(side, false)
 }
 
 function normalizeSideDetails(item) {
