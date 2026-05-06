@@ -25,6 +25,10 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
             throw new \RuntimeException(sprintf('Некорректный JSON в %s', $path));
         }
 
+        if (isset($rows['data']) && is_array($rows['data'])) {
+            $rows = $rows['data'];
+        }
+
         $updatedSides = 0;
         $updatedLocations = 0;
         $skippedNotFound = 0;
@@ -36,10 +40,13 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
                 continue;
             }
 
-            $placeNumber = $this->normalizePlaceNumber($row['column_1'] ?? null);
-            $sideCode = mb_strtoupper(trim((string) ($row['column_2'] ?? '')));
+            $placeNumber = $this->extractPlaceNumber($row);
+            if ($placeNumber === '') {
+                continue;
+            }
 
-            if ($placeNumber === '' || $sideCode === '') {
+            $sideDetails = $this->extractSideDetailsRows($row);
+            if ($sideDetails === []) {
                 continue;
             }
 
@@ -68,36 +75,44 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
                 $ad->setAddress($address);
             }
 
-            $ad->addSide($sideCode);
-            $side = $ad->getSideByCode($sideCode);
-            if (!$side instanceof AdvertisementSide) {
-                $side = (new AdvertisementSide())->setCode($sideCode);
-                $ad->addSideItem($side);
+            foreach ($sideDetails as $detail) {
+                $sideCode = mb_strtoupper(trim((string) ($detail['code'] ?? '')));
+                if ($sideCode === '') {
+                    continue;
+                }
+
+                $ad->addSide($sideCode);
+                $side = $ad->getSideByCode($sideCode);
+                if (!$side instanceof AdvertisementSide) {
+                    $side = (new AdvertisementSide())->setCode($sideCode);
+                    $ad->addSideItem($side);
+                }
+
+                $image = $this->nullableString($detail['image'] ?? null);
+                if ($image !== null) {
+                    $side->setImage($image);
+                    $this->syncLegacySideImage($ad, $sideCode, $image);
+                }
+
+                $description = $this->nullableString($detail['description'] ?? null);
+                if ($description !== null) {
+                    $side->setDescription($description);
+                    $this->syncLegacySideDescription($ad, $sideCode, $description);
+                }
+
+                $price = $this->normalizePrice($detail['price'] ?? null);
+                if ($price !== null) {
+                    $side->setPrice($price);
+                    $this->syncLegacySidePrice($ad, $sideCode, $price);
+                }
+
+                $manager->persist($side);
+                $updatedSides++;
             }
 
-            $image = $this->nullableString($row['column_5'] ?? null);
-            if ($image !== null) {
-                $side->setImage($image);
-                $this->syncLegacySideImage($ad, $sideCode, $image);
-            }
-
-            $description = $this->nullableString($row['column_6'] ?? null);
-            if ($description !== null) {
-                $side->setDescription($description);
-                $this->syncLegacySideDescription($ad, $sideCode, $description);
-            }
-
-            $price = $this->normalizePrice($row['column_8'] ?? null);
-            if ($price !== null) {
-                $side->setPrice($price);
-                $this->syncLegacySidePrice($ad, $sideCode, $price);
-            }
-
-            $manager->persist($side);
             $manager->persist($ad);
-            $updatedSides++;
 
-            [$lat, $lon] = $this->parseCoordinates($row['column_7'] ?? null);
+            [$lat, $lon] = $this->extractCoordinates($row);
             if ($lat !== null && $lon !== null) {
                 $location = $ad->getLocation();
                 if (!$location instanceof AdvertisementLocation) {
@@ -129,6 +144,39 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
     }
 
 
+
+
+    private function extractPlaceNumber(array $row): string
+    {
+        return $this->normalizePlaceNumber($row['place_number'] ?? $row['column_1'] ?? null);
+    }
+
+    /**
+     * @return array<int,array{code:mixed,description:mixed,image:mixed,price:mixed}>
+     */
+    private function extractSideDetailsRows(array $row): array
+    {
+        if (isset($row['side_details']) && is_array($row['side_details'])) {
+            return array_values(array_filter($row['side_details'], static fn (mixed $v): bool => is_array($v)));
+        }
+
+        return [[
+            'code' => $row['column_2'] ?? null,
+            'description' => $row['column_6'] ?? null,
+            'image' => $row['column_5'] ?? null,
+            'price' => $row['column_8'] ?? null,
+        ]];
+    }
+
+    /** @return array{0:?float,1:?float} */
+    private function extractCoordinates(array $row): array
+    {
+        if (array_key_exists('latitude', $row) || array_key_exists('longitude', $row)) {
+            return [$this->toFloat((string) ($row['latitude'] ?? '')), $this->toFloat((string) ($row['longitude'] ?? ''))];
+        }
+
+        return $this->parseCoordinates($row['column_7'] ?? null);
+    }
 
     private function findAdvertisement(ObjectManager $manager, string $placeNumber): ?Advertisement
     {
