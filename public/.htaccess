@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Serve existing files directly.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Forward all other requests to Symfony front controller.
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Disable directory listing in production.
+Options -Indexes
