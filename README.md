@@ -1,9 +1,9 @@
-# БМС (Бурятия Медиа Сервис) — Docker окружение
+# rk03.pro — Docker окружение
 
 Проект запускается в Docker с сервисами:
 - `nginx` (веб-сервер)
 - `app` (PHP-FPM + Symfony)
-- `database` (PostgreSQL)
+- `database` (MySQL)
 - `mailer` (Mailpit)
 
 ## Быстрый запуск
@@ -13,9 +13,9 @@ docker compose up -d --build
 ```
 
 После старта:
-- приложение: `http://localhost:8080`
+- приложение: `https://rk03.pro (или http://localhost:8080 для локальной проверки)`
 - Mailpit UI: `http://localhost:8025`
-- PostgreSQL: `localhost:5432`
+- MySQL: `localhost:3306`
 
 ## Доступ по локальной сети (для коллег)
 
@@ -40,3 +40,8 @@ docker compose exec app php bin/console doctrine:migrations:migrate --no-interac
 ```bash
 docker compose down
 ```
+
+
+## Деплой на REG.RU
+
+См. пошаговую инструкцию: `DEPLOY_REG_RU.md`.

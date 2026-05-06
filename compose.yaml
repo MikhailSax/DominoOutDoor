@@ -3,14 +3,14 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    container_name: bms_app
+    container_name: rk03_app
     restart: unless-stopped
     working_dir: /var/www
     volumes:
       - ./:/var/www
     environment:
-      APP_ENV: dev
-      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=16&charset=utf8
+      APP_ENV: prod
+      DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=8.0.36&charset=utf8mb4
       MAILER_DSN: smtp://mailer:1025
     depends_on:
       database:
@@ -18,7 +18,7 @@ services:
 
   nginx:
     image: nginx:1.27-alpine
-    container_name: bms_nginx
+    container_name: rk03_nginx
     restart: unless-stopped
     depends_on:
       - app
@@ -30,28 +30,29 @@ services:
 
 ###> doctrine/doctrine-bundle ###
   database:
-    image: postgres:${POSTGRES_VERSION:-16}-alpine
-    container_name: bms_database
+    image: mysql:${MYSQL_VERSION:-8.0}
+    container_name: rk03_database
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+      MYSQL_USER: ${MYSQL_USER:-app}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpass}
     healthcheck:
-      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpass}"]
       timeout: 5s
       retries: 5
       start_period: 60s
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - database_data:/var/lib/postgresql/data:rw
+      - database_data:/var/lib/mysql:rw
 ###< doctrine/doctrine-bundle ###
 
 ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit
-    container_name: bms_mailer
+    container_name: rk03_mailer
     restart: unless-stopped
     ports:
       - "1025:1025"
