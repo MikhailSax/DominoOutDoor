@@ -17,7 +17,7 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
     {
         $path = $this->resolveDataFilePath();
         if ($path === null) {
-            throw new \RuntimeException('Файл output.json не найден. Ожидается в src/DataFixtures/data/output.json или fixtures/data/output.json');
+            throw new \RuntimeException('Файл output.json не найден.');
         }
 
         $rows = json_decode((string) file_get_contents($path), true);
@@ -27,9 +27,8 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
 
         $updatedSides = 0;
         $updatedLocations = 0;
-        $skippedNotFound = 0;
         $createdAds = 0;
-        $skippedMissingType = 0;
+        $skipped = 0;
 
         foreach ($rows as $row) {
             if (!is_array($row)) {
@@ -44,13 +43,13 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
             }
 
             $ad = $this->findAdvertisement($manager, $placeNumber);
+
             if (!$ad instanceof Advertisement) {
                 $typeName = $this->nullableString($row['column_4'] ?? null);
                 $type = $this->findType($manager, $typeName);
 
                 if (!$type instanceof AdvertisementType) {
-                    $skippedNotFound++;
-                    $skippedMissingType++;
+                    $skipped++;
                     continue;
                 }
 
@@ -70,23 +69,21 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
 
             $ad->addSide($sideCode);
             $side = $ad->getSideByCode($sideCode);
+
             if (!$side instanceof AdvertisementSide) {
                 $side = (new AdvertisementSide())->setCode($sideCode);
                 $ad->addSideItem($side);
             }
 
-            $image = $this->nullableString($row['column_5'] ?? null);
-            if ($image !== null) {
+            if ($image = $this->nullableString($row['column_5'] ?? null)) {
                 $side->setImage($image);
             }
 
-            $description = $this->nullableString($row['column_6'] ?? null);
-            if ($description !== null) {
-                $side->setDescription($description);
+            if ($desc = $this->nullableString($row['column_6'] ?? null)) {
+                $side->setDescription($desc);
             }
 
-            $price = $this->normalizePrice($row['column_8'] ?? null);
-            if ($price !== null) {
+            if ($price = $this->normalizePrice($row['column_8'] ?? null)) {
                 $side->setPrice($price);
             }
 
@@ -97,6 +94,7 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
             [$lat, $lon] = $this->parseCoordinates($row['column_7'] ?? null);
             if ($lat !== null && $lon !== null) {
                 $location = $ad->getLocation();
+
                 if (!$location instanceof AdvertisementLocation) {
                     $location = new AdvertisementLocation();
                     $location->setAdvertisement($ad);
@@ -105,6 +103,7 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
 
                 $location->setLatitude($lat);
                 $location->setLongitude($lon);
+
                 $manager->persist($location);
                 $updatedLocations++;
             }
@@ -112,7 +111,13 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
 
         $manager->flush();
 
-        echo sprintf("✅ Обновлено сторон: %d; локаций: %d; создано объявлений: %d; пропущено (не найдено/нет типа): %d/%d\n", $updatedSides, $updatedLocations, $createdAds, $skippedNotFound, $skippedMissingType);
+        echo sprintf(
+            "✅ Стороны: %d; локации: %d; создано объявлений: %d; пропущено: %d\n",
+            $updatedSides,
+            $updatedLocations,
+            $createdAds,
+            $skipped
+        );
     }
 
     public function getDependencies(): array
@@ -125,55 +130,46 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
         return ['side_details'];
     }
 
-
-
     private function findAdvertisement(ObjectManager $manager, string $placeNumber): ?Advertisement
     {
         $repo = $manager->getRepository(Advertisement::class);
 
-        $variants = array_values(array_unique(array_filter([
+        $variants = array_unique([
             $placeNumber,
             trim($placeNumber),
             preg_replace('/\.0+$/', '', trim($placeNumber)),
-        ], static fn ($v) => is_string($v) && $v !== '')));
+        ]);
 
         foreach ($variants as $variant) {
-            /** @var Advertisement|null $byPlace */
-            $byPlace = $repo->findOneBy(['placeNumber' => $variant]);
-            if ($byPlace instanceof Advertisement) {
-                return $byPlace;
+            if (!$variant) continue;
+
+            if ($ad = $repo->findOneBy(['placeNumber' => $variant])) {
+                return $ad;
             }
 
-            /** @var Advertisement|null $byCode */
-            $byCode = $repo->findOneBy(['code' => $variant]);
-            if ($byCode instanceof Advertisement) {
-                return $byCode;
+            if ($ad = $repo->findOneBy(['code' => $variant])) {
+                return $ad;
             }
         }
 
         return null;
     }
 
-
     private function findType(ObjectManager $manager, ?string $typeName): ?AdvertisementType
     {
-        if ($typeName === null || trim($typeName) === '') {
+        if (!$typeName) {
             return null;
         }
 
         $normalized = mb_strtolower(trim($typeName));
-        /** @var AdvertisementType|null $exact */
-        $exact = $manager->getRepository(AdvertisementType::class)->findOneBy(['name' => trim($typeName)]);
-        if ($exact instanceof AdvertisementType) {
+
+        $repo = $manager->getRepository(AdvertisementType::class);
+
+        if ($exact = $repo->findOneBy(['name' => trim($typeName)])) {
             return $exact;
         }
 
-        $all = $manager->getRepository(AdvertisementType::class)->findAll();
-        foreach ($all as $type) {
-            if (!$type instanceof AdvertisementType) {
-                continue;
-            }
-
+        foreach ($repo->findAll() as $type) {
             if (mb_strtolower(trim($type->getName())) === $normalized) {
                 return $type;
             }
@@ -181,16 +177,17 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
 
         return null;
     }
+
     private function resolveDataFilePath(): ?string
     {
-        $candidates = [
+        $paths = [
             __DIR__ . '/data/output.json',
             dirname(__DIR__, 2) . '/fixtures/data/output.json',
         ];
 
-        foreach ($candidates as $candidate) {
-            if (is_file($candidate)) {
-                return $candidate;
+        foreach ($paths as $path) {
+            if (is_file($path)) {
+                return $path;
             }
         }
 
@@ -199,62 +196,41 @@ class AdvertisementSideDetailsFixtures extends Fixture implements DependentFixtu
 
     private function nullableString(mixed $value): ?string
     {
-        if ($value === null) {
-            return null;
-        }
-
         $v = trim((string) $value);
         return $v === '' ? null : $v;
     }
 
     private function normalizePrice(mixed $value): ?string
     {
-        if ($value === null || $value === '') {
-            return null;
+        if (!$value) return null;
+
+        $v = preg_replace('/[^\d,\.]/u', '', (string) $value);
+
+        if (str_contains($v, ',') && !str_contains($v, '.')) {
+            $v = str_replace(',', '.', $v);
+        } elseif (str_contains($v, ',') && str_contains($v, '.')) {
+            $v = str_replace(',', '', $v);
         }
 
-        $normalized = preg_replace('/[^\d,\.]/u', '', (string) $value);
-        if ($normalized === null || $normalized === '') {
-            return null;
-        }
-
-        if (str_contains($normalized, ',') && !str_contains($normalized, '.')) {
-            $normalized = str_replace(',', '.', $normalized);
-        } elseif (str_contains($normalized, ',') && str_contains($normalized, '.')) {
-            $normalized = str_replace(',', '', $normalized);
-        }
-
-        return is_numeric($normalized) ? number_format((float) $normalized, 2, '.', '') : null;
+        return is_numeric($v) ? number_format((float) $v, 2, '.', '') : null;
     }
 
-    /**
-     * @return array{0:?float,1:?float}
-     */
     private function parseCoordinates(mixed $value): array
     {
-        if ($value === null) {
-            return [null, null];
-        }
+        if (!$value) return [null, null];
 
-        $raw = trim((string) $value);
-        if ($raw === '') {
-            return [null, null];
-        }
+        $parts = array_map('trim', explode(',', (string) $value));
 
-        $parts = array_map('trim', explode(',', $raw));
         if (count($parts) < 2) {
             return [null, null];
         }
 
-        $lat = $this->toFloat($parts[0]);
-        $lon = $this->toFloat($parts[1]);
-
-        return [$lat, $lon];
+        return [$this->toFloat($parts[0]), $this->toFloat($parts[1])];
     }
 
     private function toFloat(string $value): ?float
     {
-        $normalized = str_replace([' ', ','], ['', '.'], $value);
-        return is_numeric($normalized) ? (float) $normalized : null;
+        $v = str_replace([' ', ','], ['', '.'], $value);
+        return is_numeric($v) ? (float) $v : null;
     }
 }
