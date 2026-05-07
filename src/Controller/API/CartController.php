@@ -27,7 +27,10 @@ class CartController extends AbstractController
     public function addItem(Request $request, AdvertisementRepository $repository): JsonResponse
     {
         $payload = json_decode($request->getContent(), true);
-        if (!is_array($payload)) {
+        if (!is_array($payload) || $payload === []) {
+            $payload = $request->request->all();
+        }
+        if (!is_array($payload) || $payload === []) {
             return $this->json(['message' => 'Некорректный формат запроса.'], 400);
         }
 
@@ -138,4 +141,3 @@ class CartController extends AbstractController
         return sprintf('#%d', (int)$advertisement->getId());
     }
 }
-
