@@ -17,11 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/api/orders', name: 'api_orders_')]
 class OrderController extends AbstractController
 {
-    #[Route('', name: 'create', methods: ['POST'])]
+    #[Route('', name: 'create', methods: ['POST', 'GET'])]
     public function create(Request $request, AdvertisementRepository $repository, EntityManagerInterface $entityManager): JsonResponse
     {
         $payload = json_decode($request->getContent(), true);
-        if (!is_array($payload)) {
+        if (!is_array($payload) || $payload === []) {
+            $payload = $request->query->all();
+        }
+        if (!is_array($payload) || $payload === []) {
             return $this->json(['message' => 'Некорректный формат запроса.'], 400);
         }
 
