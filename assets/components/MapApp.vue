@@ -28,7 +28,7 @@
         <div class="sticky top-16 z-20 flex gap-0 border-b border-gray-200 bg-white shadow-sm lg:hidden">
             <button
                 type="button"
-                class="site-header-font flex-1 border-b-[3px] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] transition"
+                class="site-header-font flex-1 border-b-[3px] px-5 py-4 text-[13px] font-semibold uppercase tracking-[0.14em] transition"
                 :class="mobileView === 'list' ? 'border-[#e85d4c] bg-white text-[#05299E]' : 'border-transparent bg-gray-50 text-gray-500'"
                 @click="mobileView = 'list'"
             >
@@ -36,7 +36,7 @@
             </button>
             <button
                 type="button"
-                class="site-header-font flex-1 border-b-[3px] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] transition"
+                class="site-header-font flex-1 border-b-[3px] px-5 py-4 text-[13px] font-semibold uppercase tracking-[0.14em] transition"
                 :class="mobileView === 'map' ? 'border-[#e85d4c] bg-white text-[#05299E]' : 'border-transparent bg-gray-50 text-gray-500'"
                 @click="mobileView = 'map'"
             >
@@ -49,7 +49,7 @@
                 class="w-full border-b border-gray-200 bg-white lg:w-[min(100%,320px)] xl:w-[360px] lg:shrink-0 lg:border-b-0 lg:border-r lg:border-gray-200"
                 :class="mobileView === 'map' ? 'hidden lg:block' : 'block'"
             >
-                <div class="flex max-h-[min(55vh,520px)] flex-col lg:max-h-none lg:h-full">
+                <div class="flex max-h-[min(68vh,700px)] flex-col lg:max-h-none lg:h-full">
                     <div class="border-b-4 border-[#e85d4c] px-5 py-5">
                         <div class="flex items-start justify-between gap-3">
                             <div>
@@ -65,12 +65,12 @@
                         </div>
                     </div>
 
-                    <div class="space-y-4 border-b border-gray-100 bg-[#f7f7f8] p-4">
+                    <div class="space-y-5 border-b border-gray-100 bg-[#f7f7f8] p-5">
                         <div>
-                            <label class="site-header-font mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">Тип продукции</label>
+                            <label class="site-header-font mb-1.5 block text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-500">Тип продукции</label>
                             <select
                                 v-model="filters.productType"
-                                class="w-full border border-gray-300 bg-white px-3 py-2.5 text-sm focus:border-[#05299E] focus:outline-none focus:ring-2 focus:ring-[#05299E]/15"
+                                class="w-full border border-gray-300 bg-white px-3 py-3 text-base focus:border-[#05299E] focus:outline-none focus:ring-2 focus:ring-[#05299E]/15"
                             >
                                 <option value="">Все типы продукции</option>
                                 <option v-for="item in productTypes" :key="item.id" :value="String(item.id)">
@@ -80,11 +80,11 @@
                         </div>
 
                         <div>
-                            <label class="site-header-font mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">Тип конструкции</label>
+                            <label class="site-header-font mb-1.5 block text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-500">Тип конструкции</label>
                             <select
                                 v-model="filters.constrTypeId"
                                 :disabled="isLoadingFilters"
-                                class="w-full border border-gray-300 bg-white px-3 py-2.5 text-sm focus:border-[#05299E] focus:outline-none focus:ring-2 focus:ring-[#05299E]/15 disabled:cursor-not-allowed disabled:bg-gray-100"
+                                class="w-full border border-gray-300 bg-white px-3 py-3 text-base focus:border-[#05299E] focus:outline-none focus:ring-2 focus:ring-[#05299E]/15 disabled:cursor-not-allowed disabled:bg-gray-100"
                             >
                                 <option value="">Все типы конструкций</option>
                                 <option v-for="item in constrTypes" :key="item.id" :value="String(item.id)">
@@ -94,13 +94,13 @@
                         </div>
 
                         <div>
-                            <p class="site-header-font mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500">Период</p>
+                            <p class="site-header-font mb-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-500">Период</p>
                             <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
                                 <button
                                     v-for="preset in datePresets"
                                     :key="preset.key"
                                     type="button"
-                                    class="site-header-font border px-2 py-2 text-[10px] font-semibold uppercase tracking-wide transition"
+                                    class="site-header-font border px-3 py-3 text-[12px] font-semibold uppercase tracking-wide transition"
                                     :class="
                                         activeDatePreset === preset.key
                                             ? 'border-[#05299E] bg-[#05299E] text-white'
@@ -116,25 +116,25 @@
                         <div class="grid grid-cols-2 gap-3">
                             <label class="text-xs">
                                 <span class="site-header-font mb-1 block text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">Свободно с</span>
-                                <input v-model="filters.bookingFrom" type="date" class="w-full border border-gray-300 bg-white px-2 py-2 text-sm" />
+                                <input v-model="filters.bookingFrom" type="date" class="w-full border border-gray-300 bg-white px-3 py-3 text-base" />
                             </label>
                             <label class="text-xs">
                                 <span class="site-header-font mb-1 block text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">Свободно до</span>
-                                <input v-model="filters.bookingTo" type="date" class="w-full border border-gray-300 bg-white px-2 py-2 text-sm" />
+                                <input v-model="filters.bookingTo" type="date" class="w-full border border-gray-300 bg-white px-3 py-3 text-base" />
                             </label>
                         </div>
 
                         <div class="flex gap-2 pt-1">
                             <button
                                 type="button"
-                                class="site-header-font flex-1 border border-gray-400 bg-white px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-gray-700 hover:border-[#05299E] hover:text-[#05299E]"
+                                class="site-header-font flex-1 border border-gray-400 bg-white px-3 py-3 text-[12px] font-semibold uppercase tracking-wider text-gray-700 hover:border-[#05299E] hover:text-[#05299E]"
                                 @click="resetFilters"
                             >
                                 Сбросить
                             </button>
                             <button
                                 type="button"
-                                class="site-header-font flex-1 bg-[#e85d4c] px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white hover:bg-[#d64d3e]"
+                                class="site-header-font flex-1 bg-[#e85d4c] px-3 py-3 text-[12px] font-semibold uppercase tracking-wider text-white hover:bg-[#d64d3e]"
                                 @click="applyFilters"
                             >
                                 Подобрать
@@ -160,7 +160,7 @@
                             v-for="item in objects"
                             :key="item.id"
                             type="button"
-                            class="mb-2 w-full border bg-white p-4 text-left shadow-sm transition hover:border-[#05299E]/35 hover:shadow-md"
+                            class="mb-3 w-full border bg-white p-4 text-left shadow-sm transition hover:border-[#05299E]/35 hover:shadow-md"
                             :class="activeObjectId === item.id ? 'border-[#e85d4c] ring-1 ring-[#e85d4c]/40' : 'border-gray-200'"
                             @click="focusObject(item.id)"
                         >
@@ -211,7 +211,7 @@
 
                 <article
                     v-if="activeObject && activeSide"
-                    class="absolute inset-x-2 bottom-2 z-20 max-h-[68vh] w-auto overflow-y-auto border-t-4 border-[#e85d4c] bg-white shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] sm:right-4 sm:top-4 sm:bottom-auto sm:max-h-[calc(100%-2rem)] sm:w-[520px] sm:max-w-[calc(100%-2rem)] lg:inset-x-auto lg:right-5 lg:top-1/2 lg:max-h-[calc(100%-2.5rem)] lg:w-[520px] lg:max-w-[calc(100%-40px)] lg:-translate-y-1/2"
+                    class="absolute inset-0 z-30 overflow-y-auto border-t-4 border-[#e85d4c] bg-white shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] sm:inset-auto sm:right-4 sm:top-4 sm:bottom-auto sm:max-h-[calc(100%-2rem)] sm:w-[520px] sm:max-w-[calc(100%-2rem)] lg:right-5 lg:top-1/2 lg:max-h-[calc(100%-2.5rem)] lg:w-[520px] lg:max-w-[calc(100%-40px)] lg:-translate-y-1/2"
                 >
                     <div class="relative">
                         <div class="absolute left-3 top-3 z-10 flex max-w-[calc(100%-90px)] gap-1 overflow-x-auto bg-white/95 p-1 shadow-md sm:left-4 sm:top-4">

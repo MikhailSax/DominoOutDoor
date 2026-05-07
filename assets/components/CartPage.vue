@@ -107,7 +107,7 @@ const props = defineProps({
 const cartItems = ref([])
 const isSubmitting = ref(false)
 const statusMessage = ref('')
-const orderForm = reactive({ name: '', phone: '', comment: '', website: '', startedAt: 0 })
+const orderForm = reactive({ name: '', phone: '', comment: '', website: '', startedAt: Date.now() })
 
 const isAuthenticated = computed(() => Boolean(props.authUser?.isAuthenticated))
 const cartTotal = computed(() => cartItems.value.reduce((sum, item) => sum + (Number(item.price) || 0), 0))
@@ -172,7 +172,6 @@ async function submitOrder() {
 
     isSubmitting.value = true
     statusMessage.value = ''
-    orderForm.startedAt = Date.now()
 
     if (isAuthenticated.value) {
         orderForm.name = props.authUser?.name || orderForm.name
@@ -200,6 +199,7 @@ async function submitOrder() {
             throw new Error(data?.message || 'Ошибка при отправке заказа.')
         }
         statusMessage.value = data?.message || 'Заказ отправлен.'
+        orderForm.startedAt = Date.now()
         await loadCart()
     } catch (error) {
         statusMessage.value = error instanceof Error ? error.message : 'Ошибка при отправке заказа.'
