@@ -109,6 +109,7 @@ const isSubmitting = ref(false)
 const statusMessage = ref('')
 const orderForm = reactive({ name: '', phone: '', comment: '', website: '', startedAt: Date.now() })
 
+const normalizedOrdersUrl = computed(() => String(props.ordersUrl || '').replace(/\/+$/, ''))
 const isAuthenticated = computed(() => Boolean(props.authUser?.isAuthenticated))
 const cartTotal = computed(() => cartItems.value.reduce((sum, item) => sum + (Number(item.price) || 0), 0))
 
@@ -179,7 +180,7 @@ async function submitOrder() {
     }
 
     try {
-        const response = await fetch(props.ordersUrl, {
+        const response = await fetch(normalizedOrdersUrl.value || '/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
