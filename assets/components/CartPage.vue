@@ -1,20 +1,29 @@
 <template>
-    <section class="bg-[#ececee] py-10 sm:py-12">
+    <section class="bg-[#ececee] py-8 sm:py-10">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-                <h1 class="home-display text-2xl font-bold uppercase tracking-tight text-gray-900 sm:text-3xl">Корзина</h1>
-                <p class="mt-2 text-xs text-gray-600">Оформите бронь: проверьте позиции и отправьте заявку.</p>
+            <div class="mb-6 rounded-2xl border border-gray-200 bg-gradient-to-br from-white via-white to-[#f6f8ff] p-6 shadow-sm sm:p-8">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <p class="site-header-font text-[10px] font-semibold uppercase tracking-[0.2em] text-[#05299E]/70">Размещение</p>
+                        <h1 class="home-display mt-2 text-2xl font-bold uppercase tracking-tight text-gray-900 sm:text-3xl">Корзина</h1>
+                        <p class="mt-2 text-xs text-gray-600">Проверьте позиции, заполните контакты и отправьте заявку на бронь.</p>
+                    </div>
+                    <div class="rounded-xl border border-[#05299E]/15 bg-[#05299E]/5 px-4 py-3 text-right">
+                        <p class="site-header-font text-[10px] font-semibold uppercase tracking-[0.14em] text-[#05299E]/70">Позиции</p>
+                        <p class="mt-1 text-xl font-bold text-[#05299E]">{{ cartItems.length }}</p>
+                    </div>
+                </div>
             </div>
 
             <div class="grid gap-6 lg:grid-cols-[1fr_360px]">
-                <article class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
+                <article class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
                     <div class="mb-4 flex items-center justify-between gap-3 border-b border-gray-100 pb-3">
                         <p class="site-header-font text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-600">
                             Всего: <span class="text-gray-900">{{ cartItems.length }}</span>
                         </p>
                         <button
                             type="button"
-                            class="site-header-font border border-gray-300 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-gray-700 transition hover:border-[#05299E] hover:text-[#05299E] disabled:opacity-50"
+                            class="site-header-font rounded-lg border border-gray-300 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-gray-700 transition hover:border-[#05299E] hover:text-[#05299E] disabled:opacity-50"
                             :disabled="!cartItems.length || isSubmitting"
                             @click="clearCart"
                         >
@@ -22,7 +31,7 @@
                         </button>
                     </div>
 
-                    <div v-if="!cartItems.length" class="rounded-lg border border-dashed border-gray-300 bg-[#fafafa] p-8 text-center text-sm text-gray-500">
+                    <div v-if="!cartItems.length" class="rounded-xl border border-dashed border-gray-300 bg-[#fafafa] p-8 text-center text-sm text-gray-500">
                         Корзина пуста.
                         <a href="/map/app" class="ml-2 font-semibold text-[#05299E] hover:text-[#041d6b]">Карта</a>
                     </div>
@@ -31,10 +40,11 @@
                         <article
                             v-for="(item, index) in cartItems"
                             :key="`${item.advertisementId}-${item.side}-${item.startDate}-${item.endDate}`"
-                            class="rounded-lg border border-gray-200 bg-[#fafafa] p-4"
+                            class="rounded-xl border border-gray-200 bg-[#fafafa] p-4 transition hover:border-[#05299E]/25 hover:bg-[#f7f9ff]"
                         >
                             <div class="flex items-start justify-between gap-3">
                                 <div class="min-w-0">
+                                    <p class="mb-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-gray-400">Позиция {{ index + 1 }}</p>
                                     <p class="truncate text-sm font-semibold text-gray-900">{{ item.address }}</p>
                                     <p class="mt-1 truncate text-xs text-gray-600">{{ item.side }} • {{ item.startDate }}—{{ item.endDate }}</p>
                                 </div>
@@ -42,7 +52,7 @@
                                     <p class="text-xs font-semibold text-[#05299E]">{{ formatPrice(item.price) }}</p>
                                     <button
                                         type="button"
-                                        class="site-header-font border border-gray-300 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-gray-700 transition hover:border-[#e85d4c] hover:text-[#e85d4c] disabled:opacity-50"
+                                        class="site-header-font rounded-md border border-gray-300 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-gray-700 transition hover:border-[#e85d4c] hover:text-[#e85d4c] disabled:opacity-50"
                                         :disabled="isSubmitting"
                                         @click="removeCartItem(index)"
                                     >
@@ -54,7 +64,7 @@
                     </div>
                 </article>
 
-                <aside class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
+                <aside class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6 lg:sticky lg:top-24 lg:h-fit">
                     <h2 class="home-display text-sm font-bold uppercase tracking-[0.16em] text-[#05299E]">Оформление заказа</h2>
 
                     <div class="mt-4 border-b border-gray-100 pb-4">
@@ -67,24 +77,24 @@
                     <form class="mt-4 space-y-3" @submit.prevent="submitOrder">
                         <label class="block text-sm">
                             <span class="site-header-font mb-1 block text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-500">Имя</span>
-                            <input v-model.trim="orderForm.name" :readonly="isAuthenticated" required class="w-full border border-gray-300 px-3 py-2.5" />
+                            <input v-model.trim="orderForm.name" :readonly="isAuthenticated" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5" />
                         </label>
                         <label class="block text-sm">
                             <span class="site-header-font mb-1 block text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-500">Телефон</span>
-                            <input v-model.trim="orderForm.phone" :readonly="isAuthenticated" required class="w-full border border-gray-300 px-3 py-2.5" />
+                            <input v-model.trim="orderForm.phone" :readonly="isAuthenticated" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5" />
                         </label>
                         <label class="block text-sm">
                             <span class="site-header-font mb-1 block text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-500">Комментарий</span>
-                            <textarea v-model.trim="orderForm.comment" rows="3" class="w-full border border-gray-300 px-3 py-2.5"></textarea>
+                            <textarea v-model.trim="orderForm.comment" rows="3" class="w-full rounded-lg border border-gray-300 px-3 py-2.5"></textarea>
                         </label>
                         <input v-model="orderForm.website" type="text" autocomplete="off" class="hidden" tabindex="-1" />
 
-                        <p v-if="statusMessage" class="rounded border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-700">{{ statusMessage }}</p>
+                        <p v-if="statusMessage" class="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-700">{{ statusMessage }}</p>
 
                         <button
                             type="submit"
                             :disabled="!cartItems.length || isSubmitting"
-                            class="site-header-font w-full bg-[#05299E] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-[#041d6b] disabled:opacity-50"
+                            class="site-header-font w-full rounded-xl bg-gradient-to-r from-[#05299E] to-[#041d6b] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition hover:opacity-95 disabled:opacity-50"
                         >
                             {{ isSubmitting ? 'Отправка…' : 'Отправить заказ' }}
                         </button>

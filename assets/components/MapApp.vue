@@ -236,7 +236,7 @@
                         </button>
 
                         <img
-                            :src="isNightPhoto && activeSide.night_image_url ? activeSide.night_image_url : (activeSide.image_url || '/images/orig.png')"
+                            :src="getMainSideImage(activeSide)"
                             alt="Фото стороны"
                             class="h-44 w-full object-cover sm:h-56 lg:h-64"
                         />
@@ -270,6 +270,35 @@
                             <dt class="pt-1 text-gray-500">Прайс без НДС</dt>
                             <dd class="pt-1 text-right text-xl font-extrabold text-gray-900 sm:text-2xl">{{ formatPrice(activeSide.price) }}</dd>
                         </dl>
+
+                        <section v-if="activeObject.side_details?.length" class="space-y-2 border-t border-gray-100 pt-3">
+                            <p class="site-header-font text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">
+                                Фотографии всех сторон
+                            </p>
+                            <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                                <button
+                                    v-for="side in activeObject.side_details"
+                                    :key="`photo-${side.code}`"
+                                    type="button"
+                                    class="group text-left"
+                                    @click="selectSide(side.code)"
+                                >
+                                    <div
+                                        class="relative aspect-[4/3] overflow-hidden border transition"
+                                        :class="activeSideCode === side.code ? 'border-[#05299E] ring-1 ring-[#05299E]/35' : 'border-gray-200 hover:border-[#05299E]/40'"
+                                    >
+                                        <img
+                                            :src="getPreviewSideImage(side)"
+                                            :alt="`Сторона ${side.code}`"
+                                            class="h-full w-full object-cover"
+                                        />
+                                        <span class="site-header-font absolute left-1.5 top-1.5 bg-white/90 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gray-800">
+                                            {{ side.code }}
+                                        </span>
+                                    </div>
+                                </button>
+                            </div>
+                        </section>
 
                         <p
                             v-if="activeSideStatus"
@@ -562,9 +591,48 @@ function formatPrice(price) {
     return `${new Intl.NumberFormat('ru-RU').format(price)} ₽`
 }
 
+function normalizeCloudMailImageUrl(url) {
+    if (!url) return null
+    const source = String(url).trim()
+    const match = source.match(/^https?:\/\/cloud\.mail\.ru\/public\/([^/]+)\/([^/?#]+)/i)
+    if (!match) return source
+    return `https://thumb.cloud.mail.ru/weblink/thumb/xw0/${match[1]}/${match[2]}?wm=true`
+}
+
+function resolveSideImageUrl(side, useNight = false) {
+    if (!side) return '/images/orig.png'
+
+    const preferred = useNight
+        ? (side.night_image_url || side.night_image)
+        : (side.image_url || side.image)
+
+    const fallback = useNight
+        ? (side.image_url || side.image)
+        : (side.night_image_url || side.night_image)
+
+    return normalizeCloudMailImageUrl(preferred) || normalizeCloudMailImageUrl(fallback) || '/images/orig.png'
+}
+
+function getMainSideImage(side) {
+    return resolveSideImageUrl(side, isNightPhoto.value)
+}
+
+function getPreviewSideImage(side) {
+    return resolveSideImageUrl(side, false)
+}
+
 function normalizeSideDetails(item) {
     const sides = Array.isArray(item?.sides) ? item.sides : []
-    if (item?.side_details?.length) return item.side_details
+    if (Array.isArray(item?.side_details) && item.side_details.length) {
+        return item.side_details
+            .filter(side => side && typeof side === 'object')
+            .map(side => ({
+                ...side,
+                code: String(side.code || '').toUpperCase(),
+            }))
+            .filter(side => side.code !== '')
+    }
+
     return sides.map(code => ({ code: String(code).toUpperCase(), price: null, image_url: null, night_image_url: null }))
 }
 
@@ -605,7 +673,11 @@ function getSideStatus(item, sideCode, fromDate, toDate) {
 }
 
 function getItemStatus(item, from, to) {
-    const statuses = item.side_details.map(s => getSideStatus(item, s.code, from, to))
+    const sideDetails = Array.isArray(item?.side_details) ? item.side_details : []
+    const statuses = sideDetails.map(s => getSideStatus(item, s.code, from, to))
+    if (!statuses.length) {
+        return { busy: false, kind: 'free', text: 'Есть свободные стороны', toneClass: 'text-emerald-700' }
+    }
     const busyAll = statuses.every(s => s.busy)
     if (!busyAll) {
         return { busy: false, kind: 'free', text: 'Есть свободные стороны', toneClass: 'text-emerald-700' }
@@ -639,11 +711,13 @@ async function loadAdvertisements() {
         
         const res = await fetch(`${props.advertisementsUrl}?${params.toString()}`)
         const data = await res.json()
-        objects.value = (data || []).map(item => ({
+        const items = Array.isArray(data) ? data : (Array.isArray(data?.items) ? data.items : [])
+
+        objects.value = items.map(item => ({
             ...item,
             side_details: normalizeSideDetails(item),
             sides: normalizeSideDetails(item).map(s => s.code),
-            bookings: item.bookings || [],
+            bookings: Array.isArray(item?.bookings) ? item.bookings : [],
         }))
         syncMapPlacemarks()
     } finally { isLoadingObjects.value = false }
