@@ -49,7 +49,7 @@
                 class="w-full border-b border-gray-200 bg-white lg:w-[min(100%,320px)] xl:w-[360px] lg:shrink-0 lg:border-b-0 lg:border-r lg:border-gray-200"
                 :class="mobileView === 'map' ? 'hidden lg:block' : 'block'"
             >
-                <div class="flex max-h-[min(68vh,700px)] flex-col lg:max-h-none lg:h-full">
+                <div class="flex max-h-[calc(100dvh-11.5rem)] min-h-[calc(100dvh-11.5rem)] flex-col lg:h-full lg:max-h-none lg:min-h-0">
                     <div class="border-b-4 border-[#e85d4c] px-5 py-5">
                         <div class="flex items-start justify-between gap-3">
                             <div>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
 
-                    <div class="space-y-5 border-b border-gray-100 bg-[#f7f7f8] p-5">
+                    <div class="max-h-[46dvh] space-y-5 overflow-y-auto border-b border-gray-100 bg-[#f7f7f8] p-5 lg:max-h-none lg:overflow-visible">
                         <div>
                             <label class="site-header-font mb-1.5 block text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-500">Тип продукции</label>
                             <select
