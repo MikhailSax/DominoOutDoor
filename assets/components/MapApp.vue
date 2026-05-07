@@ -511,6 +511,7 @@ const activeSideStatus = computed(() => {
     return getSideStatus(activeObject.value, activeSide.value.code, bookingRange.value.from, bookingRange.value.to)
 })
 
+const normalizedOrdersUrl = computed(() => String(props.ordersUrl || '').replace(/\/+$/, ''))
 const isAuthenticated = computed(() => Boolean(props.authUser?.isAuthenticated))
 const hasActiveFilters = computed(() => Boolean(filters.productType || filters.constrTypeId || filters.bookingFrom || filters.bookingTo))
 const cartTotal = computed(() => cartItems.value.reduce((sum, item) => sum + (Number(item.price) || 0), 0))
@@ -802,7 +803,7 @@ function closeOrderModal() { isOrderModalOpen.value = false }
 async function submitOrder() {
     isSubmittingOrder.value = true
     try {
-        const response = await fetch(props.ordersUrl, {
+        const response = await fetch(normalizedOrdersUrl.value || '/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
