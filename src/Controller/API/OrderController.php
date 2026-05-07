@@ -17,11 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/api/orders', name: 'api_orders_')]
 class OrderController extends AbstractController
 {
-    #[Route('', name: 'create', methods: ['POST'])]
+    #[Route('', name: 'create', methods: ['POST', 'GET'])]
     public function create(Request $request, AdvertisementRepository $repository, EntityManagerInterface $entityManager): JsonResponse
     {
         $payload = json_decode($request->getContent(), true);
-        if (!is_array($payload)) {
+        if (!is_array($payload) || $payload === []) {
+            $payload = $request->query->all();
+        }
+        if (!is_array($payload) || $payload === []) {
             return $this->json(['message' => 'Некорректный формат запроса.'], 400);
         }
 
@@ -31,14 +34,15 @@ class OrderController extends AbstractController
             return $this->json(['message' => 'Запрос отклонён.'], 422);
         }
         $nowMs = (int) floor(microtime(true) * 1000);
-        if ($formStartedAt > 0 && $nowMs - $formStartedAt < 2500) {
+        if ($formStartedAt > 0 && $nowMs - $formStartedAt < 800) {
             return $this->json(['message' => 'Пожалуйста, отправьте форму чуть позже.'], 429);
         }
 
         $session = $request->hasSession() ? $request->getSession() : null;
+        $isAuthenticated = $this->getUser() instanceof User;
         if ($session !== null) {
-            $lastRequestAt = (int) $session->get('order_submit_last_at', 0);
-            if ($lastRequestAt > 0 && (time() - $lastRequestAt) < 20) {
+            $lastRequestAtMs = (int) $session->get('order_submit_last_at_ms', 0);
+            if (!$isAuthenticated && $lastRequestAtMs > 0 && ($nowMs - $lastRequestAtMs) < 3000) {
                 return $this->json(['message' => 'Слишком частые отправки. Повторите через несколько секунд.'], 429);
             }
         }
@@ -126,7 +130,7 @@ class OrderController extends AbstractController
         $entityManager->flush();
 
         if ($session !== null) {
-            $session->set('order_submit_last_at', time());
+            $session->set('order_submit_last_at_ms', $nowMs);
         }
 
         return $this->json([
