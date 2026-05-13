@@ -88,7 +88,7 @@ final class HomePageController extends AbstractController
                 [
                     '@type' => 'Organization',
                     '@id' => $pageUrl.'#organization',
-                    'name' => 'БМС',
+                    'name' => 'РК03',
                     'alternateName' => 'Бурятия Медиа Сервис',
                     'url' => $pageUrl,
                 ],
@@ -96,7 +96,7 @@ final class HomePageController extends AbstractController
                     '@type' => 'WebPage',
                     '@id' => $pageUrl.'#webpage',
                     'url' => $pageUrl,
-                    'name' => 'БМС — наружная реклама',
+                    'name' => 'РК03 — наружная реклама',
                     'description' => 'Размещение наружной рекламы: билборды, digital-экраны и конструкции. Планирование кампаний и отчётность.',
                     'publisher' => ['@id' => $pageUrl.'#organization'],
                     'about' => [

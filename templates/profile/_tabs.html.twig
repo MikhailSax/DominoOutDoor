@@ -1,16 +1,18 @@
-<nav class="flex flex-row gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0" aria-label="Разделы кабинета">
-    <a href="{{ path('profile') }}"
-       class="home-display shrink-0 rounded-md border px-4 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.12em] transition sm:min-w-0 sm:flex-1 lg:w-full lg:text-left
-       {{ app.request.attributes.get('_route') == 'profile'
-          ? 'border-[#05299E] bg-[#05299E] text-white shadow-md'
-          : 'border-gray-200 bg-white text-gray-700 hover:border-[#05299E]/35 hover:text-[#05299E]' }}">
-        Профиль
-    </a>
-    <a href="{{ path('profile.orders') }}"
-       class="home-display shrink-0 rounded-md border px-4 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.12em] transition sm:min-w-0 sm:flex-1 lg:w-full lg:text-left
-       {{ app.request.attributes.get('_route') == 'profile.orders'
-          ? 'border-[#05299E] bg-[#05299E] text-white shadow-md'
-          : 'border-gray-200 bg-white text-gray-700 hover:border-[#05299E]/35 hover:text-[#05299E]' }}">
-        Активность и заказы
-    </a>
+<nav class="rounded-2xl border border-[#dbe6ff] bg-white p-2 shadow-sm" aria-label="Разделы кабинета">
+    <div class="flex flex-row gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
+        <a href="{{ path('profile') }}"
+           class="shrink-0 rounded-xl px-4 py-3 text-sm font-semibold transition lg:w-full
+           {{ app.request.attributes.get('_route') == 'profile'
+              ? 'bg-[#0b5fff] text-white shadow-sm'
+              : 'text-slate-700 hover:bg-[#eef4ff] hover:text-[#0b5fff]' }}">
+            Профиль
+        </a>
+        <a href="{{ path('profile.orders') }}"
+           class="shrink-0 rounded-xl px-4 py-3 text-sm font-semibold transition lg:w-full
+           {{ app.request.attributes.get('_route') == 'profile.orders'
+              ? 'bg-[#0b5fff] text-white shadow-sm'
+              : 'text-slate-700 hover:bg-[#eef4ff] hover:text-[#0b5fff]' }}">
+            Активность и заказы
+        </a>
+    </div>
 </nav>
