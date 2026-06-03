@@ -24,6 +24,12 @@ class Advertisement
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $address = null;
 
+    #[ORM\Column(length: 64, nullable: true)]
+    private ?string $oneCRef = null;
+
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $oneCData = null;
+
     #[ORM\Column(type: 'json', nullable: true)]
     private $sides = [];
 
@@ -105,6 +111,32 @@ class Advertisement
     public function setAddress(?string $address): self
     {
         $this->address = $address === null ? null : (string) trim($address);
+
+        return $this;
+    }
+
+    public function getOneCRef(): ?string
+    {
+        return $this->oneCRef;
+    }
+
+    public function setOneCRef(?string $oneCRef): self
+    {
+        $this->oneCRef = $oneCRef === null ? null : trim($oneCRef);
+
+        return $this;
+    }
+
+    /** @return array<string, mixed>|null */
+    public function getOneCData(): ?array
+    {
+        return $this->oneCData;
+    }
+
+    /** @param array<string, mixed>|null $oneCData */
+    public function setOneCData(?array $oneCData): self
+    {
+        $this->oneCData = $oneCData;
 
         return $this;
     }
