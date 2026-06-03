@@ -33,6 +33,12 @@ class AdvertisementSide
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nightImage = null;
 
+    #[ORM\Column(length: 64, nullable: true)]
+    private ?string $oneCRef = null;
+
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $oneCData = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +112,32 @@ class AdvertisementSide
     public function setNightImage(?string $nightImage): static
     {
         $this->nightImage = $nightImage;
+
+        return $this;
+    }
+
+    public function getOneCRef(): ?string
+    {
+        return $this->oneCRef;
+    }
+
+    public function setOneCRef(?string $oneCRef): static
+    {
+        $this->oneCRef = $oneCRef === null ? null : trim($oneCRef);
+
+        return $this;
+    }
+
+    /** @return array<string, mixed>|null */
+    public function getOneCData(): ?array
+    {
+        return $this->oneCData;
+    }
+
+    /** @param array<string, mixed>|null $oneCData */
+    public function setOneCData(?array $oneCData): static
+    {
+        $this->oneCData = $oneCData;
 
         return $this;
     }

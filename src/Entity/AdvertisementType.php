@@ -18,6 +18,12 @@ class AdvertisementType
     #[ORM\Column(length: 150)]
     private string $name;
 
+    #[ORM\Column(length: 64, nullable: true)]
+    private ?string $oneCRef = null;
+
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $oneCData = null;
+
     #[ORM\ManyToOne(targetEntity: AdvertisementCategory::class, inversedBy: 'types')]
     #[ORM\JoinColumn(nullable: false)]
     private ?AdvertisementCategory $category = null;
@@ -43,6 +49,32 @@ class AdvertisementType
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getOneCRef(): ?string
+    {
+        return $this->oneCRef;
+    }
+
+    public function setOneCRef(?string $oneCRef): self
+    {
+        $this->oneCRef = $oneCRef === null ? null : trim($oneCRef);
+
+        return $this;
+    }
+
+    /** @return array<string, mixed>|null */
+    public function getOneCData(): ?array
+    {
+        return $this->oneCData;
+    }
+
+    /** @param array<string, mixed>|null $oneCData */
+    public function setOneCData(?array $oneCData): self
+    {
+        $this->oneCData = $oneCData;
+
         return $this;
     }
 
