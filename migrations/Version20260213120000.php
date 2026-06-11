@@ -18,16 +18,16 @@ final class Version20260213120000 extends AbstractMigration
     {
         $this->addSql('CREATE TABLE "order" (id SERIAL NOT NULL, user_id INT DEFAULT NULL, contact_name VARCHAR(255) NOT NULL, contact_phone VARCHAR(50) NOT NULL, comment VARCHAR(1000) DEFAULT NULL, status VARCHAR(20) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, reserved_until TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, expired_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_F5299398A76ED395 ON "order" (user_id)');
-        $this->addSql('COMMENT ON COLUMN "order".created_at IS \"(DC2Type:datetime_immutable)\"');
-        $this->addSql('COMMENT ON COLUMN "order".reserved_until IS \"(DC2Type:datetime_immutable)\"');
-        $this->addSql('COMMENT ON COLUMN "order".expired_at IS \"(DC2Type:datetime_immutable)\"');
+        $this->addSql("COMMENT ON COLUMN \"order\".created_at IS '(DC2Type:datetime_immutable)'");
+        $this->addSql("COMMENT ON COLUMN \"order\".reserved_until IS '(DC2Type:datetime_immutable)'");
+        $this->addSql("COMMENT ON COLUMN \"order\".expired_at IS '(DC2Type:datetime_immutable)'");
         $this->addSql('ALTER TABLE "order" ADD CONSTRAINT FK_F5299398A76ED395 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE SET NULL NOT DEFERRABLE INITIALLY IMMEDIATE');
 
         $this->addSql('CREATE TABLE order_item (id SERIAL NOT NULL, order_ref_id INT NOT NULL, advertisement_id INT NOT NULL, side_code VARCHAR(10) NOT NULL, start_date DATE NOT NULL, end_date DATE NOT NULL, price_snapshot NUMERIC(10, 2) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_52EA1F093A218B4B ON order_item (order_ref_id)');
         $this->addSql('CREATE INDEX IDX_52EA1F09AA778AFD ON order_item (advertisement_id)');
-        $this->addSql('COMMENT ON COLUMN order_item.start_date IS \"(DC2Type:date_immutable)\"');
-        $this->addSql('COMMENT ON COLUMN order_item.end_date IS \"(DC2Type:date_immutable)\"');
+        $this->addSql("COMMENT ON COLUMN order_item.start_date IS '(DC2Type:date_immutable)'");
+        $this->addSql("COMMENT ON COLUMN order_item.end_date IS '(DC2Type:date_immutable)'");
         $this->addSql('ALTER TABLE order_item ADD CONSTRAINT FK_52EA1F093A218B4B FOREIGN KEY (order_ref_id) REFERENCES "order" (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE order_item ADD CONSTRAINT FK_52EA1F09AA778AFD FOREIGN KEY (advertisement_id) REFERENCES advertisement (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
 
